@@ -76,8 +76,14 @@ const Company = () => {
             fontSize: ".9rem",
           }}
         >
-          By Registering you agree with our <Link href="/">Privacy Policy</Link>{" "}
-          and <Link href="/">Terms and conditions</Link>
+          By Registering you agree with our{" "}
+          <Link href="/">
+            <a className="dark_bg">Privacy Policy</a>
+          </Link>{" "}
+          and{" "}
+          <Link href="/">
+            <a className="dark_bg">Terms and conditions</a>
+          </Link>
         </p>
         {errors && Object.keys(errors).keys.length > 0 && (
           <p className="alert alert-danger">You have error(s) in your form</p>

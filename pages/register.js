@@ -35,8 +35,8 @@ const register = () => {
               onClick={selectJobSeeker}
               className={
                 selected === "job-seeker"
-                  ? `btn btn-primary ${styles.btn__primary}`
-                  : `btn`
+                  ? `btn btn-primary ${styles.btn__primary} ${styles.btn}`
+                  : `btn ${styles.btn}`
               }
             >
               Job Seeker
@@ -45,8 +45,8 @@ const register = () => {
               onClick={selectCompany}
               className={
                 selected === "company"
-                  ? `btn btn-primary ${styles.btn__primary}`
-                  : `btn`
+                  ? `btn btn-primary ${styles.btn__primary} ${styles.btn}`
+                  : `btn ${styles.btn}`
               }
             >
               Company/<span>Organisation</span>
@@ -56,7 +56,7 @@ const register = () => {
           <div className={`${styles.extra__stuffs}`}>
             Already have an account?{" "}
             <Link href="/login">
-              <a>Login</a>
+              <a className="dark_bg">Login</a>
             </Link>
           </div>
         </div>
