@@ -23,9 +23,9 @@ const register = () => {
           </Link>
         </div>
         <p>
-          Sign Up today to start receiving notifications on newly posted jobs.
-          To post jobs and to save your favourite jobs for later and to apply
-          for Jobs.
+          {selected === "job-seeker"
+            ? "Sign Up today to start receiving notifications on newly posted jobs. To post jobs and to save your favourite jobs for later and to apply for Jobs."
+            : "Register a company to start posting jobs and acquire employers"}
         </p>
       </div>
       <div className={styles.right__column}>
