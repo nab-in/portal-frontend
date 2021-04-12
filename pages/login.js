@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import Link from "next/link"
 import Input from "../components/inputs/Input"
 import FormButton from "../components/buttons/FormButton"
+import Logo from "../components/Logo"
 import styles from "../styles/auth.module.sass"
 
 const login = () => {
@@ -28,6 +29,11 @@ const login = () => {
     <div className={`${styles.auth} ${styles.login}`}>
       <div className={`${styles.container}`}>
         <form onSubmit={(e) => handleSubmit(e)}>
+          <Link href="/">
+            <a className={styles.logo}>
+              <Logo height={20} width={116} />
+            </a>
+          </Link>
           <h1>Welcome Back, Login to your account</h1>
           <Input
             type="text"

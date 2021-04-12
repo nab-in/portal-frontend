@@ -16,7 +16,11 @@ const register = () => {
     <div className={styles.register}>
       <div className={styles.left__column}>
         <div className={styles.logo}>
-          <Logo />
+          <Link href="/">
+            <a className={styles.logo}>
+              <Logo height={30} width={174} />
+            </a>
+          </Link>
         </div>
         <p>
           Sign Up today to start receiving notifications on newly posted jobs.
@@ -25,31 +29,36 @@ const register = () => {
         </p>
       </div>
       <div className={styles.right__column}>
-        <div className={styles.selector}>
-          <button
-            onClick={selectJobSeeker}
-            className={
-              selected === "job-seeker"
-                ? `btn btn-primary ${styles.btn__primary}`
-                : `btn`
-            }
-          >
-            Job Seeker
-          </button>
-          <button
-            onClick={selectCompany}
-            className={
-              selected === "company"
-                ? `btn btn-primary ${styles.btn__primary}`
-                : `btn`
-            }
-          >
-            Company/Organisation
-          </button>
-        </div>
-        {selected === "job-seeker" ? <JobSeeker /> : <Company />}
-        <div className="extra-stuffs">
-          Already have an account? <Link href="/login">Login</Link>
+        <div className={styles.card}>
+          <div className={styles.selector}>
+            <button
+              onClick={selectJobSeeker}
+              className={
+                selected === "job-seeker"
+                  ? `btn btn-primary ${styles.btn__primary}`
+                  : `btn`
+              }
+            >
+              Job Seeker
+            </button>
+            <button
+              onClick={selectCompany}
+              className={
+                selected === "company"
+                  ? `btn btn-primary ${styles.btn__primary}`
+                  : `btn`
+              }
+            >
+              Company/<span>Organisation</span>
+            </button>
+          </div>
+          {selected === "job-seeker" ? <JobSeeker /> : <Company />}
+          <div className={`${styles.extra__stuffs}`}>
+            Already have an account?{" "}
+            <Link href="/login">
+              <a>Login</a>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

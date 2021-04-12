@@ -1,17 +1,15 @@
 import React from "react"
 import Image from "next/image"
 
-const Logo = () => {
+const Logo = ({ height, width }) => {
   return (
-    <div className="image">
-      <Image
-        src="/assets/images/logo.png"
-        alt="Image"
-        height={40}
-        width="auto"
-        layout="intrinsic"
-      />
-    </div>
+    <Image
+      src="/assets/images/logo.png"
+      alt="logo"
+      height={height}
+      width={width}
+      layout="intrinsic"
+    />
   )
 }
 

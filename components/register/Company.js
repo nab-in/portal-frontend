@@ -35,21 +35,21 @@ const Company = () => {
       <form onSubmit={(e) => handleSubmit(e)}>
         <Input
           type="text"
-          name="Name"
+          name="Company/Organisation Name"
           handleChange={handleChange}
-          placeholder="Company/Organisation"
           id="name"
           title="Name:"
           error={errors.Name && errors.Name}
+          inputClass="bg_input"
         />
         <Input
           type="email"
           name="email"
           handleChange={handleChange}
-          placeholder="email@company.com"
           id="email"
           title="Email address:"
           error={errors.email && errors.email}
+          inputClass="bg_input"
         />
         <Input
           type="password"
@@ -59,6 +59,7 @@ const Company = () => {
           id="password"
           title="Password:"
           error={errors.password && errors.password}
+          inputClass="bg_input"
         />
         <Input
           type="password"
@@ -68,6 +69,7 @@ const Company = () => {
           id="confirm-password"
           title="Confirm Password:"
           error={errors.confirmPassword && errors.confirmPassword}
+          inputClass="bg_input"
         />
         <p
           style={{

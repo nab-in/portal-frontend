@@ -2,34 +2,86 @@
 @import "./_variables"
 
 .register
-    @include flexVary(_, center )
-    height: 100vh
     min-height: 100vh
+    height: 100%
+    @include flexVary(flex-end, _ )
     .left__column
-        height: 100%
+        position: fixed
+        top: 0
+        left: 0
+        min-height: 100vh
+        overflow-y: auto
         background: white
         width: 50%
         max-width: 700px
         padding: 1rem 3rem
+        padding-top: 10rem
         padding-right: calc( 10% + 2rem )
         box-shadow: 4px 4px 40px 15px rgba(0, 0, 0, 0.07)
         flex-direction: column
-        @include flexVary(center, _ )
+        @include flexVary(_, _ )
         .logo
             margin-bottom: 2rem
         p
-            font-weight: bold
-            font-size: 1.3rem
+            font-size: clamp(1.3rem, 2vw, 1rem)
             line-height: 2.2rem
             color: $primary
     .right__column
-        margin-left: -10%
-        background: $primary
-        min-width: 600px
-        box-shadow: 4px 4px 30px 15px rgba(0, 0, 0, 0.07)
-        .selector
-            height: 50px
-            border-bottom: 1px solid #E2E8EC
-            @include flexCenter
-            button
-                width: 50%
+        height: 100%
+        width: 50%
+        z-index: 10
+        .card
+            margin: 3rem 0
+            margin-left: -10%
+            background: $primary
+            width: 100%
+            max-width: 500px
+            box-shadow: 4px 4px 30px 15px rgba(0, 0, 0, 0.07)
+            color: white
+            .selector
+                height: 50px
+                border-bottom: 1px solid #E2E8EC
+                padding: .5rem
+                @include flexCenter
+                button
+                    width: 50%
+                    color: white
+            h2
+                text-align: center
+                margin-top: 1.5rem
+            form
+                padding: 1rem 2rem 2rem
+                p
+                    margin-bottom: 1rem
+            .extra__stuffs
+                padding: 2rem
+                text-align: center
+                opacity: .8
+                background: #007CA9
+
+@media screen and ( max-width: 992px )
+    .register
+        .left__column
+            padding: 1rem 2rem
+            padding-top: 10rem
+            padding-right: calc( 10% + 1rem )
+        .right__column
+            width: 50%
+
+@media screen and ( max-width: 768px )
+    .register
+        flex-direction: column
+        .left__column
+            position: relative
+            min-height: 100%
+            width: 100%
+            padding: 2rem
+            .logo
+                margin-bottom: 1rem
+        .right__column
+            margin: 0
+            width: 100%
+            .card
+                margin: 0
+                width: 100%
+                max-width: 100%

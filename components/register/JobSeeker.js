@@ -37,19 +37,19 @@ const JobSeeker = () => {
           type="text"
           name="Name"
           handleChange={handleChange}
-          placeholder="Name"
           id="name"
           title="Name:"
           error={errors.Name && errors.Name}
+          inputClass="bg_input"
         />
         <Input
           type="email"
           name="email"
           handleChange={handleChange}
-          placeholder="email@example.com"
           id="email"
           title="Email address:"
           error={errors.email && errors.email}
+          inputClass="bg_input"
         />
         <Input
           type="password"
@@ -59,6 +59,7 @@ const JobSeeker = () => {
           id="password"
           title="Password:"
           error={errors.password && errors.password}
+          inputClass="bg_input"
         />
         <Input
           type="password"
@@ -68,6 +69,7 @@ const JobSeeker = () => {
           id="confirm-password"
           title="Confirm Password:"
           error={errors.confirmPassword && errors.confirmPassword}
+          inputClass="bg_input"
         />
         <p
           style={{
