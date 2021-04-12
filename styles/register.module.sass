@@ -1,0 +1,35 @@
+@import "./_colorsVariables"
+@import "./_variables"
+
+.register
+    @include flexVary(_, center )
+    height: 100vh
+    min-height: 100vh
+    .left__column
+        height: 100%
+        background: white
+        width: 50%
+        max-width: 700px
+        padding: 1rem 3rem
+        padding-right: calc( 10% + 2rem )
+        box-shadow: 4px 4px 40px 15px rgba(0, 0, 0, 0.07)
+        flex-direction: column
+        @include flexVary(center, _ )
+        .logo
+            margin-bottom: 2rem
+        p
+            font-weight: bold
+            font-size: 1.3rem
+            line-height: 2.2rem
+            color: $primary
+    .right__column
+        margin-left: -10%
+        background: $primary
+        min-width: 600px
+        box-shadow: 4px 4px 30px 15px rgba(0, 0, 0, 0.07)
+        .selector
+            height: 50px
+            border-bottom: 1px solid #E2E8EC
+            @include flexCenter
+            button
+                width: 50%

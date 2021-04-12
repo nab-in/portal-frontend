@@ -28,7 +28,7 @@ const login = () => {
     <div className={`${styles.auth} ${styles.login}`}>
       <div className={`${styles.container}`}>
         <form onSubmit={(e) => handleSubmit(e)}>
-          <h1>Log in to your account</h1>
+          <h1>Welcome Back, Login to your account</h1>
           <Input
             type="text"
             name="email"
