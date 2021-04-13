@@ -2,44 +2,7 @@ import React from "react"
 import Link from "next/link"
 import Image from "next/image"
 import styles from "./companies.module.sass"
-let companies = [
-  {
-    id: 1,
-    logo: "logo1.png",
-    name: "Company Name",
-    jobs: 18,
-  },
-  {
-    id: 2,
-    logo: "logo2.png",
-    name: "coworker",
-    jobs: 1,
-  },
-  {
-    id: 3,
-    logo: "logo1.png",
-    name: "Company Name",
-    jobs: 19,
-  },
-  {
-    id: 4,
-    logo: "logo2.png",
-    name: "coworker",
-    jobs: 10,
-  },
-  {
-    id: 5,
-    logo: "logo1.png",
-    name: "Company Name",
-    jobs: 3,
-  },
-  {
-    id: 6,
-    logo: "logo2.png",
-    name: "coworker",
-    jobs: 4,
-  },
-]
+import companies from "../../../data/companies"
 
 const Companies = () => {
   return (
@@ -49,19 +12,26 @@ const Companies = () => {
         <div className={`${styles.showcase}`}>
           {companies.map(({ logo, name, id, jobs }) => (
             <article key={id}>
-              <div className={`${styles.logo__container}`}>
-                <Image
-                  src={`/assets/companies/${logo}`}
-                  alt={`${name} logo`}
-                  layout="fill"
-                  objectFit="contain"
-                />
-              </div>
-              <Link href={`/companies/jobs/${name}`}>
+              <Link href={`/companies/${id}`}>
+                <div className={`${styles.logo__container}`}>
+                  <Image
+                    src={`/assets/companies/${logo}`}
+                    alt={`${name} logo`}
+                    layout="fill"
+                    objectFit="contain"
+                  />
+                </div>
+              </Link>
+              <Link href={`/companies/${id}/jobs/`}>
                 <a>View {jobs} Jobs</a>
               </Link>
             </article>
           ))}
+        </div>
+        <div className={styles.link__container}>
+          <Link href={`/companies`}>
+            <a>More Companies</a>
+          </Link>
         </div>
       </div>
     </section>

@@ -21,6 +21,8 @@ const Hero = () => {
       router.push(`/jobs?keyword=${keyword}`)
     if (keyword.trim().length == 0 && location.trim().length > 0)
       router.push(`/jobs?location=${location}`)
+    if (keyword.trim().length == 0 && location.trim().length == 0)
+      router.push(`/jobs`)
     setSearch({
       keyword: "",
       location: "",

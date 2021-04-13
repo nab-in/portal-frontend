@@ -1,5 +1,6 @@
 import Head from "next/head"
 import Hero from "../components/home/hero/Hero"
+import Jobs from "../components/home/jobs/Jobs"
 import Companies from "../components/home/companies/Companies"
 
 export default function Home() {
@@ -11,6 +12,7 @@ export default function Home() {
       </Head>
       <Hero />
       <main>
+        <Jobs />
         <Companies />
       </main>
     </div>

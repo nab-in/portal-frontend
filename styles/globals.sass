@@ -17,13 +17,13 @@ input, textarea, button
     outline: none !important
 
 h1
-    font-size: clamp(2rem, 3vw, 1.4rem)
+    font-size: clamp(1.4rem, 3vw, 2rem)
 
 h2
-    font-size: clamp(1.8rem, 3vw, 1.2rem)
+    font-size: clamp(1.2rem, 3vw, 1.8rem)
 
 .primary__header
-    font-size: clamp(2.2rem, 4vw, 1.8rem)
+    font-size: clamp(1.8rem, 4vw, 2.2rem)
     display: inline-block
     position: relative
     &::before
@@ -74,3 +74,9 @@ button
             border-bottom: 1px solid lightgray !important
             padding: 0
             color: #E2E8EC
+
+.template__layout
+    display: grid
+    grid-template-columns: auto 350px
+    grid-column-gap: 2rem
+    margin: 2rem 0
