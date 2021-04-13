@@ -1,0 +1,92 @@
+.hero
+    background: linear-gradient(89.98deg, rgba(0, 124, 169, 0.9) 0.01%, rgba(0, 80, 122, 0.7) 99.99%), url(/assets/images/hero_bg.jpg) bottom right
+    background-size: cover
+    background-repeat: no-repeat
+    .container
+        width: 85%
+        margin: auto
+        padding: 3rem 0
+        padding-bottom: 6rem
+        .wrapper
+            width: 70%
+            h1
+                text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5)
+                font-size: clamp(3.5rem, 2vw, 3rem)
+                color: white
+                margin-bottom: 2rem
+            p
+                font-size: clamp(1.1rem, 2vw, 1rem)
+                color: white
+                line-height: 1.7rem
+                margin: 1rem 0
+            .search__container
+                form.search__form
+                    display: flex
+                    width: 100%
+                    input
+                        background: #E2E8EC
+                        border: none
+                        width: calc( calc( 100% / 2 ) - 100px )
+                        margin-right: 10px
+                        padding: .7rem
+                        color: black
+                        transition: .3s
+                        &:focus
+                            background: none !important
+                            border-bottom: 1px solid lightgray !important
+                            padding: 0
+                            color: #E2E8EC
+                            &::placeholder
+                                color: #E2E8EC
+            .btn
+                padding: .7rem 0
+                max-width: 100px
+                width: 100px
+
+@media screen and ( max-width: 992px )
+    .hero
+        .container
+            .wrapper
+                width: 80%
+
+@media screen and ( max-width: 840px )
+    .hero
+        .container
+            width: 90%
+            .wrapper
+                width: 90%
+
+@media screen and ( max-width: 767px )
+    .hero
+        .container
+            width: 90%
+            .wrapper
+                width: 100%
+                .search__container
+                    form.search__form
+                        display: flex
+                        flex-wrap: wrap
+                        width: 100%
+                        input
+                            background: #E2E8EC
+                            border: none
+                            width: calc( 100% - 120px )
+                            margin-right: 10px
+                            padding: .7rem
+                            color: black
+                            transition: .3s
+                            &:nth-child(1)
+                                width: 100%
+                                margin-bottom: 1rem
+                            &:focus
+                                background: none !important
+                                border-bottom: 1px solid lightgray !important
+                                padding: .7rem
+                                padding-left: 0
+                                color: #E2E8EC
+                                &::placeholder
+                                    color: #E2E8EC
+                .btn
+                    min-width: 100px
+                    padding: .7rem 0
+                    max-width: 100px
