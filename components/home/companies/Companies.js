@@ -57,7 +57,7 @@ const Companies = () => {
                   objectFit="contain"
                 />
               </div>
-              <Link href={`/companies/${name}`}>
+              <Link href={`/companies/jobs/${name}`}>
                 <a>View {jobs} Jobs</a>
               </Link>
             </article>
