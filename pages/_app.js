@@ -10,7 +10,8 @@ function MyApp({ Component, pageProps }) {
   const Site = () => {
     if (
       router.pathname.startsWith("/register") ||
-      router.pathname.startsWith("/login")
+      router.pathname.startsWith("/login") ||
+      router.pathname.startsWith("/forgot_password")
     ) {
       return <Component {...pageProps} />
     } else {

@@ -5,7 +5,7 @@ import FormButton from "../components/buttons/FormButton"
 import Logo from "../components/Logo"
 import styles from "../styles/auth.module.sass"
 
-const login = () => {
+const forgot_password = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -34,7 +34,7 @@ const login = () => {
               <Logo height={20} width={116} />
             </a>
           </Link>
-          <h1>Welcome Back, Login to your account</h1>
+          <h1>Enter your email</h1>
           <Input
             type="text"
             name="email"
@@ -43,13 +43,6 @@ const login = () => {
             title="Email:"
             error={errors.email && errors.email}
           />
-          <Input
-            type="password"
-            name="password"
-            handleChange={handleChange}
-            id="password"
-            title="Password:"
-          />
           {errors.msg && (
             <p className={`${styles.alert} ${styles.alert__danger}`}>
               {errors.msg}
@@ -57,12 +50,10 @@ const login = () => {
           )}
           <div className={styles.btns}>
             <FormButton
-              text={loading ? "Please Wait" : "Login"}
+              text={loading ? "Please Wait" : "Submit"}
               btnClass="primary"
+              btnGroupClass=""
             />
-            <Link href="/forgot_password">
-              <a>Forgot password?</a>
-            </Link>
           </div>
         </form>
         <div className={`${styles.extra__stuffs}`}>
@@ -73,4 +64,4 @@ const login = () => {
   )
 }
 
-export default login
+export default forgot_password
