@@ -22,6 +22,18 @@ h1
 h2
     font-size: clamp(1.8rem, 3vw, 1.2rem)
 
+.primary__header
+    font-size: clamp(2.2rem, 4vw, 1.8rem)
+    display: inline-block
+    position: relative
+    &::before
+        content: ""
+        position: absolute
+        bottom: -7px
+        height: 20px
+        width: 100%
+        background: linear-gradient(180deg, rgba(255, 176, 76, 0.34) 0%, #FFB04C 100%)
+
 .container
     display: flex
     flex-direction: column
