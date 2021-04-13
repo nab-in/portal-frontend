@@ -1,0 +1,39 @@
+@import "../../styles/_variables"
+@import "../../styles/_colorsVariables"
+
+.job__card
+    margin: 1rem 0
+    padding: 1.8rem 1rem
+    @include flexVary(space-between, center )
+    p
+        font-size: .9rem
+        color: #5A5A5A
+        margin: .7rem 0
+        span
+            color: $primary
+    .logo__container
+        min-width: 80px
+        width: 90px
+        height: 100%
+        .logo
+            height: 50px
+            position: relative
+    .time__details
+        width: calc( 65% - 100px )
+        height: 100%
+        padding: .5rem
+        border-right: 1px solid #BBBBBB
+        h3
+            color: $primary
+            font-weight: normal
+            font-size: clamp(1rem, 4vw, 1.2rem)
+            width: 100%
+            white-space: nowrap
+            overflow: hidden
+            text-overflow: ellipsis
+            margin-bottom: 1rem
+    .job__descriptions
+        width: 35%
+        padding: .5rem
+        .company__name
+            margin-bottom: 1rem

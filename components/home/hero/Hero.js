@@ -32,12 +32,12 @@ const Hero = () => {
     <div className={styles.hero}>
       <div className={styles.container}>
         <div className={styles.wrapper}>
-          <h1>Main Headline that convinces customer.</h1>
+          <h1>Land to your destiny job today.</h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Potenti
-            pretium adipiscing tortor convallis aliquet cursus. Sed consequat
-            sed id in nullam lectus parturient. Ullamcorper arcu gravida et
-            aliquam ornare quam.
+            I have no idea what to add in these texts. Lorem ipsum dolor sit
+            amet, consectetur adipiscing elit. Potenti pretium adipiscing tortor
+            convallis aliquet cursus. Sed consequat sed id in nullam lectus
+            parturient. Ullamcorper
           </p>
           <div className={styles.search__container}>
             <form

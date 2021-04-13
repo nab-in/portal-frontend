@@ -1,4 +1,5 @@
 import React from "react"
+import Link from "next/link"
 import Template from "../../template/Template"
 import Job from "../../job/Job"
 import styles from "./jobs.module.sass"
@@ -11,8 +12,13 @@ const Jobs = () => {
         <div className={`${styles.main__content} main__content`}>
           {jobs.length > 0 &&
             jobs.slice(1, 6).map((job) => <Job job={job} key={job.id} />)}
+          <div className={styles.more__link}>
+            <Link href="/jobs">More Jobs &gt;&gt;</Link>
+          </div>
         </div>
-        <div className={`${styles.sub__content} sub__content`}>Sub</div>
+        <div className={`${styles.sub__content} sub__content`}>
+          Sub Contents
+        </div>
       </div>
     </Template>
   )

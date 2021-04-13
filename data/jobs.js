@@ -2,6 +2,8 @@ const jobs = [
   {
     id: 1,
     title: "Job title from an organization and just",
+    job_type: "Consultant",
+    location: "Dar es salaam, Tanzania",
     company: {
       id: 2,
       name: "coworker",
@@ -19,6 +21,8 @@ const jobs = [
   {
     id: 2,
     title: "Job title from an organization and just",
+    job_type: "Consultant",
+    location: "Dar es salaam, Tanzania",
     company: {
       id: 2,
       name: "coworker",
@@ -36,6 +40,8 @@ const jobs = [
   {
     id: 3,
     title: "Job title from an organization and just",
+    job_type: "Consultant",
+    location: "Dar es salaam, Tanzania",
     company: {
       id: 2,
       name: "coworker",
@@ -53,6 +59,8 @@ const jobs = [
   {
     id: 4,
     title: "Job title from an organization and just",
+    job_type: "Consultant",
+    location: "Dar es salaam, Tanzania",
     company: {
       id: 2,
       name: "coworker",
@@ -70,6 +78,8 @@ const jobs = [
   {
     id: 5,
     title: "Job title from an organization and just",
+    job_type: "Consultant",
+    location: "Dar es salaam, Tanzania",
     company: {
       id: 1,
       name: "coworker",
@@ -87,6 +97,8 @@ const jobs = [
   {
     id: 6,
     title: "Job title from an organization and just",
+    job_type: "Consultant",
+    location: "Dar es salaam, Tanzania",
     company: {
       id: 2,
       name: "coworker",
@@ -104,6 +116,8 @@ const jobs = [
   {
     id: 7,
     title: "Job title from an organization and just",
+    job_type: "Consultant",
+    location: "Dar es salaam, Tanzania",
     company: {
       id: 2,
       name: "coworker",
@@ -121,6 +135,8 @@ const jobs = [
   {
     id: 8,
     title: "Job title from an organization and just",
+    job_type: "Consultant",
+    location: "Dar es salaam, Tanzania",
     company: {
       id: 2,
       name: "coworker",
@@ -138,6 +154,8 @@ const jobs = [
   {
     id: 9,
     title: "Job title from an organization and just",
+    job_type: "Consultant",
+    location: "Dar es salaam, Tanzania",
     company: {
       id: 2,
       name: "coworker",
@@ -155,6 +173,8 @@ const jobs = [
   {
     id: 10,
     title: "Job title from an organization and just",
+    job_type: "Consultant",
+    location: "Dar es salaam, Tanzania",
     company: {
       id: 2,
       name: "coworker",
@@ -172,6 +192,8 @@ const jobs = [
   {
     id: 11,
     title: "Job title from an organization and just",
+    job_type: "Consultant",
+    location: "Dar es salaam, Tanzania",
     company: {
       id: 2,
       name: "coworker",
@@ -189,6 +211,8 @@ const jobs = [
   {
     id: 12,
     title: "Job title from an organization and just",
+    job_type: "Consultant",
+    location: "Dar es salaam, Tanzania",
     company: {
       id: 2,
       name: "coworker",
