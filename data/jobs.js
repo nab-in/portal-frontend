@@ -16,7 +16,7 @@ const jobs = [
     attachment: "attachment1",
     descriptions:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet imperdiet nunc vitae eu neque. Lobortis aliquet cursus sem accumsan. Sit pulvinar eget leo sagittis. Euismod nulla in tellus adipiscing. Phasellus nulla id lacus, accumsan sit elit placerat. Odio nec risus ut pellentesque risus, erat tempor, massa quis. Vel ligula etiam lectus euismod placerat. Mauris luctus hac egestas et. Orci sodales tortor nam pellentesque sed eget cursus blandit aliquam. Molestie rhoncus molestie in nisi eget risus, viverra eget. Tortor diam, lacus, tincidunt ridiculus congue a quisque. Nunc ac dapibus ut tortor amet. Turpis eget lorem posuere vestibulum dis vulputate. Dictumst maecenas pellentesque lobortis nisl neque. Mi pretium semper tincidunt amet aliquam suspendisse. Amet vitae diam mi, ut sem cras. Vitae massa velit fames imperdiet mattis sed. Est et leo nisl, maecenas proin urna, vitae elit sit. Ornare felis rhoncus fames sed. Enim magna a nec neque, suscipit. Ultrices non tempus, curabitur elementum viverra neque, turpis. Ac augue duis magna egestas pharetra. Pulvinar morbi a ullamcorper massa, vel vitae ipsum aliquam interdum. Nec imperdiet ultrices id proin mattis lorem platea. Est nec leo vulputate tincidunt luctus in. Massa pharetra auctor integer pulvinar senectus egestas enim. Turpis dictum at dictum nam sed sed accumsan. Tellus fames gravida integer bibendum eget nascetur id. At aliquam a donec eu. At velit quam quam ut blandit justo est ",
-    reviews: 0.85,
+    reviews: 0.3,
   },
   {
     id: 2,
@@ -35,7 +35,7 @@ const jobs = [
     attachment: "attachment1",
     descriptions:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet imperdiet nunc vitae eu neque. Lobortis aliquet cursus sem accumsan. Sit pulvinar eget leo sagittis. Euismod nulla in tellus adipiscing. Phasellus nulla id lacus, accumsan sit elit placerat. Odio nec risus ut pellentesque risus, erat tempor, massa quis. Vel ligula etiam lectus euismod placerat. Mauris luctus hac egestas et. Orci sodales tortor nam pellentesque sed eget cursus blandit aliquam. Molestie rhoncus molestie in nisi eget risus, viverra eget. Tortor diam, lacus, tincidunt ridiculus congue a quisque. Nunc ac dapibus ut tortor amet. Turpis eget lorem posuere vestibulum dis vulputate. Dictumst maecenas pellentesque lobortis nisl neque. Mi pretium semper tincidunt amet aliquam suspendisse. Amet vitae diam mi, ut sem cras. Vitae massa velit fames imperdiet mattis sed. Est et leo nisl, maecenas proin urna, vitae elit sit. Ornare felis rhoncus fames sed. Enim magna a nec neque, suscipit. Ultrices non tempus, curabitur elementum viverra neque, turpis. Ac augue duis magna egestas pharetra. Pulvinar morbi a ullamcorper massa, vel vitae ipsum aliquam interdum. Nec imperdiet ultrices id proin mattis lorem platea. Est nec leo vulputate tincidunt luctus in. Massa pharetra auctor integer pulvinar senectus egestas enim. Turpis dictum at dictum nam sed sed accumsan. Tellus fames gravida integer bibendum eget nascetur id. At aliquam a donec eu. At velit quam quam ut blandit justo est ",
-    reviews: 0.85,
+    reviews: 0.89,
   },
   {
     id: 3,
@@ -54,7 +54,7 @@ const jobs = [
     attachment: "attachment1",
     descriptions:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet imperdiet nunc vitae eu neque. Lobortis aliquet cursus sem accumsan. Sit pulvinar eget leo sagittis. Euismod nulla in tellus adipiscing. Phasellus nulla id lacus, accumsan sit elit placerat. Odio nec risus ut pellentesque risus, erat tempor, massa quis. Vel ligula etiam lectus euismod placerat. Mauris luctus hac egestas et. Orci sodales tortor nam pellentesque sed eget cursus blandit aliquam. Molestie rhoncus molestie in nisi eget risus, viverra eget. Tortor diam, lacus, tincidunt ridiculus congue a quisque. Nunc ac dapibus ut tortor amet. Turpis eget lorem posuere vestibulum dis vulputate. Dictumst maecenas pellentesque lobortis nisl neque. Mi pretium semper tincidunt amet aliquam suspendisse. Amet vitae diam mi, ut sem cras. Vitae massa velit fames imperdiet mattis sed. Est et leo nisl, maecenas proin urna, vitae elit sit. Ornare felis rhoncus fames sed. Enim magna a nec neque, suscipit. Ultrices non tempus, curabitur elementum viverra neque, turpis. Ac augue duis magna egestas pharetra. Pulvinar morbi a ullamcorper massa, vel vitae ipsum aliquam interdum. Nec imperdiet ultrices id proin mattis lorem platea. Est nec leo vulputate tincidunt luctus in. Massa pharetra auctor integer pulvinar senectus egestas enim. Turpis dictum at dictum nam sed sed accumsan. Tellus fames gravida integer bibendum eget nascetur id. At aliquam a donec eu. At velit quam quam ut blandit justo est ",
-    reviews: 0.85,
+    reviews: 1,
   },
   {
     id: 4,
@@ -73,7 +73,7 @@ const jobs = [
     attachment: "attachment1",
     descriptions:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet imperdiet nunc vitae eu neque. Lobortis aliquet cursus sem accumsan. Sit pulvinar eget leo sagittis. Euismod nulla in tellus adipiscing. Phasellus nulla id lacus, accumsan sit elit placerat. Odio nec risus ut pellentesque risus, erat tempor, massa quis. Vel ligula etiam lectus euismod placerat. Mauris luctus hac egestas et. Orci sodales tortor nam pellentesque sed eget cursus blandit aliquam. Molestie rhoncus molestie in nisi eget risus, viverra eget. Tortor diam, lacus, tincidunt ridiculus congue a quisque. Nunc ac dapibus ut tortor amet. Turpis eget lorem posuere vestibulum dis vulputate. Dictumst maecenas pellentesque lobortis nisl neque. Mi pretium semper tincidunt amet aliquam suspendisse. Amet vitae diam mi, ut sem cras. Vitae massa velit fames imperdiet mattis sed. Est et leo nisl, maecenas proin urna, vitae elit sit. Ornare felis rhoncus fames sed. Enim magna a nec neque, suscipit. Ultrices non tempus, curabitur elementum viverra neque, turpis. Ac augue duis magna egestas pharetra. Pulvinar morbi a ullamcorper massa, vel vitae ipsum aliquam interdum. Nec imperdiet ultrices id proin mattis lorem platea. Est nec leo vulputate tincidunt luctus in. Massa pharetra auctor integer pulvinar senectus egestas enim. Turpis dictum at dictum nam sed sed accumsan. Tellus fames gravida integer bibendum eget nascetur id. At aliquam a donec eu. At velit quam quam ut blandit justo est ",
-    reviews: 0.85,
+    reviews: 0.5,
   },
   {
     id: 5,
@@ -92,7 +92,7 @@ const jobs = [
     attachment: "attachment1",
     descriptions:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet imperdiet nunc vitae eu neque. Lobortis aliquet cursus sem accumsan. Sit pulvinar eget leo sagittis. Euismod nulla in tellus adipiscing. Phasellus nulla id lacus, accumsan sit elit placerat. Odio nec risus ut pellentesque risus, erat tempor, massa quis. Vel ligula etiam lectus euismod placerat. Mauris luctus hac egestas et. Orci sodales tortor nam pellentesque sed eget cursus blandit aliquam. Molestie rhoncus molestie in nisi eget risus, viverra eget. Tortor diam, lacus, tincidunt ridiculus congue a quisque. Nunc ac dapibus ut tortor amet. Turpis eget lorem posuere vestibulum dis vulputate. Dictumst maecenas pellentesque lobortis nisl neque. Mi pretium semper tincidunt amet aliquam suspendisse. Amet vitae diam mi, ut sem cras. Vitae massa velit fames imperdiet mattis sed. Est et leo nisl, maecenas proin urna, vitae elit sit. Ornare felis rhoncus fames sed. Enim magna a nec neque, suscipit. Ultrices non tempus, curabitur elementum viverra neque, turpis. Ac augue duis magna egestas pharetra. Pulvinar morbi a ullamcorper massa, vel vitae ipsum aliquam interdum. Nec imperdiet ultrices id proin mattis lorem platea. Est nec leo vulputate tincidunt luctus in. Massa pharetra auctor integer pulvinar senectus egestas enim. Turpis dictum at dictum nam sed sed accumsan. Tellus fames gravida integer bibendum eget nascetur id. At aliquam a donec eu. At velit quam quam ut blandit justo est ",
-    reviews: 0.85,
+    reviews: 0.58,
   },
   {
     id: 6,
@@ -206,7 +206,7 @@ const jobs = [
     attachment: "attachment1",
     descriptions:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet imperdiet nunc vitae eu neque. Lobortis aliquet cursus sem accumsan. Sit pulvinar eget leo sagittis. Euismod nulla in tellus adipiscing. Phasellus nulla id lacus, accumsan sit elit placerat. Odio nec risus ut pellentesque risus, erat tempor, massa quis. Vel ligula etiam lectus euismod placerat. Mauris luctus hac egestas et. Orci sodales tortor nam pellentesque sed eget cursus blandit aliquam. Molestie rhoncus molestie in nisi eget risus, viverra eget. Tortor diam, lacus, tincidunt ridiculus congue a quisque. Nunc ac dapibus ut tortor amet. Turpis eget lorem posuere vestibulum dis vulputate. Dictumst maecenas pellentesque lobortis nisl neque. Mi pretium semper tincidunt amet aliquam suspendisse. Amet vitae diam mi, ut sem cras. Vitae massa velit fames imperdiet mattis sed. Est et leo nisl, maecenas proin urna, vitae elit sit. Ornare felis rhoncus fames sed. Enim magna a nec neque, suscipit. Ultrices non tempus, curabitur elementum viverra neque, turpis. Ac augue duis magna egestas pharetra. Pulvinar morbi a ullamcorper massa, vel vitae ipsum aliquam interdum. Nec imperdiet ultrices id proin mattis lorem platea. Est nec leo vulputate tincidunt luctus in. Massa pharetra auctor integer pulvinar senectus egestas enim. Turpis dictum at dictum nam sed sed accumsan. Tellus fames gravida integer bibendum eget nascetur id. At aliquam a donec eu. At velit quam quam ut blandit justo est ",
-    reviews: 0.85,
+    reviews: 0.69,
   },
   {
     id: 12,
