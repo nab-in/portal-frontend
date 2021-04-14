@@ -2,6 +2,7 @@ import React from "react"
 import Link from "next/link"
 import Template from "../../template/Template"
 import Job from "../../job/Job"
+import NewsLetter from "../../newsletter/NewsLetter"
 import styles from "./jobs.module.sass"
 import jobs from "../../../data/jobs"
 
@@ -17,7 +18,7 @@ const Jobs = () => {
           </div>
         </div>
         <div className={`${styles.sub__content} sub__content`}>
-          Sub Contents
+          <NewsLetter />
         </div>
       </div>
     </Template>

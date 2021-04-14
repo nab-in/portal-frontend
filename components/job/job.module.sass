@@ -2,13 +2,14 @@
 @import "../../styles/_colorsVariables"
 
 .job__card
-    margin: 1rem 0
+    margin: 0 0 1rem
     padding: 1.8rem 1rem
-    @include flexVary(space-between, center )
+    flex-wrap: wrap
+    @include flexVary(space-between, _ )
     p
         font-size: .9rem
         color: #5A5A5A
-        margin: .7rem 0
+        margin-bottom: .7rem
         span
             color: $primary
     .logo__container
@@ -20,18 +21,19 @@
             position: relative
     .time__details
         width: calc( 65% - 100px )
+        min-width: 200px
         height: 100%
-        padding: .5rem
+        padding: 0 .5rem
         border-right: 1px solid #BBBBBB
         h3
             color: $primary
             font-weight: normal
-            font-size: clamp(1rem, 4vw, 1.2rem)
+            font-size: clamp(1rem, 4vw, 1.1rem)
             width: 100%
             white-space: nowrap
             overflow: hidden
             text-overflow: ellipsis
-            margin-bottom: 1rem
+            margin-bottom: .3rem
         .stars
             $percent: calc(var(--rating) / 5 * 100%)
             display: inline-block
@@ -39,6 +41,7 @@
             font-family: Times // make sure ★ appears correctly
             line-height: 1
             color: $primary
+            margin-bottom: .7rem
             &::before
                 content: '★★★★★'
                 letter-spacing: 3px
@@ -50,6 +53,7 @@
 
     .job__descriptions
         width: 35%
-        padding: .5rem
+        min-width: 200px
+        padding: 0 .5rem
         .company__name
             margin-bottom: 1rem
