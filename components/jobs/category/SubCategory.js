@@ -1,23 +1,27 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import styles from "./category.module.sass"
 
 const SubCategory = ({ sub, setSearch, search, category }) => {
   let { name, id } = sub //sub category destructuring
   let [checked, setChecked] = useState(false)
-  // adding sub category
 
+  let searchCopy = search?.categories
+  // checking if category exists in search state
+  let categoryIndex = searchCopy?.findIndex((u) => u.id == category.id)
+
+  let SubCategoryIndex
+
+  // searching if sub category exists in the category
+  if (categoryIndex >= 0) {
+    SubCategoryIndex = searchCopy[categoryIndex]?.sub_categories?.findIndex(
+      (u) => u.id == id
+    )
+  }
+
+  // toggling sub category
   const toggleSubCategory = () => {
-    let searchCopy = search?.categories
-
-    // checking if category exists in search state
-    let categoryIndex = searchCopy?.findIndex((u) => u.id == category.id)
-
     // if category exists this run
     if (categoryIndex >= 0) {
-      let SubCategoryIndex = searchCopy[
-        categoryIndex
-      ]?.sub_categories?.findIndex((u) => u.id == id)
-
       if (SubCategoryIndex >= 0) {
         // remove sub_category function goes here
         searchCopy[categoryIndex].sub_categories = searchCopy[
@@ -63,6 +67,13 @@ const SubCategory = ({ sub, setSearch, search, category }) => {
     }
   }
 
+  useEffect(() => {
+    // updating UI when subcategory is removed from filter criteria
+    if (SubCategoryIndex === -1) {
+      setChecked(false)
+    }
+  }, [search])
+
   return (
     <div
       onClick={toggleSubCategory}
@@ -88,6 +99,3 @@ const SubCategory = ({ sub, setSearch, search, category }) => {
 }
 
 export default SubCategory
-
-// TODO: work on removing subcategory from the search
-// TODO: work on cool dropdown UI
