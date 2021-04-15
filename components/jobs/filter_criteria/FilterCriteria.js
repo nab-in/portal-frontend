@@ -1,7 +1,8 @@
 import React from "react"
 
+// displays filter criteria set in the hero component
 const FilterCriteria = ({ search, setSearch }) => {
-  console.log(search.categories)
+  // setSearch will be used to remove criteria when remove action is called
   return (
     <div>
       {search?.keyword && <p>Keyword: {search.keyword}</p>}

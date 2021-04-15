@@ -1,7 +1,7 @@
 import React from "react"
-import categories from "../../../data/categories"
 import SubCategory from "./SubCategory"
 
+// filter dropdown component per each category
 const Category = ({ category, search, setSearch }) => {
   let { name, sub_categories, id } = category
   return (

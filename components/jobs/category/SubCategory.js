@@ -1,22 +1,43 @@
 import React from "react"
-import categories from "../../../data/categories"
 
 const SubCategory = ({ sub, setSearch, search, category }) => {
-  let { name, id } = sub
+  let { name, id } = sub //sub category destructuring
+
+  // adding sub category
+
   const addCategory = () => {
     let searchCopy = search?.categories
+
+    // checking if category exists in search state
+
     let categoryIndex = searchCopy?.findIndex((u) => u.id == category.id)
+
+    // if category exists this run
+
     if (categoryIndex >= 0) {
-      searchCopy[categoryIndex] = {
-        ...searchCopy[categoryIndex],
-        sub_categories: searchCopy[categoryIndex].sub_categories.concat(sub),
+      let SubCategoryIndex = searchCopy[
+        categoryIndex
+      ]?.sub_categories?.findIndex((u) => u.id == sub.id)
+
+      if (SubCategoryIndex >= 0) {
+        // remove sub_category function goes here
       }
-      console.log(searchCopy[categoryIndex])
-      setSearch({
-        ...search,
-        categories: searchCopy,
-      })
+
+      // if category does not exists this run
+      if (SubCategoryIndex === -1) {
+        searchCopy[categoryIndex] = {
+          ...searchCopy[categoryIndex],
+
+          sub_categories: searchCopy[categoryIndex].sub_categories.concat(sub),
+        }
+
+        setSearch({
+          ...search,
+          categories: searchCopy,
+        })
+      }
     }
+
     if (categoryIndex === -1) {
       setSearch({
         ...search,
