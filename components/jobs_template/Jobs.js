@@ -10,13 +10,17 @@ import jobs from "../../data/jobs"
 // main template to display jobs in landing page and jobs page
 const Jobs = ({ search, setSearch, heading }) => {
   let [filter, setFilter] = useState(false)
+
   // check if search object has any value to dynamically render heading
   let checkSearch = (obj) => {
     for (let key in obj) {
-      if (obj[key] == null || obj[key] == "") {
+      if (obj[key] == null || obj[key] == "" || obj[key] == undefined) {
         setFilter(false)
-      } else {
+        return
+      } else if (obj[key] !== null || obj[key].length > 0) {
+        console.log(obj[key].length)
         setFilter(true)
+        return
       }
     }
   }

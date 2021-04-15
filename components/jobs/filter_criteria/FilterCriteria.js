@@ -1,5 +1,7 @@
 import React from "react"
+import { AiOutlineClose } from "react-icons/ai"
 import FilterItem from "./FilterItem"
+import styles from "./filter.module.sass"
 
 // displays filter criteria set in the hero component
 const FilterCriteria = ({ search, setSearch }) => {

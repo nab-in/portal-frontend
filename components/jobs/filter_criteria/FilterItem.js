@@ -1,4 +1,6 @@
 import React from "react"
+import { AiOutlineClose } from "react-icons/ai"
+import styles from "./filter.module.sass"
 
 const FilterItem = ({ sub, search, category, setSearch }) => {
   let { name, id } = sub
@@ -31,7 +33,7 @@ const FilterItem = ({ sub, search, category, setSearch }) => {
     }
   }
   return (
-    <div>
+    <div className={styles.filter}>
       {name}
       <span onClick={removeCriteria}>X</span>
     </div>

@@ -73,7 +73,7 @@ const SubCategory = ({ sub, setSearch, search, category }) => {
 
   useEffect(() => {
     // updating UI when subcategory is removed from filter criteria
-    if (SubCategoryIndex === -1) {
+    if (SubCategoryIndex === -1 || SubCategoryIndex === undefined) {
       setChecked(false)
     }
   }, [search])
