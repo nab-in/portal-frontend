@@ -6,22 +6,32 @@ const SubCategory = ({ sub, setSearch, search, category }) => {
   let [checked, setChecked] = useState(false)
   // adding sub category
 
-  const addCategory = () => {
+  const toggleSubCategory = () => {
     let searchCopy = search?.categories
 
     // checking if category exists in search state
-
     let categoryIndex = searchCopy?.findIndex((u) => u.id == category.id)
 
     // if category exists this run
-
     if (categoryIndex >= 0) {
       let SubCategoryIndex = searchCopy[
         categoryIndex
-      ]?.sub_categories?.findIndex((u) => u.id == sub.id)
+      ]?.sub_categories?.findIndex((u) => u.id == id)
 
       if (SubCategoryIndex >= 0) {
         // remove sub_category function goes here
+        searchCopy[categoryIndex].sub_categories = searchCopy[
+          categoryIndex
+        ].sub_categories.filter((el) => el.id !== id)
+
+        //   updating state with new categories
+        setSearch({
+          ...search,
+          categories: searchCopy,
+        })
+
+        // uncheck the checkbox
+        setChecked(false)
       }
 
       // if category does not exists this run
@@ -36,8 +46,8 @@ const SubCategory = ({ sub, setSearch, search, category }) => {
           ...search,
           categories: searchCopy,
         })
+        setChecked(true)
       }
-      setChecked(true)
     }
 
     if (categoryIndex === -1) {
@@ -55,7 +65,7 @@ const SubCategory = ({ sub, setSearch, search, category }) => {
 
   return (
     <div
-      onClick={addCategory}
+      onClick={toggleSubCategory}
       className={
         checked
           ? `${styles.sub__category} ${styles.checked}`
@@ -65,8 +75,8 @@ const SubCategory = ({ sub, setSearch, search, category }) => {
       <div className={styles.label}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 25">
           <path
-            stroke-linecap="round"
-            stroke-miterlimit="10"
+            strokeLinecap="round"
+            strokeMiterlimit="10"
             fill="none"
             d="M22.9 3.7l-15.2 16.6-6.6-7.1"
           />
