@@ -7,7 +7,7 @@ const FilterCriteria = ({ search, setSearch }) => {
     <div>
       {search?.keyword && <p>Keyword: {search.keyword}</p>}
       {search?.location && <p>Location: {search.location}</p>}
-      {search.categories.length > 0 &&
+      {search?.categories.length > 0 &&
         search.categories.map((category) => (
           <div key={category.id}>
             {category.sub_categories.length > 0 && (

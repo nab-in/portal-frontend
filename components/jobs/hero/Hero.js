@@ -32,6 +32,18 @@ const Hero = ({ setSearch, search }) => {
               onSubmit={(e) => handleSubmit(e)}
               className={`search__form ${styles.search__form}`}
             >
+              {categories.length > 0 && (
+                <div className={styles.categories}>
+                  {categories.map((category) => (
+                    <Category
+                      key={category.id}
+                      category={category}
+                      search={search}
+                      setSearch={setSearch}
+                    />
+                  ))}
+                </div>
+              )}
               <div className={styles.inputs}>
                 <input
                   type="text"
@@ -49,18 +61,6 @@ const Hero = ({ setSearch, search }) => {
                   Search
                 </button>
               </div>
-              {categories.length > 0 && (
-                <div className={styles.categories}>
-                  {categories.map((category) => (
-                    <Category
-                      key={category.id}
-                      category={category}
-                      search={search}
-                      setSearch={setSearch}
-                    />
-                  ))}
-                </div>
-              )}
             </form>
           </div>
         </div>

@@ -1,8 +1,9 @@
-import React from "react"
+import React, { useState } from "react"
+import styles from "./category.module.sass"
 
 const SubCategory = ({ sub, setSearch, search, category }) => {
   let { name, id } = sub //sub category destructuring
-
+  let [checked, setChecked] = useState(false)
   // adding sub category
 
   const addCategory = () => {
@@ -36,6 +37,7 @@ const SubCategory = ({ sub, setSearch, search, category }) => {
           categories: searchCopy,
         })
       }
+      setChecked(true)
     }
 
     if (categoryIndex === -1) {
@@ -47,10 +49,35 @@ const SubCategory = ({ sub, setSearch, search, category }) => {
           sub_categories: [sub],
         }),
       })
+      setChecked(true)
     }
   }
 
-  return <div onClick={addCategory}>{name}</div>
+  return (
+    <div
+      onClick={addCategory}
+      className={
+        checked
+          ? `${styles.sub__category} ${styles.checked}`
+          : `${styles.sub__category}`
+      }
+    >
+      <div className={styles.label}>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 25">
+          <path
+            stroke-linecap="round"
+            stroke-miterlimit="10"
+            fill="none"
+            d="M22.9 3.7l-15.2 16.6-6.6-7.1"
+          />
+        </svg>
+        <span> {name}</span>
+      </div>
+    </div>
+  )
 }
 
 export default SubCategory
+
+// TODO: work on removing subcategory from the search
+// TODO: work on cool dropdown UI
