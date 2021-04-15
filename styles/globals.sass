@@ -124,3 +124,30 @@ button
                     padding: .2rem
                     .icon
                         color: red
+
+.stars
+    $percent: calc(var(--rating) / 5 * 100%)
+    display: inline-block
+    font-size: .9rem
+    font-family: Times // make sure ★ appears correctly
+    line-height: 1
+    color: $primary
+    margin-bottom: .7rem
+    &::before
+        content: '★★★★★'
+        letter-spacing: 3px
+        background: linear-gradient(90deg, $secondary calc( var(--rating) / 5 * 100% ), white calc( var(--rating) / 5 * 100% ))
+        -webkit-background-clip: text
+        -webkit-text-stroke-width: 1px
+        -webkit-text-stroke-color: $secondary
+        -webkit-text-fill-color: transparent
+    &.bg__stars
+        margin-bottom: 0
+        margin-left: 1.5rem
+        transform: scale(1.2)
+        &::before
+            background: linear-gradient(90deg, $secondary calc( var(--rating) / 5 * 100% ), transparent calc( var(--rating) / 5 * 100% ))
+            -webkit-background-clip: text
+            -webkit-text-stroke-width: 1px
+            -webkit-text-stroke-color: $secondary
+            -webkit-text-fill-color: transparent

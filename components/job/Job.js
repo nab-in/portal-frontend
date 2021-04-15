@@ -1,7 +1,7 @@
 import React, { CSSProperties } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import moment from "moment"
+// import moment from "moment"
 import styles from "./job.module.sass"
 
 const Job = ({ job }) => {
@@ -33,11 +33,7 @@ const Job = ({ job }) => {
         <h3 className="">
           <Link href={`/jobs/${id}`}>{title}</Link>
         </h3>
-        <div
-          className={`${styles.stars}`}
-          style={style}
-          aria-label="Rating of this product is 2.3 out of 5."
-        ></div>
+        <div className="stars" style={style}></div>
         <p>
           Posted: <span>{created_at}</span>
         </p>

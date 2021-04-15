@@ -36,7 +36,7 @@ const Jobs = ({ search, setSearch, heading }) => {
       <div className={`${styles.template__layout} template__layout`}>
         <div className={`${styles.main__content} main__content`}>
           <FilterCriteria search={search} setSearch={setSearch} />
-          {filter && <h3>Results</h3>}
+          {filter && <h3 className={styles.results__header}>Results</h3>}
           {jobs.length > 0 &&
             jobs.slice(1, 6).map((job) => <Job job={job} key={job.id} />)}
           <div className={styles.more__link}>
