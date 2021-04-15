@@ -1,9 +1,11 @@
 .hero
-    background: linear-gradient(90deg, rgba(0, 80, 122, 0.7) 1.13%, #007CA9 100%)
+    // background: linear-gradient(90deg, rgba(0, 80, 122, 0.7) 1.13%, #007CA9 100%)
+    background: #00507A
     background-size: cover
     background-repeat: no-repeat
     position: sticky
-    top: 60px
+    top: 0
+    z-index: 3
     .container
         width: 85%
         max-width: 1600px
@@ -15,12 +17,14 @@
         .logo__container
             position: relative
             bottom: calc( -50px - 1rem )
+            border: 1px solid #E2E8EC
+            background: white
+            padding: .4rem
             .logo
                 width: 100px
                 height: 100px
-                background: white
                 position: relative
-                border: 1px solid #E2E8EC
+
         .job__heading
             padding: 0 2rem
             .title
@@ -42,4 +46,3 @@ main
         width: 85%
         max-width: 1600px
         margin: 5rem auto
-        height: 150vh

@@ -1,6 +1,7 @@
 import React from "react"
 import { useRouter } from "next/router"
 import Image from "next/image"
+import JobDetails from "../../components/job/JobDetails"
 import styles from "../../styles/job.module.sass"
 import jobs from "../../data/jobs"
 
@@ -41,7 +42,17 @@ const job = () => {
         </div>
       </div>
       <main>
-        <div className={styles.template}></div>
+        <div className={styles.template}>
+          <h1 className="primary__header">Details</h1>
+          <div className={`${styles.template__layout} template__layout`}>
+            <div className={`${styles.main__content} main__content`}>
+              {job[0] && <JobDetails job={job[0]} />}
+            </div>
+            <div className={`${styles.sub__content} sub__content`}>
+              Related Jobs
+            </div>
+          </div>
+        </div>
       </main>
     </div>
   )
