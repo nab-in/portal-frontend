@@ -32,35 +32,37 @@ const Hero = ({ setSearch, search }) => {
               onSubmit={(e) => handleSubmit(e)}
               className={`search__form ${styles.search__form}`}
             >
-              <input
-                type="text"
-                placeholder="Type to search..."
-                onChange={(e) => handleChange(e)}
-                name="keyword"
-              />
-              <input
-                type="text"
-                placeholder="Location"
-                onChange={(e) => handleChange(e)}
-                name="location"
-              />
-              <button className={`btn btn-primary ${styles.btn}`}>
-                Search
-              </button>
+              <div className={styles.inputs}>
+                <input
+                  type="text"
+                  placeholder="Type to search..."
+                  onChange={(e) => handleChange(e)}
+                  name="keyword"
+                />
+                <input
+                  type="text"
+                  placeholder="Location"
+                  onChange={(e) => handleChange(e)}
+                  name="location"
+                />
+                <button className={`btn btn-primary ${styles.btn}`}>
+                  Search
+                </button>
+              </div>
+              {categories.length > 0 && (
+                <div className={styles.categories}>
+                  {categories.map((category) => (
+                    <Category
+                      key={category.id}
+                      category={category}
+                      search={search}
+                      setSearch={setSearch}
+                    />
+                  ))}
+                </div>
+              )}
             </form>
           </div>
-          {categories.length > 0 && (
-            <div className={styles.categories}>
-              {categories.map((category) => (
-                <Category
-                  key={category.id}
-                  category={category}
-                  search={search}
-                  setSearch={setSearch}
-                />
-              ))}
-            </div>
-          )}
         </div>
       </div>
     </div>

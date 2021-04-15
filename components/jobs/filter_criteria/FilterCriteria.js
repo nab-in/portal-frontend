@@ -12,9 +12,9 @@ const FilterCriteria = ({ search, setSearch }) => {
           <div key={category.id}>
             {category.sub_categories.length > 0 && (
               <div>
-                {category.name}:&nbsp;
+                {category.name}:&nbsp;&nbsp;&nbsp;
                 {category.sub_categories.map((sub) => (
-                  <span key={sub.id}>{sub.name}</span>
+                  <span key={sub.id}>{sub.name}&nbsp; &nbsp;&nbsp;</span>
                 ))}
               </div>
             )}
