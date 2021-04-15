@@ -84,14 +84,17 @@
                             input
                                 background: #E2E8EC
                                 border: none
-                                width: calc( 100% - 120px )
-                                margin-right: 10px
+                                width: calc( 100% - 100px )
+                                margin-right: 0
                                 padding: .7rem
                                 color: black
                                 transition: .3s
                                 &:nth-child(1)
                                     width: 100%
                                     margin-bottom: 1rem
+                                &:nth-child(2)
+                                    margin-right: 10px
+                                    width: calc( 100% - 110px )
                                 &:focus
                                     background: none !important
                                     border-bottom: 1px solid lightgray !important
@@ -101,6 +104,6 @@
                                     &::placeholder
                                         color: #E2E8EC
                     .btn
-                        // min-width: 100px
+                        min-width: 100px
                         // padding: .7rem 0
-                        // max-width: 100px
+                        max-width: 100px
