@@ -34,13 +34,10 @@ const Job = ({ job }) => {
           <Link href={`/jobs/${id}`}>{title}</Link>
         </h3>
         <div
-          class={`${styles.stars}`}
+          className={`${styles.stars}`}
           style={style}
           aria-label="Rating of this product is 2.3 out of 5."
-        >
-          {/* &nbsp;
-          {Math.round(reviews * 5 * 10) / 10} */}
-        </div>
+        ></div>
         <p>
           Posted: <span>{created_at}</span>
         </p>
