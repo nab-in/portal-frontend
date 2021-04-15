@@ -14,14 +14,16 @@ const Jobs = ({ search, setSearch, heading }) => {
   // check if search object has any value to dynamically render heading
   let checkSearch = (obj) => {
     for (let key in obj) {
-      if (obj[key] == null || obj[key] == "" || obj[key] == undefined) {
-        setFilter(false)
-        return
-      } else if (obj[key] !== null || obj[key].length > 0) {
-        console.log(obj[key].length)
+      if (obj[key] !== null && obj[key].length > 0) {
         setFilter(true)
         return
       }
+      if (obj[key] == [] && obj.categories.length > 0) {
+        setFilter(true)
+        return
+      }
+      setFilter(false)
+      return
     }
   }
   // updating UI

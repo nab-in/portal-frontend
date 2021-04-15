@@ -17,8 +17,8 @@ const Hero = ({ setSearch, search }) => {
     if (router.query)
       setSearch({
         ...search,
-        keyword: router.query.keyword,
-        location: router.query.location,
+        keyword: router.query.keyword ? router.query.keyword : "",
+        location: router.query.location ? router.query.location : "",
       })
   }, [])
 
@@ -48,12 +48,14 @@ const Hero = ({ setSearch, search }) => {
                 <input
                   type="text"
                   placeholder="Type to search..."
+                  value={search.keyword}
                   onChange={(e) => handleChange(e)}
                   name="keyword"
                 />
                 <input
                   type="text"
                   placeholder="Location"
+                  value={search.location}
                   onChange={(e) => handleChange(e)}
                   name="location"
                 />
