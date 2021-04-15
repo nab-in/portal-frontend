@@ -1,0 +1,42 @@
+@import "../../styles/_colorsVariables"
+
+.card
+    padding: 2rem 1.31rem
+    box-shadow: 5px 4px 30px 5px rgba(0, 0, 0, 0.15)
+    margin-bottom: 3rem
+    h2
+        font-size: clamp(1.3rem, 3vw, 1.5rem)
+        line-height: 1.8rem
+        margin-bottom: 1.2rem
+    .showcase
+        article
+            margin-bottom: 1rem
+            padding: 1rem
+            .basic__info
+                display: flex
+                .logo__container
+                    min-width: 80px
+                    width: 90px
+                    height: 100%
+                    .logo
+                        height: 50px
+                        position: relative
+                .time__details
+                    font-size: .8rem
+                    .time
+                        margin-bottom: .7rem
+                        span
+                            color: $primary
+            .title
+                margin-top: .7rem
+                h3
+                    font-size: 1rem
+                    width: 100%
+                    white-space: nowrap
+                    overflow: hidden
+                    text-overflow: ellipsis
+                    font-weight: normal
+
+    .more__link
+        margin-top: 1rem
+        text-align: right

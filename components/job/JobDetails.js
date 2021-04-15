@@ -46,6 +46,12 @@ const JobDetails = ({ job }) => {
       <div className={styles.descriptions}>
         <Linkify>{descriptions}</Linkify>
       </div>
+      <div className={styles.job__footer}>
+        <p>
+          You need an account to apply for this job. Already have one?{" "}
+          <Link href="/login">Login</Link>
+        </p>
+      </div>
     </div>
   )
 }
