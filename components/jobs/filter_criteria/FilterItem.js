@@ -20,6 +20,9 @@ const FilterItem = ({ sub, search, category, setSearch }) => {
         categoryIndex
       ].sub_categories.filter((el) => el.id !== id)
 
+      //   removing category in categories array
+      if (searchCopy[categoryIndex].sub_categories.length === 0)
+        searchCopy = searchCopy.filter((el) => el.id != category.id)
       //   updating state with new categories
       setSearch({
         ...search,

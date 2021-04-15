@@ -15,15 +15,16 @@ const Jobs = ({ search, setSearch, heading }) => {
     for (let key in obj) {
       if (obj[key] == null || obj[key] == "") {
         setFilter(false)
-        // if (obj[key] == [] && obj[key].length == 0) setFilter(false)
       } else {
         setFilter(true)
       }
     }
   }
+  // updating UI
   useEffect(() => {
     checkSearch(search)
   }, [search])
+
   return (
     <Template heading={filter ? "Filter Criteria" : heading}>
       <div className={`${styles.template__layout} template__layout`}>
