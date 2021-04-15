@@ -1,8 +1,7 @@
 import React from "react"
 import { AiOutlineClose } from "react-icons/ai"
-import styles from "./filter.module.sass"
 
-const FilterItem = ({ sub, search, category, setSearch }) => {
+const FilterItem = ({ sub, search, category, setSearch, styles }) => {
   let { name, id } = sub
   const removeCriteria = () => {
     //   categories copy
@@ -33,10 +32,12 @@ const FilterItem = ({ sub, search, category, setSearch }) => {
     }
   }
   return (
-    <div className={styles.filter}>
+    <span>
       {name}
-      <span onClick={removeCriteria}>X</span>
-    </div>
+      <span onClick={removeCriteria} className="close">
+        <AiOutlineClose className="icon" />
+      </span>
+    </span>
   )
 }
 
