@@ -11,6 +11,7 @@
     font-family: 'Lato', sans-serif
 
 @import "./_colors"
+@import "./_colorsVariables"
 @import "./_variables"
 
 input, textarea, button
@@ -95,19 +96,31 @@ button
         border-color: white
 
 .filter__criteria
-    margin-bottom: 1.5rem
+    // margin-bottom: 1.5rem
     .criteria
         margin-bottom: .7rem
         display: flex
+        align-items: center
+        font-size: .9rem
         &__title
-            margin-right: .7rem
+            margin-right: 1rem
             display: inline-block
         &__showcase
             display: flex
+            align-items: center
             flex-wrap: wrap
             span
                 display: flex
                 align-items: center
+                justify-content: center
                 padding: .2rem .5rem
+                border-radius: 8px
                 margin: 0 .5rem .5rem 0
                 background: #E2E8EC
+                color: $primary
+                .close
+                    margin: 0
+                    cursor: pointer
+                    padding: .2rem
+                    .icon
+                        color: red

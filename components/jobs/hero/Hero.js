@@ -9,6 +9,7 @@ const Hero = ({ setSearch, search }) => {
   const handleChange = (e) => {
     let { name, value } = e.target
     setSearch({ ...search, [name]: value })
+    // router.query{[name]: value}
   }
   const handleSubmit = (e) => {
     e.preventDefault()
