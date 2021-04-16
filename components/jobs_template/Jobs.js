@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react"
 import Link from "next/link"
 import Template from "../template/Template"
 import Job from "../job/Job"
-import FilterCriteria from "../jobs/filter_criteria/FilterCriteria"
+import FilterCriteria from "../filter_criteria/FilterCriteria"
 import NewsLetter from "../newsletter/NewsLetter"
-import styles from "./jobs.module.sass"
+import styles from "../../styles/template.module.sass"
 import jobs from "../../data/jobs"
 
 let isAuthenticated = false
