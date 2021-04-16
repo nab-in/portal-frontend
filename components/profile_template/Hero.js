@@ -5,7 +5,7 @@ import styles from "./hero.module.sass"
 let isAuthenticated = false
 const Hero = ({ details, page }) => {
   const Profile = () => {
-    if (page == "company") {
+    if (page == "company" || "company/jobs") {
       let { logo, name, title, id } = details
       return (
         <div className={styles.container}>
