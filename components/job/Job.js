@@ -30,9 +30,9 @@ const Job = ({ job }) => {
         </div>
       </div>
       <div className={styles.time__details}>
-        <h3 className="">
+        <h2>
           <Link href={`/jobs/${id}`}>{title}</Link>
-        </h3>
+        </h2>
         <div className="stars" style={style}></div>
         <p>
           Posted: <span>{created_at}</span>
