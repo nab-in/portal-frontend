@@ -1,8 +1,5 @@
 .hero
-    // background: linear-gradient(90deg, rgba(0, 80, 122, 0.7) 1.13%, #007CA9 100%)
-    background: #00507A
-    background-size: cover
-    background-repeat: no-repeat
+    background: linear-gradient(90deg, #00507A 1.13%, #007CA9 100%)
     position: sticky
     top: 0
     z-index: 3
@@ -15,7 +12,7 @@
         padding: 1rem 0
         color: #E2E8EC
         .logo__container
-            position: relative
+            position: absolute
             bottom: calc( -50px - 1rem )
             border: 1px solid #E2E8EC
             background: white
@@ -27,18 +24,23 @@
 
         .job__heading
             padding: 0 2rem
+            // position: relative
+            margin-left: 100px
             .title
-                display: flex
-                align-items: center
                 margin-bottom: 1.2rem
+                h1
+                    width: 100%
             .time__details
                 display: flex
                 align-items: center
+                flex-wrap: wrap
                 font-size: .9rem
+                .stars
+                    margin-left: .5rem
                 .time
                     margin-right: 1rem
                     span
-                        margin-right: 1rem
+                        margin-right: .3rem
 main
     .template
         background: white
@@ -46,3 +48,51 @@ main
         width: 85%
         max-width: 1600px
         margin: 5rem auto
+
+@media screen and ( max-width: 767px )
+    .hero
+        .container
+            width: 90%
+    main
+        .template
+            padding: 2rem
+            width: 90%
+
+@media screen and ( max-width: 767px )
+    .hero
+        .container
+            width: 90%
+            .logo__container
+                position: relative
+                bottom: 50%
+                .logo
+                    width: 50px
+                    height: 50px
+            .job__heading
+                padding: 0
+                margin-left: calc( -50px - 1rem )
+                .title
+                    margin-bottom: 1.5rem
+                    h1
+                        width: 100%
+                .time__details
+                    margin-left: 50px
+                    padding-left: 2rem
+                    min-height: 50px
+                    .stars
+                        margin-top: .7rem
+                    .time
+                        margin-right: .7rem
+                        margin-top: .7rem
+    main
+        .template
+            padding: 2rem 1.5rem
+            width: 90%
+            margin: 2rem auto
+
+@media screen and ( max-width: 420px )
+    .hero
+        .container
+            .job__heading
+                .title
+                    margin-bottom: 1rem

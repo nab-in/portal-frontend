@@ -28,8 +28,7 @@ const job = () => {
           </div>
           <div className={styles.job__heading}>
             <div className={styles.title}>
-              <h2>{job[0]?.title}</h2>
-              <div className="stars bg__stars" style={style}></div>
+              <h1>{job[0]?.title}</h1>
             </div>
             <div className={styles.time__details}>
               <div className={`${styles.time} ${styles.posted}`}>
@@ -39,6 +38,10 @@ const job = () => {
                 <span>Deadline: {job[0]?.close_date},</span>
                 <span>{job[0]?.close_time}</span>
               </div>
+              <div
+                className={`stars bg__stars ${styles.stars}`}
+                style={style}
+              ></div>
             </div>
           </div>
         </div>
