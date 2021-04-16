@@ -1,5 +1,7 @@
 import React from "react"
 import Link from "next/link"
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai"
+import Details from "./Details"
 import styles from "./template.module.sass"
 
 let isUser = false
@@ -12,12 +14,12 @@ const Template = ({ page, details }) => {
           <nav>
             <ul>
               <li>
-                <Link href={`/companies/${id}`}>
+                <Link href={`/companies/${id}?tab=profile`}>
                   <a>Profile</a>
                 </Link>
               </li>
               <li>
-                <Link href={`/companies/${id}/jobs`}>
+                <Link href={`/companies/${id}?tab=jobs`}>
                   <a>Jobs</a>
                 </Link>
               </li>
@@ -33,22 +35,22 @@ const Template = ({ page, details }) => {
           <nav>
             <ul>
               <li>
-                <Link href={`/users/${id}`}>
+                <Link href={`/users/${id}?tab=profile`}>
                   <a>Profile</a>
                 </Link>
               </li>
               <li>
-                <Link href={`/users/edit-profile/${id}`}>
+                <Link href={`/users/${id}?tab=edit-profile`}>
                   <a>Edit Profile</a>
                 </Link>
               </li>
               <li>
-                <Link href={`/users/applied_jobs/${id}`}>
+                <Link href={`/users/${id}?tab=applied-jobs`}>
                   <a>Applied Jobs</a>
                 </Link>
               </li>
               <li>
-                <Link href={`/users/saved_jobs/${id}`}>
+                <Link href={`/users/${id}?tab=saved-jobs`}>
                   <a>Saved Jobs</a>
                 </Link>
               </li>
@@ -64,7 +66,9 @@ const Template = ({ page, details }) => {
   return (
     <section className={styles.template}>
       <Nav />
-      <div className={styles.main__details}>Main details</div>
+      <div className={styles.main__details}>
+        <Details />
+      </div>
     </section>
   )
 }
