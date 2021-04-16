@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react"
-import { BsChevronDown, BsChevronUp } from "react-icons/bs"
+import { FaChevronDown, FaChevronUp } from "react-icons/fa"
 import SubCategory from "./SubCategory"
 import styles from "./category.module.sass"
 
@@ -40,9 +40,9 @@ const Category = ({ category, search, setSearch }) => {
           <button onClick={open}>
             {name}{" "}
             {openDropdown ? (
-              <BsChevronUp className={styles.icon} />
+              <FaChevronUp className={styles.icon} />
             ) : (
-              <BsChevronDown className={styles.icon} />
+              <FaChevronDown className={styles.icon} />
             )}
           </button>
           <div

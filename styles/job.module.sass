@@ -1,7 +1,6 @@
 .hero
     background: linear-gradient(90deg, #00507A 1.13%, #007CA9 100%)
-    position: sticky
-    top: 0
+    position: relative
     z-index: 3
     .container
         width: 85%
@@ -10,6 +9,7 @@
         display: flex
         align-items: flex-end
         padding: 1rem 0
+        padding-top: calc( 1rem + 60px )
         color: #E2E8EC
         .logo__container
             position: absolute
@@ -59,7 +59,6 @@ main
 
 @media screen and ( max-width: 767px )
     .hero
-        position: relative
         .container
             width: 90%
             .logo__container
