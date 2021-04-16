@@ -55,7 +55,9 @@ const job = () => {
             </div>
             <div className={`${styles.sub__content} sub__content`}>
               <RelatedJobs />
-              <NewsLetter />
+              <div className={styles.newsletter}>
+                <NewsLetter />
+              </div>
             </div>
           </div>
         </div>
