@@ -24,7 +24,7 @@ h2
     font-size: clamp(1.2rem, 3vw, 1.8rem)
 
 .primary__header
-    font-size: clamp(1.8rem, 4vw, 2.2rem)
+    font-size: clamp(1.4rem, 3vw, 2rem)
     display: inline-block
     position: relative
     &::before
@@ -32,6 +32,18 @@ h2
         position: absolute
         bottom: -7px
         height: 20px
+        width: 100%
+        background: linear-gradient(180deg, rgba(255, 176, 76, 0.34) 0%, #FFB04C 100%)
+
+.primary__text
+    display: inline-block
+    position: relative
+    cursor: pointer
+    &::before
+        content: ""
+        position: absolute
+        bottom: 0
+        height: 10px
         width: 100%
         background: linear-gradient(180deg, rgba(255, 176, 76, 0.34) 0%, #FFB04C 100%)
 
@@ -149,6 +161,8 @@ button
     grid-auto-flow: dense
     grid-column-gap: 3rem
     margin: 3rem 0
+    &.full__width
+        display: block
     .main__content
         grid-column: span 2
 

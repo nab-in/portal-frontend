@@ -17,6 +17,7 @@ const jobs = () => {
           search={search}
           setSearch={setSearch}
           heading="Recent Jobs"
+          page="jobs"
         />
       </main>
     </div>
