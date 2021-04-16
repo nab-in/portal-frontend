@@ -23,7 +23,7 @@ const Company = ({ company }) => {
         </div>
       </div>
       <div className={styles.details}>
-        <div className={`verified ${styles.verified}`}>
+        <div className={`badge verified ${styles.verified}`}>
           Verified <GoVerified className="icon" />
         </div>
         <div className={styles.jobs}>

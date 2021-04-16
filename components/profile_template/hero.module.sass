@@ -1,0 +1,59 @@
+.hero
+    background: linear-gradient(90deg, #00507A 1.13%, #007CA9 100%)
+    position: sticky
+    top: 0
+    z-index: 3
+    .container
+        width: 85%
+        max-width: 1600px
+        margin: auto
+        display: flex
+        align-items: flex-end
+        padding: 1rem 0
+        color: #E2E8EC
+        .dp__container
+            position: absolute
+            bottom: calc( -50px - 1rem )
+            border: 1px solid #E2E8EC
+            background: white
+            padding: .4rem
+            .dp
+                width: 100px
+                height: 100px
+                position: relative
+        .heading
+            padding: 0 2rem
+            position: relative
+            margin-left: 100px
+            .name
+                margin-bottom: 1rem
+                display: flex
+                align-items: center
+                flex-wrap: wrap
+                span:nth-child(2)
+                    font-weight: normal
+                    margin-left: 3rem
+                h1
+                    width: 100%
+
+@media screen and ( max-width: 767px )
+    .hero
+        position: relative
+        .container
+            width: 90%
+            .dp__container
+                position: relative
+                bottom: 50%
+                .dp
+                    width: 50px
+                    height: 50px
+            .heading
+                padding: 0
+                margin-left: 1rem
+                .name
+                    span:nth-child(1)
+                        width: 100%
+                        display: block
+                    span:nth-child(2)
+                        margin-top: .5rem
+                        margin-left: 0
