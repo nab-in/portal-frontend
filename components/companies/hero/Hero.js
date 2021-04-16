@@ -2,9 +2,9 @@ import React, { useEffect } from "react"
 import { useRouter } from "next/router"
 import styles from "./hero.module.sass"
 import Category from "../../categories/Category"
-import categories from "../../../data/categories"
+import categories from "../../../data/company_categories"
 
-const Hero = ({ setSearch, search }) => {
+const Hero = ({ search, setSearch }) => {
   let router = useRouter()
   const handleChange = (e) => {
     let { name, value } = e.target
@@ -18,7 +18,6 @@ const Hero = ({ setSearch, search }) => {
       setSearch({
         ...search,
         keyword: router.query.keyword ? router.query.keyword : "",
-        location: router.query.location ? router.query.location : "",
       })
   }, [])
 
@@ -26,7 +25,7 @@ const Hero = ({ setSearch, search }) => {
     <div className={styles.hero}>
       <div className={styles.container}>
         <div className={styles.wrapper}>
-          <h1>Search for different Jobs.</h1>
+          <h1>Search for different Companies.</h1>
           <div className={styles.search__container}>
             <form
               onSubmit={(e) => handleSubmit(e)}
@@ -51,13 +50,6 @@ const Hero = ({ setSearch, search }) => {
                   value={search.keyword}
                   onChange={(e) => handleChange(e)}
                   name="keyword"
-                />
-                <input
-                  type="text"
-                  placeholder="Location"
-                  value={search.location}
-                  onChange={(e) => handleChange(e)}
-                  name="location"
                 />
                 <button className={`btn btn-primary ${styles.btn}`}>
                   Search

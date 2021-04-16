@@ -1,0 +1,103 @@
+.hero
+    background: linear-gradient(90deg, #00507A 1.13%, #007CA9 100%)
+    background-size: cover
+    background-repeat: no-repeat
+    .container
+        width: 85%
+        max-width: 1600px
+        margin: auto
+        padding: 4rem 0
+        padding-bottom: 6rem
+        text-align: center
+        display: flex
+        justify-content: center
+        .wrapper
+            width: 80%
+            h1
+                text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5)
+                font-size: clamp(2.8rem, 4vw, 3.5rem)
+                color: white
+                margin-bottom: 2rem
+            p
+                font-size: clamp(1rem, 2vw, 1.05rem)
+                color: white
+                line-height: 1.5rem
+                margin: 1rem 0
+            .search__container
+                form.search__form
+                    .inputs
+                        display: flex
+                        width: 100%
+                        input
+                            background: #E2E8EC
+                            border: none
+                            width: calc( 100% - 100px )
+                            margin-right: 10px
+                            padding: .7rem
+                            color: black
+                            transition: .3s
+                            &:focus
+                                background: none !important
+                                border-bottom: 1px solid lightgray !important
+                                padding: 0
+                                color: #E2E8EC
+                                &::placeholder
+                                    color: #E2E8EC
+                .btn
+                    padding: .7rem 0
+                    // max-width: 100px
+                    width: 100px
+            .categories
+                width: 100%
+                display: flex
+                justify-content: stretch
+                align-content: center
+                flex-wrap: wrap
+                margin-bottom: 1rem
+
+@media screen and ( max-width: 992px )
+    .hero
+        .container
+            .wrapper
+                width: 80%
+
+@media screen and ( max-width: 840px )
+    .hero
+        .container
+            width: 90%
+            .wrapper
+                width: 90%
+
+@media screen and ( max-width: 767px )
+    .hero
+        .container
+            padding: 5rem 0
+            padding-bottom: 7rem
+            .wrapper
+                width: 100%
+                .search__container
+                    form.search__form
+                        .inputs
+                            display: flex
+                            flex-wrap: wrap
+                            width: 100%
+                            input
+                                background: #E2E8EC
+                                border: none
+                                width: calc( 100% - 110px )
+                                margin-right: 10px
+                                padding: .7rem
+                                color: black
+                                transition: .3s
+                                &:focus
+                                    background: none !important
+                                    border-bottom: 1px solid lightgray !important
+                                    padding: .7rem
+                                    padding-left: 0
+                                    color: #E2E8EC
+                                    &::placeholder
+                                        color: #E2E8EC
+                    .btn
+                        min-width: 100px
+                        // padding: .7rem 0
+                        max-width: 100px

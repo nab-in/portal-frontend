@@ -10,7 +10,7 @@ const Companies = () => {
       <div className={`${styles.container} container`}>
         <h2 className="primary__header">Trusted By</h2>
         <div className={`${styles.showcase}`}>
-          {companies.map(({ logo, name, id, jobs }) => (
+          {companies.slice(1, 7).map(({ logo, name, id, jobs }) => (
             <article key={id}>
               <Link href={`/companies/${id}`}>
                 <div className={`${styles.logo__container}`}>
