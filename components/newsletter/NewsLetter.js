@@ -19,7 +19,7 @@ const NewsLetter = () => {
     e.preventDefault()
   }
   return (
-    <div className={`${styles.card}`}>
+    <div className={`${styles.card} newslatter`}>
       <h3>
         Subscribe to be an early bird to receive notifications on new jobs
       </h3>

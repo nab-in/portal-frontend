@@ -78,15 +78,6 @@ button
             padding: 0
             color: #E2E8EC
 
-.template__layout
-    display: grid
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr))
-    grid-auto-flow: dense
-    grid-column-gap: 3rem
-    margin: 3rem 0
-    .main__content
-        grid-column: span 2
-
 .card
     border: 1px solid #BBBBBB
     background: white
@@ -105,6 +96,7 @@ button
         &__title
             margin-right: 1rem
             display: inline-block
+            white-space: nowrap
         &__showcase
             display: flex
             align-items: center
@@ -115,7 +107,7 @@ button
                 justify-content: center
                 padding: .2rem .5rem
                 border-radius: 8px
-                margin: 0 .5rem .5rem 0
+                margin: .3rem .5rem .3rem 0
                 background: #E2E8EC
                 color: $primary
                 .close
@@ -151,3 +143,24 @@ button
             -webkit-text-stroke-width: 1px
             -webkit-text-stroke-color: $secondary
             -webkit-text-fill-color: transparent
+
+.template__layout
+    display: grid
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))
+    grid-auto-flow: dense
+    grid-column-gap: 3rem
+    margin: 3rem 0
+    .main__content
+        grid-column: span 2
+
+@media screen and ( max-width: 1230px )
+    .template__layout
+        display: grid
+        grid-template-columns: repeat(auto-fit, minmax(100%, 1fr))
+        grid-column-gap: 0
+        .sub__content
+            margin-top: 3rem
+            &.newslatter
+                display: none
+            .newslatter
+                display: none

@@ -12,6 +12,8 @@
         article
             margin-bottom: 1rem
             padding: 1rem
+            display: flex
+            flex-direction: column
             .basic__info
                 display: flex
                 .logo__container
@@ -21,12 +23,13 @@
                     .logo
                         height: 50px
                         position: relative
-                .time__details
+                p
                     font-size: .8rem
-                    .time
-                        margin-bottom: .7rem
-                        span
-                            color: $primary
+                    margin-bottom: .7rem
+                    span
+                        color: $primary
+                .company__info
+                    display: none
             .title
                 margin-top: .7rem
                 h3
@@ -40,3 +43,40 @@
     .more__link
         margin-top: 1rem
         text-align: right
+
+@media screen and ( max-width: 1230px )
+    .card
+        .showcase
+            article
+                .basic__info
+                    flex-wrap: wrap
+                    order: 2
+                    margin-top: 1.5rem
+                    .time__details
+                        padding-right: 1rem
+                        border-right: 1px solid #BBBBBB
+                    .company__info
+                        display: block
+                        padding-left: 1rem
+                .title
+                    order: 1
+                    margin: 0
+
+@media screen and ( max-width: 767px )
+    .card
+        .showcase
+            article
+                .basic__info
+                    flex-wrap: wrap
+                    .time__details
+                        padding-right: 0
+                        border-right: none
+                        width: calc( 100% - 100px )
+                        margin-bottom: 1rem
+                    .company__info
+                        display: flex
+                        flex-wrap: wrap
+                        padding-left: 0
+                        width: 100%
+                        p
+                            margin-right: 2rem

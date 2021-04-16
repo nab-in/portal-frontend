@@ -43,7 +43,7 @@ const Jobs = ({ search, setSearch, heading }) => {
             <Link href="/jobs">More Jobs &gt;&gt;</Link>
           </div>
         </div>
-        <div className={`${styles.sub__content} sub__content`}>
+        <div className={`${styles.sub__content} sub__content newslatter`}>
           <NewsLetter />
         </div>
       </div>

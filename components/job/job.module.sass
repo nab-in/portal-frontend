@@ -5,7 +5,7 @@
     margin: 0 0 1rem
     padding: 1.8rem 1rem
     flex-wrap: wrap
-    @include flexVary(space-between, _ )
+    @include flexVary(flex-start, _ )
     p
         font-size: .9rem
         color: #5A5A5A
@@ -41,3 +41,15 @@
         padding: 0 .5rem
         .company__name
             margin-bottom: 1rem
+
+@media screen and ( max-width: 767px )
+    .job__card
+        .time__details
+            min-width: 200px
+            height: 100%
+            width: calc( 100% - 100px )
+            padding: 0 .5rem 0 2rem
+            border-right: none
+        .job__descriptions
+            margin-top: 1rem
+            width: 100%
