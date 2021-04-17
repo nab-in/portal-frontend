@@ -8,16 +8,21 @@
     transition: .2s
     label
         margin-bottom: .2rem
-    input
+    input, textarea
         transition: .25s ease-in
         height: 35px
         background: none
         border: none
         border-bottom: 1px solid lightgray
         font-size: 1rem
+        resize: none
         &:focus
             outline: none !important
             border-bottom-color: $primary
         &::placeholder
             font-size: .8rem
             color: gray
+    textarea
+        height: auto
+        min-height: 70px
+        margin-top: .6rem

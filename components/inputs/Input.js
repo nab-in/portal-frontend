@@ -12,6 +12,7 @@ const Input = ({
   title,
   error,
   success,
+  textarea,
 }) => {
   return (
     <div
@@ -24,14 +25,25 @@ const Input = ({
       <label htmlFor={id} className="text-primary">
         {title}
       </label>
-      <input
-        type={type}
-        name={name}
-        placeholder={placeholder}
-        value={value}
-        id={id}
-        onChange={(e) => handleChange(e)}
-      />
+      {textarea ? (
+        <textarea
+          name={name}
+          placeholder={placeholder}
+          value={value}
+          id={id}
+          onChange={(e) => handleChange(e)}
+        />
+      ) : (
+        <input
+          type={type}
+          name={name}
+          placeholder={placeholder}
+          value={value}
+          id={id}
+          onChange={(e) => handleChange(e)}
+        />
+      )}
+
       {error && <small className="text-danger">{error}</small>}
       {success && <small className="text-success">{success}</small>}
     </div>

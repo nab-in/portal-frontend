@@ -1,10 +1,9 @@
 import React from "react"
-import styles from "./form_button.module.sass"
 
 const FormButton = ({ text, btnClass, btnGroupClass }) => {
   return (
     <div className={`btn-group ${btnGroupClass}`}>
-      <button className={`btn btn-${btnClass} span__full`}>{text}</button>
+      <button className={`btn ${btnClass}`}>{text}</button>
     </div>
   )
 }

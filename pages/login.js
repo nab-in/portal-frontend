@@ -58,7 +58,7 @@ const login = () => {
           <div className={styles.btns}>
             <FormButton
               text={loading ? "Please Wait" : "Login"}
-              btnClass="primary"
+              btnClass="btn-primary"
             />
             <Link href="/forgot_password">
               <a>Forgot password?</a>
