@@ -57,7 +57,7 @@ const Hero = () => {
                 name="location"
               />
               <button className={`btn btn-primary ${styles.btn}`}>
-                Search
+                Explore
               </button>
             </form>
           </div>
