@@ -5,8 +5,7 @@ import { GoVerified } from "react-icons/go"
 import styles from "./company.module.sass"
 
 const Company = ({ company }) => {
-  let { id, logo, name, jobs, title, bio, about, location, website } = company
-  console.log(company)
+  let { id, logo, name, jobs } = company
   return (
     <div className={`card ${styles.card}`}>
       <div className={styles.company}>

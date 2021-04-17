@@ -6,7 +6,6 @@ import EditProfile from "./details/EditProfile"
 import Jobs from "./details/Jobs"
 
 const Details = ({ tab, details, page }) => {
-  console.log(page)
   const Content = () => {
     if (tab == undefined || tab == "profile")
       return <Profile details={details} page={page} />

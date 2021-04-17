@@ -21,6 +21,13 @@
 
     .main__details
         width: calc( 100% - 200px )
+        section
+            background: white
+            header
+                padding: 1rem 2rem
+                border-bottom: 1px solid #BBBBBB
+            article
+                padding: 0 2rem 2rem
 
 @media screen and ( max-width: 992px )
     .template
@@ -34,12 +41,12 @@
     .template
         column-gap: 1rem
         width: 90%
+        margin: 2rem auto
 
 @media screen and ( max-width: 600px )
     .template
         display: block
         width: 90%
-        margin: 2rem auto
         aside
             top: 60px
             padding: 0
@@ -60,3 +67,9 @@
                                 background: #E2E8EC
         .main__details
             width: 100%
+            section
+                header
+                    padding: 1rem
+                    border-bottom: 1px solid #BBBBBB
+                article
+                    padding: 0 1rem 2rem
