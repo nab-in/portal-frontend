@@ -9,7 +9,7 @@ let companies = [
     about:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet imperdiet nunc vitae eu neque. Lobortis aliquet cursus sem accumsan. Sit pulvinar eget leo sagittis. Euismod nulla in tellus adipiscing.",
     location: "Kilimanjaro Tanzania",
-    website: "www.companywebsite.com",
+    website: "http://www.companywebsite.com",
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ let companies = [
     about:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet imperdiet nunc vitae eu neque. Lobortis aliquet cursus sem accumsan. Sit pulvinar eget leo sagittis. Euismod nulla in tellus adipiscing.",
     location: "Kilimanjaro Tanzania",
-    website: "www.companywebsite.com",
+    website: "http://www.companywebsite.com",
   },
   {
     id: 3,
@@ -33,7 +33,7 @@ let companies = [
     about:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet imperdiet nunc vitae eu neque. Lobortis aliquet cursus sem accumsan. Sit pulvinar eget leo sagittis. Euismod nulla in tellus adipiscing.",
     location: "Kilimanjaro Tanzania",
-    website: "www.companywebsite.com",
+    website: "http://www.companywebsite.com",
   },
   {
     id: 4,
@@ -45,7 +45,7 @@ let companies = [
     about:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet imperdiet nunc vitae eu neque. Lobortis aliquet cursus sem accumsan. Sit pulvinar eget leo sagittis. Euismod nulla in tellus adipiscing.",
     location: "Kilimanjaro Tanzania",
-    website: "www.companywebsite.com",
+    website: "http://www.companywebsite.com",
   },
   {
     id: 5,
@@ -57,7 +57,7 @@ let companies = [
     about:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet imperdiet nunc vitae eu neque. Lobortis aliquet cursus sem accumsan. Sit pulvinar eget leo sagittis. Euismod nulla in tellus adipiscing.",
     location: "Kilimanjaro Tanzania",
-    website: "www.companywebsite.com",
+    website: "http://www.companywebsite.com",
   },
   {
     id: 6,
@@ -69,7 +69,7 @@ let companies = [
     about:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet imperdiet nunc vitae eu neque. Lobortis aliquet cursus sem accumsan. Sit pulvinar eget leo sagittis. Euismod nulla in tellus adipiscing.",
     location: "Kilimanjaro Tanzania",
-    website: "www.companywebsite.com",
+    website: "http://www.companywebsite.com",
   },
   {
     id: 7,
@@ -81,7 +81,7 @@ let companies = [
     about:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet imperdiet nunc vitae eu neque. Lobortis aliquet cursus sem accumsan. Sit pulvinar eget leo sagittis. Euismod nulla in tellus adipiscing.",
     location: "Kilimanjaro Tanzania",
-    website: "www.companywebsite.com",
+    website: "http://www.companywebsite.com",
   },
   {
     id: 8,
@@ -93,7 +93,7 @@ let companies = [
     about:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet imperdiet nunc vitae eu neque. Lobortis aliquet cursus sem accumsan. Sit pulvinar eget leo sagittis. Euismod nulla in tellus adipiscing.",
     location: "Kilimanjaro Tanzania",
-    website: "www.companywebsite.com",
+    website: "http://www.companywebsite.com",
   },
   {
     id: 9,
@@ -105,7 +105,7 @@ let companies = [
     about:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet imperdiet nunc vitae eu neque. Lobortis aliquet cursus sem accumsan. Sit pulvinar eget leo sagittis. Euismod nulla in tellus adipiscing.",
     location: "Kilimanjaro Tanzania",
-    website: "www.companywebsite.com",
+    website: "http://www.companywebsite.com",
   },
   {
     id: 10,
@@ -117,7 +117,7 @@ let companies = [
     about:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet imperdiet nunc vitae eu neque. Lobortis aliquet cursus sem accumsan. Sit pulvinar eget leo sagittis. Euismod nulla in tellus adipiscing.",
     location: "Kilimanjaro Tanzania",
-    website: "www.companywebsite.com",
+    website: "http://www.companywebsite.com",
   },
 ]
 

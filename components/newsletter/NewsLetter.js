@@ -32,7 +32,7 @@ const NewsLetter = () => {
           id="email"
         />
         <div className={styles.btns}>
-          <FormButton text="Subscribe" btnClass="primary" />
+          <FormButton text="Subscribe" btnClass="btn-primary span__full" />
         </div>
       </form>
     </div>

@@ -90,7 +90,7 @@ const JobSeeker = () => {
         )}
         <FormButton
           text={loading ? "Please Wait" : "Register"}
-          btnClass={loading ? "disabled" : "primary"}
+          btnClass={loading ? "disabled" : "btn-primary"}
           btnGroupClass=""
         />
       </form>

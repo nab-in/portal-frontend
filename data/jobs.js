@@ -24,7 +24,7 @@ const jobs = [
     job_type: "Consultant",
     location: "Dar es salaam, Tanzania",
     company: {
-      id: 2,
+      id: 10,
       name: "coworker",
       logo: "logo2.png",
     },
@@ -43,7 +43,7 @@ const jobs = [
     job_type: "Consultant",
     location: "Dar es salaam, Tanzania",
     company: {
-      id: 2,
+      id: 8,
       name: "coworker",
       logo: "logo1.png",
     },
@@ -62,7 +62,7 @@ const jobs = [
     job_type: "Consultant",
     location: "Dar es salaam, Tanzania",
     company: {
-      id: 2,
+      id: 6,
       name: "coworker",
       logo: "logo2.png",
     },

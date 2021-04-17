@@ -1,6 +1,7 @@
 import React, { useState } from "react"
-import Hero from "../components/jobs/hero/Hero"
+import Hero from "../components/filter_hero/Hero"
 import Jobs from "../components/jobs_template/Jobs"
+import categories from "../data/categories"
 
 const jobs = () => {
   const [search, setSearch] = useState({
@@ -10,7 +11,12 @@ const jobs = () => {
   })
   return (
     <div className="jobs">
-      <Hero setSearch={setSearch} search={search} />
+      <Hero
+        setSearch={setSearch}
+        search={search}
+        categories={categories}
+        title="Search for different Jobs."
+      />
       <main>
         <Jobs
           filter={true}
