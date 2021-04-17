@@ -1,16 +1,11 @@
 import React from "react"
 import Link from "next/link"
-import { useRouter } from "next/router"
 import styles from "./template.module.sass"
 
 let isUser = false
 let isCompany = false
 
-const Aside = ({ page, details }) => {
-  let router = useRouter()
-  let tab
-  tab = router.query.tab
-
+const Aside = ({ page, details, tab }) => {
   let Nav = () => {
     if (page == "company" || page == "company/jobs") {
       let { id } = details
