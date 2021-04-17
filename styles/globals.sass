@@ -122,12 +122,14 @@ button
     .criteria
         margin-bottom: .7rem
         display: flex
-        align-items: center
+        align-items: flex-start
         font-size: .9rem
         &__title
-            margin-right: 1rem
             display: inline-block
             white-space: nowrap
+            padding: .2rem 0
+            margin: .3rem 0
+            margin-right: 1rem
         &__showcase
             display: flex
             align-items: center
@@ -136,6 +138,7 @@ button
                 display: flex
                 align-items: center
                 justify-content: center
+                flex-wrap: wrap
                 padding: .2rem .5rem
                 border-radius: 8px
                 margin: .3rem .5rem .3rem 0
@@ -145,6 +148,7 @@ button
                     margin: 0
                     cursor: pointer
                     padding: .2rem
+                    margin-left: 1rem
                     .icon
                         color: red
 

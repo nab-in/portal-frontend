@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react"
-import Hero from "../components/companies/hero/Hero"
+import Hero from "../components/filter_hero/Hero"
 import Template from "../components/template/Template"
 import FilterCriteria from "../components/filter_criteria/FilterCriteria"
 import NewsLetter from "../components/newsletter/NewsLetter"
 import Company from "../components/company/Company"
 import companies from "../data/companies"
+import categories from "../data/company_categories"
 import styles from "../styles/template.module.sass"
 
 let isAuthenticated = false
@@ -12,6 +13,7 @@ const Companies = () => {
   let [filter, setFilter] = useState(false)
   let [search, setSearch] = useState({
     keyword: "",
+    location: "",
     categories: [],
   })
   let checkSearch = (obj) => {
@@ -35,7 +37,12 @@ const Companies = () => {
   }, [search])
   return (
     <div>
-      <Hero search={search} setSearch={setSearch} />
+      <Hero
+        search={search}
+        setSearch={setSearch}
+        categories={categories}
+        title="Search for different Companies."
+      />
       <main>
         <Template heading={filter ? "Filter Criteria" : "Companies"}>
           <div
