@@ -1,0 +1,114 @@
+@import "/styles/_colorsVariables"
+
+.footer_container
+  padding-top: 2rem
+  height: auto
+  background-image: linear-gradient($primary, $primary, #5ba2ff)
+  display: grid
+  grid-template-columns: repeat(4, 1fr)
+  grid-template-rows: 1fr 0.05fr
+  gap: 0px 0px
+  grid-template-areas: "footer_left footer_left footer_right  footer_right" ". . . ." ". . . ."
+
+.footer_left 
+  grid-area: footer_left
+  margin-left: 20%
+  margin-right: 5%
+  color: $bg
+
+.footer_right
+  display: grid
+  grid-template-columns: repeat(3, 1fr)
+  grid-template-rows: repeat(2, 1fr)
+  gap: 0px 0px
+  grid-template-areas: "f_browse f_jobs f_connect" "f_browse f_jobs f_connect"
+  grid-area: footer_right
+
+.f_browse
+  grid-area: f_browse
+  margin-top: 3.5rem
+  h3
+    color: $bg
+  li
+    list-style-type: none
+    margin-top: 1rem
+    a
+      color: $bg
+    
+.f_jobs
+  grid-area: f_jobs
+  margin-top: 3.5rem
+  h3
+    color: $bg
+  li
+    list-style-type: none
+    margin-top: 1rem
+    a
+      color: $bg
+
+.f_connect
+  grid-area: f_connect
+  margin-top: 3.5rem
+  h3
+    color: $bg
+  li
+    list-style-type: none
+    margin-top: 1rem
+    a
+      color: $bg
+
+.logo
+  font-weight: 800
+  font-size: 1.5rem
+  position: relative
+  color: $text-color
+  a 
+    color: $secondary
+    text-decoration: none
+    
+    span
+        color: $bg
+
+.logo2
+  font-weight: 800
+  font-size: 1.5rem
+  position: relative
+  color: $text-color
+  margin-top: 0.8rem
+  
+  a 
+    color: $secondary
+    text-decoration: none
+        
+    span
+        color: $bg
+
+.footer_links
+  color: $secondary
+  margin-left: 0.8rem
+
+.footer_call_to_action
+  margin-top: 1.6rem
+
+.footer_call_to_action
+  margin-bottom: 0.2rem
+
+.footer_form
+  background: #00000000
+  width: 100%
+  padding: 12px 20px
+  margin: 8px 0
+  display: inline-block
+  border-top-style: hidden
+  border-left-style: hidden
+  border-right-style: hidden
+  border-radius: 3px
+  box-sizing: border-box
+  border-bottom-width: 0.1rem
+  border-bottom-color: $bg
+
+.footer_copyright
+  margin-top: 2rem
+  font-size: 0.8rem
+  span
+    color: $secondary
