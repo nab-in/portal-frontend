@@ -9,11 +9,11 @@ const SubCategory = ({ sub, setSearch, search, category }) => {
   // checking if category exists in search state
   let categoryIndex = searchCopy?.findIndex((u) => u.id == category.id)
 
-  let SubCategoryIndex
+  let subCategoryIndex
 
   // searching if sub category exists in the category
   if (categoryIndex >= 0) {
-    SubCategoryIndex = searchCopy[categoryIndex]?.sub_categories?.findIndex(
+    subCategoryIndex = searchCopy[categoryIndex].sub_categories?.findIndex(
       (u) => u.id == id
     )
   }
@@ -22,7 +22,7 @@ const SubCategory = ({ sub, setSearch, search, category }) => {
   const toggleSubCategory = () => {
     // if category exists this run
     if (categoryIndex >= 0) {
-      if (SubCategoryIndex >= 0) {
+      if (subCategoryIndex >= 0) {
         // remove sub_category function goes here
         searchCopy[categoryIndex].sub_categories = searchCopy[
           categoryIndex
@@ -42,8 +42,8 @@ const SubCategory = ({ sub, setSearch, search, category }) => {
         setChecked(false)
       }
 
-      // if category does not exists this run
-      if (SubCategoryIndex === -1) {
+      // if sub_category does not exists this run
+      if (subCategoryIndex === -1) {
         searchCopy[categoryIndex] = {
           ...searchCopy[categoryIndex],
 
@@ -58,6 +58,7 @@ const SubCategory = ({ sub, setSearch, search, category }) => {
       }
     }
 
+    // if categories do not exist in search
     if (categoryIndex === -1) {
       setSearch({
         ...search,
@@ -73,7 +74,7 @@ const SubCategory = ({ sub, setSearch, search, category }) => {
 
   useEffect(() => {
     // updating UI when subcategory is removed from filter criteria
-    if (SubCategoryIndex === -1 || SubCategoryIndex === undefined) {
+    if (subCategoryIndex === -1 || subCategoryIndex === undefined) {
       setChecked(false)
     }
   }, [search])
