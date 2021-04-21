@@ -43,11 +43,13 @@ const Header = () => {
               </Link>
             </li>
             <li className={styles.nav_item}>
-              <AiOutlineSearch className="icon" />
+              <AiOutlineSearch className={styles.icon}/>
             </li>
           </ul>
+          </nav>
 
-          <ul className={styles.navbar_user}>
+          <nav className={styles.navbar_user}>
+          <ul >
             <li>
               <Link href="/login">
                 <a href="/login" className="nav_link">
@@ -55,9 +57,9 @@ const Header = () => {
                 </a>
               </Link>
             </li>
-            <li>
-              <Link href="/register" className="btn btn-primary">
-                <a href="/register" className="nav_link">
+            <li className={`btn btn-primary ${styles.btn}`}>
+              <Link href="/register">
+               <a href="/register" className={styles.join}>
                   Join Us
                 </a>
               </Link>
