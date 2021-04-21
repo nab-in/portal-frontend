@@ -57,9 +57,9 @@ const Header = () => {
                 </a>
               </Link>
             </li>
-            <li className={styles.btn_header}>
+            <li className={`btn btn-primary ${styles.btn}`}>
               <Link href="/register">
-               <a href="/register" >
+               <a href="/register" className={styles.join}>
                   Join Us
                 </a>
               </Link>
