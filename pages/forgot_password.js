@@ -51,7 +51,7 @@ const forgot_password = () => {
           <div className={styles.btns}>
             <FormButton
               text={loading ? "Please Wait" : "Submit"}
-              btnClass="primary"
+              btnClass="btn-primary"
               btnGroupClass=""
             />
           </div>

@@ -2,8 +2,13 @@
 
 .header
     width: 100%
-    height: 75px
-    
+    height: 60px
+    background: white
+    position: fixed
+    z-index: 12
+    border-bottom: 1px solid #E2E8EC
+    overflow-y: hidden
+
 .logo
     font-weight: 800
     font-size: 1.5rem
@@ -11,25 +16,27 @@
     position: relative
     color: $text-color
     padding-left: 3.7rem
-    
-    a 
+
+    a
         color: $secondary
         text-decoration: none
-        
-        span 
+
+        span
             color: $primary
 
 .main_nav
-    padding: 20px 40px 25px 40px
+    padding: 20px 0 25px 40px
 
-    .logo 
+    .logo
         float: left
-    
+
     .navbar_menu
-        margin:0 auto
-        list-style:none
+        margin: 0 auto
+        list-style: none
 
         ul
+            padding-left: 350px
+
             li
                 display: inline-block
                 line-style-type: none
@@ -42,7 +49,52 @@
                     position: relative
                     font-size: 18px
                     font-weight: 500
-                
-                a:hover 
+                    line-height: 30px
+                    
+                    &.icon
+
+
+                a:hover
                     color: $secondary
-  
+                    
+.navbar_user 
+    margin: 0 auto
+    list-style: none
+    float: right
+    padding-right: 100px
+
+    ul
+        li
+            display: inline-block
+            line-style-type: none
+            
+            a
+                line-height: 30px
+                color: $text-color
+                text-decoration: none
+                padding: 20px
+                position: relative
+                font-size: 18px
+                font-weight: 500
+                line-height: 30px
+                
+            a:hover
+                
+
+            .btn
+
+
+
+@media screen and ( max-width: 992px )
+
+
+@media screen and ( max-width: 840px )
+.header
+    
+.main_nav
+    .navbar_menu
+        ul
+            li
+@media screen and ( max-width: 767px )
+
+            

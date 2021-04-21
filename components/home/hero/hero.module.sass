@@ -1,12 +1,12 @@
 .hero
-    background: linear-gradient(89.98deg, rgba(0, 124, 169, 0.9) 0.01%, rgba(0, 80, 122, 0.7) 99.99%), url(/assets/images/hero_bg.jpg) bottom right
+    background: linear-gradient(89.98deg, rgba(0, 124, 169, 0.9) 0.01%, rgba(0, 80, 122, 0.7) 99.99%), url(/assets/images/bghero.jpg) bottom right
     background-size: cover
     background-repeat: no-repeat
     .container
         width: 85%
         max-width: 1600px
         margin: auto
-        padding: 6rem 0
+        padding-top: calc( 6rem + 60px )
         padding-bottom: 9rem
         .wrapper
             width: 70%
@@ -16,9 +16,9 @@
                 color: white
                 margin-bottom: 2rem
             p
-                font-size: clamp(1rem, 2vw, 1.1rem)
+                font-size: clamp(1rem, 2vw, 1.05rem)
                 color: white
-                line-height: 1.7rem
+                line-height: 1.5rem
                 margin: 1rem 0
             .search__container
                 form.search__form
@@ -60,7 +60,7 @@
 @media screen and ( max-width: 767px )
     .hero
         .container
-            padding: 5rem 0
+            padding-top: calc( 5rem + 60px )
             padding-bottom: 7rem
             .wrapper
                 width: 100%

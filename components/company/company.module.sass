@@ -1,0 +1,49 @@
+@import "../../styles/_variables"
+@import "../../styles/_colorsVariables"
+
+.card
+    margin: 0 0 1rem
+    padding: 1.8rem 1rem
+    flex-wrap: wrap
+    position: relative
+    @include flexVary(flex-start, center )
+    .company
+        min-width: 400px
+        height: 100%
+        display: flex
+        align-items: center
+        padding-right: 2rem
+        .logo
+            margin-right: 2rem
+            width: 50px
+            height: 50px
+            position: relative
+    .details
+        border-left: 1px solid #bbbbbb
+        padding-left: 1rem
+        div
+            margin: .7rem
+
+@media screen and ( max-width: 767px )
+    .card
+        .company
+            min-width: 300px
+
+@media screen and ( max-width: 606px )
+    .card
+        .company
+            min-width: 100%
+            padding-right: 0
+            width: 100%
+        .details
+            width: 100%
+            border-left: none
+            padding-left: 0
+            margin-top: 1.5rem
+            div
+                margin: 0
+            .verified
+                position: absolute
+                top: 0rem
+                right: 0rem
+                border-radius: 0

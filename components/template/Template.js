@@ -5,7 +5,7 @@ const Template = ({ heading, children }) => {
   return (
     <section className={styles.template}>
       <div className={styles.container}>
-        <h1 className="primary__header">{heading}</h1>
+        {heading && <h1 className="primary__header">{heading}</h1>}
         {children}
       </div>
     </section>

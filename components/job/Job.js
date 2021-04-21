@@ -1,7 +1,7 @@
 import React, { CSSProperties } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import moment from "moment"
+// import moment from "moment"
 import styles from "./job.module.sass"
 
 const Job = ({ job }) => {
@@ -30,17 +30,10 @@ const Job = ({ job }) => {
         </div>
       </div>
       <div className={styles.time__details}>
-        <h3 className="">
+        <h2>
           <Link href={`/jobs/${id}`}>{title}</Link>
-        </h3>
-        <div
-          class={`${styles.stars}`}
-          style={style}
-          aria-label="Rating of this product is 2.3 out of 5."
-        >
-          {/* &nbsp;
-          {Math.round(reviews * 5 * 10) / 10} */}
-        </div>
+        </h2>
+        <div className="stars" style={style}></div>
         <p>
           Posted: <span>{created_at}</span>
         </p>

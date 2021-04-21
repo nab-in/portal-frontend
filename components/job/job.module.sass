@@ -2,13 +2,14 @@
 @import "../../styles/_colorsVariables"
 
 .job__card
-    margin: 1rem 0
+    margin: 0 0 1rem
     padding: 1.8rem 1rem
-    @include flexVary(space-between, center )
+    flex-wrap: wrap
+    @include flexVary(flex-start, _ )
     p
         font-size: .9rem
         color: #5A5A5A
-        margin: .7rem 0
+        margin-bottom: .7rem
         span
             color: $primary
     .logo__container
@@ -16,40 +17,51 @@
         width: 90px
         height: 100%
         .logo
+            width: 50px
             height: 50px
             position: relative
     .time__details
         width: calc( 65% - 100px )
+        min-width: 200px
         height: 100%
-        padding: .5rem
+        padding: 0 .5rem
         border-right: 1px solid #BBBBBB
-        h3
+        h2
             color: $primary
             font-weight: normal
-            font-size: clamp(1rem, 4vw, 1.2rem)
+            font-size: clamp(1rem, 4vw, 1.1rem)
             width: 100%
             white-space: nowrap
             overflow: hidden
             text-overflow: ellipsis
-            margin-bottom: 1rem
-        .stars
-            $percent: calc(var(--rating) / 5 * 100%)
-            display: inline-block
-            font-size: .9rem
-            font-family: Times // make sure ★ appears correctly
-            line-height: 1
-            color: $primary
-            &::before
-                content: '★★★★★'
-                letter-spacing: 3px
-                background: linear-gradient(90deg, $secondary calc( var(--rating) / 5 * 100% ), white calc( var(--rating) / 5 * 100% ))
-                -webkit-background-clip: text
-                -webkit-text-stroke-width: 1px
-                -webkit-text-stroke-color: $secondary
-                -webkit-text-fill-color: transparent
+            margin-bottom: .3rem
 
     .job__descriptions
         width: 35%
-        padding: .5rem
+        min-width: 200px
+        padding: 0 1rem
         .company__name
             margin-bottom: 1rem
+
+@media screen and ( max-width: 767px )
+    .job__card
+        .time__details
+            min-width: 200px
+            height: 100%
+            width: calc( 100% - 100px )
+            padding: 0 .5rem 0 2rem
+            border-right: none
+        .job__descriptions
+            margin-top: 1rem
+            width: 100%
+            padding: 0
+
+@media screen and ( max-width: 432px )
+    .job__card
+        .time__details
+            width: 100%
+            padding: 0
+            margin-top: 1rem
+        .job__descriptions
+            margin-top: 1rem
+            width: 100%
