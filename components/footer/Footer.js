@@ -10,9 +10,9 @@ const Footer = () => {
       </Link>
   </h1>
       <p className={styles.footer_call_to_action}>Sign Up today to start applying for different jobs and posting jobs for different professions 
-      <a className={styles.footer_links}>Register</a></p>
+      <Link href=""><a className={styles.footer_links}>Register</a></Link></p>
       <p className={styles.footer_call_to_action}>Already Registered? 
-      <a className={styles.footer_links}>Login</a></p>
+      <Link href=""><a className={styles.footer_links}>Login</a></Link></p>
 
       <div>
       <p className={styles.footer_call_to_action} >Subscribe to start receiving notifications when new jobs are posted </p>
