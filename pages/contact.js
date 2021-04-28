@@ -3,9 +3,8 @@ import styles from "../styles/contact.module.sass"
 
 const Contact = () => {
     return ( 
-       <header>
-           hi there
-
+       <header className={styles.contact_header}>
+           Contact page
        </header> 
      );
 }
