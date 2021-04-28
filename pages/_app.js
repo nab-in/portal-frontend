@@ -1,9 +1,8 @@
 import React from "react"
-// import { Provider } from "react-redux"
 import { useRouter } from "next/router"
 import "../styles/globals.sass"
 import Layout from "../components/layout/Layout"
-// import store from "../redux/store"
+import { AuthProvider } from "../context/auth"
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter()
@@ -23,9 +22,9 @@ function MyApp({ Component, pageProps }) {
     }
   }
   return (
-    // <Provider store={store}>
-    <Site />
-    // </Provider>
+    <AuthProvider>
+        <Site />
+    </AuthProvider>
   )
 }
 
