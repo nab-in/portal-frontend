@@ -1,11 +1,11 @@
 import Link from "next/link"
-import { AiOutlineSearch } from "react-icons/ai"
+import { AiOutlineSearch, AiOutlineMenu } from "react-icons/ai"
 import styles from "./Header.module.sass"
 
 const Header = () => {
   return (
     <header className={styles.header}>
-      <div className={`${styles.main_nav} ${styles.container}`}>
+      <div className={`${styles.main_nav} ${styles.container} ${styles.mobile_menu}`}>
         <h1 className={styles.logo}>
           <Link href="/">
             <a href="/">
