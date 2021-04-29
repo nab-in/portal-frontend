@@ -1,8 +1,18 @@
+import React, { useState } from "react"
 import Link from "next/link"
-import { AiOutlineSearch } from "react-icons/ai"
+import { AiOutlineSearch,AiOutlineMenu } from "react-icons/ai"
 import styles from "./Header.module.sass"
+import { IconContext } from "react-icons/lib"
 
 const Header = () => {
+
+  const [isOpen, setisOpen] = useState(false);
+
+  const handleClick = () => {
+    
+    setisOpen(!isOpen);
+  }
+
   return (
     <header className={styles.header}>
       <div className={`${styles.main_nav} ${styles.container}`}>
@@ -57,7 +67,7 @@ const Header = () => {
                 </a>
               </Link>
             </li>
-            <li className={`btn btn-primary ${styles.btn}`}>
+            <li className={`btn btn-primary ${styles.btn__primary}`}>
               <Link href="/register">
                <a href="/register" className={styles.join}>
                   Join Us
@@ -66,6 +76,9 @@ const Header = () => {
             </li>
           </ul>
         </nav>
+
+        <button className={styles.toggle__button} onClick={handleClick}> <AiOutlineMenu />  </button>
+  
       </div>
     </header>
   )
