@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { useRouter } from "next/router"
-import { AiOutlineSearch,AiOutlineMenu } from "react-icons/ai"
+import { AiOutlineSearch } from "react-icons/ai"
 import styles from "./Header.module.sass"
 
 let isAuthenticated = false
@@ -16,8 +16,10 @@ const Notifications = () => {
 }
 
 const Profile = () => {
+  // takes care of profile drop down
   let [open, setOpen] = useState(false)
-  const close = () => setOpen(!open)
+  const toggleDropdown = () => setOpen(!open)
+
   return <div className={styles.profile}>
     Profile component
   </div>
@@ -26,15 +28,19 @@ const Profile = () => {
 const Search = () => {
   let router = useRouter()
   const [keyword, setKeyword] = useState(null)
+
+  // takes care of search dropdown
   const [search, setSearch] = useState(false)
   const toggleSearch = () => {
     setSearch(!search)
   }
 
+  // Handling search input change
   const handleChange = e => {
     setKeyword(e.target.value)
   }
   
+  // Handling search input submit and redirecting to jobs with keyword
   const handleSubmit = e => {
     e.preventDefault()
     if (keyword.trim().length > 0)
@@ -118,22 +124,24 @@ const Header = () => {
             </li>
             <Search />
           </ul>
-           <ul className={styles.auth__links}>
-            <li>
-              <Link href="/login">
-                <a className="nav_link">
-                  Login
-                </a>
-              </Link>
-            </li>
-            <li className={`btn btn-primary ${styles.btn__primary}`}>
-              <Link href="/register">
-               <a className={styles.join}>
-                  Join Us
-                </a>
-              </Link>
-            </li>
-          </ul>
+          {!isAuthenticated &&
+            <ul className={styles.auth__links}>
+              <li>
+                <Link href="/login">
+                   <a className="nav_link">
+                     Login
+                   </a>
+                 </Link>
+               </li>
+               <li className={`btn btn-primary ${styles.btn__primary}`}>
+                 <Link href="/register">
+                   <a className={styles.join}>
+                     Join Us
+                   </a>
+                 </Link>
+               </li>
+             </ul>
+           }
         </nav>
         {isAuthenticated && <>
             <Notifications />
