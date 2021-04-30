@@ -91,9 +91,8 @@ const Header = () => {
             </li>
           </ul>
           </nav>
-
         <div className={styles.burger}>
-        <button className={styles.toggle__button} onClick={handleClick}> <AiOutlineMenu /></button>
+          <button className={styles.toggle__button} onClick={toggleMenu}> <AiOutlineMenu /></button>
         </div>
         <div className={search? `${styles.search__container} ${styles.open}`: `${styles.search__container}`}>
          <form
@@ -111,7 +110,6 @@ const Header = () => {
               </button>
             </form>
         </div>
-  
       </div>
     </header>
   )
