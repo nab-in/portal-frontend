@@ -1,7 +1,7 @@
 import React, {useEffect, useRef} from "react"
 
 // detect outside click hook
-let useClickOutside = (handler) => {
+let UseClickOutside = (handler) => {
   let node = useRef()
   useEffect(() => {
     let handle = (e) => {
@@ -17,4 +17,4 @@ let useClickOutside = (handler) => {
   return node
 }
 
-export default useClickOutside
+export default UseClickOutside
