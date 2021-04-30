@@ -1,24 +1,8 @@
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState } from "react"
 import { FaChevronDown, FaChevronUp } from "react-icons/fa"
 import SubCategory from "./SubCategory"
+import UseClickOutside from "../UseClickOutside"
 import styles from "./category.module.sass"
-
-// detect outside click hook
-let useClickOutside = (handler) => {
-  let node = useRef()
-  useEffect(() => {
-    let handle = (e) => {
-      if (!node.current.contains(e.target)) {
-        handler()
-      }
-    }
-    document.addEventListener("mousedown", handle)
-    return () => {
-      document.removeEventListener("mousedown", handle)
-    }
-  })
-  return node
-}
 
 // filter dropdown component per each category
 const Category = ({ category, search, setSearch }) => {
@@ -29,7 +13,7 @@ const Category = ({ category, search, setSearch }) => {
   }
 
   // check if outside is clicked
-  let node = useClickOutside(() => {
+  let node = UseClickOutside(() => {
     setOpenDropdown(false)
   })
 
