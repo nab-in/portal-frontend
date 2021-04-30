@@ -5,9 +5,17 @@ import styles from "./Header.module.sass"
 // import { IconContext } from "react-icons/lib"
 
 const Header = () => {
-
+  const [keyword, setKeyword] = useState(null)
   const [isOpen, setisOpen] = useState(false);
-  cons [search, setSearch] = useState(false)
+  const [search, setSearch] = useState(false)
+
+  const handleChange = e => {
+    setKeyword(e.target.value)
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault()
+  }
 
   const toggleMenu = () => {
     setisOpen(!isOpen);
