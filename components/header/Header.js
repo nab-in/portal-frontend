@@ -3,6 +3,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { useRouter } from "next/router"
 import { AiOutlineSearch } from "react-icons/ai"
+import UseClickOutside from "../UseClickOutside"
 import styles from "./Header.module.sass"
 
 let isAuthenticated = false
@@ -10,6 +11,10 @@ let isAuthenticated = false
 const Notifications = () => {
   let [open, setOpen] = useState(false)
   const close = () => setOpen(!open)
+
+  // detect outside click hook
+  let node = UseClickOutside(() => setOpen(false))
+
   return <div className={styles.notifications}>
     Notifications component
   </div>
@@ -19,6 +24,9 @@ const Profile = () => {
   // takes care of profile drop down
   let [open, setOpen] = useState(false)
   const toggleDropdown = () => setOpen(!open)
+
+  // detect outside click hook
+  let node = UseClickOutside(() => setOpen(false))
 
   return <div className={styles.profile}>
     Profile component
@@ -47,8 +55,11 @@ const Search = () => {
       router.push(`/jobs?keyword=${keyword}`)
   }
 
+  // detect outside click hook
+  let node = UseClickOutside(() => setOpen(false))
+
   return (
-    <div className={styles.search__container}>
+    <div className={styles.search__container} ref={node}>
       <button className={styles.toggle__search} onClick={toggleSearch}>
         <AiOutlineSearch className={styles.icon}/>
       </button>
@@ -79,6 +90,9 @@ const Header = () => {
     setisOpen(!isOpen);
   }
 
+  // detect outside click hook
+  let node = UseClickOutside(() => setOpen(false))
+
   return (
     <header className={styles.header}>
       <div className={styles.container}>
@@ -95,35 +109,42 @@ const Header = () => {
           </Link>
         </div>
         <nav>
-          <ul className={isOpen? `${styles.menu} ${styles.open}`: `${styles.menu}`}>
-            <li className={`${styles.nav_item} ${styles.active}`}>
-              <Link href="/jobs">
-                <a className="nav_link">
-                  Jobs
-                </a>
-              </Link>
-            </li>
-            <li className={`${styles.nav_item} ${styles.active}`}>
-              <Link href="/companies">
-                <a className="nav_link">Companies</a>
-              </Link>
-            </li>
-            <li className={styles.nav_item}>
-              <Link href="/about">
-                <a className="nav_link">
-                  About
-                </a>
-              </Link>
-            </li>
-            <li className={styles.nav_item}>
-              <Link href="/contact">
-                <a className="nav_link">
-                  Contact
-                </a>
-              </Link>
-            </li>
-            <Search />
-          </ul>
+          <div className={isOpen? `${styles.menu} ${styles.open}`: `${styles.menu}`}>
+           <div className={styles.burger}>
+             <button className={styles.toggle__button} onClick={toggleMenu}>
+               <span />
+             </button>
+           </div>
+           <ul>
+              <li className={`${styles.nav_item} ${styles.active}`}>
+                <Link href="/jobs">
+                  <a className="nav_link">
+                    Jobs
+                  </a>
+                </Link>
+              </li>
+              <li className={`${styles.nav_item} ${styles.active}`}>
+                <Link href="/companies">
+                  <a className="nav_link">Companies</a>
+                </Link>
+              </li>
+              <li className={styles.nav_item}>
+                <Link href="/about">
+                  <a className="nav_link">
+                    About
+                  </a>
+                </Link>
+              </li>
+              <li className={styles.nav_item}>
+                <Link href="/contact">
+                  <a className="nav_link">
+                    Contact
+                  </a>
+                </Link>
+              </li>
+              <Search />
+            </ul>
+          </div>
           {!isAuthenticated &&
             <ul className={styles.auth__links}>
               <li>
@@ -148,11 +169,6 @@ const Header = () => {
             <Profile />
           </>
         }
-        <div className={styles.burger}>
-          <button className={styles.toggle__button} onClick={toggleMenu}>
-            <span />
-          </button>
-        </div>
       </div>
     </header>
   )
