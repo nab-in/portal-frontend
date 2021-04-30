@@ -1,10 +1,12 @@
 import React, { useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
+import { useRouter } from "next/router"
 import { AiOutlineSearch,AiOutlineMenu } from "react-icons/ai"
 import styles from "./Header.module.sass"
-// import { IconContext } from "react-icons/lib"
 
 const Header = () => {
+  let router = useRouter()
   const [keyword, setKeyword] = useState(null)
   const [isOpen, setisOpen] = useState(false);
   const [search, setSearch] = useState(false)
@@ -15,6 +17,8 @@ const Header = () => {
 
   const handleSubmit = e => {
     e.preventDefault()
+    if (keyword.trim().length > 0)
+      router.push(`/jobs?keyword=${keyword}`)
   }
 
   const toggleMenu = () => {
