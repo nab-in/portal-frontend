@@ -15,9 +15,11 @@ const Notifications = () => {
   // detect outside click hook
   let node = UseClickOutside(() => setOpen(false))
 
-  return <div className={styles.notifications}>
-    Notifications component
-  </div>
+  return (
+    <div className={styles.notifications} ref={node}>
+      Notifications component
+    </div>
+  )
 }
 
 const Profile = () => {
@@ -28,9 +30,7 @@ const Profile = () => {
   // detect outside click hook
   let node = UseClickOutside(() => setOpen(false))
 
-  return <div className={styles.profile}>
-    Profile component
-  </div>
+  return <div className={styles.profile}>Profile component</div>
 }
 
 const Search = () => {
@@ -38,21 +38,20 @@ const Search = () => {
   const [keyword, setKeyword] = useState(null)
 
   // takes care of search dropdown
-  const [search, setSearch] = useState(false)
+  const [open, setOpen] = useState(false)
   const toggleSearch = () => {
     setSearch(!search)
   }
 
   // Handling search input change
-  const handleChange = e => {
+  const handleChange = (e) => {
     setKeyword(e.target.value)
   }
-  
+
   // Handling search input submit and redirecting to jobs with keyword
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault()
-    if (keyword.trim().length > 0)
-      router.push(`/jobs?keyword=${keyword}`)
+    if (keyword.trim().length > 0) router.push(`/jobs?keyword=${keyword}`)
   }
 
   // detect outside click hook
@@ -61,33 +60,35 @@ const Search = () => {
   return (
     <div className={styles.search__container} ref={node}>
       <button className={styles.toggle__search} onClick={toggleSearch}>
-        <AiOutlineSearch className={styles.icon}/>
+        <AiOutlineSearch className={styles.icon} />
       </button>
-      <div className={search? `${styles.search} ${styles.open}`: `${styles.search}`}>
-         <form
-              onSubmit={(e) => handleSubmit(e)}
-              className={`search__form ${styles.search__form}`}
-            >
-              <input
-                type="text"
-                placeholder="Type to search..."
-                onChange={(e) => handleChange(e)}
-                name="keyword"
-              />
-              <button className={`btn btn-primary ${styles.btn}`}>
-                Search
-              </button>
-            </form>
-        </div>
+      <div
+        className={
+          open ? `${styles.search} ${styles.open}` : `${styles.search}`
+        }
+      >
+        <form
+          onSubmit={(e) => handleSubmit(e)}
+          className={`search__form ${styles.search__form}`}
+        >
+          <input
+            type="text"
+            placeholder="Type to search..."
+            onChange={(e) => handleChange(e)}
+            name="keyword"
+          />
+          <button className={`btn btn-primary ${styles.btn}`}>Search</button>
+        </form>
+      </div>
     </div>
   )
 }
 
 const Header = () => {
-  const [isOpen, setisOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
   const toggleMenu = () => {
-    setisOpen(!isOpen);
+    setOpen(!open)
   }
 
   // detect outside click hook
@@ -96,7 +97,7 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-       <div className={styles.logo__container}>
+        <div className={styles.logo__container}>
           <Link href="/">
             <a className={styles.logo}>
               <Image
@@ -109,18 +110,21 @@ const Header = () => {
           </Link>
         </div>
         <nav>
-          <div className={isOpen? `${styles.menu} ${styles.open}`: `${styles.menu}`}>
-           <div className={styles.burger}>
-             <button className={styles.toggle__button} onClick={toggleMenu}>
-               <span />
-             </button>
-           </div>
-           <ul>
+          <div
+            className={
+              open ? `${styles.menu} ${styles.open}` : `${styles.menu}`
+            }
+            ref={node}
+          >
+            <div className={styles.burger}>
+              <button className={styles.toggle__button} onClick={toggleMenu}>
+                <span />
+              </button>
+            </div>
+            <ul>
               <li className={`${styles.nav_item} ${styles.active}`}>
                 <Link href="/jobs">
-                  <a className="nav_link">
-                    Jobs
-                  </a>
+                  <a className="nav_link">Jobs</a>
                 </Link>
               </li>
               <li className={`${styles.nav_item} ${styles.active}`}>
@@ -130,45 +134,38 @@ const Header = () => {
               </li>
               <li className={styles.nav_item}>
                 <Link href="/about">
-                  <a className="nav_link">
-                    About
-                  </a>
+                  <a className="nav_link">About</a>
                 </Link>
               </li>
               <li className={styles.nav_item}>
                 <Link href="/contact">
-                  <a className="nav_link">
-                    Contact
-                  </a>
+                  <a className="nav_link">Contact</a>
                 </Link>
               </li>
               <Search />
             </ul>
           </div>
-          {!isAuthenticated &&
+          {!isAuthenticated && (
             <ul className={styles.auth__links}>
               <li>
                 <Link href="/login">
-                   <a className="nav_link">
-                     Login
-                   </a>
-                 </Link>
-               </li>
-               <li className={`btn btn-primary ${styles.btn__primary}`}>
-                 <Link href="/register">
-                   <a className={styles.join}>
-                     Join Us
-                   </a>
-                 </Link>
-               </li>
-             </ul>
-           }
+                  <a className="nav_link">Login</a>
+                </Link>
+              </li>
+              <li className={`btn btn-primary ${styles.btn__primary}`}>
+                <Link href="/register">
+                  <a className={styles.join}>Join Us</a>
+                </Link>
+              </li>
+            </ul>
+          )}
         </nav>
-        {isAuthenticated && <>
+        {isAuthenticated && (
+          <>
             <Notifications />
             <Profile />
           </>
-        }
+        )}
       </div>
     </header>
   )
