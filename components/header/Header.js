@@ -30,7 +30,7 @@ const Profile = () => {
   // detect outside click hook
   let node = UseClickOutside(() => setOpen(false))
 
-  return <div className={styles.profile}>Profile component</div>
+  return <div className={styles.profile} ref={node}>Profile component</div>
 }
 
 const Search = () => {
@@ -40,7 +40,7 @@ const Search = () => {
   // takes care of search dropdown
   const [open, setOpen] = useState(false)
   const toggleSearch = () => {
-    setSearch(!search)
+    setOpen(!open)
   }
 
   // Handling search input change
