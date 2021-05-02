@@ -134,6 +134,10 @@
                 justify-content: flex-end
                 flex-grow: 1
                 .menu
+                    &.open
+                        ul
+                            opacity: 1
+                            transform: translateX(0)
                     .burger
                         border-radius: 5px
                         display: flex
@@ -157,13 +161,13 @@
                                     &.middle
                                         opacity: 0
                                     &.before
-                                        width: 34.5px
+                                        width: 38px
                                         transform: rotateZ(45deg)
                                         transform-origin: 6.5px 0px 0px
                                     &.after
-                                        width: 34.5px
+                                        width: 38px
                                         transform: rotateZ(-45deg)
-                                        transform-origin: 0px 0px 6.5px
+                                        transform-origin: 6.5px 0px 0px
                             span
                                 position: relative
                                 height: 2px
@@ -177,11 +181,29 @@
                                     width: 25px
                     ul
                         position: absolute
-                        display: none
-                // .search__container
-                //     position: absolute
-                //     top: 0
-                //     right: calc( 5% + 40px + 2rem )
+                        transition: .35s
+                        opacity: 0
+                        right: 0
+                        top: 50px
+                        background: #ffffff
+                        width: 100%
+                        z-index: 5
+                        padding: 1.5rem 1.5rem
+                        box-shadow: 4px 4px 15px 10px rgba(0, 0, 0, 0.08)
+                        border-radius: 10px
+                        text-align: left
+                        transform: translateX(100%)
+                        display: flex
+                        flex-direction: column
+                        li
+                            width: 100%
+                            padding: 0 5%
+                            a
+                                display: flex
+                                width: 100%
+                                padding: .7rem 0
+                                border-bottom: 1px solid #BBBBBB
+                                cursor: pointer
                 .auth__links
                     display: flex
                     align-items: center
