@@ -135,10 +135,33 @@
                 flex-grow: 1
                 .menu
                     .burger
+                        border-radius: 5px
                         display: flex
+                        justify-content: center
+                        align-items: center
                         background: #E2E8EC
                         height: 40px
                         width: 40px
+                        button
+                            display: flex
+                            justify-content: center
+                            align-items: center
+                            span
+                                position: relative
+                                height: 1.5px
+                                width: 30px
+                                background: $primary
+                                &::before, &::after
+                                    content: ""
+                                    position: absolute
+                                    left: 0
+                                    height: 1.5px
+                                    width: 25px
+                                    background: $primary
+                                &::before
+                                    top: -7px
+                                &::after
+                                    top: 7px
                     ul
                         position: absolute
                         display: none
