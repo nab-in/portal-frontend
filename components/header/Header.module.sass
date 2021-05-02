@@ -142,32 +142,46 @@
                         background: #E2E8EC
                         height: 40px
                         width: 40px
-                        button
+                        button.toggle__button
+                            height: 100%
+                            width: 100%
+                            padding: 5px
+                            cursor: pointer
                             display: flex
+                            flex-direction: column
                             justify-content: center
-                            align-items: center
+                            align-items: flex-start
+                            position: relative
+                            &.close
+                                span
+                                    &.middle
+                                        opacity: 0
+                                    &.before
+                                        width: 34.5px
+                                        transform: rotateZ(45deg)
+                                        transform-origin: 6.5px 0px 0px
+                                    &.after
+                                        width: 34.5px
+                                        transform: rotateZ(-45deg)
+                                        transform-origin: 0px 0px 6.5px
                             span
                                 position: relative
-                                height: 1.5px
+                                height: 2px
                                 width: 30px
                                 background: $primary
-                                &::before, &::after
-                                    content: ""
-                                    position: absolute
-                                    left: 0
-                                    height: 1.5px
+                                transition: .25s
+                                &.middle
+                                    margin: 7px 0
+                                &.before, &.after
+                                    transition: .25s
                                     width: 25px
-                                    background: $primary
-                                &::before
-                                    top: -7px
-                                &::after
-                                    top: 7px
                     ul
                         position: absolute
                         display: none
-                        display: flex
-                        li
-                            margin: .7rem
+                // .search__container
+                //     position: absolute
+                //     top: 0
+                //     right: calc( 5% + 40px + 2rem )
                 .auth__links
                     display: flex
                     align-items: center

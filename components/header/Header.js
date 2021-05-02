@@ -121,8 +121,17 @@ const Header = () => {
             ref={node}
           >
             <div className={styles.burger}>
-              <button className={styles.toggle__button} onClick={toggleMenu}>
-                <span />
+              <button
+                className={
+                  open
+                    ? `${styles.toggle__button} ${styles.close}`
+                    : `${styles.toggle__button}`
+                }
+                onClick={toggleMenu}
+              >
+                <span className={styles.before} />
+                <span className={styles.middle} />
+                <span className={styles.after} />
               </button>
             </div>
             <ul>
