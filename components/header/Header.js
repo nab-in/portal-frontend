@@ -30,7 +30,11 @@ const Profile = () => {
   // detect outside click hook
   let node = UseClickOutside(() => setOpen(false))
 
-  return <div className={styles.profile} ref={node}>Profile component</div>
+  return (
+    <div className={styles.profile} ref={node}>
+      Profile component
+    </div>
+  )
 }
 
 const Search = () => {
@@ -149,12 +153,12 @@ const Header = () => {
             <ul className={styles.auth__links}>
               <li>
                 <Link href="/login">
-                  <a className="nav_link">Login</a>
+                  <a>Login</a>
                 </Link>
               </li>
-              <li className={`btn btn-primary ${styles.btn__primary}`}>
+              <li>
                 <Link href="/register">
-                  <a className={styles.join}>Join Us</a>
+                  <a className={`btn btn-primary ${styles.join}`}>Join Us</a>
                 </Link>
               </li>
             </ul>
