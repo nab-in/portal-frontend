@@ -6,5 +6,5 @@ COPY package*.json ./
 COPY node_modules ./node_modules
 RUN npm i
 COPY . ./
-EXPOSE 3000
-CMD npm run start
+RUN npm run build
+CMD ["npm", "dev"]
