@@ -1,0 +1,13 @@
+version: "3.3"
+
+services:
+  portal-frontend:
+    image: portal/ui
+    container_name: portal-ui
+    ports:
+      - 8000:3000
+    build: .
+    restart: always
+    command: npm run dev
+    volumes:
+      - ./:/usr/src/app
