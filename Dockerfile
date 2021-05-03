@@ -6,5 +6,4 @@ COPY package*.json ./
 COPY node_modules ./node_modules
 RUN npm i
 COPY . ./
-RUN npm run build
 CMD ["npm", "dev"]
