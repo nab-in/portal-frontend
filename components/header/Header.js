@@ -114,7 +114,29 @@ const Header = () => {
           </Link>
         </div>
         <nav>
-          <Search />
+          <div className={styles.mobile__search}>
+            <Search />
+          </div>
+          {!isAuthenticated && (
+            <ul className={styles.auth__links}>
+              <li className={styles.login}>
+                <Link href="/login">
+                  <a>Login</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/register">
+                  <a className={`btn btn-primary ${styles.join}`}>Join Us</a>
+                </Link>
+              </li>
+            </ul>
+          )}
+          {isAuthenticated && (
+            <>
+              <Notifications />
+              <Profile />
+            </>
+          )}
           <div
             className={
               open ? `${styles.menu} ${styles.open}` : `${styles.menu}`
@@ -159,27 +181,7 @@ const Header = () => {
               <Search />
             </ul>
           </div>
-          {!isAuthenticated && (
-            <ul className={styles.auth__links}>
-              <li>
-                <Link href="/login">
-                  <a>Login</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/register">
-                  <a className={`btn btn-primary ${styles.join}`}>Join Us</a>
-                </Link>
-              </li>
-            </ul>
-          )}
         </nav>
-        {isAuthenticated && (
-          <>
-            <Notifications />
-            <Profile />
-          </>
-        )}
       </div>
     </header>
   )
