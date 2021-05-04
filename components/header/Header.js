@@ -114,6 +114,7 @@ const Header = () => {
           </Link>
         </div>
         <nav>
+          <Search />
           <div
             className={
               open ? `${styles.menu} ${styles.open}` : `${styles.menu}`
