@@ -1,10 +1,11 @@
 @import "/styles/_colorsVariables"
 
 .header
-    width: 100vw
+    width: 100%
     height: 60px
     background: white
-    position: fixed
+    position: sticky
+    top: 0
     z-index: 12
     border-bottom: 1px solid #E2E8EC
     .container
@@ -39,59 +40,52 @@
                     align-items: center
                     li
                         margin: 1rem
-                .search__container
-                    button.toggle__search
-                        cursor: pointer
-                        line-height: 60px
-                        font-size: 1.2rem
-                        color: $primary
+            .search__container
+                button.toggle__search
+                    cursor: pointer
+                    line-height: 60px
+                    font-size: 1.2rem
+                    color: $primary
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    padding: 1rem
+                .search
+                    opacity: 0
+                    visibility: hidden
+                    position: absolute
+                    left: 50%
+                    top: 70px
+                    z-index: 15
+                    transform: translateX(-50%)
+                    transition: .35s
+                    width: 1000px
+                    max-width: 80%
+                    height: 45px
+                    overflow: hidden
+                    border-radius: 5px
+                    &.open
+                        opacity: 1
+                        visibility: visible
+                    form
+                        width: 100%
+                        height: 100%
                         display: flex
-                        justify-content: center
-                        align-items: center
-                        padding: 1rem
-                    .search
-                        opacity: 0
-                        visibility: hidden
-                        position: absolute
-                        left: 50%
-                        top: 70px
-                        z-index: 15
-                        transform: translateX(-50%)
-                        transition: .35s
-                        width: 1000px
-                        max-width: 80%
-                        height: 45px
-                        overflow: hidden
-                        border-radius: 5px
-                        &.open
-                            opacity: 1
-                            visibility: visible
-                        form
-                            width: 100%
+                        input
+                            width: calc( 100% - 100px )
                             height: 100%
                             display: flex
-                            input
-                                width: calc( 100% - 100px )
-                                height: 100%
-                                display: flex
-                                background: #E2E8EC
-                                padding: .7rem
-                                color: black
-                                border: none
-                                transition: .3s
-                                &:focus
-                                    background: none !important
-                                    border-bottom: 1px solid lightgray !important
-                                    padding: 0
-                                    color: #E2E8EC
-                                    &::placeholder
-                                        color: #E2E8EC
-                            .btn
-                                height: 100%
-                                max-width: 100px
-                                min-width: 100px
-                                padding: 0
-                                cursor: pointer
+                            background: #E2E8EC
+                            border: 1px solid lightgray !important
+                            padding: .7rem
+                            color: black
+                            transition: .3s
+                        .btn
+                            height: 100%
+                            max-width: 100px
+                            min-width: 100px
+                            padding: 0
+                            cursor: pointer
             .auth__links
                 display: flex
                 align-items: center
@@ -101,7 +95,6 @@
 @media screen and ( max-width: 1080px )
     .header
         .container
-            .logo__container
             nav
                 flex-grow: 0.5
                 .menu
@@ -119,12 +112,6 @@
 
 @media screen and ( max-width: 768px )
     .header
-        width: 100vw
-        height: 60px
-        background: white
-        position: fixed
-        z-index: 12
-        border-bottom: 1px solid #E2E8EC
         .container
             .logo__container
                 flex-grow: 1

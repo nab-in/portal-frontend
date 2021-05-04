@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import Input from "../inputs/Input"
 import FormButton from "../buttons/FormButton"
 import styles from "./newsletter.module.sass"
+import rippleEffect from "../rippleEffect.js"
 
 const NewsLetter = () => {
   const [formData, setFormdata] = useState({
@@ -31,9 +32,11 @@ const NewsLetter = () => {
           name="email"
           id="email"
         />
-        <div className={styles.btns}>
-          <FormButton text="Subscribe" btnClass="btn-primary span__full" />
-        </div>
+        <FormButton
+          text="Subscribe"
+          btnClass="btn-primary span__full"
+          btnGroupClass="btns"
+        />
       </form>
     </div>
   )
