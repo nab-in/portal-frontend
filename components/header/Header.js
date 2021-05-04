@@ -5,6 +5,7 @@ import { useRouter } from "next/router"
 import { AiOutlineSearch } from "react-icons/ai"
 import UseClickOutside from "../UseClickOutside"
 import styles from "./Header.module.sass"
+import rippleEffect from "../rippleEffect.js"
 
 let isAuthenticated = false
 
@@ -39,7 +40,7 @@ const Profile = () => {
 
 const Search = () => {
   let router = useRouter()
-  const [keyword, setKeyword] = useState(null)
+  const [keyword, setKeyword] = useState("")
 
   // takes care of search dropdown
   const [open, setOpen] = useState(false)
@@ -55,7 +56,11 @@ const Search = () => {
   // Handling search input submit and redirecting to jobs with keyword
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (keyword.trim().length > 0) router.push(`/jobs?keyword=${keyword}`)
+    if (keyword.trim().length > 0) {
+      router.push(`/jobs?keyword=${keyword}`)
+    } else {
+      router.push(`/jobs`)
+    }
   }
 
   // detect outside click hook
@@ -81,7 +86,12 @@ const Search = () => {
             onChange={(e) => handleChange(e)}
             name="keyword"
           />
-          <button className={`btn btn-primary ${styles.btn}`}>Search</button>
+          <button
+            className={`btn btn-primary ${styles.btn}`}
+            onClick={rippleEffect}
+          >
+            Search
+          </button>
         </form>
       </div>
     </div>
@@ -126,7 +136,12 @@ const Header = () => {
               </li>
               <li>
                 <Link href="/register">
-                  <a className={`btn btn-primary ${styles.join}`}>Join Us</a>
+                  <a
+                    className={`btn btn-primary ${styles.join}`}
+                    onClick={rippleEffect}
+                  >
+                    Join Us
+                  </a>
                 </Link>
               </li>
             </ul>
