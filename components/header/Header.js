@@ -3,22 +3,46 @@ import Link from "next/link"
 import Image from "next/image"
 import { useRouter } from "next/router"
 import { AiOutlineSearch } from "react-icons/ai"
+import { FaBell } from "react-icons/fa"
 import UseClickOutside from "../UseClickOutside"
 import styles from "./Header.module.sass"
 import rippleEffect from "../rippleEffect.js"
 
-let isAuthenticated = false
+let isAuthenticated = true
 
 const Notifications = () => {
   let [open, setOpen] = useState(false)
-  const close = () => setOpen(!open)
+  let number = 5
+  const toggleNotification = () => setOpen(!open)
 
   // detect outside click hook
   let node = UseClickOutside(() => setOpen(false))
 
   return (
     <div className={styles.notifications} ref={node}>
-      Notifications component
+      <div className={styles.toggle}>
+        <button onClick={toggleNotification}>
+          <FaBell className={styles.icon} />
+          {0 < number && number <= 99 && <span>{number}</span>}
+          {number > 99 && <span>99+</span>}
+        </button>
+      </div>
+      <div
+        className={
+          open ? `${styles.dropdown} ${styles.open}` : `${styles.dropdown}`
+        }
+      >
+        <h3>Notifications</h3>
+        <div className={styles.showcase}>
+          <article>Notification one</article>
+          <article>Notification one</article>
+          <article>Notification one</article>
+          <article>Notification one</article>
+        </div>
+        <Link href="/notifications">
+          <a>View All</a>
+        </Link>
+      </div>
     </div>
   )
 }
@@ -33,7 +57,62 @@ const Profile = () => {
 
   return (
     <div className={styles.profile} ref={node}>
-      Profile component
+      <div onClick={() => setOpen(!open)} className={styles.profile}>
+        <div className={styles.name}>
+          <span>Username long enough to impress the princes</span>
+        </div>
+        <div className={styles.dp__container}>
+          <Image
+            src={`/assets/images/dp.jpeg`}
+            alt={`dp`}
+            height={40}
+            width={40}
+            objectFit="cover"
+          />
+        </div>
+      </div>
+      <div
+        className={
+          open ? `${styles.dropdown} ${styles.open}` : `${styles.dropdown}`
+        }
+      >
+        <div className={styles.profile}>
+          <div className={styles.dp__container}>
+            <Image
+              src={`/assets/images/dp.jpeg`}
+              alt={`dp`}
+              height={40}
+              width={40}
+              objectFit="cover"
+            />
+          </div>
+          <div className={styles.name}>John Doe</div>
+        </div>
+        <nav>
+          <ul>
+            <li>
+              <Link href="/profile">
+                <a onClick={() => setOpen(false)}>Profile</a>
+              </Link>
+            </li>
+            <ul>
+              <li>
+                <Link href="/profile?tab=saved-jobs">
+                  <a onClick={() => setOpen(false)}>Saved Jobs</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/profile?tab=applied-jobs">
+                  <a onClick={() => setOpen(false)}>Applied Jobs</a>
+                </Link>
+              </li>
+            </ul>
+            <li>
+              <a href="#!">Logout</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
   )
 }
@@ -123,7 +202,7 @@ const Header = () => {
             </a>
           </Link>
         </div>
-        <nav>
+        <nav className={styles.nav}>
           <div className={styles.mobile__search}>
             <Search />
           </div>
@@ -147,10 +226,10 @@ const Header = () => {
             </ul>
           )}
           {isAuthenticated && (
-            <>
+            <div className={styles.auth}>
               <Notifications />
               <Profile />
-            </>
+            </div>
           )}
           <div
             className={
@@ -172,7 +251,7 @@ const Header = () => {
                 <span className={styles.after} />
               </button>
             </div>
-            <ul>
+            <ul className={styles.menu__list}>
               <li className={`${styles.nav_item} ${styles.active}`}>
                 <Link href="/jobs">
                   <a className="nav_link">Jobs</a>
