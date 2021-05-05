@@ -3,7 +3,7 @@ import Link from "next/link"
 import styles from "./template.module.sass"
 
 let isUser = false
-let isCompany = false
+let isCompany = true
 
 const Aside = ({ page, details, tab }) => {
   let Nav = () => {

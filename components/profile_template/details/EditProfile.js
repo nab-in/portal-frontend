@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import Input from "../../inputs/Input"
 import Button from "../../buttons/FormButton"
+import Upload from "./Upload"
 import styles from "./edit_profile.module.sass"
 
 let isUser = false
@@ -32,6 +33,7 @@ const EditProfile = ({ page, details }) => {
         <header>
           <h2>Edit Informations</h2>
         </header>
+        <Upload />
         <article className={styles.contents}>
           <form onSubmit={(e) => handleSubmit(e)}>
             <Input
