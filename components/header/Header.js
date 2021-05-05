@@ -34,8 +34,8 @@ const Notifications = () => {
       >
         <h3>Notifications</h3>
         <div className={styles.showcase}>
-          <article>Notification one</article>
-          <article>Notification one</article>
+          <article className={styles.unread}>Notification one</article>
+          <article className={styles.unread}>Notification one</article>
           <article>Notification one</article>
           <article>Notification one</article>
         </div>
@@ -59,7 +59,7 @@ const Profile = () => {
     <div className={styles.profile} ref={node}>
       <div onClick={() => setOpen(!open)} className={styles.profile}>
         <div className={styles.name}>
-          <span>Username long enough to impress the princes</span>
+          <span>Username</span>
         </div>
         <div className={styles.dp__container}>
           <Image
