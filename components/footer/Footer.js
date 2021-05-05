@@ -3,11 +3,11 @@ import Link from "next/link"
 
 const Footer = () => {
   return (
-    <div className={styles.footer_container}>
+    <footer className={styles.footer_container}>
       <div className={styles.footer_left}>
         <h1 className={styles.logo}>
           <Link href="/">
-            <a href="/">
+            <a>
               <span>Job</span>Portal.
             </a>
           </Link>
@@ -15,13 +15,13 @@ const Footer = () => {
         <p className={styles.footer_call_to_action}>
           Sign Up today to start applying for different jobs and posting jobs
           for different professions
-          <Link href="">
+          <Link href="/register">
             <a className={styles.footer_links}>Register</a>
           </Link>
         </p>
         <p className={styles.footer_call_to_action}>
           Already Registered?
-          <Link href="">
+          <Link href="/login">
             <a className={styles.footer_links}>Login</a>
           </Link>
         </p>
@@ -65,12 +65,12 @@ const Footer = () => {
           <h3>Browse</h3>
           <ul>
             <li>
-              <Link href="/">
+              <Link href="/jobs">
                 <a>Jobs</a>
               </Link>
             </li>
             <li>
-              <Link href="/">
+              <Link href="/companies">
                 <a>Companies</a>
               </Link>
             </li>
@@ -81,17 +81,17 @@ const Footer = () => {
           <h3>Jobs</h3>
           <ul>
             <li>
-              <Link href="/">About us</Link>
+              <Link href="/about">About us</Link>
             </li>
             <li>
-              <Link href="/">Contact us</Link>
+              <Link href="/contact">Contact us</Link>
             </li>
             <li>
-              <Link href="/">Help</Link>
+              <Link href="/help">Help</Link>
             </li>
             <li>
-              <Link href="/">
-                <a href="/">Terms of Use</a>
+              <Link href="/terms">
+                <a>Terms of Use</a>
               </Link>
             </li>
           </ul>
@@ -101,30 +101,28 @@ const Footer = () => {
           <h3>Connect</h3>
           <h1 className={styles.logo2}>
             <Link href="/">
-              <a href="/">
+              <a>
                 <span>Job</span>Portal.
               </a>
             </Link>
           </h1>
           <ul>
             <li>
-              <Link href="/">Facebook</Link>
+              <a href="/">Facebook</a>
             </li>
             <li>
-              <Link href="/">Twitter</Link>
+              <a href="/">Twitter</a>
             </li>
             <li>
-              <Link href="/">LinkedIn</Link>
+              <a href="/">LinkedIn</a>
             </li>
             <li>
-              <Link href="/">
-                <a href="/">Instagram</a>
-              </Link>
+              <a href="/">Instagram</a>
             </li>
           </ul>
         </div>
       </div>
-    </div>
+    </footer>
   )
 }
 
