@@ -2,14 +2,15 @@ import React, { useState } from "react"
 import Link from "next/link"
 import Input from "../inputs/Input"
 import FormButton from "../buttons/FormButton"
+import axios from "axios"
 
 const JobSeeker = () => {
   const [formData, setFormData] = useState({
-    Name: "",
+    firstname: "",
+    lastname: "",
     email: "",
     username: "",
     password: "",
-    confirmPassword: "",
   })
 
   const [errors, setErrors] = useState({})
@@ -28,6 +29,17 @@ const JobSeeker = () => {
   }
   const handleSubmit = (e) => {
     e.preventDefault()
+    setLoading(true)
+    axios
+      .post(process.env.NEXT_PUBLIC_API_URL + "/users/register", formData)
+      .then((res) => {
+        console.log(res.data)
+        setLoading(false)
+      })
+      .catch((err) => {
+        setLoading(false)
+        console.log(err)
+      })
   }
   return (
     <div className="register__jobseeker">
@@ -35,11 +47,20 @@ const JobSeeker = () => {
       <form onSubmit={(e) => handleSubmit(e)}>
         <Input
           type="text"
-          name="Name"
+          name="firstname"
           handleChange={handleChange}
-          id="name"
-          title="Name:"
-          error={errors.Name && errors.Name}
+          id="firstname"
+          title="First Name:"
+          error={errors.firstname && errors.firstname}
+          inputClass="bg_input"
+        />
+        <Input
+          type="text"
+          name="lastname"
+          handleChange={handleChange}
+          id="lastname"
+          title="Last Name:"
+          error={errors.lastname && errors.lastname}
           inputClass="bg_input"
         />
         <Input
@@ -52,23 +73,21 @@ const JobSeeker = () => {
           inputClass="bg_input"
         />
         <Input
-          type="password"
-          name="password"
+          type="text"
+          name="username"
           handleChange={handleChange}
-          placeholder=""
-          id="password"
-          title="Password:"
-          error={errors.password && errors.password}
+          id="username"
+          title="Username:"
+          error={errors.username && errors.username}
           inputClass="bg_input"
         />
         <Input
           type="password"
-          name="confirmPassword"
+          name="password"
           handleChange={handleChange}
-          placeholder=""
-          id="confirm-password"
-          title="Confirm Password:"
-          error={errors.confirmPassword && errors.confirmPassword}
+          id="password"
+          title="Password:"
+          error={errors.password && errors.password}
           inputClass="bg_input"
         />
         <p

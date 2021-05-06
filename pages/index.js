@@ -2,8 +2,6 @@ import Head from "next/head"
 import Hero from "../components/home/hero/Hero"
 import Jobs from "../components/jobs_template/Jobs"
 import Companies from "../components/home/companies/Companies"
-import axios from "axios"
-import btoa from "btoa"
 
 export default function Home() {
   return (
@@ -21,18 +19,18 @@ export default function Home() {
   )
 }
 
-export async function getStaticProps() {
-  let jobs = null
+// export async function getStaticProps() {
+//   let jobs = null
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/jobs`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
+//   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/jobs`, {
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//   })
 
-  return {
-    props: {
-      jobs,
-    },
-  }
-}
+//   return {
+//     props: {
+//       jobs,
+//     },
+//   }
+// }

@@ -1,14 +1,13 @@
 import React, { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { useAuthState } from "../../context/auth"
 import { useRouter } from "next/router"
 import { AiOutlineSearch } from "react-icons/ai"
 import { FaBell } from "react-icons/fa"
 import UseClickOutside from "../UseClickOutside"
 import styles from "./Header.module.sass"
 import rippleEffect from "../rippleEffect.js"
-
-let isAuthenticated = true
 
 const Notifications = () => {
   let [open, setOpen] = useState(false)
@@ -48,6 +47,8 @@ const Notifications = () => {
 }
 
 const Profile = () => {
+  const { user } = useAuthState()
+  const {username, name} = user
   // takes care of profile drop down
   let [open, setOpen] = useState(false)
   const toggleDropdown = () => setOpen(!open)
@@ -59,7 +60,7 @@ const Profile = () => {
     <div className={styles.profile} ref={node}>
       <div onClick={() => setOpen(!open)} className={styles.profile}>
         <div className={styles.name}>
-          <span>Username</span>
+          <span>{username}</span>
         </div>
         <div className={styles.dp__container}>
           <Image
@@ -178,6 +179,7 @@ const Search = () => {
 }
 
 const Header = () => {
+  const { isAuthenticated } = useAuthState()
   const [open, setOpen] = useState(false)
 
   const toggleMenu = () => {

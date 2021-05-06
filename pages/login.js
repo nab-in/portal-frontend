@@ -1,12 +1,16 @@
 import React, { useState } from "react"
 import Link from "next/link"
+import { useRouter } from "next/router"
 import Input from "../components/inputs/Input"
 import FormButton from "../components/buttons/FormButton"
 import Logo from "../components/Logo"
 import styles from "../styles/auth.module.sass"
 import axios from "axios"
+import { useAuthDispatch } from "../context/auth"
 
 const login = () => {
+  let router = useRouter()
+  const dispatch = useAuthDispatch()
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -26,11 +30,23 @@ const login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    let body = formData
+    setLoading(true)
     axios
       .post(process.env.NEXT_PUBLIC_API_URL + "/login", formData)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err))
+      .then((res) => {
+        console.log(res.data)
+        dispatch({
+          type: "LOGIN",
+          payload: res.data,
+        })
+        setLoading(false)
+        if (res.data.verified) router.push("/")
+      })
+      .catch((err) => {
+        setLoading(false)
+
+        console.log(err)
+      })
   }
 
   return (
