@@ -6,8 +6,10 @@ import RelatedJobs from "../../components/job/RelatedJobs"
 import NewsLetter from "../../components/newsletter/NewsLetter"
 import styles from "../../styles/job.module.sass"
 import jobs from "../../data/jobs"
+import { useAuthState } from "../../context/auth"
 
 const job = () => {
+  let { isAuthenticated } = useAuthState()
   let router = useRouter()
   let id = router.query.id
   let job = jobs.filter((e) => e.id == id)
@@ -55,9 +57,11 @@ const job = () => {
             </div>
             <div className={`${styles.sub__content} sub__content`}>
               <RelatedJobs />
-              <div className={styles.newsletter}>
-                <NewsLetter />
-              </div>
+              {!isAuthenticated && (
+                <div className={styles.newsletter}>
+                  <NewsLetter />
+                </div>
+              )}
             </div>
           </div>
         </div>

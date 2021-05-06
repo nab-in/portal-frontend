@@ -6,12 +6,13 @@ import FilterCriteria from "../filter_criteria/FilterCriteria"
 import NewsLetter from "../newsletter/NewsLetter"
 import styles from "../../styles/template.module.sass"
 import jobs from "../../data/jobs"
-
-let isAuthenticated = false
+import { useAuthState } from "../../context/auth"
 
 // main template to display jobs in landing page and jobs page
 const Jobs = ({ search, setSearch, heading, page }) => {
   let [filter, setFilter] = useState(false)
+
+  let { isAuthenticated } = useAuthState()
 
   // check if search object has any value to dynamically render heading
   let checkSearch = (obj) => {

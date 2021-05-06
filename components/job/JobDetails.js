@@ -2,22 +2,11 @@ import React from "react"
 import Link from "next/link"
 import Linkify from "react-linkify"
 import styles from "./job_details.module.sass"
+import { useAuthState } from "../../context/auth"
 
 const JobDetails = ({ job }) => {
-  let {
-    id,
-    title,
-    job_type,
-    location,
-    company,
-    created_at,
-    close_date,
-    close_time,
-    email,
-    attachment,
-    descriptions,
-    reviews,
-  } = job
+  let { user, isAuthenticated } = useAuthState()
+  let { id, job_type, location, company, email, attachment, descriptions } = job
   return (
     <div className={styles.details}>
       <div className={styles.title}>
@@ -46,12 +35,14 @@ const JobDetails = ({ job }) => {
       <div className={styles.descriptions}>
         <Linkify>{descriptions}</Linkify>
       </div>
-      <div className={styles.job__footer}>
-        <p>
-          You need an account to apply for this job. Already have one?{" "}
-          <Link href="/login">Login</Link>
-        </p>
-      </div>
+      {!isAuthenticated && (
+        <div className={styles.job__footer}>
+          <p>
+            You need an account to apply for this job. Already have one?{" "}
+            <Link href="/login">Login</Link>
+          </p>
+        </div>
+      )}
     </div>
   )
 }
