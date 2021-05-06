@@ -4,10 +4,11 @@ import Input from "../components/inputs/Input"
 import FormButton from "../components/buttons/FormButton"
 import Logo from "../components/Logo"
 import styles from "../styles/auth.module.sass"
+import axios from "axios"
 
 const login = () => {
   const [formData, setFormData] = useState({
-    email: "",
+    username: "",
     password: "",
   })
 
@@ -22,9 +23,16 @@ const login = () => {
       [name]: value,
     })
   }
+
   const handleSubmit = (e) => {
     e.preventDefault()
+    let body = formData
+    axios
+      .post(process.env.NEXT_PUBLIC_API_URL + "/login", formData)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err))
   }
+
   return (
     <div className={`${styles.auth} ${styles.login}`}>
       <div className={`${styles.container}`}>
@@ -37,11 +45,11 @@ const login = () => {
           <h1>Welcome Back, Login to your account</h1>
           <Input
             type="text"
-            name="email"
+            name="username"
             handleChange={handleChange}
-            id="email"
-            title="Email:"
-            error={errors.email && errors.email}
+            id="username"
+            title="Username:"
+            error={errors.username && errors.username}
           />
           <Input
             type="password"
