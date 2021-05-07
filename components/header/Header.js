@@ -48,7 +48,7 @@ const Notifications = () => {
 
 const Profile = () => {
   const { user } = useAuthState()
-  const {username, name} = user
+  const { username, name } = user
   // takes care of profile drop down
   let [open, setOpen] = useState(false)
   const toggleDropdown = () => setOpen(!open)
@@ -254,26 +254,40 @@ const Header = () => {
               </button>
             </div>
             <ul className={styles.menu__list}>
-              <li className={`${styles.nav_item} ${styles.active}`}>
+              <li>
                 <Link href="/jobs">
-                  <a className="nav_link">Jobs</a>
+                  <a>Jobs</a>
                 </Link>
               </li>
-              <li className={`${styles.nav_item} ${styles.active}`}>
+              <li>
                 <Link href="/companies">
-                  <a className="nav_link">Companies</a>
+                  <a>Companies</a>
                 </Link>
               </li>
-              <li className={styles.nav_item}>
+              <li>
                 <Link href="/about">
-                  <a className="nav_link">About</a>
+                  <a>About</a>
                 </Link>
               </li>
-              <li className={styles.nav_item}>
+              <li>
                 <Link href="/contact">
-                  <a className="nav_link">Contact</a>
+                  <a>Contact</a>
                 </Link>
               </li>
+              {!isAuthenticated && (
+                <>
+                  <li className={`${styles.nav_item} ${styles.auth_link}`}>
+                    <Link href="/login">
+                      <a>Login</a>
+                    </Link>
+                  </li>
+                  <li className={`${styles.nav_item} ${styles.auth_link}`}>
+                    <Link href="/register">
+                      <a>Sign Up</a>
+                    </Link>
+                  </li>
+                </>
+              )}
               <Search />
             </ul>
           </div>
