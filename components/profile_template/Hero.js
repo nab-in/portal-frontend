@@ -1,9 +1,10 @@
 import React from "react"
 import Image from "next/image"
 import styles from "./hero.module.sass"
+import { useAuthState } from "../../context/auth"
 
-let isAuthenticated = false
 const Hero = ({ details, page }) => {
+  let { user, isAuthenticated } = useAuthState()
   const Profile = () => {
     if (page == "company" || "company/jobs") {
       let { logo, name, title, id } = details
@@ -23,9 +24,9 @@ const Hero = ({ details, page }) => {
             <div className={styles.name}>
               <h1>
                 <span>{name}</span>
-                {isAuthenticated && (
+                {/* {isAuthenticated && (
                   <span className="badge unverified">Follow</span>
-                )}
+                )} */}
               </h1>
             </div>
             <div className={`${styles.title}`}>
@@ -35,7 +36,7 @@ const Hero = ({ details, page }) => {
         </div>
       )
     }
-    if (page == "user") {
+    if (page == "profile") {
       let { logo, name, title, id } = details
       return (
         <div className={styles.container}>
@@ -51,12 +52,12 @@ const Hero = ({ details, page }) => {
           </div>
           <div className={styles.heading}>
             <div className={styles.name}>
-              <h1>
+              {/* <h1>
                 <span>{name}</span>
                 {isAuthenticated && (
                   <span className="badge unverified">Follow</span>
                 )}
-              </h1>
+              </h1> */}
             </div>
             <div className={`${styles.title}`}>
               <span>{title}</span>

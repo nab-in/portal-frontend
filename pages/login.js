@@ -34,7 +34,6 @@ const login = () => {
     axios
       .post(process.env.NEXT_PUBLIC_API_URL + "/login", formData)
       .then((res) => {
-        console.log(res.data)
         dispatch({
           type: "LOGIN",
           payload: res.data,
@@ -64,7 +63,7 @@ const login = () => {
             name="username"
             handleChange={handleChange}
             id="username"
-            title="Username:"
+            title="Username/Email:"
             error={errors.username && errors.username}
           />
           <Input
