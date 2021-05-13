@@ -108,14 +108,14 @@ const Aside = ({ page, details, tab }) => {
         </>
       )
     }
-    if (page == "user") {
+    if (page == "user" && isUser) {
       let { id } = details
       return (
         <aside>
           <nav>
             <ul>
               <li>
-                <Link href={`/users/${id}?tab=profile`}>
+                <Link href={`/profile/${id}?tab=profile`}>
                   <a
                     className={
                       tab == "profile" || tab == undefined || tab == ""
@@ -128,7 +128,7 @@ const Aside = ({ page, details, tab }) => {
                 </Link>
               </li>
               <li>
-                <Link href={`/users/${id}?tab=edit-profile`}>
+                <Link href={`/profile/${id}?tab=edit-profile`}>
                   <a
                     className={tab == "edit-profile" ? `${styles.active}` : ""}
                   >
@@ -137,7 +137,7 @@ const Aside = ({ page, details, tab }) => {
                 </Link>
               </li>
               <li>
-                <Link href={`/users/${id}?tab=applied-jobs`}>
+                <Link href={`/profile/${id}?tab=applied-jobs`}>
                   <a
                     className={tab == "applied-jobs" ? `${styles.active}` : ""}
                   >
@@ -146,7 +146,7 @@ const Aside = ({ page, details, tab }) => {
                 </Link>
               </li>
               <li>
-                <Link href={`/users/${id}?tab=saved-jobs`}>
+                <Link href={`/profile/${id}?tab=saved-jobs`}>
                   <a className={tab == "saved-jobs" ? `${styles.active}` : ""}>
                     Saved Jobs
                   </a>

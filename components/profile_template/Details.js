@@ -5,8 +5,8 @@ import AppliedJobs from "./details/AppliedJobs"
 import EditProfile from "./details/EditProfile"
 import Jobs from "./details/Jobs"
 
-let isUser = true
-let isCompany = true
+let isUser = false
+let isCompany = false
 const Details = ({ tab, details, page }) => {
   const Content = () => {
     if (tab == undefined || tab == "profile")

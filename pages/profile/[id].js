@@ -11,7 +11,7 @@ const profile = () => {
   if (company.length > 0) details = company[0]
   return (
     <div>
-      {details && <Profile_Template page="company" details={details} />}
+      {details && <Profile_Template page="user" details={details} />}
       {!details && <h2>Not Found</h2>}
     </div>
   )
