@@ -1,12 +1,13 @@
 import Template from "../template/Template"
 import NewsLetter from "../newsletter/NewsLetter"
 import { useAuthState } from "../../context/auth"
+import styles from "./page.module.sass"
 
 const PageTemplate = ({ heading, children }) => {
   const { isAuthenticated } = useAuthState()
   return (
     <div>
-      <div className="hero" />
+      <div className={styles.hero} />
       <main>
         <Template heading={heading}>
           <div

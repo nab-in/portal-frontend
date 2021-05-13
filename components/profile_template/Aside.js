@@ -1,11 +1,20 @@
 import React from "react"
 import Link from "next/link"
+import { useAuthState } from "../../context/auth"
 import styles from "./template.module.sass"
 
 let isUser = false
 let isCompany = false
 
 const Aside = ({ page, details, tab }) => {
+  const { user } = useAuthState()
+  if (user?.role === "company" && page == "company" && user?.id == details.id) {
+    isCompany = true
+  } else if (page == "auth-user") {
+    isUser = true
+  } else if (user?.id == details.id) {
+    isUser = true
+  }
   let Nav = () => {
     if (page == "company" || page == "company/jobs") {
       let { id } = details
@@ -163,7 +172,7 @@ const Aside = ({ page, details, tab }) => {
           <nav>
             <ul>
               <li>
-                <Link href={`/users?tab=profile`}>
+                <Link href={`/profile?tab=profile`}>
                   <a
                     className={
                       tab == "profile" || tab == undefined || tab == ""
@@ -176,7 +185,7 @@ const Aside = ({ page, details, tab }) => {
                 </Link>
               </li>
               <li>
-                <Link href={`/users?tab=edit-profile`}>
+                <Link href={`/profile?tab=edit-profile`}>
                   <a
                     className={tab == "edit-profile" ? `${styles.active}` : ""}
                   >
@@ -185,7 +194,7 @@ const Aside = ({ page, details, tab }) => {
                 </Link>
               </li>
               <li>
-                <Link href={`/users?tab=applied-jobs`}>
+                <Link href={`/profile?tab=applied-jobs`}>
                   <a
                     className={tab == "applied-jobs" ? `${styles.active}` : ""}
                   >
@@ -194,7 +203,7 @@ const Aside = ({ page, details, tab }) => {
                 </Link>
               </li>
               <li>
-                <Link href={`/users?tab=saved-jobs`}>
+                <Link href={`/profile?tab=saved-jobs`}>
                   <a className={tab == "saved-jobs" ? `${styles.active}` : ""}>
                     Saved Jobs
                   </a>
