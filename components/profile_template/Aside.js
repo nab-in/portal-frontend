@@ -1,20 +1,8 @@
 import React from "react"
 import Link from "next/link"
-import { useAuthState } from "../../context/auth"
 import styles from "./template.module.sass"
 
-let isUser = false
-let isCompany = false
-
-const Aside = ({ page, details, tab }) => {
-  const { user } = useAuthState()
-  if (user?.role === "company" && page == "company" && user?.id == details.id) {
-    isCompany = true
-  } else if (page == "auth-user") {
-    isUser = true
-  } else if (user?.id == details.id) {
-    isUser = true
-  }
+const Aside = ({ page, details, tab, isUser, isCompany }) => {
   let Nav = () => {
     if (page == "company" || page == "company/jobs") {
       let { id } = details

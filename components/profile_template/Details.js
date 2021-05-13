@@ -5,9 +5,7 @@ import AppliedJobs from "./details/AppliedJobs"
 import EditProfile from "./details/EditProfile"
 import Jobs from "./details/Jobs"
 
-let isUser = false
-let isCompany = false
-const Details = ({ tab, details, page }) => {
+const Details = ({ tab, details, page, isUser, isCompany }) => {
   const Content = () => {
     if (tab == undefined || tab == "profile")
       return <Profile details={details} page={page} />
