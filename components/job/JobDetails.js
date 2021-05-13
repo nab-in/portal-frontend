@@ -1,11 +1,15 @@
-import React from "react"
+import React, { useState } from "react"
 import Link from "next/link"
 import Linkify from "react-linkify"
 import styles from "./job_details.module.sass"
 import { useAuthState } from "../../context/auth"
 
 const JobDetails = ({ job }) => {
+  let [rate, setRate] = useState(0)
   let { user, isAuthenticated } = useAuthState()
+  let { verified, role } = user
+  let stars = [1, 2, 3, 4, 5]
+  let style = { "--rating": rate }
   let { id, job_type, location, company, email, attachment, descriptions } = job
   return (
     <div className={styles.details}>
@@ -36,12 +40,32 @@ const JobDetails = ({ job }) => {
         <Linkify>{descriptions}</Linkify>
       </div>
       {!isAuthenticated && (
-        <div className={styles.job__footer}>
+        <section className={styles.job__footer}>
           <p>
             You need an account to apply for this job. Already have one?{" "}
             <Link href="/login">Login</Link>
           </p>
-        </div>
+        </section>
+      )}
+      {isAuthenticated && verified && role !== company && (
+        <section>
+          <div className={styles.btns}>
+            <button className="btn btn-secondary">Save</button>
+            <button className="btn btn-primary">Apply</button>
+          </div>
+          <div className={styles.rate}>
+            <p>Rate this job</p>
+            <div className={styles.stars} style={style}>
+              {stars.map((star) => (
+                <span
+                  key={star}
+                  className={styles.star}
+                  onClick={() => setRate(star)}
+                ></span>
+              ))}
+            </div>
+          </div>
+        </section>
       )}
     </div>
   )
