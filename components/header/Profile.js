@@ -7,7 +7,8 @@ import styles from "./profile.module.sass"
 
 const Profile = () => {
   const { user } = useAuthState()
-  const { username } = user
+  const { username, dp, firstname, lastname } = user
+  let name = username?.split("")[0]
   // takes care of profile drop down
   let [open, setOpen] = useState(false)
   //   const toggleDropdown = () => setOpen(!open)
@@ -22,13 +23,17 @@ const Profile = () => {
           <span>{username}</span>
         </div>
         <div className={styles.dp__container}>
-          <Image
-            src={`/assets/images/dp.jpeg`}
-            alt={`dp`}
-            height={40}
-            width={40}
-            objectFit="cover"
-          />
+          {dp ? (
+            <Image
+              src={`/assets/images/dp.jpeg`}
+              alt={`dp`}
+              height={40}
+              width={40}
+              objectFit="cover"
+            />
+          ) : (
+            <div className={styles.default}>{name}</div>
+          )}
         </div>
       </div>
       <div
@@ -38,15 +43,21 @@ const Profile = () => {
       >
         <div className={styles.profile}>
           <div className={styles.dp__container}>
-            <Image
-              src={`/assets/images/dp.jpeg`}
-              alt={`dp`}
-              height={40}
-              width={40}
-              objectFit="cover"
-            />
+            {dp ? (
+              <Image
+                src={`/assets/images/dp.jpeg`}
+                alt={`dp`}
+                height={40}
+                width={40}
+                objectFit="cover"
+              />
+            ) : (
+              <div className={styles.default}>{name}</div>
+            )}
           </div>
-          <div className={styles.name}>John Doe</div>
+          <div className={styles.name}>
+            {firstname} {lastname}
+          </div>
         </div>
         <nav>
           <ul>

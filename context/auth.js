@@ -42,8 +42,16 @@ const authReducer = (state, action) => {
 
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, {
-    user: null,
-    isAuthenticated: false,
+    user: {
+      id: 1,
+      firstname: "Admin",
+      lastname: "Portal",
+      username: "admin",
+      role: "admin",
+      dp: null,
+      verified: true,
+    },
+    isAuthenticated: true,
   })
   return (
     <AuthDispatchContext.Provider value={dispatch}>
