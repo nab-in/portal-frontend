@@ -1,7 +1,14 @@
-import styles from "../styles/contact.module.sass"
+import styles from "../styles/page.module.sass"
+import PageTemplate from "../components/page_template/PageTemplate"
 
 const Contact = () => {
-  return <header className={styles.contact_header}>Contact page</header>
+  return (
+    <div className={styles.contact_header}>
+      <PageTemplate heading="Contact Us">
+        {/* any other contents goes here */}
+      </PageTemplate>
+    </div>
+  )
 }
 
 export default Contact
