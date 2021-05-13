@@ -3,7 +3,7 @@ import Link from "next/link"
 import styles from "./template.module.sass"
 
 let isUser = false
-let isCompany = true
+let isCompany = false
 
 const Aside = ({ page, details, tab }) => {
   let Nav = () => {
@@ -58,10 +58,60 @@ const Aside = ({ page, details, tab }) => {
         </aside>
       )
     }
-    if (page == "user" && isUser) {
+    if (page == "auth-company") {
+      return (
+        <>
+          {isCompany && (
+            <aside>
+              <nav>
+                <ul>
+                  <li>
+                    <Link href={`/dashboard/`}>
+                      <a>Dashboard</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href={`/company?tab=profile`}>
+                      <a
+                        className={
+                          tab == undefined || tab == "profile" || tab == ""
+                            ? `${styles.active}`
+                            : ""
+                        }
+                      >
+                        Profile
+                      </a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href={`/company?tab=edit-profile`}>
+                      <a
+                        className={
+                          tab == "edit-profile" ? `${styles.active}` : ""
+                        }
+                      >
+                        Edit Profile
+                      </a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href={`/company?tab=jobs`}>
+                      <a className={tab == "jobs" ? `${styles.active}` : ""}>
+                        Jobs
+                      </a>
+                    </Link>
+                  </li>
+                </ul>
+              </nav>
+            </aside>
+          )}
+        </>
+      )
+    }
+    if (page == "user") {
       let { id } = details
       return (
-        <aside ref={node}>
+        <aside>
           <nav>
             <ul>
               <li>
@@ -107,7 +157,55 @@ const Aside = ({ page, details, tab }) => {
         </aside>
       )
     }
-    if (page == "user" && !isUser) {
+    if (page == "auth-user" && isUser) {
+      return (
+        <aside>
+          <nav>
+            <ul>
+              <li>
+                <Link href={`/users?tab=profile`}>
+                  <a
+                    className={
+                      tab == "profile" || tab == undefined || tab == ""
+                        ? `${styles.active}`
+                        : ""
+                    }
+                  >
+                    Profile
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href={`/users?tab=edit-profile`}>
+                  <a
+                    className={tab == "edit-profile" ? `${styles.active}` : ""}
+                  >
+                    Edit Profile
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href={`/users?tab=applied-jobs`}>
+                  <a
+                    className={tab == "applied-jobs" ? `${styles.active}` : ""}
+                  >
+                    Applied Jobs
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href={`/users?tab=saved-jobs`}>
+                  <a className={tab == "saved-jobs" ? `${styles.active}` : ""}>
+                    Saved Jobs
+                  </a>
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        </aside>
+      )
+    }
+    if ((page == "user" || page == "auth-user") && !isUser) {
       return null
     }
   }

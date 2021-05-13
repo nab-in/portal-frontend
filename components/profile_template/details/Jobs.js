@@ -17,7 +17,7 @@ const Jobs = ({ page, details }) => {
           <h2>Jobs</h2>
         </header>
         <article className={styles.contents}>
-          {company_jobs.length > 0 ? (
+          {company_jobs?.length > 0 ? (
             <>
               {company_jobs.map(
                 ({

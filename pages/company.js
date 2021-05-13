@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 import Profile_Template from "../components/profile_template/Profile_Template"
 import companies from "../data/companies"
 
-const profile = () => {
+const Company = () => {
   let router = useRouter()
   let details
   let id = 1
@@ -11,10 +11,10 @@ const profile = () => {
   if (company.length > 0) details = company[0]
   return (
     <div>
-      {details && <Profile_Template page="auth-user" details={details} />}
+      {details && <Profile_Template page="auth-company" details={details} />}
       {!details && <h2>Not Found</h2>}
     </div>
   )
 }
 
-export default profile
+export default Company
