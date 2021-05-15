@@ -17,7 +17,12 @@ const Details = ({ tab, details, page, isUser, isCompany }) => {
       return (
         <>
           {isUser || isCompany ? (
-            <EditProfile details={details} page={page} />
+            <EditProfile
+              details={details}
+              page={page}
+              isUser={isUser}
+              isCompany={isCompany}
+            />
           ) : (
             <Profile details={details} page={page} />
           )}

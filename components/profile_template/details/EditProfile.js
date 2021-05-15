@@ -3,19 +3,19 @@ import Input from "../../inputs/Input"
 import Button from "../../buttons/FormButton"
 import Upload from "./Upload"
 import styles from "./edit_profile.module.sass"
+import Settings from "./Settings"
 
-let isUser = false
-const EditProfile = ({ page, details }) => {
-  // let [cv, setCv] = useState(details.cv ? details.cv : "")
+const EditProfile = ({ page, details, isUser, isCompany }) => {
   let [formData, setFormData] = useState({
-    firstname: details.name ? details.name : "",
+    firstname: details?.firstname ? details.firstname : "",
+    lastname: details?.lastname ? details.lastname : "",
     title: details.title ? details.title : "",
     bio: details.bio ? details.bio : "",
     location: details.location ? details.location : "",
     about: details.about ? details.about : "",
     website: details.website ? details.website : "",
   })
-  let { Name, title, bio, location, about, website } = formData
+  let { firstname, lastname, title, bio, location, about, website } = formData
   const handleChange = (e) => {
     let { name, value } = e.target
     setFormData({ ...formData, [name]: value })
@@ -40,12 +40,20 @@ const EditProfile = ({ page, details }) => {
         <article className={styles.contents}>
           <form onSubmit={(e) => handleSubmit(e)}>
             <Input
-              title="Name"
-              name="Name"
-              id="name"
-              value={Name}
+              title="Firstname:"
+              name="firstname"
+              id="firstname"
+              value={firstname}
               handleChange={handleChange}
-              placeholder="Enter your name"
+              placeholder="Enter your First name"
+            />
+            <Input
+              title="Lastname"
+              name="lastname"
+              id="lastname"
+              value={lastname}
+              handleChange={handleChange}
+              placeholder="Enter your Last name"
             />
             <Input
               title="Title"
@@ -111,12 +119,7 @@ const EditProfile = ({ page, details }) => {
           </article>
         </section>
       )}
-      <section>
-        <header>
-          <h2>Settings</h2>
-        </header>
-        <article className={styles.contents}>Just settings</article>
-      </section>
+      <Settings />
     </div>
   )
 }
