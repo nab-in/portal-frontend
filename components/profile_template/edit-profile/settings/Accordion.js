@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react"
 import { BiPlus, BiMinus } from "react-icons/bi"
+import styles from "./accordion.module.sass"
 
 const Accordion = ({ title, children }) => {
   const [active, setActive] = useState("")
@@ -12,7 +13,7 @@ const Accordion = ({ title, children }) => {
     setHeight(active === "active" ? "0px" : `${content.current.scrollHeight}px`)
   }
   return (
-    <div onClick={() => toggleAccordion()}>
+    <div onClick={() => toggleAccordion()} className={styles.accordion}>
       <p>
         {title}{" "}
         <span>
@@ -24,7 +25,7 @@ const Accordion = ({ title, children }) => {
         style={{
           maxHeight: `${height}`,
         }}
-        className="accordion__content"
+        className={styles.accordion__content}
       >
         {children}
       </div>

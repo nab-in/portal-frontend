@@ -1,0 +1,14 @@
+.accordion
+    margin: 2rem 0
+    p
+        display: flex
+        justify-content: space-between
+        font-weight: lighter
+        align-items: center
+        cursor: pointer
+    .accordion__content
+        overflow: auto
+        transition: max-height 0.6s ease
+        &::-webkit-scrollbar
+            width: 0px
+            background: transparent
