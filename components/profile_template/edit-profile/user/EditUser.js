@@ -4,6 +4,7 @@ import Button from "../../../buttons/FormButton"
 import Upload from "../Upload"
 import styles from "../edit_profile.module.sass"
 import Settings from "../settings/Settings"
+import CV from "./CV"
 
 const EditProfile = ({ page, details, isUser, isCompany }) => {
   let [formData, setFormData] = useState({
@@ -21,10 +22,6 @@ const EditProfile = ({ page, details, isUser, isCompany }) => {
     setFormData({ ...formData, [name]: value })
   }
   const handleSubmit = (e) => {
-    e.preventDefault(e)
-  }
-  const handleFileChange = (e) => {}
-  const handleFileSubmit = (e) => {
     e.preventDefault(e)
   }
   return (
@@ -100,23 +97,7 @@ const EditProfile = ({ page, details, isUser, isCompany }) => {
           </form>
         </article>
       </section>
-      <section>
-        <header>
-          <h2>Upload CV</h2>
-        </header>
-        <article className={styles.contents}>
-          <form onSubmit={(e) => handleFileSubmit(e)}>
-            <input
-              type="file"
-              name="cv"
-              id="cv"
-              handleChange={(e) => handleFileChange(e)}
-            />
-            <label htmlFor="cv">Upload</label>
-            <Button text="Upload" btnClass="btn-primary" />
-          </form>
-        </article>
-      </section>
+      <CV />
       <Settings />
     </div>
   )
