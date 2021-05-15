@@ -1,9 +1,9 @@
 import React, { useState } from "react"
-import Input from "../../inputs/Input"
-import Button from "../../buttons/FormButton"
-import Upload from "./Upload"
-import styles from "./edit_profile.module.sass"
-import Settings from "./Settings"
+import Input from "../../../inputs/Input"
+import Button from "../../../buttons/FormButton"
+import Upload from "../Upload"
+import styles from "../edit_profile.module.sass"
+import Settings from "../settings/Settings"
 
 const EditProfile = ({ page, details, isUser, isCompany }) => {
   let [formData, setFormData] = useState({
@@ -100,25 +100,23 @@ const EditProfile = ({ page, details, isUser, isCompany }) => {
           </form>
         </article>
       </section>
-      {isUser && (
-        <section>
-          <header>
-            <h2>Upload CV</h2>
-          </header>
-          <article className={styles.contents}>
-            <form onSubmit={(e) => handleFileSubmit(e)}>
-              <input
-                type="file"
-                name="cv"
-                id="cv"
-                handleChange={(e) => handleFileChange(e)}
-              />
-              <label htmlFor="cv">Upload</label>
-              <Button text="Upload" btnClass="btn-primary" />
-            </form>
-          </article>
-        </section>
-      )}
+      <section>
+        <header>
+          <h2>Upload CV</h2>
+        </header>
+        <article className={styles.contents}>
+          <form onSubmit={(e) => handleFileSubmit(e)}>
+            <input
+              type="file"
+              name="cv"
+              id="cv"
+              handleChange={(e) => handleFileChange(e)}
+            />
+            <label htmlFor="cv">Upload</label>
+            <Button text="Upload" btnClass="btn-primary" />
+          </form>
+        </article>
+      </section>
       <Settings />
     </div>
   )

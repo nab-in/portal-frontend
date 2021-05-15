@@ -1,8 +1,8 @@
 import React from "react"
 import { useRouter } from "next/router"
-import { useAuthState } from "../../context/auth"
-import Aside from "./Aside"
-import Details from "./Details"
+import { useAuthState } from "../../../context/auth"
+import Aside from "../aside/Aside"
+import Details from "../Details"
 import styles from "./template.module.sass"
 
 let isUser = false

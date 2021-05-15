@@ -1,6 +1,6 @@
 import React from "react"
 import Link from "next/link"
-import styles from "./template.module.sass"
+import styles from "../template/template.module.sass"
 
 const Aside = ({ page, details, tab, isUser, isCompany }) => {
   let Nav = () => {

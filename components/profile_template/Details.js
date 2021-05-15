@@ -1,9 +1,9 @@
 import React from "react"
-import SavedJobs from "./details/SavedJobs"
-import Profile from "./details/Profile"
-import AppliedJobs from "./details/AppliedJobs"
-import EditProfile from "./details/EditProfile"
-import Jobs from "./details/Jobs"
+import SavedJobs from "./jobs/SavedJobs"
+import Profile from "./profile/Profile"
+import AppliedJobs from "./jobs/AppliedJobs"
+import EditProfile from "./edit-profile/EditProfile"
+import Jobs from "./jobs/Jobs"
 
 const Details = ({ tab, details, page, isUser, isCompany }) => {
   const Content = () => {
@@ -19,7 +19,6 @@ const Details = ({ tab, details, page, isUser, isCompany }) => {
           {isUser || isCompany ? (
             <EditProfile
               details={details}
-              page={page}
               isUser={isUser}
               isCompany={isCompany}
             />

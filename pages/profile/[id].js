@@ -5,11 +5,10 @@ import Error from "../../components/error/Error"
 
 const profile = () => {
   let { user } = useAuthState()
-  let details = user
   return (
     <div>
-      {details && <Profile_Template page="user" details={details} />}
-      {!details && <Error />}
+      {user && <Profile_Template page="user" details={user} />}
+      {!user && <Error />}
     </div>
   )
 }

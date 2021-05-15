@@ -1,11 +1,11 @@
 import React from "react"
 import Image from "next/image"
-import { useAuthState } from "../../context/auth"
+import { useAuthState } from "../../../context/auth"
 import styles from "./hero.module.sass"
 
 const Hero = ({ details, page }) => {
   const Profile = () => {
-    const { isAuthenticated } = useAuthState()
+    const { isAuthenticated, user } = useAuthState()
     if (page == "company" || page == "company/jobs") {
       let { logo, name, title, id } = details
       return (
@@ -24,7 +24,7 @@ const Hero = ({ details, page }) => {
             <div className={styles.name}>
               <h1>
                 <span>{name}</span>
-                {isAuthenticated && (
+                {isAuthenticated && user?.role !== "company" && (
                   <span className="badge unverified">Follow</span>
                 )}
               </h1>
