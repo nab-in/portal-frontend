@@ -50,6 +50,13 @@ export const AuthProvider = ({ children }) => {
       role: "admin",
       dp: null,
       verified: true,
+      title: "Software Developer",
+      bio: "I create best softwares",
+      about:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet imperdiet nunc vitae eu neque. Lobortis aliquet cursus sem accumsan. Sit pulvinar eget leo sagittis. Euismod nulla in tellus adipiscing.",
+      website: "http://mywebsite.com",
+      location: "Kilimanjaro Tanzania",
+      cv: null,
     },
     isAuthenticated: true,
   })

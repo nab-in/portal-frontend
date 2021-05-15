@@ -12,12 +12,17 @@
         width: 200px
         position: sticky
         top: 70px
+        z-index: 2
         nav
             ul
                 li
-                    margin: 1rem 0
-                    a.active
-                        color: #BC5100
+                    a
+                        display: inline-block
+                        width: 100%
+                        padding: 1rem 0
+                        border-bottom: 1px solid #bbb
+                        &.active
+                            color: #BC5100
 
     .main__details
         width: calc( 100% - 200px )
@@ -55,6 +60,7 @@
             width: 100%
             height: auto
             margin-bottom: 1rem
+            font-size: .9rem
             border-bottom: 1px solid #E2E8EC
             nav
                 ul
@@ -64,7 +70,8 @@
                         margin: 0
                         a
                             display: inline-flex
-                            padding: .7rem 1.2rem
+                            padding: .7rem
+                            border: none
                             &.active, &:hover
                                 background: #E2E8EC
         .main__details

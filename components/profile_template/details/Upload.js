@@ -2,7 +2,8 @@ import React, { useState } from "react"
 import { FaCamera } from "react-icons/fa"
 import styles from "./upload.module.sass"
 
-const Upload = () => {
+const Upload = ({ dp, name }) => {
+  name = name.split("")[0]
   let [imgData, setImgData] = useState(null)
   const handleChange = (e) => {
     if (e.target.files) {
@@ -29,7 +30,13 @@ const Upload = () => {
             {imgData ? (
               <img src={imgData} alt="newly uploaded" />
             ) : (
-              <img src="/assets/companies/logo2.png" alt="dp" />
+              <>
+                {dp ? (
+                  <img src="/assets/companies/logo2.png" alt="dp" />
+                ) : (
+                  <div className={styles.default}>{name}</div>
+                )}
+              </>
             )}
 
             <FaCamera className={styles.icon} />

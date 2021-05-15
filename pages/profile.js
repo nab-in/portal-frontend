@@ -1,18 +1,17 @@
 import React from "react"
-import { useRouter } from "next/router"
+import { useAuthState } from "../context/auth"
 import Profile_Template from "../components/profile_template/Profile_Template"
-import companies from "../data/companies"
+import Error from "../components/error/Error"
 
 const profile = () => {
-  let router = useRouter()
-  let details
-  let id = 1
-  let company = companies.filter((el) => el.id == id)
-  if (company.length > 0) details = company[0]
+  let { user, isAuthenticated } = useAuthState()
+  let details = user
   return (
     <div>
-      {details && <Profile_Template page="auth-user" details={details} />}
-      {!details && <h2>Not Found</h2>}
+      {details && isAuthenticated && (
+        <Profile_Template page="auth-user" details={details} />
+      )}
+      {(!details || !isAuthenticated) && <Error />}
     </div>
   )
 }

@@ -11,7 +11,7 @@
     "axios": "^0.21.1",
     "dotenv": "^9.0.0",
     "moment": "^2.29.1",
-    "next": "10.1.2",
+    "next": "^10.2.0",
     "next-images": "^1.7.0",
     "next-iron-session": "^4.1.13",
     "react": "17.0.2",

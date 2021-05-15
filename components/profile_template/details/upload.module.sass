@@ -2,6 +2,7 @@
 
 .img__upload
     margin: 1.5rem 1rem
+    z-index: 1
     form
         display: flex
         justify-content: center
@@ -28,9 +29,10 @@
                 height: 120px
                 width: 120px
                 transition: .3s
+                background: rgba(0, 0, 0, .3)
             &:hover
                 .img__cover
-                    background: rgba(0, 0, 0, .5)
+                    background: rgba(0, 0, 0, .7)
             img
                 height: 100%
                 width: 100%
@@ -38,6 +40,15 @@
             .icon
                 position: absolute
                 bottom: -10px
-                right: calc( 30% - 12px)
+                right: -10%
                 font-size: 24px
+                color: $secondary
+            .default
+                display: flex
+                justify-content: center
+                align-items: center
+                height: 100%
+                width: 100%
+                text-transform: uppercase
+                font-size: 5rem
                 color: $primary

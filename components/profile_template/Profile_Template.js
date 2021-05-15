@@ -1,7 +1,6 @@
 import React from "react"
 import Hero from "./Hero"
 import Template from "./Template"
-import styles from "./template.module.sass"
 
 const Profile_Template = ({ details, page }) => {
   return (

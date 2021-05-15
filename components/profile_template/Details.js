@@ -9,7 +9,10 @@ const Details = ({ tab, details, page, isUser, isCompany }) => {
   const Content = () => {
     if (tab == undefined || tab == "profile")
       return <Profile details={details} page={page} />
-    if (tab == "jobs") return <Jobs page={page} details={details} />
+    if (tab == "jobs" && page == "company")
+      return <Jobs page={page} details={details} />
+    if (tab == "jobs" && page != "company")
+      return <Profile page={page} details={details} />
     if (tab == "edit-profile")
       return (
         <>

@@ -8,7 +8,7 @@ let isUser = false
 const EditProfile = ({ page, details }) => {
   // let [cv, setCv] = useState(details.cv ? details.cv : "")
   let [formData, setFormData] = useState({
-    Name: details.name ? details.name : "",
+    firstname: details.name ? details.name : "",
     title: details.title ? details.title : "",
     bio: details.bio ? details.bio : "",
     location: details.location ? details.location : "",
@@ -33,7 +33,10 @@ const EditProfile = ({ page, details }) => {
         <header>
           <h2>Edit Informations</h2>
         </header>
-        <Upload />
+        <Upload
+          dp={details.dp ? details.dp : details.logo}
+          name={details.username ? details.username : details.name}
+        />
         <article className={styles.contents}>
           <form onSubmit={(e) => handleSubmit(e)}>
             <Input
