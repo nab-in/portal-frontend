@@ -91,25 +91,6 @@ const EditProfile = ({ details }) => {
           </form>
         </article>
       </section>
-      {isUser && (
-        <section>
-          <header>
-            <h2>Upload CV</h2>
-          </header>
-          <article className={styles.contents}>
-            <form onSubmit={(e) => handleFileSubmit(e)}>
-              <input
-                type="file"
-                name="cv"
-                id="cv"
-                handleChange={(e) => handleFileChange(e)}
-              />
-              <label htmlFor="cv">Upload</label>
-              <Button text="Upload" btnClass="btn-primary" />
-            </form>
-          </article>
-        </section>
-      )}
       <Settings />
     </div>
   )
