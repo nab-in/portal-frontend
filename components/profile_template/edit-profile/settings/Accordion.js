@@ -13,8 +13,8 @@ const Accordion = ({ title, children }) => {
     setHeight(active === "active" ? "0px" : `${content.current.scrollHeight}px`)
   }
   return (
-    <div onClick={() => toggleAccordion()} className={styles.accordion}>
-      <p>
+    <div className={styles.accordion}>
+      <p onClick={() => toggleAccordion()}>
         {title}{" "}
         <span>
           {active ? <BiMinus className="icon" /> : <BiPlus className="icon" />}
