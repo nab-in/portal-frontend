@@ -73,16 +73,9 @@ const login = () => {
             id="password"
             title="Password:"
           />
-          {errors.msg && (
-            <p className={`${styles.alert} ${styles.alert__danger}`}>
-              {errors.msg}
-            </p>
-          )}
+          {errors.msg && <p className={`alert ${error.type}`}>{errors.msg}</p>}
           <div className={styles.btns}>
-            <FormButton
-              text={loading ? "Please Wait" : "Login"}
-              btnClass="btn-primary"
-            />
+            <FormButton text="Login" btnClass="btn-primary" />
             <Link href="/forgot_password">
               <a>Forgot password?</a>
             </Link>

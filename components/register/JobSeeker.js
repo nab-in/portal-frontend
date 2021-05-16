@@ -105,11 +105,13 @@ const JobSeeker = () => {
           </Link>
         </p>
         {errors && Object.keys(errors).keys.length > 0 && (
-          <p className="alert alert-danger">You have error(s) in your form</p>
+          <p className={`alert ${error.type}`}>
+            You have error(s) in your form
+          </p>
         )}
         <FormButton
-          text={loading ? "Please Wait" : "Register"}
-          btnClass={loading ? "disabled" : "btn-primary"}
+          text="Register"
+          btnClass="btn-primary"
           btnGroupClass="btns"
         />
       </form>

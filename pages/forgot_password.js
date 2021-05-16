@@ -43,17 +43,9 @@ const forgot_password = () => {
             title="Email:"
             error={errors.email && errors.email}
           />
-          {errors.msg && (
-            <p className={`${styles.alert} ${styles.alert__danger}`}>
-              {errors.msg}
-            </p>
-          )}
+          {errors.msg && <p className={`alert ${error.type}`}>{errors.msg}</p>}
           <div className={styles.btns}>
-            <FormButton
-              text={loading ? "Please Wait" : "Submit"}
-              btnClass="btn-primary"
-              btnGroupClass=""
-            />
+            <FormButton text="Submit" btnClass="btn-primary" btnGroupClass="" />
           </div>
         </form>
         <div className={`${styles.extra__stuffs}`}>
