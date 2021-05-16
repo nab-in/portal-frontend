@@ -3,6 +3,7 @@ import { useRouter } from "next/router"
 import "../styles/globals.sass"
 import Layout from "../components/layout/Layout"
 import { AuthProvider } from "../context/auth"
+import { AlertsProvider } from "../context/alerts"
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter()
@@ -23,7 +24,9 @@ function MyApp({ Component, pageProps }) {
   }
   return (
     <AuthProvider>
+      <AlertsProvider>
         <Site />
+      </AlertsProvider>
     </AuthProvider>
   )
 }
