@@ -1,17 +1,12 @@
-import React from "react"
+import Section from "../Section"
 
 const SavedJobs = () => {
   return (
-    <div>
-      <section>
-        <header>
-          <h2>Saved Jobs</h2>
-        </header>
-        <article>
-          <p>You haven't saved any item</p>
-        </article>
-      </section>
-    </div>
+    <Section title="Applied Jobs">
+      <article>
+        <p>You haven't saved any job</p>
+      </article>
+    </Section>
   )
 }
 

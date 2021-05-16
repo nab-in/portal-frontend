@@ -1,4 +1,5 @@
 import { useAuthState } from "../../../../context/auth"
+import Section from "../../Section"
 import Username from "./Username"
 import Email from "./Email"
 import Password from "./Password"
@@ -6,16 +7,13 @@ import Password from "./Password"
 const Settings = () => {
   let { user } = useAuthState()
   return (
-    <section>
-      <header>
-        <h2>Settings</h2>
-      </header>
+    <Section title="Settings">
       <article>
         <Username username={user.username && user.username} />
         <Email email={user?.email} />
         <Password />
       </article>
-    </section>
+    </Section>
   )
 }
 

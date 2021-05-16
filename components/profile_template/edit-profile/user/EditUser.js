@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import Section from "../../Section"
 import Input from "../../../inputs/Input"
 import Button from "../../../buttons/FormButton"
 import Upload from "../Upload"
@@ -26,10 +27,7 @@ const EditProfile = ({ page, details, isUser, isCompany }) => {
   }
   return (
     <div className={styles.profile}>
-      <section>
-        <header>
-          <h2>Edit Informations</h2>
-        </header>
+      <Section title="Edit Informations">
         <Upload
           dp={details.dp ? details.dp : details.logo}
           name={details.username ? details.username : details.name}
@@ -96,7 +94,7 @@ const EditProfile = ({ page, details, isUser, isCompany }) => {
             <Button text="Save" btnClass="btn-primary" />
           </form>
         </article>
-      </section>
+      </Section>
       <CV />
       <Settings />
     </div>

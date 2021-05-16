@@ -1,4 +1,4 @@
-import React from "react"
+import Section from "../Section"
 import styles from "./profile.module.sass"
 
 let Card = ({ title, content, url }) => (
@@ -12,10 +12,7 @@ const Profile = ({ details }) => {
   let { id, title, bio, about, website, cv, location } = details
   return (
     <div className={styles.profile}>
-      <section>
-        <header className={styles.header}>
-          <h2>About</h2>
-        </header>
+      <Section title="About">
         <article className={styles.contents}>
           {title && <Card title="Title" content={title} />}
           {bio && <Card title="Bio" content={bio} />}
@@ -24,7 +21,7 @@ const Profile = ({ details }) => {
           {website && <Card title="Website" content={website} url={true} />}
           {cv && <Card title="CV" content={cv} url="true" />}
         </article>
-      </section>
+      </Section>
     </div>
   )
 }

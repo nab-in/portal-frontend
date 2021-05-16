@@ -1,5 +1,6 @@
 import React from "react"
 import Link from "next/link"
+import Section from "../Section"
 import styles from "./jobs.module.sass"
 import jobs from "../../../data/jobs"
 
@@ -12,10 +13,7 @@ const Jobs = ({ page, details }) => {
 
   return (
     <div className={styles.jobs}>
-      <section>
-        <header>
-          <h2>Jobs</h2>
-        </header>
+      <Section title="Jobs">
         <article className={styles.contents}>
           {company_jobs?.length > 0 ? (
             <>
@@ -67,7 +65,7 @@ const Jobs = ({ page, details }) => {
             </>
           )}
         </article>
-      </section>
+      </Section>
     </div>
   )
 }

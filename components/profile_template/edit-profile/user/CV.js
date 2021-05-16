@@ -1,5 +1,8 @@
 import React from "react"
+// import { AiOutlineCloudUpload } from "react-icons/ai"
+import Section from "../../Section"
 import Button from "../../../buttons/FormButton"
+import styles from "./cv.module.sass"
 
 const CV = () => {
   const handleFileChange = (e) => {}
@@ -7,23 +10,21 @@ const CV = () => {
     e.preventDefault(e)
   }
   return (
-    <section>
-      <header>
-        <h2>Upload CV</h2>
-      </header>
-      <article>
+    <Section title="Upload CV">
+      <article className={styles.cv}>
         <form onSubmit={(e) => handleFileSubmit(e)}>
-          <input
-            type="file"
-            name="cv"
-            id="cv"
-            handleChange={(e) => handleFileChange(e)}
-          />
-          <label htmlFor="cv">Upload</label>
+          <label htmlFor="cv">
+            <input
+              type="file"
+              name="cv"
+              id="cv"
+              handleChange={(e) => handleFileChange(e)}
+            />
+          </label>
           <Button text="Upload" btnClass="btn-primary" />
         </form>
       </article>
-    </section>
+    </Section>
   )
 }
 
