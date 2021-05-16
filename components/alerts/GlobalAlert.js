@@ -1,7 +1,6 @@
 import React from "react"
 import { useAlertsState, useAlertsDispatch } from "../../context/alerts"
 import { AiOutlineClose } from "react-icons/ai"
-import styles from "./alerts.module.sass"
 
 const GlobalAlert = () => {
   let { alert } = useAlertsState()
@@ -16,9 +15,9 @@ const GlobalAlert = () => {
   return (
     <>
       {alert.message && (
-        <div className={`${styles.alerts} ${styles[type]}`}>
+        <div className={`alerts removable ${type}`}>
           {message && message}
-          <AiOutlineClose className={styles.icon} onClick={close} />
+          <AiOutlineClose className="icon" onClick={close} />
         </div>
       )}
     </>

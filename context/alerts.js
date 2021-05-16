@@ -6,6 +6,15 @@ const AlertsDispatchContext = createContext()
 const alertsReducer = (state, action) => {
   let { type, payload } = action
   switch (type) {
+    case "ADD":
+      let { message, type } = payload
+      return {
+        ...state,
+        alert: {
+          message,
+          type,
+        },
+      }
     case "REMOVE":
       return {
         ...state,
@@ -24,8 +33,8 @@ const alertsReducer = (state, action) => {
 export const AlertsProvider = ({ children }) => {
   const [state, dispatch] = useReducer(alertsReducer, {
     alert: {
-      message: "New danger on the road ,sfhkhsgljlgjljamdlj fejkui",
-      type: "danger",
+      message: "",
+      type: "",
     },
   })
   return (
