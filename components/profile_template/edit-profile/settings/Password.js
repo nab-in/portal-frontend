@@ -2,6 +2,7 @@ import React from "react"
 import Accordion from "./Accordion"
 import Input from "../../../inputs/Input"
 import Button from "../../../buttons/FormButton"
+import styles from "./settings.module.sass"
 
 const Password = () => {
   const handleChange = (e) => {}
@@ -10,7 +11,7 @@ const Password = () => {
   }
   return (
     <Accordion title="Change Password">
-      <form onSubmit={(e) => handleSubmit(e)}>
+      <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
         <Input
           title="Enter your current email/username"
           handleChange={handleChange}

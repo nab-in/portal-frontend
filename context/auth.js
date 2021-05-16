@@ -47,6 +47,7 @@ export const AuthProvider = ({ children }) => {
       firstname: "Admin",
       lastname: "Portal",
       username: "admin",
+      email: "admin@portal.com",
       role: "admin",
       dp: null,
       verified: true,

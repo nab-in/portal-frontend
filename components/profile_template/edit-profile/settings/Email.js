@@ -2,15 +2,21 @@ import React from "react"
 import Accordion from "./Accordion"
 import Input from "../../../inputs/Input"
 import Button from "../../../buttons/FormButton"
+import styles from "./settings.module.sass"
 
-const Email = () => {
+const Email = ({ email }) => {
   const handleChange = (e) => {}
   const handleSubmit = (e) => {
     e.preventDefault(e)
   }
+  let title = (
+    <span>
+      Change email <strong> ({email})*</strong>
+    </span>
+  )
   return (
-    <Accordion title="Change Email">
-      <form onSubmit={(e) => handleSubmit(e)}>
+    <Accordion title={title}>
+      <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
         <Input
           title="Enter your current email/username"
           handleChange={handleChange}

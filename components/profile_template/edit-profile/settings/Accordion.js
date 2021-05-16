@@ -23,7 +23,8 @@ const Accordion = ({ title, children }) => {
       <div
         ref={content}
         style={{
-          maxHeight: `${height}`,
+          minHeight: `${height}`,
+          maxHeight: height,
         }}
         className={styles.accordion__content}
       >
