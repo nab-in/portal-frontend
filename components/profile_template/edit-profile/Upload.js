@@ -7,10 +7,10 @@ const Upload = ({ dp, name }) => {
   let [imgData, setImgData] = useState(null)
   const handleChange = (e) => {
     if (e.target.files) {
-      setDp(e.target.files[0])
       const reader = new FileReader()
       reader.addEventListener("load", () => {
         setImgData(reader.result)
+        console.log(imgData)
       })
       reader.readAsDataURL(e.target.files[0])
     }
@@ -38,7 +38,6 @@ const Upload = ({ dp, name }) => {
                 )}
               </>
             )}
-
             <FaCamera className={styles.icon} />
           </div>
         </label>
