@@ -4,6 +4,7 @@ import "../styles/globals.sass"
 import Layout from "../components/layout/Layout"
 import { AuthProvider } from "../context/auth"
 import { AlertsProvider } from "../context/alerts"
+import Alert from "../components/alerts/GlobalAlert"
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter()
@@ -26,6 +27,7 @@ function MyApp({ Component, pageProps }) {
     <AuthProvider>
       <AlertsProvider>
         <Site />
+        <Alert />
       </AlertsProvider>
     </AuthProvider>
   )
