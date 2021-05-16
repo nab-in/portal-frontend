@@ -22,7 +22,11 @@ const Username = ({ username }) => {
           handleChange={handleChange}
         />
         <Input title="Enter your new username" handleChange={handleChange} />
-        <Input title="Enter Password" handleChange={handleChange} />
+        <Input
+          type="password"
+          title="Enter Password"
+          handleChange={handleChange}
+        />
         <Button text="Update" btnClass="btn-primary" />
       </form>
     </Accordion>

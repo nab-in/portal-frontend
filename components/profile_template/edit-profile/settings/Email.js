@@ -21,8 +21,16 @@ const Email = ({ email }) => {
           title="Enter your current email/username"
           handleChange={handleChange}
         />
-        <Input title="Enter your new email" handleChange={handleChange} />
-        <Input title="Enter Password" handleChange={handleChange} />
+        <Input
+          type="email"
+          title="Enter your new email"
+          handleChange={handleChange}
+        />
+        <Input
+          type="password"
+          title="Enter Password"
+          handleChange={handleChange}
+        />
         <Button text="Update" btnClass="btn-primary" />
       </form>
     </Accordion>

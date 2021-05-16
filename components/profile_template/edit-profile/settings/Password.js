@@ -17,10 +17,15 @@ const Password = () => {
           handleChange={handleChange}
         />
         <Input
+          type="password"
           title="Enter your current password"
           handleChange={handleChange}
         />
-        <Input title="Enter New Password" handleChange={handleChange} />
+        <Input
+          type="password"
+          title="Enter New Password"
+          handleChange={handleChange}
+        />
         <Button text="Update" btnClass="btn-primary" />
       </form>
     </Accordion>
