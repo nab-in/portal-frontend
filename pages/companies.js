@@ -6,11 +6,13 @@ import FilterCriteria from "../components/filter_criteria/FilterCriteria"
 import NewsLetter from "../components/newsletter/NewsLetter"
 import Company from "../components/company/Company"
 import Loader from "../components/loaders/CardLoader"
+import Spinner from "../components/loaders/ButtonLoader"
 import companies from "../data/companies"
 import categories from "../data/company_categories"
 import styles from "../styles/template.module.sass"
 
 let loading = false
+let loadMore = false
 const Companies = () => {
   const { isAuthenticated } = useAuthState()
   let [filter, setFilter] = useState(false)
@@ -77,7 +79,13 @@ const Companies = () => {
               <div
                 className={`${styles.more__link} ${styles.more__link__center}`}
               >
-                <button className="primary__text">Load More</button>
+                <>
+                  {loadMore ? (
+                    <Spinner bg="light" />
+                  ) : (
+                    <button className="primary__text">Load More</button>
+                  )}
+                </>
               </div>
             </div>
             {!isAuthenticated && (

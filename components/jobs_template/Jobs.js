@@ -3,6 +3,7 @@ import Link from "next/link"
 import Template from "../template/Template"
 import Job from "../job/Job"
 import Loader from "../loaders/CardLoader"
+import Spinner from "../loaders/ButtonLoader"
 import FilterCriteria from "../filter_criteria/FilterCriteria"
 import NewsLetter from "../newsletter/NewsLetter"
 import styles from "../../styles/template.module.sass"
@@ -10,6 +11,7 @@ import jobs from "../../data/jobs"
 import { useAuthState } from "../../context/auth"
 
 let loading = false
+let loadMore = false
 
 // main template to display jobs in landing page and jobs page
 const Jobs = ({ search, setSearch, heading, page }) => {
@@ -69,7 +71,13 @@ const Jobs = ({ search, setSearch, heading, page }) => {
             }
           >
             {page === "jobs" ? (
-              <button className="primary__text">Load More</button>
+              <>
+                {loadMore ? (
+                  <Spinner bg="light" />
+                ) : (
+                  <button className="primary__text">Load More</button>
+                )}
+              </>
             ) : (
               <Link href="/jobs">More Jobs &gt;&gt;</Link>
             )}
