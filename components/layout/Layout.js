@@ -1,14 +1,18 @@
 import React from "react"
-import { withIronSession } from "next-iron-session"
+import Loader from "../loaders/AuthLoader"
 import Header from "../header/Header"
 import Footer from "../footer/Footer"
+
+let loading = true
 
 const Layout = ({ children }) => {
   return (
     <div className="layout">
-      <Header />
+      {loading? <Loader />: <>
+        <Header />
       {children}
       <Footer />
+      </>}
     </div>
   )
 }
