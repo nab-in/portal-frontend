@@ -51,9 +51,9 @@ const Jobs = ({ search, setSearch, heading, page }) => {
           {filter && <h3 className={styles.results__header}>Results</h3>}
           {loading ? (
             <>
-              <Loader />
-              <Loader />
-              <Loader />
+              <Loader stars={true} />
+              <Loader stars={true} />
+              <Loader stars={true} />
             </>
           ) : (
             <>

@@ -4,7 +4,7 @@ import Loader from "../../loaders/CompaniesLoader"
 import styles from "./companies.module.sass"
 import companies from "../../../data/companies"
 
-let loading = true
+let loading = false
 const Companies = () => {
   return (
     <section className={styles.companies}>
