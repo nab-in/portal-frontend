@@ -1,6 +1,5 @@
 import React from "react"
 import Link from "next/link"
-import Image from "next/image"
 import styles from "./companies.module.sass"
 import companies from "../../../data/companies"
 
@@ -14,7 +13,7 @@ const Companies = () => {
             <article key={id}>
               <Link href={`/companies/${id}`}>
                 <div className={`${styles.logo__container}`}>
-                  <Image
+                  <img
                     src={`/assets/companies/${logo}`}
                     alt={`${name} logo`}
                     layout="fill"

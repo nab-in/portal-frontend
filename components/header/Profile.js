@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import Link from "next/link"
-import Image from "next/image"
 import { useAuthState } from "../../context/auth"
 import UseClickOutside from "../UseClickOutside"
 import styles from "./profile.module.sass"
@@ -24,7 +23,7 @@ const Profile = () => {
         </div>
         <div className={styles.dp__container}>
           {dp ? (
-            <Image
+            <img
               src={`/assets/images/dp.jpeg`}
               alt={`dp`}
               height={40}
@@ -44,7 +43,7 @@ const Profile = () => {
         <div className={styles.profile}>
           <div className={styles.dp__container}>
             {dp ? (
-              <Image
+              <img
                 src={`/assets/images/dp.jpeg`}
                 alt={`dp`}
                 height={40}

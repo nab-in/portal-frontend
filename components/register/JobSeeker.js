@@ -113,6 +113,7 @@ const JobSeeker = () => {
           text="Register"
           btnClass="btn-primary"
           btnGroupClass="btns"
+          loading={loading}
         />
       </form>
     </div>

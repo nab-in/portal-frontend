@@ -8,6 +8,7 @@ const NewsLetter = () => {
     Name: "",
     email: "",
   })
+  const [loading, setLoading] = useState(false)
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormdata({
@@ -35,6 +36,7 @@ const NewsLetter = () => {
           text="Subscribe"
           btnClass="btn-primary span__full"
           btnGroupClass="btns"
+          loading={loading}
         />
       </form>
     </div>

@@ -1,5 +1,4 @@
 import React from "react"
-import Image from "next/image"
 import { useAuthState } from "../../../context/auth"
 import Loader from "../../loaders/ProfileHeroLoader"
 import styles from "./hero.module.sass"
@@ -15,7 +14,7 @@ const Hero = ({ details, page }) => {
         <div className={styles.container}>
           <div className={styles.dp__container}>
             <div className={styles.dp}>
-              <Image
+              <img
                 src={`/assets/companies/${logo}`}
                 alt={`${name} logo`}
                 layout="fill"
@@ -48,7 +47,7 @@ const Hero = ({ details, page }) => {
           <div className={styles.dp__container}>
             <div className={styles.dp}>
               {dp ? (
-                <Image
+                <img
                   src={`/assets/companies/${dp}`}
                   alt={`${username} logo`}
                   layout="fill"

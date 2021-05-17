@@ -45,7 +45,12 @@ const forgot_password = () => {
           />
           {errors.msg && <p className={`alert ${error.type}`}>{errors.msg}</p>}
           <div className={styles.btns}>
-            <FormButton text="Submit" btnClass="btn-primary" btnGroupClass="" />
+            <FormButton
+              text="Submit"
+              btnClass="btn-primary"
+              btnGroupClass=""
+              loading={loading}
+            />
           </div>
         </form>
         <div className={`${styles.extra__stuffs}`}>
