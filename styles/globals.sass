@@ -195,6 +195,22 @@ span.ripple
             -webkit-text-stroke-color: $secondary
             -webkit-text-fill-color: transparent
 
+.loader
+    width: 100%
+    height: 100%
+    display: block
+    background: rgba(226, 232, 236, .5)
+    animation: wave .1.2s ease-in 0s infinite both
+    position: relative
+    &::before
+        content: ""
+        position: absolute
+        width: 100%
+        height: 100%
+        display: block
+        background: #E2E8EC
+        animation: wave 1.2s ease-in .4s infinite both
+
 .template__layout
     display: grid
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))

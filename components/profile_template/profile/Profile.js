@@ -1,5 +1,8 @@
 import Section from "../Section"
+import Loader from "../../loaders/ProfileLoader"
 import styles from "./profile.module.sass"
+
+let loading = true
 
 let Card = ({ title, content, url }) => (
   <div className={styles.card}>
@@ -14,12 +17,24 @@ const Profile = ({ details }) => {
     <div className={styles.profile}>
       <Section title="About">
         <article className={styles.contents}>
-          {title && <Card title="Title" content={title} />}
-          {bio && <Card title="Bio" content={bio} />}
-          {location && <Card title="Location" content={location} />}
-          {about && <Card title="About" content={about} />}
-          {website && <Card title="Website" content={website} url={true} />}
-          {cv && <Card title="CV" content={cv} url="true" />}
+          {loading ? (
+            <>
+              <Loader />
+              <Loader />
+              <Loader />
+              <Loader />
+              <Loader />
+            </>
+          ) : (
+            <>
+              {title && <Card title="Title" content={title} />}
+              {bio && <Card title="Bio" content={bio} />}
+              {location && <Card title="Location" content={location} />}
+              {about && <Card title="About" content={about} />}
+              {website && <Card title="Website" content={website} url={true} />}
+              {cv && <Card title="CV" content={cv} url="true" />}
+            </>
+          )}
         </article>
       </Section>
     </div>

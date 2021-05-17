@@ -9,7 +9,7 @@ import styles from "../../styles/template.module.sass"
 import jobs from "../../data/jobs"
 import { useAuthState } from "../../context/auth"
 
-let loading = true
+let loading = false
 
 // main template to display jobs in landing page and jobs page
 const Jobs = ({ search, setSearch, heading, page }) => {
@@ -51,7 +51,6 @@ const Jobs = ({ search, setSearch, heading, page }) => {
           {filter && <h3 className={styles.results__header}>Results</h3>}
           {loading ? (
             <>
-              <Loader />
               <Loader />
               <Loader />
               <Loader />
