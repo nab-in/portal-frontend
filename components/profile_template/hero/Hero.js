@@ -1,7 +1,10 @@
 import React from "react"
 import Image from "next/image"
 import { useAuthState } from "../../../context/auth"
+import Loader from "../../loaders/ProfileHeroLoader"
 import styles from "./hero.module.sass"
+
+let loading = true
 
 const Hero = ({ details, page }) => {
   const Profile = () => {
@@ -72,11 +75,7 @@ const Hero = ({ details, page }) => {
       )
     }
   }
-  return (
-    <div className={styles.hero}>
-      <Profile />
-    </div>
-  )
+  return <div className={styles.hero}>{loading ? <Loader /> : <Profile />}</div>
 }
 
 export default Hero
