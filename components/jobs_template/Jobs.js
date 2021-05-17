@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react"
 import Link from "next/link"
 import Template from "../template/Template"
 import Job from "../job/Job"
+import Loader from "../loaders/CardLoader"
 import FilterCriteria from "../filter_criteria/FilterCriteria"
 import NewsLetter from "../newsletter/NewsLetter"
 import styles from "../../styles/template.module.sass"
 import jobs from "../../data/jobs"
 import { useAuthState } from "../../context/auth"
+
+let loading = true
 
 // main template to display jobs in landing page and jobs page
 const Jobs = ({ search, setSearch, heading, page }) => {
@@ -46,8 +49,19 @@ const Jobs = ({ search, setSearch, heading, page }) => {
         <div className={`${styles.main__content} main__content`}>
           <FilterCriteria search={search} setSearch={setSearch} />
           {filter && <h3 className={styles.results__header}>Results</h3>}
-          {jobs.length > 0 &&
-            jobs.slice(1, 6).map((job) => <Job job={job} key={job.id} />)}
+          {loading ? (
+            <>
+              <Loader />
+              <Loader />
+              <Loader />
+              <Loader />
+            </>
+          ) : (
+            <>
+              {jobs.length > 0 &&
+                jobs.slice(1, 6).map((job) => <Job job={job} key={job.id} />)}
+            </>
+          )}
           <div
             className={
               page === "jobs"

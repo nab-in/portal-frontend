@@ -1,4 +1,3 @@
-import React from "react"
 import styles from "./auth-loader.module.sass"
 
 const Loader = () => {
