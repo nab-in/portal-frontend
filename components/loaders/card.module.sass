@@ -5,20 +5,36 @@
     display: flex
     align-items: center
     min-height: 100px
-    // max-width: 600px
+    span.loader
+        width: 100%
+        height: 100%
+        display: block
+        background: rgba(226, 232, 236, .7)
+        animation: wave .1.2s ease-in 0s infinite both
+        position: relative
+        &::before
+            content: ""
+            position: absolute
+            width: 100%
+            height: 100%
+            display: block
+            background: #E2E8EC
+            animation: wave 1.2s ease-in .4s infinite both
     .logo
         width: 90px
         height: 90px
-        background: lightgray
+        background: rgba(226, 232, 236, .7)
+        overflow: hidden
     .details
         padding: 0 1rem
         width: calc( 100% - 90px )
         p, h2
             height: 18px
             width: 80%
-            background: lightgray
+            background: rgba(226, 232, 236, .7)
             margin: .5rem
             border-radius: 5px
+            overflow: hidden
         p:last-child
             width: 70%
         h2
@@ -33,3 +49,11 @@
                 -webkit-text-stroke-width: 1px
                 -webkit-text-stroke-color: lightgray
                 -webkit-text-fill-color: transparent
+
+@keyframes wave
+    0%
+        transform: translateX(-100%)
+    50%
+        transform: translateX(0)
+    100%
+        transform: translateX(100%)
