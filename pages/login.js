@@ -75,7 +75,7 @@ const login = () => {
           />
           {errors.msg && <p className={`alert ${error.type}`}>{errors.msg}</p>}
           <div className={styles.btns}>
-            <FormButton text="Login" btnClass="btn-primary" />
+            <FormButton text="Login" btnClass="btn-primary" loading={loading} />
             <Link href="/forgot_password">
               <a>Forgot password?</a>
             </Link>

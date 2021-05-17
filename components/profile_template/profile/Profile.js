@@ -2,7 +2,7 @@ import Section from "../Section"
 import Loader from "../../loaders/ProfileLoader"
 import styles from "./profile.module.sass"
 
-let loading = true
+let loading = false
 
 let Card = ({ title, content, url }) => (
   <div className={styles.card}>

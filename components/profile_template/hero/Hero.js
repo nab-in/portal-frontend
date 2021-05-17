@@ -4,7 +4,7 @@ import { useAuthState } from "../../../context/auth"
 import Loader from "../../loaders/ProfileHeroLoader"
 import styles from "./hero.module.sass"
 
-let loading = true
+let loading = false
 
 const Hero = ({ details, page }) => {
   const Profile = () => {
