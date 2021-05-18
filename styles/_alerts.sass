@@ -18,6 +18,11 @@
         border: 1px solid #E2E8EC
         border-top-left-radius: 10px
         border-top-right-radius: 10px
+        transform: translateY(-100%)
+        opacity: 0
+        transition: .25s
+        &.open
+            transform: translateY(0)
     &.success
         background: $bg_success_alert
         border: 1px solid $border_success_alert

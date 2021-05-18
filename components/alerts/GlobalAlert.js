@@ -15,7 +15,13 @@ const GlobalAlert = () => {
   return (
     <>
       {alert.message && (
-        <div className={`alerts removable ${type}`}>
+        <div
+          className={
+            alert.message
+              ? `alerts removable ${type} open`
+              : `alerts removable ${type}`
+          }
+        >
           {message && message}
           <AiOutlineClose className="icon" onClick={close} />
         </div>
