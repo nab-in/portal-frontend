@@ -1,7 +1,7 @@
 import styles from "./card.module.sass"
 const CardLoader = ({ stars }) => {
   return (
-    <article className={`card ${styles.card}`}>
+    <div className={`card ${styles.card}`}>
       <div className={styles.logo}></div>
       <div className={styles.details}>
         <h2>
@@ -15,7 +15,7 @@ const CardLoader = ({ stars }) => {
           <span className="loader"></span>
         </p>
       </div>
-    </article>
+    </div>
   )
 }
 

@@ -7,7 +7,6 @@ import { useAuthState } from "../../context/auth"
 const JobDetails = ({ job }) => {
   let [rate, setRate] = useState(0)
   let { user, isAuthenticated } = useAuthState()
-  let { verified, role } = user
   let stars = [1, 2, 3, 4, 5]
   let style = { "--rating": rate }
   let { id, job_type, location, company, email, attachment, descriptions } = job
@@ -47,7 +46,7 @@ const JobDetails = ({ job }) => {
           </p>
         </section>
       )}
-      {isAuthenticated && verified && role !== company && (
+      {isAuthenticated && user.verified && user.role !== "company" && (
         <section>
           <div className={styles.btns}>
             <button className="btn btn-secondary">Save</button>

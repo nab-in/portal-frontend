@@ -213,6 +213,14 @@ span.ripple
         background: #E2E8EC
         animation: wave 1.2s ease-in .4s infinite both
 
+@keyframes wave
+    0%
+        transform: translateX(-100%)
+    50%
+        transform: translateX(0)
+    100%
+        transform: translateX(100%)
+
 .template__layout
     display: grid
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))
