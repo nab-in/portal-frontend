@@ -5,7 +5,7 @@ import Loader from "../loaders/CardLoader"
 import jobs from "../../data/jobs"
 import styles from "./related_jobs.module.sass"
 
-let loading = true
+let loading = false
 
 const RelatedJobs = () => {
   return (
