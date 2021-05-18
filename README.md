@@ -8,6 +8,8 @@ npm run dev
 yarn dev
 ```
 
+Open `http:.//localhost:3000` to display it in the browser
+
 ## Dependencies
 
 `axios` for api calls.\
@@ -152,9 +154,12 @@ These are hardcoded data that were userd accross the app as a placeholders to th
 11. `page_template/PageTemplate.js` is the component that uses `/components/template/Template.js` component but also has its own hero fro the pages where hero doesn't have any content i.e about, contact etc
 
 12. `register` contains two components to separate registering user/jobseeker and registering a company
+
     1. `/JobSeeker.js` responsible for registering normal user/Job seeker
     2. `/Company.js` responsible for registering a company
-13. `profile_template`
+
+13. `profile_template` is used to showcase user/companies profiles/ jobs/ applied jobs/ saved jobs/ edit profile items
+
 14. `job` random jobs components used accross the app
 
     1. `/Job.js` a job card to display some job details and is used in `/components/jobs_template/Jobs.js` which is used in both `/pages/index.js` and `/pages/jobs.js`. It accepts props ie
@@ -268,6 +273,9 @@ it uses `/components/template.Template.js` as the main template and pass childre
 it maps `/components/job/Job.js` when jobs are available from the main page
 it also uses `/components/filter_criteria` to display different criterias in the `/pages/jobs.js` page
 
-22. `filter_criteria`
+22. `filter_criteria` used to display different filter criterias in `/pages/jobs.js` and `/pages/companies.js` pages
+
+    1. `/FilterCriteria.js` this accepts search and setSearch props. setsearch is used to remove item/criteria from the state and search to display criteria in the browser. it displays `keyword` and `location` criteria while maps categories to display category names. in each category it maps the `/components/filter_criteria/FilterItem.js` to displays subcategories of each category. if none exists or have no value in search state it doesnt display nothing
+    2. `/FilterItem.js` it is mapped in the above component to display subcategories of each category with a function to remove the subcategory. if removed it update search state using setsearch and if all the subcategories are removed from a category it removes the category completely from the search state
 
 23. `footer`
