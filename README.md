@@ -10,27 +10,27 @@ yarn dev
 
 ## Dependencies
 
-`axios` for api calls.
-`dotenv` for environment variables.
-`moment` for working on time/date.
-`react-icons` for different icons.
-`react-linkify` this is used to wrap a text/paragraph to detect links and automatically adding anchor tags to those links. It is used in job description.
+`axios` for api calls.\
+`dotenv` for environment variables.\
+`moment` for working on time/date.\
+`react-icons` for different icons.\
+`react-linkify` this is used to wrap a text/paragraph to detect links and automatically adding anchor tags to those links. It is used in job description.\
 `sass` this dependency allows using sass directly to react without compiling sass to css.
 
 ## Pages
 
-1. `index.js` Landing page, consists of the following components\
+1. `index.js` Landing page, consists of the following components
 
    1. `/components/home/hero/Hero.js` displays the introductory header and paragraph along with the search bars that redirects to jobs page.\
    2. `/components/jobs_template/Jobs.js` showcases the jobs for landing page and jobs page. (more explanations on components details)\
    3. `/components/home/companies/Companies.js` contains a list of some available companies and the number of jobs the company have posted.
 
-2. `jobs.js` Displays list of all jobs available. consists of the following components.\
+2. `jobs.js` Displays list of all jobs available. consists of the following components.
 
    1. `/components/filter_hero/Hero.js` this is used for both jobs and companies pages to display different filters for searching either jobs or companies.\
    2. `/components/jobs_template/Jobs` showcases jobs and it is used also in landing page expept here it also shows different filter criterias as entered by user in `/components/filter_hero/Hero.js` component.
 
-3. `companies.js` Displays the list of all verified companies available. consists of\
+3. `companies.js` Displays the list of all verified companies available. consists of
 
    1. `/components/filter_hero/Hero.js` more descriptions in components part\
    2. `/components/template/Template.js` this returns a general layout for landing, jobs, companies, about, pages and other pages, takes in a heading(primary heading) and childrens(whatever components can be added as a child in its parent component).\
@@ -145,7 +145,7 @@ These are hardcoded data that were userd accross the app as a placeholders to th
    6. `/HeroLoader.js` prerenders hero component for profile(both companies and user profiles) pages and job details page when details are fetching
    7. `/ProfileLoader.js` renders when user details are fetching and is used in main profile part of the profile(more explanations in `/components/profile_template` part)
 
-9. `newslatter/NewsLetter.js` displays subscription form for unauthenticated users
+9. `newsletter/NewsLetter.js` displays subscription form for unauthenticated users
 
 10. `template/Template.js` is used for many pages to display main section of the page and also contains primary header and is responsible for the layout (ie in the page where jobs part and newsletter/related jobs part is displayed )
 
@@ -195,16 +195,66 @@ These are hardcoded data that were userd accross the app as a placeholders to th
 }
 ```
 
-16. `layout/Layout.js`
+16. `layout/Layout.js` it is the main layout for all pages expect `/pages/login.js`, `/pages/register.js` and `/pages/forgot_password.js`. it is used to display `/components/header/Header.js` at the top, `/components/footer/Footer.js` at the bottom and whatever component props is passed in as children.
+    it is imported in `/pages/_app.js` and its where user data will be fetched hence `/components/loaders/AuthLoader.js` will pre-render while fetchimg user data. This is to avoid fetching user data to the pages where this layout isn't users ie `login.js`
 
 17. `header`
 
-18. `filter_hero/Hero.js`
+    1. `/Header.js` is the main header of the app and is imported in `/components/layout/Layout.js`. it displays the main navigation as well as some user data when user is authenticated
+    2. `/Profile.js` displays saome basic user data and some navigation to authenticated pages, shows when user is authenticated
+    3. `/Notifications.js` display user notifications and only showa when user is authenticated
 
-19. `categories`
+18. `home` contains components that are used in landing page only
 
-20. `jobs_templateJobs.js`
+    1. `/hero/Hero.js` contains introductory heading and paragraph together with search bars which redirects to jobs page.
+    2. `/companies/Companies.js` dispays a shortlist of companies in the landing page
 
-21. `filter_criteria`
+19. `filter_hero/Hero.js` this is used for both `/pages/companies.js` and `/pages/jobs` to display different search criteria. it has search inputs as well as mapping category filters `/components/categories/Category.js`. it accepts accept props which is `search` and `setSearch`. search is a state declared in the individual page such as jobs page and setSearch is also a method declared in usestate to update search state. When user type in search bars it updates the state in this same component.
 
-22. `footer`
+The reason to opt usestate instead of using global state is because these same components are used to update different states ie search state in jobs is different from that in companies page and they are used to call different data in the api although they share the same types of data ie search passed as props is declared as
+
+```JS
+    {
+        keyword: "",
+        location: "",
+        categories: [],
+    }
+```
+
+20. `categories` used to display different filters in `/components/filter_hero/Hero.js` component
+
+    1. `/Category.js` this component is mapped in `/components/filter_hero/Hero.js` and takes in the props ie search, setSearch (...refer to `/components/filter_hero/Hero.js` component), category which has the following data
+
+    ```JS
+        {
+            name, //category name
+            sub_categories: [], // array of subcategories
+            id, //category id
+        }
+    ```
+
+    these data are extracted from `/components/filter_hero/Hero.js` component where in that component categories are fetched from the api, the sub_category array is mapped in this component
+
+    2. `/SubCategory.js` is mapped from `/components/categories/Category` and is used to display subcategories of the main category. it receives props such as
+
+    ```JS
+        {
+            sub: {
+                id, //sub_category id
+                name, //sub_category name
+            },
+            setSearch, // prop drilled from the main page
+            search, // prop drilled from main page
+            category: {
+                id, //parent category id
+            }
+        }
+    ```
+
+    In this component user is allowed to select/unselect any subcategory and the clicked subcategory is then added/removed in the search state, the main reason we have setSearch. search prop is used to update UI when user selects and unselect a sub_category by using custom checkbox(svg)
+
+21. `jobs_templateJobs.js`
+
+22. `filter_criteria`
+
+23. `footer`
