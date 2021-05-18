@@ -253,7 +253,20 @@ The reason to opt usestate instead of using global state is because these same c
 
     In this component user is allowed to select/unselect any subcategory and the clicked subcategory is then added/removed in the search state, the main reason we have setSearch. search prop is used to update UI when user selects and unselect a sub_category by using custom checkbox(svg)
 
-21. `jobs_templateJobs.js`
+21. `jobs_template/Jobs.js` this is used in `index.js` and `jobs.js` to display jobs and other items. it accepts props which are
+
+```JS
+{
+    search,
+    setSearch, // refer to `/components/filter_hero/Hero.js`
+    heading, //to render different headings as per page
+    page // to render different items for different pages ie from jobs page the value passed is page="jobs"
+}
+```
+
+it uses `/components/template.Template.js` as the main template and pass childrens and heading as props. refer to `/components/template.Template.js`
+it maps `/components/job/Job.js` when jobs are available from the main page
+it also uses `/components/filter_criteria` to display different criterias in the `/pages/jobs.js` page
 
 22. `filter_criteria`
 
