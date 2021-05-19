@@ -8,7 +8,7 @@ npm run dev
 yarn dev
 ```
 
-Open `http:.//localhost:3000` to display it in the browser
+Open `http://localhost:3000` to display it in the browser
 
 ## Dependencies
 
@@ -23,26 +23,26 @@ Open `http:.//localhost:3000` to display it in the browser
 
 1. `index.js` Landing page, consists of the following components
 
-   1. `/components/home/hero/Hero.js` displays the introductory header and paragraph along with the search bars that redirects to jobs page.\
-   2. `/components/jobs_template/Jobs.js` showcases the jobs for landing page and jobs page. (more explanations on components details)\
+   1. `/components/home/hero/Hero.js` displays the introductory header and paragraph along with the search bars that redirects to jobs page.
+   2. `/components/jobs_template/Jobs.js` showcases the jobs for landing page and jobs page. (more explanations on components details)
    3. `/components/home/companies/Companies.js` contains a list of some available companies and the number of jobs the company have posted.
 
 2. `jobs.js` Displays list of all jobs available. consists of the following components.
 
-   1. `/components/filter_hero/Hero.js` this is used for both jobs and companies pages to display different filters for searching either jobs or companies.\
+   1. `/components/filter_hero/Hero.js` this is used for both jobs and companies pages to display different filters for searching either jobs or companies.
    2. `/components/jobs_template/Jobs` showcases jobs and it is used also in landing page expept here it also shows different filter criterias as entered by user in `/components/filter_hero/Hero.js` component.
 
 3. `companies.js` Displays the list of all verified companies available. consists of
 
-   1. `/components/filter_hero/Hero.js` more descriptions in components part\
-   2. `/components/template/Template.js` this returns a general layout for landing, jobs, companies, about, pages and other pages, takes in a heading(primary heading) and childrens(whatever components can be added as a child in its parent component).\
-   3. `/components/company/Company.js` the company card for mapped inside the main companies page.\
-   4. `/components/loaders/ButtonLoader.js` for displaying spinner while fetching more companies\
+   1. `/components/filter_hero/Hero.js` more descriptions in components part
+   2. `/components/template/Template.js` this returns a general layout for landing, jobs, companies, about, pages and other pages, takes in a heading(primary heading) and childrens(whatever components can be added as a child in its parent component).
+   3. `/components/company/Company.js` the company card for mapped inside the main companies page.
+   4. `/components/loaders/ButtonLoader.js` for displaying spinner while fetching more companies
    5. `/components/newsletter/NewsLetter.js` for displaying subscribe form
 
 4. `company.js` displays profile of authenticated company i.e. the company that is current logged in and returns 404 not found component when no company is logged in. It consists of
 
-   1. `/components.profile_template/Profile_Template.js` this components uses props to display different profile informations of various users. (more explainations on the component part).
+   1. `/components/profile_template/Profile_Template.js` this components uses props to display different profile informations of various users. (more explainations on the component part).
    2. `/components/error/Error.js` this return 404 page error when no company is authenticated.
 
 5. `profile.js` displays profile of authenticated user i.e. the user that is current logged in and returns 404 not found component when no user is logged in. It consists of
@@ -158,7 +158,35 @@ These are hardcoded data that were userd accross the app as a placeholders to th
     1. `/JobSeeker.js` responsible for registering normal user/Job seeker
     2. `/Company.js` responsible for registering a company
 
-13. `profile_template` is used to showcase user/companies profiles/ jobs/ applied jobs/ saved jobs/ edit profile items
+13. `profile_template` is used to showcase user/companies profiles/ jobs/ applied jobs/ saved jobs/ edit profile items. The profile page has three main sections -> `hero`, `navigation` and `main-content` and uses tabs to switch between different contents/pages. these tabs looks like this `http://localhost:3000/page_name?tab=tab_name` the value of tab ie tab_name is what returns the required contents.... more explanations below.
+
+    1. `/Perofile_Template.js` is the entry component in the whole profile ecosystem. it takes in `/components/profile_template/hero/Hero` to display a hero for some details and `/components/profile_template/template/Template` to display the main profile details and takes two props ie
+
+    ```JS
+        {
+            details, // profile details of either user or company/ both share some similar components
+            page // page name ie page can be user (do indicate the profile is of user), auth-user (to indicate the profile is of authenticated user/ user who is currently logged in) or company (to indicate that the profile is of a company)
+        }
+    ```
+
+    2. `/hero/Hero.js` displays some user/company details on the hero, takes in `details` and `page` as props
+    3. `/template/Template.js` takes in `details` and `page` as props and also its where we check if the profile is of authenticated user or company(in order to allow them to edit profile if its theirs as well as view their own private items like `applied jobs` of `saved jobs`). Two components are imported in this component which is `Aside` (navigation section of the profile) and `Details` (main content of the website), both taking `details` and `page`, `isUser` (true if profile is of the current logged in user) and `isCompany`(true if the profile is of the current logged in company) as props
+    4. `/aside/Aside.js` as explained above this shows profile navigation and consist of route like `tab=profile`- for profile details page, `tab=edit-profile` available if `isUser` or `isCompany` is true to allow users to edit their profiles, `tab=jobs` available for companies only and works only when `page="company"`, `/dashboard` this ia available if `isCompany` is true or if `isUser` is true and user is an `admin` to take them to their dashboards which is another apps, `tab=saved-jobs` and `tab=applied-jobs` when `isUser` is true and works only when `page="user/auth-user"`. the aside does not display at all when `isUser` and `isCompany` are false and it is a user profile and only an admin can view user profile
+    5. `/Details.js` this works similar to aside where displays different contents deoending on the route clicked in the aside, the authentication status and the page ie, if `isUser` and page is `user`/`auth-user` and the tab=`edit-profile` it will display edit profile contents while if `isUser` is false it will just display the profile details of the user. so it takes in several components ie `/components/profile_template/edit-profile/EditProfile.js`, `/components/profile_template/edit-profile/Profile.js`, `/components/profile_template/edit-profile/Jobs.js`, `/components/profile_template/edit-profile/AppliedJobs.js` and `/components/profile_template/edit-profile/SavedJobs.js` components.
+    6. `/Section.js` this is the main template used by details components, takes in heading and children
+    7. `/profile/Profile.js` this displays profile information for any user/company, it takes in `details` props.
+    8. `/jobs/Jobs.js` displays jobs added by a company. only works when `tab=jobs` and `page=company`
+    9. `/jobs/AppliedJobs.js` displays jobs that user has applied and their status and only work when `tab=applied-jobs` and `isUser` is true otherwise returns `/components/profile_template/profile/Profile.js` component
+    10. `/jobs/SavedJobs.js` displays jobs user has saved and works similar to the component above
+    11. `/edit-profile/EditProfile.js` this works on `tab=edit-profile` and either `isUser` or `isCompany` is true otherwise returns `/components/profile_template/profile/Profile.js` component. also it takes in `details`, `isUser` and `isCompany` props. it has two components, `/components/profile_template/edit-profile/user/EditUser.js` and `/components/profile_template/edit-profile/company/EditCompany.js`. the reason to separate these stuffs is user and company updates their profile to different destinations/ api routes just like we did in register. so if `isUser` is true then displays `EditUser` component and the other way around.
+        `NB`: both `isUser` and `isCompany` can never be true at the same time, its either one of them true or both false.
+        1. `/user/EditUser.js` edits user and takes in `/edit-profile/Upload.js` to allow user to upload dp/profile photos, `/edit-profile/CV.js` to allow user to upload their CVs, `/settings/Settings.js` to allow users to update their core info like email, username and password while allowing users to update their basic infos inside the same component.
+        2. `/company/EditCompany.js` workis exactly like `/user/EditUser` except doesnt have upload CV section and in the settings doesnt have username settings ie companies dont have usernames
+        3. `Upload.js` allows uploading dp/logos
+        4. `/user/CV.js` allows uploading CVs
+        5. `/settings/Settings.js` allow user to update their core info like `username`, `emails` and `password`. updating each of these info reguires user to add his/her current login info to ensure its the user who is doing them changes even if user may be authenticated. this is because we may use unexpiring sessions/tokens and anyone can use users computer so just to make sure. it takes in `Username`, `Email` and `Password` components.
+           1. `/Username.js`, `Email.js`, `Password.js` as explained above these contains forms to update the infos and the UI part is the are arranged as accordions where user have to click the title to actually see the form so they require `/Accordion.js` just to do that.
+           2. `/Accordion.js` is used to toggle on and off the settings forms this is good to reduce the number of components visible at the same time in the settings part as having three forms at the same time actually can distract user so they must choose what they want to change, click them and boom the form appears before them
 
 14. `job` random jobs components used accross the app
 
@@ -279,3 +307,10 @@ it also uses `/components/filter_criteria` to display different criterias in the
     2. `/FilterItem.js` it is mapped in the above component to display subcategories of each category with a function to remove the subcategory. if removed it update search state using setsearch and if all the subcategories are removed from a category it removes the category completely from the search state
 
 23. `footer`
+
+## CSS
+
+Most of the components are wrapped in the folders and contains their own css files. These files have `.module.sass` extension. the global css files are placed in `/styles` folder and are
+
+    1. `/global.sass`, this is the global css file and is imported in `/pages/_app.js`. contains all the global styles together with some components which starts with `_filename.sass`
+    2. `_filename.sass` these are components in sass ecosystem and can be imported in any sass file in order to use their styles/ varialbles or functions

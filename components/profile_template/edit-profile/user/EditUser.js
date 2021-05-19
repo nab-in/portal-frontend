@@ -7,7 +7,7 @@ import styles from "../edit_profile.module.sass"
 import Settings from "../settings/Settings"
 import CV from "./CV"
 
-const EditProfile = ({ page, details, isUser, isCompany }) => {
+const EditProfile = ({ details }) => {
   let [formData, setFormData] = useState({
     firstname: details?.firstname ? details.firstname : "",
     lastname: details?.lastname ? details.lastname : "",
@@ -96,7 +96,7 @@ const EditProfile = ({ page, details, isUser, isCompany }) => {
         </article>
       </Section>
       <CV />
-      <Settings />
+      <Settings page="user" />
     </div>
   )
 }

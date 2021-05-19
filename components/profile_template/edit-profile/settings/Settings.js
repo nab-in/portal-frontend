@@ -4,12 +4,14 @@ import Username from "./Username"
 import Email from "./Email"
 import Password from "./Password"
 
-const Settings = () => {
+const Settings = ({ page }) => {
   let { user } = useAuthState()
   return (
     <Section title="Settings">
       <article>
-        <Username username={user.username && user.username} />
+        {page === "user" && (
+          <Username username={user.username && user.username} />
+        )}
         <Email email={user?.email} />
         <Password />
       </article>

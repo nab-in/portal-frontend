@@ -22,10 +22,7 @@ const EditProfile = ({ details }) => {
   const handleSubmit = (e) => {
     e.preventDefault(e)
   }
-  const handleFileChange = (e) => {}
-  const handleFileSubmit = (e) => {
-    e.preventDefault(e)
-  }
+
   return (
     <div className={styles.profile}>
       <section>
