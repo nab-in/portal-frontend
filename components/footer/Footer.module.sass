@@ -5,9 +5,7 @@
   .footer_container
     padding-top: 2rem
     height: auto
-    // background-image: linear-gradient($primary, $primary, #5ba2ff)
     display: grid
-    // grid-template-columns: repeat(auto-fill, minmax(350px, 1fr))
     grid-template-columns: repeat(4, 1fr)
     grid-template-rows: 1fr 0.05fr
     gap: 0px 0px
@@ -21,7 +19,6 @@
 
   .footer_right
     display: grid
-    // grid-template-columns: repeat(auto-fill, minmax(250px, 1fr))
     grid-template-columns: repeat(3, 1fr)
     grid-template-rows: repeat(2, 1fr)
     gap: 0px 0px
@@ -154,6 +151,7 @@
   span
     color: $secondary
 
+//specific for small screens only
 @media screen and ( max-width: 590px )
   .f_browse, .f_jobs, .f_connect
     text-align: center
