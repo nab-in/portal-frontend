@@ -1,65 +1,98 @@
 @import "/styles/_colorsVariables"
 
+//layout for larger screens
+@media screen and ( min-width: 590px )
+  .footer_container
+    padding-top: 2rem
+    height: auto
+    // background-image: linear-gradient($primary, $primary, #5ba2ff)
+    display: grid
+    // grid-template-columns: repeat(auto-fill, minmax(350px, 1fr))
+    grid-template-columns: repeat(4, 1fr)
+    grid-template-rows: 1fr 0.05fr
+    gap: 0px 0px
+    grid-template-areas: "footer_left footer_left footer_right  footer_right" ". . . ." ". . . ."
+  
+  .footer_left 
+    grid-area: footer_left
+    // margin-left: 20%
+    // margin-right: 5%
+    // color: $bg
+
+  .footer_right
+    display: grid
+    // grid-template-columns: repeat(auto-fill, minmax(250px, 1fr))
+    grid-template-columns: repeat(3, 1fr)
+    grid-template-rows: repeat(2, 1fr)
+    gap: 0px 0px
+    grid-template-areas: "f_browse f_jobs f_connect" "f_browse f_jobs f_connect"
+    grid-area: footer_right
+
+  .f_browse
+    grid-area: f_browse
+    h3
+      margin-bottom: 1rem
+    li
+      margin-top: 1.5rem
+
+  .f_jobs
+    grid-area: f_jobs
+    h3
+      margin-bottom: 1rem
+    li
+      margin-top: 1.5rem
+
+  .f_connect
+    grid-area: f_connect
+    h3
+      margin-bottom: 1rem
+    li
+      margin-top: 1.5rem
+
+//default layout and other styles
+
 .footer_container
-  padding-top: 2rem
-  height: auto
   background-image: linear-gradient($primary, $primary, #5ba2ff)
-  display: grid
-  // grid-template-columns: repeat(auto-fill, minmax(350px, 1fr))
-  grid-template-columns: repeat(4, 1fr)
-  grid-template-rows: 1fr 0.05fr
-  gap: 0px 0px
-  grid-template-areas: "footer_left footer_left footer_right  footer_right" ". . . ." ". . . ."
 
 .footer_left 
   grid-area: footer_left
   margin-left: 20%
-  margin-right: 5%
+  margin-right: 20%
   color: $bg
-
-.footer_right
-  display: grid
-  // grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  grid-template-columns: repeat(3, 1fr)
-  grid-template-rows: repeat(2, 1fr)
-  gap: 0px 0px
-  grid-template-areas: "f_browse f_jobs f_connect" "f_browse f_jobs f_connect"
-  grid-area: footer_right
+  // h1
+  //   margin-top: 1rem
 
 .f_browse
-  grid-area: f_browse
-  margin-top: 3.5rem
+  margin-top: 1.5rem
   h3
     color: $bg
   li
     list-style-type: none
-    margin-top: 1rem
+    margin-top: 0.2rem
     a
       color: $bg
     a:hover
       text-decoration: none
-    
+
 .f_jobs
-  grid-area: f_jobs
-  margin-top: 3.5rem
+  margin-top: 1.5rem
   h3
     color: $bg
   li
     list-style-type: none
-    margin-top: 1rem
+    margin-top: 0.2rem
     a
       color: $bg
     a:hover
       text-decoration: none
 
 .f_connect
-  grid-area: f_connect
-  margin-top: 3.5rem
+  margin-top: 1.5rem
   h3
     color: $bg
   li
     list-style-type: none
-    margin-top: 1rem
+    margin-top: 0.2rem
     a
       color: $bg
     a:hover
@@ -120,3 +153,12 @@
   font-size: 0.8rem
   span
     color: $secondary
+
+@media screen and ( max-width: 590px )
+  .f_browse, .f_jobs, .f_connect
+    text-align: center
+  .f_connect
+    padding-bottom: 2rem
+  .footer_left
+    h1
+      padding-top: 2rem
