@@ -3,6 +3,12 @@
 To start this app run
 
 ```bash
+npm install
+```
+
+And then run
+
+```bash
 npm run dev
 # or
 yarn dev
