@@ -1,6 +1,6 @@
 import React from "react"
 import { useAuthState } from "../../../context/auth"
-import Loader from "../../loaders/ProfileHeroLoader"
+import Loader from "../../loaders/HeroLoader"
 import styles from "./hero.module.sass"
 
 let loading = false
