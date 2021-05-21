@@ -108,16 +108,16 @@ const Footer = () => {
           </h1>
           <ul>
             <li>
-              <a href="/">Facebook</a>
+              <Link href="/">Facebook</Link>
             </li>
             <li>
-              <a href="/">Twitter</a>
+              <Link href="/">Twitter</Link>
             </li>
             <li>
-              <a href="/">LinkedIn</a>
+              <Link href="/">LinkedIn</Link>
             </li>
             <li>
-              <a href="/">Instagram</a>
+              <Link href="/">Instagram</Link>
             </li>
           </ul>
         </div>
