@@ -1,14 +1,14 @@
 import React from "react"
-import Image from "next/image"
 
 const Logo = ({ height, width }) => {
   return (
-    <Image
+    <img
       src="/assets/images/logo.png"
       alt="logo"
       height={height}
-      width={width}
-      layout="intrinsic"
+      style={{
+        width: "auto",
+      }}
     />
   )
 }

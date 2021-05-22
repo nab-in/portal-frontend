@@ -1,42 +1,14 @@
 import React, { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { useAuthState } from "../../context/auth"
 import { useRouter } from "next/router"
 import { AiOutlineSearch } from "react-icons/ai"
 import UseClickOutside from "../UseClickOutside"
 import styles from "./Header.module.sass"
 import rippleEffect from "../rippleEffect.js"
-
-let isAuthenticated = false
-
-const Notifications = () => {
-  let [open, setOpen] = useState(false)
-  const close = () => setOpen(!open)
-
-  // detect outside click hook
-  let node = UseClickOutside(() => setOpen(false))
-
-  return (
-    <div className={styles.notifications} ref={node}>
-      Notifications component
-    </div>
-  )
-}
-
-const Profile = () => {
-  // takes care of profile drop down
-  let [open, setOpen] = useState(false)
-  const toggleDropdown = () => setOpen(!open)
-
-  // detect outside click hook
-  let node = UseClickOutside(() => setOpen(false))
-
-  return (
-    <div className={styles.profile} ref={node}>
-      Profile component
-    </div>
-  )
-}
+import Profile from "./Profile"
+import Notifications from "./Notifications"
 
 const Search = () => {
   let router = useRouter()
@@ -99,6 +71,7 @@ const Search = () => {
 }
 
 const Header = () => {
+  const { isAuthenticated } = useAuthState()
   const [open, setOpen] = useState(false)
 
   const toggleMenu = () => {
@@ -123,7 +96,7 @@ const Header = () => {
             </a>
           </Link>
         </div>
-        <nav>
+        <nav className={styles.nav}>
           <div className={styles.mobile__search}>
             <Search />
           </div>
@@ -147,10 +120,10 @@ const Header = () => {
             </ul>
           )}
           {isAuthenticated && (
-            <>
+            <div className={styles.auth}>
               <Notifications />
               <Profile />
-            </>
+            </div>
           )}
           <div
             className={
@@ -172,27 +145,41 @@ const Header = () => {
                 <span className={styles.after} />
               </button>
             </div>
-            <ul>
-              <li className={`${styles.nav_item} ${styles.active}`}>
+            <ul className={styles.menu__list}>
+              <li>
                 <Link href="/jobs">
-                  <a className="nav_link">Jobs</a>
+                  <a>Jobs</a>
                 </Link>
               </li>
-              <li className={`${styles.nav_item} ${styles.active}`}>
+              <li>
                 <Link href="/companies">
-                  <a className="nav_link">Companies</a>
+                  <a>Companies</a>
                 </Link>
               </li>
-              <li className={styles.nav_item}>
+              <li>
                 <Link href="/about">
-                  <a className="nav_link">About</a>
+                  <a>About</a>
                 </Link>
               </li>
-              <li className={styles.nav_item}>
+              <li>
                 <Link href="/contact">
-                  <a className="nav_link">Contact</a>
+                  <a>Contact</a>
                 </Link>
               </li>
+              {!isAuthenticated && (
+                <>
+                  <li className={`${styles.nav_item} ${styles.auth_link}`}>
+                    <Link href="/login">
+                      <a>Login</a>
+                    </Link>
+                  </li>
+                  <li className={`${styles.nav_item} ${styles.auth_link}`}>
+                    <Link href="/register">
+                      <a>Sign Up</a>
+                    </Link>
+                  </li>
+                </>
+              )}
               <Search />
             </ul>
           </div>

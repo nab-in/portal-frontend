@@ -3,7 +3,7 @@ import Hero from "../components/home/hero/Hero"
 import Jobs from "../components/jobs_template/Jobs"
 import Companies from "../components/home/companies/Companies"
 
-export default function Home() {
+const Home = () => {
   return (
     <div>
       <Head>
@@ -18,3 +18,5 @@ export default function Home() {
     </div>
   )
 }
+
+export default Home

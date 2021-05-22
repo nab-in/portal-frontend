@@ -13,6 +13,7 @@
 @import "./_colors"
 @import "./_colorsVariables"
 @import "./_variables"
+@import "./_alerts"
 
 input, textarea, button
     outline: none !important
@@ -71,6 +72,8 @@ button
     @include flexCenter
     &.span__full
         width: 100%
+    &.btn-secondary
+        background: #E2E8EC
     &.btn-primary
         background: $secondary
         color: white
@@ -84,8 +87,8 @@ span.ripple
     position: absolute
     border-radius: 50%
     transform: scale(0)
-    animation: ripple 600ms linear
-    background-color: rgba(255, 255, 255, 0.4)
+    animation: ripple 800ms linear
+    background-color: rgba(255, 255, 255, 0.5)
 
 @keyframes ripple
     to
@@ -191,6 +194,32 @@ span.ripple
             -webkit-text-stroke-width: 1px
             -webkit-text-stroke-color: $secondary
             -webkit-text-fill-color: transparent
+
+.loader
+    width: 100%
+    height: 100%
+    display: block
+    background: rgba(226, 232, 236, .5)
+    animation: wave .1.2s ease-in 0s infinite both
+    position: relative
+    border-radius: 5px
+    overflow: hidden
+    &::before
+        content: ""
+        position: absolute
+        width: 100%
+        height: 100%
+        display: block
+        background: #E2E8EC
+        animation: wave 1.2s ease-in .4s infinite both
+
+@keyframes wave
+    0%
+        transform: translateX(-100%)
+    50%
+        transform: translateX(0)
+    100%
+        transform: translateX(100%)
 
 .template__layout
     display: grid

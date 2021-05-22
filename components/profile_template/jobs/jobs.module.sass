@@ -1,0 +1,56 @@
+@import "../../../styles/_colorsVariables"
+@import "../../../styles/_variables"
+
+.jobs
+    .contents
+        .job
+            margin: 0 0 1rem
+            padding: 1.8rem 1rem
+            flex-wrap: wrap
+            @include flexVary(flex-start, _ )
+            p
+                font-size: .9rem
+                color: #5A5A5A
+                margin-bottom: .7rem
+            span
+                color: $primary
+            .time__details
+                width: 60%
+                min-width: 200px
+                height: 100%
+                padding: 0 1rem 0 0
+                border-right: 1px solid #BBBBBB
+                h2
+                    color: $primary
+                    font-weight: normal
+                    font-size: clamp(1rem, 4vw, 1.1rem)
+                    width: 100%
+                    white-space: nowrap
+                    overflow: hidden
+                    text-overflow: ellipsis
+                    margin-bottom: .3rem
+            .job__descriptions
+                width: 35%
+                min-width: 200px
+                padding: 0 1rem
+
+@media screen and ( max-width: 992px )
+    .jobs
+        .contents
+            .job
+                .time__details
+                    width: 100%
+                    border-right: none
+                    h2
+                        color: $primary
+                        font-weight: normal
+                        font-size: clamp(1rem, 4vw, 1.1rem)
+                        width: 100%
+                        white-space: nowrap
+                        overflow: hidden
+                        text-overflow: ellipsis
+                        margin-bottom: .3rem
+                .job__descriptions
+                    width: 100%
+                    min-width: 200px
+                    padding: 0

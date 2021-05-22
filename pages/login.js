@@ -1,13 +1,18 @@
 import React, { useState } from "react"
 import Link from "next/link"
+import { useRouter } from "next/router"
 import Input from "../components/inputs/Input"
 import FormButton from "../components/buttons/FormButton"
 import Logo from "../components/Logo"
 import styles from "../styles/auth.module.sass"
+import axios from "axios"
+import { useAuthDispatch } from "../context/auth"
 
 const login = () => {
+  let router = useRouter()
+  const dispatch = useAuthDispatch()
   const [formData, setFormData] = useState({
-    email: "",
+    username: "",
     password: "",
   })
 
@@ -22,9 +27,27 @@ const login = () => {
       [name]: value,
     })
   }
+
   const handleSubmit = (e) => {
     e.preventDefault()
+    setLoading(true)
+    axios
+      .post(process.env.NEXT_PUBLIC_API_URL + "/login", formData)
+      .then((res) => {
+        dispatch({
+          type: "LOGIN",
+          payload: res.data,
+        })
+        setLoading(false)
+        if (res.data.verified) router.push("/")
+      })
+      .catch((err) => {
+        setLoading(false)
+
+        console.log(err)
+      })
   }
+
   return (
     <div className={`${styles.auth} ${styles.login}`}>
       <div className={`${styles.container}`}>
@@ -37,11 +60,11 @@ const login = () => {
           <h1>Welcome Back, Login to your account</h1>
           <Input
             type="text"
-            name="email"
+            name="username"
             handleChange={handleChange}
-            id="email"
-            title="Email:"
-            error={errors.email && errors.email}
+            id="username"
+            title="Username/Email:"
+            error={errors.username && errors.username}
           />
           <Input
             type="password"
@@ -50,16 +73,9 @@ const login = () => {
             id="password"
             title="Password:"
           />
-          {errors.msg && (
-            <p className={`${styles.alert} ${styles.alert__danger}`}>
-              {errors.msg}
-            </p>
-          )}
+          {errors.msg && <p className={`alert ${error.type}`}>{errors.msg}</p>}
           <div className={styles.btns}>
-            <FormButton
-              text={loading ? "Please Wait" : "Login"}
-              btnClass="btn-primary"
-            />
+            <FormButton text="Login" btnClass="btn-primary" loading={loading} />
             <Link href="/forgot_password">
               <a>Forgot password?</a>
             </Link>

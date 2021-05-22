@@ -1,5 +1,6 @@
 import React from "react"
 import { useRouter } from "next/router"
+import Error from "../../components/error/Error"
 import Profile_Template from "../../components/profile_template/Profile_Template"
 import companies from "../../data/companies"
 
@@ -12,7 +13,7 @@ const Company = () => {
   return (
     <div>
       {details && <Profile_Template page="company" details={details} />}
-      {!details && <h2>Not Found</h2>}
+      {!details && <Error />}
     </div>
   )
 }

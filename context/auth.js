@@ -9,7 +9,7 @@ const authReducer = (state, action) => {
     case "LOGIN":
       return {
         ...state,
-        isAuthenticated: payload?.verified === true ? true : false,
+        isAuthenticated: payload?.verified,
         user: payload,
       }
     case "REGISTER":
@@ -17,7 +17,7 @@ const authReducer = (state, action) => {
         ...state,
         user: payload,
       }
-  
+
     // Logout
     case "LOGOUT":
       return {
@@ -31,7 +31,7 @@ const authReducer = (state, action) => {
       return {
         ...state,
         user: payload,
-        isAuthenticated: payload?.verified === true? true: false
+        isAuthenticated: payload?.verified,
       }
     default:
       return {
@@ -56,4 +56,3 @@ export const AuthProvider = ({ children }) => {
 
 export const useAuthState = () => useContext(AuthStateContext)
 export const useAuthDispatch = () => useContext(AuthDispatchContext)
-

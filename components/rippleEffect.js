@@ -16,8 +16,6 @@ const createRipple = (e) => {
     ripple.remove()
   }
 
-  console.log(e, button.offsetTop, radius)
-
   button.appendChild(circle)
 }
 
