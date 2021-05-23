@@ -6,6 +6,8 @@ const Logo = ({ height, width }) => {
       src="/assets/images/logo.svg"
       alt="logo"
       height={height}
+      width="auto"
+      loading="lazy"
       style={{
         width: "auto",
       }}
