@@ -34,6 +34,7 @@ const login = () => {
     axios
       .post(process.env.NEXT_PUBLIC_API_URL + "/login", formData)
       .then((res) => {
+        console.log(res)
         dispatch({
           type: "LOGIN",
           payload: res.data,
