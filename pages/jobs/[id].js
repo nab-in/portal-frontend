@@ -1,6 +1,5 @@
 import React from "react"
 import { useRouter } from "next/router"
-import Image from "next/image"
 import JobDetails from "../../components/job/JobDetails"
 import RelatedJobs from "../../components/job/RelatedJobs"
 import NewsLetter from "../../components/newsletter/NewsLetter"
@@ -10,7 +9,7 @@ import styles from "../../styles/job.module.sass"
 import jobs from "../../data/jobs"
 import { useAuthState } from "../../context/auth"
 
-let loading = true
+let loading = false
 
 const job = () => {
   let { isAuthenticated } = useAuthState()
@@ -30,11 +29,10 @@ const job = () => {
             <div className={styles.container}>
               <div className={styles.logo__container}>
                 <div className={styles.logo}>
-                  <Image
+                  <img
                     src={`/assets/companies/${job[0]?.company.logo}`}
                     alt={`${job[0]?.company.name} logo`}
-                    layout="fill"
-                    objectFit="contain"
+                    loading="lazy"
                   />
                 </div>
               </div>

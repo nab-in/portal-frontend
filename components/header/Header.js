@@ -9,6 +9,7 @@ import styles from "./Header.module.sass"
 import rippleEffect from "../rippleEffect.js"
 import Profile from "./Profile"
 import Notifications from "./Notifications"
+import Logo from "../Logo"
 
 const Search = () => {
   let router = useRouter()
@@ -87,12 +88,7 @@ const Header = () => {
         <div className={styles.logo__container}>
           <Link href="/">
             <a className={styles.logo}>
-              <Image
-                src={`/assets/images/logo.png`}
-                alt={`logo`}
-                layout="fill"
-                objectFit="contain"
-              />
+              <Logo height={20} />
             </a>
           </Link>
         </div>
