@@ -1,5 +1,4 @@
 import React from "react"
-import Image from "next/image"
 import Link from "next/link"
 import { GoVerified } from "react-icons/go"
 import styles from "./company.module.sass"
@@ -10,11 +9,10 @@ const Company = ({ company }) => {
     <div className={`card ${styles.card}`}>
       <div className={styles.company}>
         <div className={styles.logo}>
-          <Image
+          <img
             src={`/assets/companies/${logo}`}
             alt={`${name} logo`}
-            layout="fill"
-            objectFit="contain"
+            loading="lazy"
           />
         </div>
         <div className={styles.name}>

@@ -1,7 +1,5 @@
 import React, { CSSProperties } from "react"
 import Link from "next/link"
-import Image from "next/image"
-// import moment from "moment"
 import styles from "./job.module.sass"
 
 const Job = ({ job }) => {
@@ -21,11 +19,10 @@ const Job = ({ job }) => {
     <article className={`card ${styles.job__card}`}>
       <div className={styles.logo__container}>
         <div className={styles.logo}>
-          <Image
+          <img
             src={`/assets/companies/${company.logo}`}
             alt={`${company.name} logo`}
-            layout="fill"
-            objectFit="contain"
+            loading="lazy"
           />
         </div>
       </div>

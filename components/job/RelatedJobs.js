@@ -37,11 +37,10 @@ const RelatedJobs = () => {
                     <div className={styles.basic__info}>
                       <div className={styles.logo__container}>
                         <div className={styles.logo}>
-                          <Image
+                          <img
                             src={`/assets/companies/${company.logo}`}
                             alt={`${company.name} logo`}
-                            layout="fill"
-                            objectFit="contain"
+                            loading="lazy"
                           />
                         </div>
                       </div>
