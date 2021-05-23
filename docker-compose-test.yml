@@ -4,11 +4,12 @@ services:
   ui:
     image: portal/ui
     container_name: portal-ui
-    build: .
+    build:
+      context: ./
+      dockerfile: Dockerfile
     restart: always
-    command: npm run dev
     volumes:
-      - ./:/usr/src/app
+      - .:/app
   nginx:
     image: nginx:1.17.9-alpine
     container_name: ui-nginx
