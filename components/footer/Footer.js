@@ -78,7 +78,7 @@ const Footer = () => {
         </div>
 
         <div className={styles.f_jobs}>
-          <h3>Jobs</h3>
+          <h3>About</h3>
           <ul>
             <li>
               <Link href="/about">About us</Link>
