@@ -17,8 +17,7 @@ const Hero = ({ details, page }) => {
               <img
                 src={`/assets/companies/${logo}`}
                 alt={`${name} logo`}
-                layout="fill"
-                objectFit="contain"
+                loading="lazy"
               />
             </div>
           </div>
