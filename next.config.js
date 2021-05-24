@@ -1,5 +1,7 @@
 require("dotenv").config()
 const webpack = require("webpack")
+const withPWA = require("next-pwa")
+const runtimeCaching = require("next-pwa/cache")
 
 module.exports = {
   webpack: (config) => {
@@ -7,3 +9,10 @@ module.exports = {
     return config
   },
 }
+
+// module.exports = withPWA({
+//   pwa: {
+//     dest: 'public',
+//     runtimeCaching,
+//   }
+// })
