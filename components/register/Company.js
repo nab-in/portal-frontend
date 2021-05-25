@@ -1,9 +1,11 @@
 import React, { useState } from "react"
+import getConfig from "next/config"
 import Link from "next/link"
 import Input from "../inputs/Input"
 import FormButton from "../buttons/FormButton"
 
 const Company = () => {
+  const { publicRuntimeConfig } = getConfig()
   const [formData, setFormData] = useState({
     Name: "",
     email: "",

@@ -1,10 +1,12 @@
 import React, { useState } from "react"
+import getConfig from "next/config"
 import Link from "next/link"
 import Input from "../inputs/Input"
 import FormButton from "../buttons/FormButton"
 import axios from "axios"
 
 const JobSeeker = () => {
+  const { publicRuntimeConfig } = getConfig()
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
@@ -31,7 +33,7 @@ const JobSeeker = () => {
     e.preventDefault()
     setLoading(true)
     axios
-      .post(process.env.NEXT_PUBLIC_API_URL + "/users/register", formData)
+      .post(`${publicRuntimeConfig.API_URL}/users/register`, formData)
       .then((res) => {
         console.log(res.data)
         setLoading(false)

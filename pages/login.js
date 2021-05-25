@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import Link from "next/link"
+import getConfig from "next/config"
 import { useRouter } from "next/router"
 import Input from "../components/inputs/Input"
 import FormButton from "../components/buttons/FormButton"
@@ -9,6 +10,7 @@ import axios from "axios"
 import { useAuthDispatch } from "../context/auth"
 
 const login = () => {
+  const { publicRuntimeConfig } = getConfig()
   let router = useRouter()
   const dispatch = useAuthDispatch()
   const [formData, setFormData] = useState({
@@ -32,7 +34,7 @@ const login = () => {
     e.preventDefault()
     setLoading(true)
     axios
-      .post(process.env.NEXT_PUBLIC_API_URL + "/login", formData)
+      .post(`${publicRuntimeConfig.API_URL}/login`, formData)
       .then((res) => {
         console.log(res)
         dispatch({
