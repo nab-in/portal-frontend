@@ -29,7 +29,15 @@ const Hero = () => {
     })
   }
   return (
-    <div className={styles.hero}>
+    <div
+      className={styles.hero}
+      style={{
+        background:
+          "linear-gradient(89.98deg, rgba(0, 124, 169, 0.9) 0.01%, rgba(0, 80, 122, 0.7) 99.99%), url(/assets/images/bghero.jpg) bottom right",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <div className={styles.container}>
         <div className={styles.wrapper}>
           <h1 className="text-primary-400">Land to your destiny job today.</h1>
