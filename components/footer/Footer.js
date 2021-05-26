@@ -46,6 +46,7 @@ const Footer = () => {
             id="name"
             title="Name:"
             inputClass="bg_input"
+            placeholder="Enter your full name"
           />
           <Input
             type="email"
@@ -54,6 +55,7 @@ const Footer = () => {
             id="email"
             title="Email address:"
             inputClass="bg_input"
+            placeholder="Enter your email address"
           />
           <FormButton
             text="Subscribe"
