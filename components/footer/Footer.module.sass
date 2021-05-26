@@ -48,6 +48,8 @@
     padding-left: 2rem
 
 //default layout and other styles
+.hidden
+  display: none
 
 .footer_container
   background-image: linear-gradient($primary, $primary, #5ba2ff)
@@ -134,13 +136,40 @@
 
 //specific for small screens only
 @media screen and ( max-width: 590px )
+  .footer_container
+    display: flex 
+    flex-flow: column
+
   .f_browse, .f_jobs, .f_connect
+    font-size: 0.8rem
     text-align: left
-    padding-left: 10%
+    padding-left: 6%
+    h3
+      margin-bottom: 0.8rem
+
   .f_connect
-    padding-bottom: 2rem
+    // padding-bottom: 1rem
+    h1
+      display: none
+
+  .footer_right
+    order: 1
+    
   .footer_left
+    order: 2
+    padding-left: 6%
+    padding-right: 6%
+    padding-bottom: 2rem
     h1
       padding-top: 2rem
-    padding-left: 10%
-    padding-right: 10%
+      padding-bottom: 0.2rem
+
+  .flexgrid
+    display: flex
+  
+  .flexcol
+    flex: 1
+
+  // .footer_container div:nth-child(1)
+  //   color: red
+    

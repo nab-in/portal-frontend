@@ -1,10 +1,17 @@
 import styles from "./Footer.module.sass"
 import Link from "next/link"
+import Input from "../inputs/Input"
+import FormButton from "../buttons/FormButton"
+import {useAuthState} from "../../context/auth"
 
 const Footer = () => {
+  const {user} = useAuthState()
+  const handleChange = (e) => {}
+  const handleSubmit = () => {}
+
   return (
     <footer className={styles.footer_container}>
-      <div className={styles.footer_left}>
+      <div className={user?styles.hidden:styles.footer_left}>
         <h1 className={styles.logo}>
           <Link href="/">
             <a>
@@ -30,23 +37,29 @@ const Footer = () => {
           <p className={styles.footer_call_to_action}>
             Subscribe to start receiving notifications when new jobs are posted{" "}
           </p>
-          <form>
-            <input
-              className={styles.footer_form}
-              type="text"
-              placeholder="Name"
-              name="name"
-            />
-            <input
-              className={styles.footer_form}
-              type="text"
-              placeholder="Email"
-              name="email"
-            />
-            <button className={`btn btn-primary ${styles.btn}`}>
-              {" "}
-              Subscribe{" "}
-            </button>
+
+          <form onSubmit={(e) => handleSubmit(e)}>
+          <Input
+            type="text"
+            name="username"
+            handleChange={handleChange}
+            id="name"
+            title="Name:"
+            inputClass="bg_input"
+          />
+          <Input
+            type="email"
+            name="email"
+            handleChange={handleChange}
+            id="email"
+            title="Email address:"
+            inputClass="bg_input"
+          />
+          <FormButton
+            text="Subscribe"
+            btnClass="btn-primary"
+            btnGroupClass="btns"
+          />
           </form>
         </div>
 
@@ -60,8 +73,9 @@ const Footer = () => {
           </p>
         </div>
       </div>
-      <div className={styles.footer_right}>
-        <div className={styles.f_browse}>
+      
+      <div className={`${styles.footer_right} ${styles.flexgrid}`}>
+        <div className={`${styles.f_browse} ${styles.flexcol}`}>
           <h3>Browse</h3>
           <ul>
             <li>
@@ -77,7 +91,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        <div className={styles.f_jobs}>
+        <div className={`${styles.f_jobs} ${styles.flexcol}`}>
           <h3>About</h3>
           <ul>
             <li>
@@ -97,7 +111,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        <div className={styles.f_connect}>
+        <div className={`${styles.f_connect} ${styles.flexcol}`}>
           <h3>Connect</h3>
           <h1 className={styles.logo2}>
             <Link href="/">
