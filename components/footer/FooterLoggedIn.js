@@ -5,7 +5,7 @@ const FooterLoggedIn = () => {
   return (
     <footer>
       <div className={styles.flex_container}>
-        <div className={`${styles.f_browse} ${styles.flexcol}`}>
+        <div className={styles.f_browse}>
           <h3>Company</h3>
           <ul>
             <li>
@@ -25,7 +25,7 @@ const FooterLoggedIn = () => {
           </ul>
         </div>
 
-        <div className={`${styles.f_jobs} ${styles.flexcol}`}>
+        <div className={styles.f_jobs}>
           <h3>Browse</h3>
           <ul>
             <li>
@@ -61,7 +61,7 @@ const FooterLoggedIn = () => {
           </ul>
         </div>
 
-        <div className={`${styles.f_connect} ${styles.flexcol}`}>
+        <div className={styles.f_connect}>
           <h3>Connect</h3>
           <h1 className={styles.logo}>
             <Link href="/">
