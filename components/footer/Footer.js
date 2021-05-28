@@ -1,17 +1,19 @@
-import styles from "./Footer.module.sass"
-import Link from "next/link"
-import Input from "../inputs/Input"
-import FormButton from "../buttons/FormButton"
-import {useAuthState} from "../../context/auth"
+import styles from "./Footer.module.sass";
+import Link from "next/link";
+import Input from "../inputs/Input";
+import FormButton from "../buttons/FormButton";
+// import { useAuthState } from "../../context/auth";
 
 const Footer = () => {
-  const {user} = useAuthState()
-  const handleChange = (e) => {}
-  const handleSubmit = () => {}
+  // const { user } = useAuthState();
+  const handleChange = (e) => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
   return (
     <footer className={styles.footer_container}>
-      <div className={user?styles.hidden:styles.footer_left}>
+      <div className={styles.footer_left}>
         <h1 className={styles.logo}>
           <Link href="/">
             <a>
@@ -39,29 +41,29 @@ const Footer = () => {
           </p>
 
           <form onSubmit={(e) => handleSubmit(e)}>
-          <Input
-            type="text"
-            name="username"
-            handleChange={handleChange}
-            id="name"
-            title="Name:"
-            inputClass="bg_input"
-            placeholder="Enter your full name"
-          />
-          <Input
-            type="email"
-            name="email"
-            handleChange={handleChange}
-            id="email"
-            title="Email address:"
-            inputClass="bg_input"
-            placeholder="Enter your email address"
-          />
-          <FormButton
-            text="Subscribe"
-            btnClass="btn-primary"
-            btnGroupClass="btns"
-          />
+            <Input
+              type="text"
+              name="username"
+              handleChange={handleChange}
+              id="name"
+              title="Name:"
+              inputClass="bg_input"
+              placeholder="Enter your full name"
+            />
+            <Input
+              type="email"
+              name="email"
+              handleChange={handleChange}
+              id="email"
+              title="Email address:"
+              inputClass="bg_input"
+              placeholder="Enter your email address"
+            />
+            <FormButton
+              text="Subscribe"
+              btnClass="btn-primary"
+              btnGroupClass="btns"
+            />
           </form>
         </div>
 
@@ -75,7 +77,7 @@ const Footer = () => {
           </p>
         </div>
       </div>
-      
+
       <div className={`${styles.footer_right} ${styles.flexgrid}`}>
         <div className={`${styles.f_browse} ${styles.flexcol}`}>
           <h3>Browse</h3>
@@ -139,7 +141,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

@@ -1,11 +1,15 @@
-import React from "react"
-import Loader from "../loaders/AuthLoader"
-import Header from "../header/Header"
-import Footer from "../footer/Footer"
+import React from "react";
+import Loader from "../loaders/AuthLoader";
+import Header from "../header/Header";
+import Footer from "../footer/Footer";
+import FooterLoggedIn from "../footer/FooterLoggedIn";
+import { useAuthState } from "../../context/auth";
 
-let loading = false
+let loading = false;
+console.log(useAuthState);
 
 const Layout = ({ children }) => {
+  const { user } = useAuthState();
   return (
     <div className="layout">
       {loading ? (
@@ -14,11 +18,11 @@ const Layout = ({ children }) => {
         <>
           <Header />
           {children}
-          <Footer />
+          {!user ? <Footer /> : <FooterLoggedIn />}
         </>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;
