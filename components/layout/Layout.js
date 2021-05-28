@@ -6,7 +6,7 @@ import FooterLoggedIn from "../footer/FooterLoggedIn";
 import { useAuthState } from "../../context/auth";
 
 let loading = false;
-console.log(useAuthState);
+// console.log(useAuthState);
 
 const Layout = ({ children }) => {
   const { user } = useAuthState();
