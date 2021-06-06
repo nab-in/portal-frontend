@@ -1,11 +1,11 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import Link from "next/link"
 import Loader from "../../loaders/CompaniesLoader"
 import styles from "./companies.module.sass"
-import companies from "../../../data/companies"
+import { API } from "../../api"
 
-let loading = false
-const Companies = () => {
+// let loading = false
+const Companies = ({ companies, loading }) => {
   return (
     <section className={styles.companies}>
       <div className={`${styles.container} container`}>
@@ -19,21 +19,27 @@ const Companies = () => {
             </>
           ) : (
             <>
-              {companies.slice(1, 7).map(({ logo, name, id, jobs }) => (
-                <article key={id}>
-                  <Link href={`/companies/${id}`}>
-                    <div className={`${styles.logo__container}`}>
-                      <img
-                        src={`/assets/companies/${logo}`}
-                        alt={`${name} logo`}
-                      />
-                    </div>
-                  </Link>
-                  <Link href={`/companies/${id}/jobs/`}>
-                    <a>View {jobs} Jobs</a>
-                  </Link>
-                </article>
-              ))}
+              {companies?.companies.length > 0 ? (
+                <>
+                  {companies.companies.map(({ logo, name, id, jobs }) => (
+                    <article key={id}>
+                      <Link href={`/companies/${id}`}>
+                        <div className={`${styles.logo__container}`}>
+                          <img
+                            src={`/assets/companies/${logo}`}
+                            alt={`${name} logo`}
+                          />
+                        </div>
+                      </Link>
+                      <Link href={`/companies/${id}/jobs/`}>
+                        <a>View {jobs} Jobs</a>
+                      </Link>
+                    </article>
+                  ))}
+                </>
+              ) : (
+                <>No company found</>
+              )}
             </>
           )}
         </div>

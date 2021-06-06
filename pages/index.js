@@ -5,11 +5,15 @@ import Jobs from "../components/jobs_template/Jobs"
 import Companies from "../components/home/companies/Companies"
 import { API } from "../components/api"
 
-const Home = ({ jobs }) => {
+const Home = ({ jobs, companies }) => {
   const [loading, setLoading] = useState(true)
+  const [loadCompanies, setLoadCompanies] = useState(true)
   useEffect(() => {
     if (jobs) setLoading(false)
   }, [jobs])
+  useEffect(() => {
+    if (companies) setLoadCompanies(false)
+  }, [companies])
   return (
     <div>
       <Head>
@@ -19,7 +23,7 @@ const Home = ({ jobs }) => {
       <Hero />
       <main>
         <Jobs heading="Recent Jobs" jobs={jobs} loading={loading} />
-        <Companies />
+        <Companies companies={companies} loading={loadCompanies} />
       </main>
     </div>
   )
@@ -27,11 +31,13 @@ const Home = ({ jobs }) => {
 
 export async function getStaticProps() {
   const res = await fetch(`${API}/jobs`)
+  const companies = await (await fetch(`${API}/companies`)).json()
   const jobs = await res.json()
 
   return {
     props: {
       jobs,
+      companies,
     },
   }
 }
