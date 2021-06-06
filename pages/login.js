@@ -8,6 +8,7 @@ import Logo from "../components/Logo"
 import styles from "../styles/auth.module.sass"
 import axios from "axios"
 import { useAuthDispatch } from "../context/auth"
+import { API } from "../components/api"
 
 const login = () => {
   const { publicRuntimeConfig } = getConfig()
@@ -34,7 +35,7 @@ const login = () => {
     e.preventDefault()
     setLoading(true)
     axios
-      .post(`${publicRuntimeConfig.API_URL}/login`, formData)
+      .post(`${API}/login`, formData)
       .then((res) => {
         console.log(res)
         dispatch({

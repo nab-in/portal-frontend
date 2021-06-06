@@ -7,14 +7,12 @@ import Spinner from "../loaders/ButtonLoader"
 import FilterCriteria from "../filter_criteria/FilterCriteria"
 import NewsLetter from "../newsletter/NewsLetter"
 import styles from "../../styles/template.module.sass"
-import jobs from "../../data/jobs"
 import { useAuthState } from "../../context/auth"
 
-let loading = false
 let loadMore = false
 
 // main template to display jobs in landing page and jobs page
-const Jobs = ({ search, setSearch, heading, page }) => {
+const Jobs = ({ search, setSearch, heading, page, jobs, loading }) => {
   let [filter, setFilter] = useState(false)
 
   let { isAuthenticated } = useAuthState()
@@ -59,8 +57,15 @@ const Jobs = ({ search, setSearch, heading, page }) => {
             </>
           ) : (
             <>
-              {jobs.length > 0 &&
-                jobs.slice(1, 6).map((job) => <Job job={job} key={job.id} />)}
+              {jobs?.length > 0 ? (
+                <>
+                  {jobs.map((job) => (
+                    <Job job={job} key={job.id} />
+                  ))}
+                </>
+              ) : (
+                <>Jobs Not Found</>
+              )}
             </>
           )}
           <div
