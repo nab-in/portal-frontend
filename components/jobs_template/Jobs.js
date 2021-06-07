@@ -9,10 +9,16 @@ import NewsLetter from "../newsletter/NewsLetter"
 import styles from "../../styles/template.module.sass"
 import { useAuthState } from "../../context/auth"
 
-let loadMore = false
-
 // main template to display jobs in landing page and jobs page
-const Jobs = ({ search, setSearch, heading, page, jobs, loading }) => {
+const Jobs = ({
+  search,
+  setSearch,
+  heading,
+  page,
+  jobs,
+  loading,
+  loadMore,
+}) => {
   let [filter, setFilter] = useState(false)
 
   let { isAuthenticated } = useAuthState()
@@ -57,9 +63,9 @@ const Jobs = ({ search, setSearch, heading, page, jobs, loading }) => {
             </>
           ) : (
             <>
-              {jobs?.jobs?.length > 0 ? (
+              {jobs?.length > 0 ? (
                 <>
-                  {jobs.jobs.map((job) => (
+                  {jobs.map((job) => (
                     <Job job={job} key={job.id} />
                   ))}
                 </>

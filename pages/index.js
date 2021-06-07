@@ -5,12 +5,16 @@ import Jobs from "../components/jobs_template/Jobs"
 import Companies from "../components/home/companies/Companies"
 import { API } from "../components/api"
 
-const Home = ({ jobs, companies }) => {
+const Home = ({ data, companies }) => {
   const [loading, setLoading] = useState(true)
+  const [jobs, setJobs] = useState([])
   const [loadCompanies, setLoadCompanies] = useState(true)
   useEffect(() => {
-    if (jobs) setLoading(false)
-  }, [jobs])
+    if (data) {
+      setLoading(false)
+      setJobs(data.jobs)
+    }
+  }, [data])
   useEffect(() => {
     if (companies) setLoadCompanies(false)
   }, [companies])
@@ -29,14 +33,15 @@ const Home = ({ jobs, companies }) => {
   )
 }
 
-export async function getStaticProps() {
-  const res = await fetch(`${API}/jobs`)
+export async function getServerSideProps() {
+  let data = null
+  const res = await fetch(`${API}/jobs?pageSize=8`)
   const companies = await (await fetch(`${API}/companies`)).json()
-  const jobs = await res.json()
+  data = await res.json()
 
   return {
     props: {
-      jobs,
+      data,
       companies,
     },
   }
