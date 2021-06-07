@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react"
-import Router, { useRouter } from "next/router"
+// import Router, { useRouter } from "next/router"
 import Hero from "../components/filter_hero/Hero"
 import Jobs from "../components/jobs_template/Jobs"
 import categories from "../data/categories"
 import { API } from "../components/api"
+import axios from "axios"
 
 const jobs = ({ data }) => {
   const [loadMore, setLoadMore] = useState(false)
+  let [page, setPage] = useState(data?.pager.page + 1)
+  let [pages, setPages] = useState(false)
   let [jobs, setJobs] = useState([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState({
@@ -14,13 +17,11 @@ const jobs = ({ data }) => {
     location: "",
     categories: [],
   })
-  let router = useRouter()
-  const startLoading = () => setLoadMore(true)
-  const stopLoading = () => setLoadMore(false)
+
   useEffect(() => {
     if (data) {
       setLoading(false)
-      setJobs(jobs.concat(data.jobs))
+      setJobs(data.jobs)
     }
   }, [data])
   const handleScroll = () => {
@@ -31,29 +32,34 @@ const jobs = ({ data }) => {
       let pageOffset = window.pageYOffset + window.innerHeight
       if (pageOffset > lastJobOffset) {
         if (data?.pager.page < data?.pager.pageCount && !loadMore) {
-          let query = router.query
-          query.page = parseInt(data.pager.page) + 1
-          router.push({
-            pathname: router.pathname,
-            query: query,
-          })
+          setLoadMore(true)
+          axios
+            .get(`${API}/jobs?page=${page}&pageSize=3`)
+            .then((res) => {
+              if (res.data) {
+                setPages(true)
+                // setPages(res.data.pager.page < res.data.pager.pageCount)
+                setJobs(jobs.concat(res.data.jobs))
+              }
+            })
+            .catch((err) => console.log(err))
+          setPage(parseInt(page) + 1)
+          console.log(pages)
+          if (pages) {
+            handleScroll()
+            console.log("here")
+          }
         }
       }
     }
   }
   useEffect(() => {
-    if (typeof window !== "undefined")
-      window.addEventListener("scroll", handleScroll)
+    // if (typeof window !== "undefined")
+    window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   })
-  useEffect(() => {
-    Router.events.on("routeChangeStart", startLoading)
-    Router.events.on("routeChangeComplete", stopLoading)
-    return () => {
-      Router.events.off("routeChangeStart", startLoading)
-      Router.events.off("routeChangeComplete", stopLoading)
-    }
-  }, [])
+
+  console.log(jobs, page, pages, data)
   return (
     <div className="jobs">
       <Hero
@@ -79,10 +85,15 @@ const jobs = ({ data }) => {
 }
 
 export async function getServerSideProps({ query }) {
-  let page = query.page || 1
   let data = null
-  const res = await fetch(`${API}/jobs?page=${page}&pageSize=8`)
-  data = await res.json()
+  axios
+    .get(`${API}/jobs?&pageSize=3`)
+    .then((res) => {
+      data = res.data
+    })
+    .catch((err) => console.log(err))
+  // const res = await fetch(`${API}/jobs?pageSize=3`)
+  // data = await res.json()
 
   return {
     props: {
