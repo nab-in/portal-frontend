@@ -109,7 +109,7 @@ const Header = () => {
                     className={`btn btn-primary ${styles.join}`}
                     onClick={rippleEffect}
                   >
-                    Join Us
+                    Join
                   </a>
                 </Link>
               </li>

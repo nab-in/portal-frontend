@@ -57,9 +57,9 @@ const Jobs = ({ search, setSearch, heading, page, jobs, loading }) => {
             </>
           ) : (
             <>
-              {jobs?.length > 0 ? (
+              {jobs?.jobs?.length > 0 ? (
                 <>
-                  {jobs.map((job) => (
+                  {jobs.jobs.map((job) => (
                     <Job job={job} key={job.id} />
                   ))}
                 </>
