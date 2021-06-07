@@ -86,14 +86,14 @@ const jobs = ({ data }) => {
 
 export async function getServerSideProps({ query }) {
   let data = null
-  axios
-    .get(`${API}/jobs?&pageSize=3`)
-    .then((res) => {
-      data = res.data
-    })
-    .catch((err) => console.log(err))
-  // const res = await fetch(`${API}/jobs?pageSize=3`)
-  // data = await res.json()
+  // axios
+  //   .get(`${API}/jobs?&pageSize=3`)
+  //   .then((res) => {
+  //     data = res.data
+  //   })
+  //   .catch((err) => console.log(err))
+  const res = await fetch(`${API}/jobs?pageSize=3`)
+  data = await res.json()
 
   return {
     props: {
