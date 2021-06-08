@@ -5,7 +5,7 @@ import Jobs from "../components/jobs_template/Jobs"
 import Companies from "../components/home/companies/Companies"
 import { API } from "../components/api"
 
-const Home = ({ data, companies }) => {
+const Home = ({ data, companies, error }) => {
   const [loading, setLoading] = useState(true)
   const [jobs, setJobs] = useState([])
   const [loadCompanies, setLoadCompanies] = useState(true)
@@ -15,6 +15,11 @@ const Home = ({ data, companies }) => {
       setJobs(data.jobs)
     }
   }, [data])
+  useEffect(() => {
+    if (error) {
+      setLoading(false)
+    }
+  }, [error])
   useEffect(() => {
     if (companies) setLoadCompanies(false)
   }, [companies])
@@ -35,12 +40,19 @@ const Home = ({ data, companies }) => {
 
 export async function getServerSideProps() {
   let data = null
-  const res = await fetch(`${API}/jobs?pageSize=8`)
-  const companies = await (await fetch(`${API}/companies`)).json()
-  data = await res.json()
+  let companies = null
+  let error = null
+  try {
+    const res = await fetch(`${API}/jobs?pageSize=8`)
+    companies = await (await fetch(`${API}/companies`)).json()
+    data = await res.json()
+  } catch (err) {
+    error = "Internal server error"
+  }
 
   return {
     props: {
+      error,
       data,
       companies,
     },

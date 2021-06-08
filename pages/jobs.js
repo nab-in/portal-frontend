@@ -54,7 +54,6 @@ const jobs = ({ data }) => {
     }
   }
   useEffect(() => {
-    // if (typeof window !== "undefined")
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   })
@@ -84,16 +83,14 @@ const jobs = ({ data }) => {
   )
 }
 
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps() {
   let data = null
-  // axios
-  //   .get(`${API}/jobs?&pageSize=3`)
-  //   .then((res) => {
-  //     data = res.data
-  //   })
-  //   .catch((err) => console.log(err))
-  const res = await fetch(`${API}/jobs?pageSize=3`)
-  data = await res.json()
+  try {
+    const res = await fetch(`${API}/jobs?pageSize=3`)
+    data = await res.json()
+  } catch (err) {
+    console.log(err)
+  }
 
   return {
     props: {
