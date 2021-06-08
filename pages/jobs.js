@@ -36,20 +36,26 @@ const jobs = ({ data, error }) => {
       let lastJobOffset = lastJob.offsetTop + lastJob.clientHeight
       let pageOffset = window.pageYOffset + window.innerHeight
       if (pageOffset > lastJobOffset) {
-        if (data?.pager.page < data?.pager.pageCount && !loadMore) {
+        console.log(
+          "here",
+          pages,
+          page <= Math.ceil(data?.pager.total / data?.pager.pageCount)
+        )
+        if (
+          page <= Math.ceil(data?.pager.total / data?.pager.pageCount) &&
+          !loadMore
+        ) {
           if (pages) {
             setLoadMore(true)
-            // console.log(loadMore, jobs)
             axios
               .get(`${API}/jobs?page=${page}&pageSize=3`)
               .then((res) => {
                 if (res.data) {
                   // console.log(res.data, "here")
-                  setPages(res.data.pager.page < res.data.pager.pageCount)
+                  setPages(res.data.pager.page <= res.data.pager.pageCount)
                   setJobs(jobs.concat(res.data.jobs))
-                  console.log(jobs)
                   setLoadMore(false)
-                  setPage(parseInt(page) + 1)
+                  setPage(parseInt(res.data?.pager.page) + 1)
                 }
               })
               .catch((err) => {
