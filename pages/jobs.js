@@ -39,18 +39,23 @@ const jobs = ({ data, error }) => {
         if (data?.pager.page < data?.pager.pageCount && !loadMore) {
           if (pages) {
             setLoadMore(true)
+            // console.log(loadMore, jobs)
             axios
               .get(`${API}/jobs?page=${page}&pageSize=3`)
               .then((res) => {
                 if (res.data) {
-                  // setPages(true)
+                  // console.log(res.data, "here")
                   setPages(res.data.pager.page < res.data.pager.pageCount)
                   setJobs(jobs.concat(res.data.jobs))
+                  console.log(jobs)
+                  setLoadMore(false)
+                  setPage(parseInt(page) + 1)
                 }
               })
-              .catch((err) => console.log(err))
-            setPage(parseInt(page) + 1)
-            setLoadMore(false)
+              .catch((err) => {
+                console.log(err)
+                setLoadMore(false)
+              })
           }
         }
       }
@@ -61,7 +66,7 @@ const jobs = ({ data, error }) => {
     return () => window.removeEventListener("scroll", handleScroll)
   })
 
-  console.log(jobs, page, pages, data)
+  // console.log(jobs, page, pages, data)
   return (
     <div className="jobs">
       <Hero
