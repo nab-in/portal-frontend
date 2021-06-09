@@ -13,8 +13,9 @@ const Job = ({ job }) => {
     close_time,
     job_type,
     location,
-    reviews,
+    // reviews: 0.8
   } = job
+  let reviews = 0.85
   let style = { "--rating": reviews * 5 }
   return (
     <article className={`card ${styles.job__card}`}>

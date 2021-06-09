@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import moment from "moment"
 import JobDetails from "../../components/job/JobDetails"
 import RelatedJobs from "../../components/job/RelatedJobs"
@@ -9,11 +9,16 @@ import styles from "../../styles/job.module.sass"
 import { API } from "../../components/api"
 import { useAuthState } from "../../context/auth"
 
-let loading = false
-
 const job = ({ data }) => {
+  let [loading, setLoading] = useState(true)
   let { isAuthenticated } = useAuthState()
-  let job = data
+  let job
+  useEffect(() => {
+    if (data) {
+      job = data
+      setLoading(false)
+    }
+  }, [data])
   console.log(job)
   let style = { "--rating": 0.85 * 5 }
   return (
@@ -25,39 +30,41 @@ const job = ({ data }) => {
           </>
         ) : (
           <>
-            <div className={styles.container}>
-              <div className={styles.logo__container}>
-                <div className={styles.logo}>
-                  <img
-                    src={`/assets/companies/logo1.png`}
-                    alt={`${job.name} logo`}
-                    loading="lazy"
-                  />
+            {job && (
+              <div className={styles.container}>
+                <div className={styles.logo__container}>
+                  <div className={styles.logo}>
+                    <img
+                      src={`/assets/companies/logo1.png`}
+                      alt={`${job.name} logo`}
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+                <div className={styles.job__heading}>
+                  <div className={styles.title}>
+                    <h1>{job.name}</h1>
+                  </div>
+                  <div className={styles.time__details}>
+                    <div className={`${styles.time} ${styles.posted}`}>
+                      Posted at:&nbsp;{" "}
+                      {moment(job.created).format("MMM DD, YYYY")}
+                    </div>
+                    <div className={`${styles.time} ${styles.deadline}`}>
+                      <span>
+                        Deadline:{" "}
+                        {moment(job.created).format("MMM DD, YYYY HH:mm")}
+                      </span>
+                      <span>{job[0]?.close_time}</span>
+                    </div>
+                    <div
+                      className={`stars bg__stars ${styles.stars}`}
+                      style={style}
+                    ></div>
+                  </div>
                 </div>
               </div>
-              <div className={styles.job__heading}>
-                <div className={styles.title}>
-                  <h1>{job.name}</h1>
-                </div>
-                <div className={styles.time__details}>
-                  <div className={`${styles.time} ${styles.posted}`}>
-                    Posted at:&nbsp;{" "}
-                    {moment(job.created).format("MMM DD, YYYY")}
-                  </div>
-                  <div className={`${styles.time} ${styles.deadline}`}>
-                    <span>
-                      Deadline:{" "}
-                      {moment(job.created).format("MMM DD, YYYY HH:mm")}
-                    </span>
-                    <span>{job[0]?.close_time}</span>
-                  </div>
-                  <div
-                    className={`stars bg__stars ${styles.stars}`}
-                    style={style}
-                  ></div>
-                </div>
-              </div>
-            </div>
+            )}
           </>
         )}
       </div>
