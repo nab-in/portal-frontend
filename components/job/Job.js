@@ -20,7 +20,7 @@ const Job = ({ job }) => {
       <div className={styles.logo__container}>
         <div className={styles.logo}>
           <img
-            src={`/assets/companies/${company?.logo}`}
+            src={`/assets/companies/logo1.png`}
             alt={`${company?.name} logo`}
             loading="lazy"
           />

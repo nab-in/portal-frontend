@@ -18,6 +18,8 @@ const Jobs = ({
   jobs,
   loading,
   loadMore,
+  loadJobs,
+  message,
 }) => {
   let [filter, setFilter] = useState(false)
 
@@ -83,10 +85,18 @@ const Jobs = ({
           >
             {page === "jobs" ? (
               <>
-                {loadMore ? (
-                  <Spinner bg="light" />
+                {message ? (
+                  <>
+                    <p>{message}</p>
+                  </>
                 ) : (
-                  <button className="primary__text">Load More</button>
+                  <>
+                    {loadMore ? (
+                      <Spinner bg="light" />
+                    ) : (
+                      <button className="primary__text">Load More</button>
+                    )}
+                  </>
                 )}
               </>
             ) : (

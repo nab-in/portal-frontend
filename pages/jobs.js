@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react"
-// import Router, { useRouter } from "next/router"
 import Hero from "../components/filter_hero/Hero"
 import Jobs from "../components/jobs_template/Jobs"
 import categories from "../data/categories"
@@ -11,17 +10,23 @@ const jobs = ({ data, error }) => {
   let [page, setPage] = useState(data?.pager.page + 1)
   let [pages, setPages] = useState(data?.pager.page < data?.pager.pageCount)
   let [jobs, setJobs] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [search, setSearch] = useState({
+  let [message, setMessage] = useState(null)
+  let [loading, setLoading] = useState(true)
+  let [search, setSearch] = useState({
     keyword: "",
     location: "",
     categories: [],
   })
+  const loadJobs = () => {
+    console.log("Load jobs")
+  }
+  console.log(error)
 
   useEffect(() => {
     if (data) {
       setLoading(false)
       setJobs(data.jobs)
+      if (data.jobs.length === 0) setMessage("Ooops! not a single job found")
     }
   }, [data])
   useEffect(() => {
@@ -38,32 +43,36 @@ const jobs = ({ data, error }) => {
       if (pageOffset > lastJobOffset) {
         if (
           page <= Math.ceil(data?.pager.total / data?.pager.pageSize) &&
-          !loadMore
+          !loadMore &&
+          pages
         ) {
-          if (pages) {
-            setLoadMore(true)
-            axios
-              .get(`${API}/jobs?page=${page}&pageSize=3`)
-              .then((res) => {
-                if (res.data) {
-                  setPages(
-                    res.data.pager.page <=
-                      Math.ceil(res.data.pager.total / res.data.pager.pageSize)
-                  )
-                  setJobs(jobs.concat(res.data.jobs))
-                  setLoadMore(false)
-                  setPage(parseInt(res.data?.pager.page) + 1)
-                }
-              })
-              .catch((err) => {
-                console.log(err)
+          setLoadMore(true)
+          axios
+            .get(`${API}/jobs?page=${page}&pageSize=3`)
+            .then((res) => {
+              if (res.data) {
+                setPages(
+                  res.data.pager.page <=
+                    Math.ceil(res.data.pager.total / res.data.pager.pageSize)
+                )
+                setJobs(jobs.concat(res.data.jobs))
                 setLoadMore(false)
-              })
-          }
+                setPage(parseInt(res.data?.pager.page) + 1)
+              }
+            })
+            .catch((err) => {
+              console.log(err)
+              setLoadMore(false)
+            })
+        }
+        if (page > Math.ceil(data?.pager.total / data?.pager.pageSize)) {
+          setLoadMore(false)
+          setMessage("You have seen it all")
         }
       }
     }
   }
+  console.log(pages)
   useEffect(() => {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
@@ -87,6 +96,8 @@ const jobs = ({ data, error }) => {
           jobs={jobs}
           loading={loading}
           loadMore={loadMore}
+          message={message}
+          loadJobs={loadJobs}
         />
       </main>
     </div>
@@ -101,7 +112,7 @@ export async function getServerSideProps() {
     data = await res.json()
   } catch (err) {
     console.log(err)
-    error = "internal server error"
+    error = err.json()
   }
 
   return {
