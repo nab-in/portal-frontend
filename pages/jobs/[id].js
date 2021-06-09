@@ -9,7 +9,7 @@ import styles from "../../styles/job.module.sass"
 import { API } from "../../components/api"
 import { useAuthState } from "../../context/auth"
 
-const job = ({ data }) => {
+const job = ({ data, error }) => {
   let [loading, setLoading] = useState(true)
   let { isAuthenticated } = useAuthState()
   let job
@@ -19,7 +19,11 @@ const job = ({ data }) => {
       setLoading(false)
     }
   }, [data])
-  console.log(job)
+  useEffect(() => {
+    if (error) {
+      setLoading(false)
+    }
+  }, [error])
   let style = { "--rating": 0.85 * 5 }
   return (
     <div>
@@ -70,26 +74,37 @@ const job = ({ data }) => {
       </div>
       <main>
         <div className={styles.template}>
-          <h1 className="primary__header">Details</h1>
-          <div className={`${styles.template__layout} template__layout`}>
-            <div className={`${styles.main__content} main__content`}>
-              {loading ? (
-                <>
-                  <DetailsLoader />
-                </>
-              ) : (
-                <>{job && <JobDetails job={job} />}</>
-              )}
-            </div>
-            <div className={`${styles.sub__content} sub__content`}>
-              <RelatedJobs />
-              {!isAuthenticated && (
-                <div className={styles.newsletter}>
-                  <NewsLetter />
+          {error ? (
+            <>
+              <p>
+                Failed to load, please check your internet connection and try
+                again
+              </p>
+            </>
+          ) : (
+            <>
+              <h1 className="primary__header">Details</h1>
+              <div className={`${styles.template__layout} template__layout`}>
+                <div className={`${styles.main__content} main__content`}>
+                  {loading ? (
+                    <>
+                      <DetailsLoader />
+                    </>
+                  ) : (
+                    <>{job && <JobDetails job={job} />}</>
+                  )}
                 </div>
-              )}
-            </div>
-          </div>
+                <div className={`${styles.sub__content} sub__content`}>
+                  <RelatedJobs />
+                  {!isAuthenticated && (
+                    <div className={styles.newsletter}>
+                      <NewsLetter />
+                    </div>
+                  )}
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </main>
     </div>
