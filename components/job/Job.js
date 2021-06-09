@@ -1,5 +1,6 @@
 import React, { CSSProperties } from "react"
 import Link from "next/link"
+import moment from "moment"
 import styles from "./job.module.sass"
 
 const Job = ({ job }) => {
@@ -7,7 +8,7 @@ const Job = ({ job }) => {
     id,
     name,
     company,
-    created_at,
+    created,
     close_date,
     close_time,
     job_type,
@@ -31,9 +32,12 @@ const Job = ({ job }) => {
           <Link href={`/jobs/${id}`}>{name}</Link>
         </h2>
         {reviews && <div className="stars" style={style}></div>}
-        <p>{/* Posted: <span>{created_at}</span> */}</p>
         <p>
-          Deadline: <span>{/* {close_date} {close_time} */}</span>
+          Posted: <span> {moment(created).format("MMM DD, YYYY")}</span>
+        </p>
+        <p>
+          Deadline:{" "}
+          <span>{moment(job.created).format("MMM DD, YYYY HH:mm")}</span>
         </p>
       </div>
       <div className={styles.job__descriptions}>

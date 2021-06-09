@@ -1,4 +1,5 @@
 import React from "react"
+import moment from "moment"
 import JobDetails from "../../components/job/JobDetails"
 import RelatedJobs from "../../components/job/RelatedJobs"
 import NewsLetter from "../../components/newsletter/NewsLetter"
@@ -40,10 +41,14 @@ const job = ({ data }) => {
                 </div>
                 <div className={styles.time__details}>
                   <div className={`${styles.time} ${styles.posted}`}>
-                    Posted at:&nbsp; {job.created}
+                    Posted at:&nbsp;{" "}
+                    {moment(job.created).format("MMM DD, YYYY")}
                   </div>
                   <div className={`${styles.time} ${styles.deadline}`}>
-                    <span>Deadline: {job.created},</span>
+                    <span>
+                      Deadline:{" "}
+                      {moment(job.created).format("MMM DD, YYYY HH:mm")}
+                    </span>
                     <span>{job[0]?.close_time}</span>
                   </div>
                   <div
