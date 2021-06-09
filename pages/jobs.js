@@ -36,13 +36,8 @@ const jobs = ({ data, error }) => {
       let lastJobOffset = lastJob.offsetTop + lastJob.clientHeight
       let pageOffset = window.pageYOffset + window.innerHeight
       if (pageOffset > lastJobOffset) {
-        console.log(
-          "here",
-          pages,
-          page <= Math.ceil(data?.pager.total / data?.pager.pageCount)
-        )
         if (
-          page <= Math.ceil(data?.pager.total / data?.pager.pageCount) &&
+          page <= Math.ceil(data?.pager.total / data?.pager.pageSize) &&
           !loadMore
         ) {
           if (pages) {
@@ -51,8 +46,10 @@ const jobs = ({ data, error }) => {
               .get(`${API}/jobs?page=${page}&pageSize=3`)
               .then((res) => {
                 if (res.data) {
-                  // console.log(res.data, "here")
-                  setPages(res.data.pager.page <= res.data.pager.pageCount)
+                  setPages(
+                    res.data.pager.page <=
+                      Math.ceil(res.data.pager.total / res.data.pager.pageSize)
+                  )
                   setJobs(jobs.concat(res.data.jobs))
                   setLoadMore(false)
                   setPage(parseInt(res.data?.pager.page) + 1)
@@ -72,7 +69,6 @@ const jobs = ({ data, error }) => {
     return () => window.removeEventListener("scroll", handleScroll)
   })
 
-  // console.log(jobs, page, pages, data)
   return (
     <div className="jobs">
       <Hero
