@@ -8,16 +8,20 @@ import { API } from "../components/api"
 const Home = ({ data, companies, error }) => {
   const [loading, setLoading] = useState(true)
   const [jobs, setJobs] = useState([])
+  let [message, setMessage] = useState(null)
   const [loadCompanies, setLoadCompanies] = useState(true)
   useEffect(() => {
     if (data) {
       setLoading(false)
       setJobs(data.jobs)
+      if (data.jobs.length === 0) setMessage("Ooops! not a single job found")
     }
   }, [data])
   useEffect(() => {
     if (error) {
       setLoading(false)
+      if ((JSON.parse(error).code = "EHOSTUNREACH"))
+        setMessage("Internet connection error")
     }
   }, [error])
   useEffect(() => {
@@ -31,7 +35,12 @@ const Home = ({ data, companies, error }) => {
       </Head>
       <Hero />
       <main>
-        <Jobs heading="Recent Jobs" jobs={jobs} loading={loading} />
+        <Jobs
+          heading="Recent Jobs"
+          jobs={jobs}
+          message={message}
+          loading={loading}
+        />
         <Companies companies={companies} loading={loadCompanies} />
       </main>
     </div>
@@ -47,7 +56,7 @@ export async function getServerSideProps() {
     companies = await (await fetch(`${API}/companies`)).json()
     data = await res.json()
   } catch (err) {
-    error = "Internal server error"
+    error = JSON.stringify(err)
   }
 
   return {

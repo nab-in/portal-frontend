@@ -20,7 +20,7 @@ const jobs = ({ data, error }) => {
   const loadJobs = () => {
     console.log("Load jobs")
   }
-  console.log(error)
+  // console.log(JSON.parse(error).message)
 
   useEffect(() => {
     if (data) {
@@ -32,6 +32,8 @@ const jobs = ({ data, error }) => {
   useEffect(() => {
     if (error) {
       setLoading(false)
+      if ((JSON.parse(error).code = "EHOSTUNREACH"))
+        setMessage("Internet connection error")
     }
   }, [error])
   const handleScroll = () => {
@@ -72,7 +74,6 @@ const jobs = ({ data, error }) => {
       }
     }
   }
-  console.log(pages)
   useEffect(() => {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
@@ -112,7 +113,7 @@ export async function getServerSideProps() {
     data = await res.json()
   } catch (err) {
     console.log(err)
-    error = err.json()
+    error = JSON.stringify(err)
   }
 
   return {

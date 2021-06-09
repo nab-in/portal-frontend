@@ -72,10 +72,11 @@ const Jobs = ({
                   ))}
                 </>
               ) : (
-                <>Jobs Not Found</>
+                <></>
               )}
             </>
           )}
+          {message && <p>{message}</p>}
           <div
             className={
               page === "jobs"
@@ -86,15 +87,15 @@ const Jobs = ({
             {page === "jobs" ? (
               <>
                 {message ? (
-                  <>
-                    <p>{message}</p>
-                  </>
+                  <></>
                 ) : (
                   <>
                     {loadMore ? (
                       <Spinner bg="light" />
                     ) : (
-                      <button className="primary__text">Load More</button>
+                      <button className="primary__text" onClick={loadJobs}>
+                        Load More
+                      </button>
                     )}
                   </>
                 )}
