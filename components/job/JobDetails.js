@@ -9,11 +9,11 @@ const JobDetails = ({ job }) => {
   let { user, isAuthenticated } = useAuthState()
   let stars = [1, 2, 3, 4, 5]
   let style = { "--rating": rate }
-  let { id, job_type, location, company, email, attachment, descriptions } = job
+  let { id, job_type, location, company, email, attachment, bio } = job
   return (
     <div className={styles.details}>
       <div className={styles.title}>
-        Company/Organisation: <span>{company.name}</span>
+        Company/Organisation: <span>{company?.name}</span>
       </div>
       <div className={styles.title}>
         Location: <span>{location}</span>
@@ -29,14 +29,14 @@ const JobDetails = ({ job }) => {
       </div>
       <div className={styles.title}>
         Attachment:
-        <Link href={`/assets/docs/${attachment}.pdf`}>
+        <Link href={`/assets/docs/attachment1.pdf`}>
           <a target="_blank">
             <span>{attachment}.pdf</span>
           </a>
         </Link>
       </div>
       <div className={styles.descriptions}>
-        <Linkify>{descriptions}</Linkify>
+        <Linkify>{bio}</Linkify>
       </div>
       {!isAuthenticated && (
         <section className={styles.job__footer}>

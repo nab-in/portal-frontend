@@ -1,22 +1,20 @@
 import React from "react"
-import { useRouter } from "next/router"
 import JobDetails from "../../components/job/JobDetails"
 import RelatedJobs from "../../components/job/RelatedJobs"
 import NewsLetter from "../../components/newsletter/NewsLetter"
 import HeroLoader from "../../components/loaders/HeroLoader"
 import DetailsLoader from "../../components/loaders/DetailsLoader"
 import styles from "../../styles/job.module.sass"
-import jobs from "../../data/jobs"
+import { API } from "../../components/api"
 import { useAuthState } from "../../context/auth"
 
 let loading = false
 
-const job = () => {
+const job = ({ data }) => {
   let { isAuthenticated } = useAuthState()
-  let router = useRouter()
-  let id = router.query.id
-  let job = jobs.filter((e) => e.id == id)
-  let style = { "--rating": job[0]?.reviews * 5 }
+  let job = data
+  console.log(job)
+  let style = { "--rating": 0.85 * 5 }
   return (
     <div>
       <div className={styles.hero}>
@@ -30,22 +28,22 @@ const job = () => {
               <div className={styles.logo__container}>
                 <div className={styles.logo}>
                   <img
-                    src={`/assets/companies/${job[0]?.company.logo}`}
-                    alt={`${job[0]?.company.name} logo`}
+                    src={`/assets/companies/logo1.png`}
+                    alt={`${job.name} logo`}
                     loading="lazy"
                   />
                 </div>
               </div>
               <div className={styles.job__heading}>
                 <div className={styles.title}>
-                  <h1>{job[0]?.title}</h1>
+                  <h1>{job.name}</h1>
                 </div>
                 <div className={styles.time__details}>
                   <div className={`${styles.time} ${styles.posted}`}>
-                    Posted at:&nbsp; {job[0]?.created_at}
+                    Posted at:&nbsp; {job.created}
                   </div>
                   <div className={`${styles.time} ${styles.deadline}`}>
-                    <span>Deadline: {job[0]?.close_date},</span>
+                    <span>Deadline: {job.created},</span>
                     <span>{job[0]?.close_time}</span>
                   </div>
                   <div
@@ -68,7 +66,7 @@ const job = () => {
                   <DetailsLoader />
                 </>
               ) : (
-                <>{job[0] && <JobDetails job={job[0]} />}</>
+                <>{job && <JobDetails job={job} />}</>
               )}
             </div>
             <div className={`${styles.sub__content} sub__content`}>
@@ -84,6 +82,24 @@ const job = () => {
       </main>
     </div>
   )
+}
+
+export async function getServerSideProps(context) {
+  let data = null
+  let error = null
+  try {
+    const res = await fetch(`${API}/jobs/${context.params.id}`)
+    data = await res.json()
+  } catch (err) {
+    error = JSON.stringify(err)
+  }
+
+  return {
+    props: {
+      error,
+      data,
+    },
+  }
 }
 
 export default job
