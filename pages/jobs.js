@@ -50,7 +50,7 @@ const jobs = ({ data, error }) => {
         ) {
           setLoadMore(true)
           axios
-            .get(`${API}/jobs?page=${page}&pageSize=4`)
+            .get(`${API}/jobs?page=${page}&pageSize=8`)
             .then((res) => {
               if (res.data) {
                 setPages(

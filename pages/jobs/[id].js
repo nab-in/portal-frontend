@@ -12,10 +12,10 @@ import { useAuthState } from "../../context/auth"
 const job = ({ data, error }) => {
   let [loading, setLoading] = useState(true)
   let { isAuthenticated } = useAuthState()
-  let job
+  let [job, setJob] = useState(null)
   useEffect(() => {
     if (data) {
-      job = data
+      setJob(data)
       setLoading(false)
     }
   }, [data])
