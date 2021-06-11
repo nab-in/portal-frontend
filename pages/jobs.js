@@ -17,10 +17,6 @@ const jobs = ({ data, error }) => {
     location: "",
     categories: [],
   })
-  const loadJobs = () => {
-    console.log("Load jobs")
-  }
-  // console.log(JSON.parse(error).message)
 
   useEffect(() => {
     if (data) {
@@ -74,6 +70,7 @@ const jobs = ({ data, error }) => {
       }
     }
   }
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
@@ -96,9 +93,9 @@ const jobs = ({ data, error }) => {
           page="jobs"
           jobs={jobs}
           loading={loading}
+          setLoading={setLoading}
           loadMore={loadMore}
           message={message}
-          loadJobs={loadJobs}
         />
       </main>
     </div>

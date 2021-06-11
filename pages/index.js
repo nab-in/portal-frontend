@@ -40,6 +40,7 @@ const Home = ({ data, companies, error }) => {
           jobs={jobs}
           message={message}
           loading={loading}
+          setLoading={setLoading}
         />
         <Companies companies={companies} loading={loadCompanies} />
       </main>

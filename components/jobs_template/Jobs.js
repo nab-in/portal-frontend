@@ -9,7 +9,8 @@ import FilterCriteria from "../filter_criteria/FilterCriteria"
 import NewsLetter from "../newsletter/NewsLetter"
 import styles from "../../styles/template.module.sass"
 import { useAuthState } from "../../context/auth"
-
+import { API } from "../api"
+import axios from "axios"
 // main template to display jobs in landing page and jobs page
 const Jobs = ({
   search,
@@ -18,11 +19,12 @@ const Jobs = ({
   page,
   jobs,
   loading,
+  setLoading,
   loadMore,
-  loadJobs,
   message,
 }) => {
   let [filter, setFilter] = useState(false)
+  let [searchResults, setResults] = useState([])
 
   let { isAuthenticated } = useAuthState()
 
@@ -41,9 +43,34 @@ const Jobs = ({
       return
     }
   }
+  const searching = () => {
+    setLoading(true)
+    let s = ""
+    if (search?.keyword.trim != "") s += `&filter=name:ilike:${search?.keyword}`
+    if (search?.location.trim != "")
+      s += `&filter=location:ilike:${search?.location}`
+    search?.categories.forEach((category) => {
+      s += `&filter=name:ilike:${category.name}`
+      category.sub_categories.forEach((sub) => {
+        s += `&filter=name:ilike:${sub.name}`
+      })
+    })
+    let url = `${API}/jobs?${s}`
+    axios
+      .get(url)
+      .then((res) => {
+        setResults(res.data.jobs)
+        setLoading(false)
+      })
+      .catch((err) => {
+        console.log(err)
+        setLoading(false)
+      })
+  }
   // updating UI
   useEffect(() => {
     checkSearch(search)
+    searching()
   }, [search])
 
   return (
@@ -66,14 +93,30 @@ const Jobs = ({
             </>
           ) : (
             <>
-              {jobs?.length > 0 ? (
+              {searchResults?.length > 0 ? (
                 <>
-                  {jobs.map((job) => (
-                    <Job job={job} key={job.id} />
-                  ))}
+                  {searchResults?.length > 0 ? (
+                    <>
+                      {searchResults.map((job) => (
+                        <Job job={job} key={job.id} />
+                      ))}
+                    </>
+                  ) : (
+                    <></>
+                  )}
                 </>
               ) : (
-                <></>
+                <>
+                  {jobs?.length > 0 ? (
+                    <>
+                      {jobs.map((job) => (
+                        <Job job={job} key={job.id} />
+                      ))}
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </>
               )}
             </>
           )}
@@ -90,15 +133,7 @@ const Jobs = ({
                 {message ? (
                   <></>
                 ) : (
-                  <>
-                    {loadMore ? (
-                      <Spinner bg="light" />
-                    ) : (
-                      <button className="primary__text" onClick={loadJobs}>
-                        Load More
-                      </button>
-                    )}
-                  </>
+                  <>{loadMore ? <Spinner bg="light" /> : <></>}</>
                 )}
               </>
             ) : (
