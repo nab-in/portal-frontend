@@ -9,11 +9,13 @@ import styles from "../styles/auth.module.sass"
 import axios from "axios"
 import { useAuthDispatch } from "../context/auth"
 import { API } from "../components/api"
+import { useAlertsDispatch } from "../context/alerts"
 
 const login = () => {
   const { publicRuntimeConfig } = getConfig()
   let router = useRouter()
   const dispatch = useAuthDispatch()
+  let alertDispatch = useAlertsDispatch()
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -43,7 +45,14 @@ const login = () => {
           payload: res.data,
         })
         setLoading(false)
-        if (res.data.verified) router.push("/")
+        alertDispatch({
+          type: "ADD",
+          payload: {
+            message: "You have successfully logged in",
+            type: "success",
+          },
+        })
+        router.push("/")
       })
       .catch((err) => {
         setLoading(false)
