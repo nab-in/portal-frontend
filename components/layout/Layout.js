@@ -9,22 +9,20 @@ import { useAlertsDispatch } from "../../context/alerts"
 import Cookies from "js-cookie"
 
 const Layout = ({ children }) => {
-  let [loading, setLoading] = useState(true)
+  let [loading, setLoading] = useState(false)
   const { user } = useAuthState()
   const dispatch = useAuthDispatch()
   const alertDisptach = useAlertsDispatch()
   useEffect(() => {
     let token = Cookies.get("token")
     if (token) {
+      setLoading(true)
       dispatch({
         type: "AUTH",
       })
       setLoading(false)
     }
-    if (!token) {
-      setLoading(false)
-    }
-    if (!user)
+    if (token && !user)
       alertDisptach({
         type: "ADD",
         payload: {
@@ -37,7 +35,7 @@ const Layout = ({ children }) => {
           type: "danger",
         },
       })
-  }, [])
+  }, [user, loading])
   return (
     <div className="layout">
       {loading ? (
