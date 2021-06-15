@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import Link from "next/link"
 import Loader from "../loaders/AuthLoader"
 import Header from "../header/Header"
 import Footer from "../footer/Footer"
@@ -27,7 +28,12 @@ const Layout = ({ children }) => {
       alertDisptach({
         type: "ADD",
         payload: {
-          message: "Failed to fetch user info",
+          message: (
+            <>
+              Failed to fetch your profile info please{" "}
+              <Link href="/login">Login</Link> or refresh the page
+            </>
+          ),
           type: "danger",
         },
       })

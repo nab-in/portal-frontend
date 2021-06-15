@@ -1,4 +1,3 @@
-import React from "react"
 import { useAlertsState, useAlertsDispatch } from "../../context/alerts"
 import { AiOutlineClose } from "react-icons/ai"
 
@@ -22,7 +21,7 @@ const GlobalAlert = () => {
               : `alerts removable ${type}`
           }
         >
-          {message && message}
+          <p>{message && message}</p>
           <AiOutlineClose className="icon" onClick={close} />
         </div>
       )}
