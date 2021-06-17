@@ -145,4 +145,57 @@ First import useReducer from react
 import React, { useReducer } from "react"
 ```
 
+Second declare a state ie 
+
+```JS
+// state state and display are the only thing passed here and 
+// state means state while dispatch is any action that changes the state kinda like setstate
+// reducerFn is any function which returns something, this plus dispatch are what changes the state
+const [state, dispatch] = useReducer(reducerFn, initialState)
+```
+
+Now that we have seen how we can declare a state, lets take a look on reducerFn, this is any function and whatever name you give it.
+
+It takes in state which is the initial State you declared and action
+
+action is an object that comprises type and payload so while dispatching you pass in type and payload, 
+we usually use switch statement which checks for which type is selected and return something as you've declared
+
+these will make sense in a second, lets get into it
+
+```JS
+// reducer function
+const reducer = ( state, action ) => {
+    const {type, payload}
+    switch (type) {
+        // Login user
+        case "LOGIN":
+            // whatever logic like adding token to cookie/localstorage
+            // the return statement will update the initial state
+            return {
+                ...state, // its always safe to do this
+                user: payload // this is what passed as a payload when a dispatching a certain action of type login
+            } // whatever you wanna return to update state
+ 
+        case "LOGOUT":
+             // whatever logic like removing token
+             return {
+                 ...state,
+                 user: null
+             }
+
+        default:
+            return state
+    }
+}
+```
+
+Now that we have our reducer function, lets clearly set our state
+```JS
+const [state, dispatch] = useReducer(reducer, {
+  user: null
+})
+```
+
+Now that we have our state, lets put them all in a component to see them in action
 
