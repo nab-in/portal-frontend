@@ -109,7 +109,7 @@ const Home = () => {
     update state using setUser say
     useEffect(() => {
         setUser({
-            ...,
+            ...user,
             isAuthenticated: true,
             user: {
                 name: "John",
