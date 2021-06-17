@@ -133,7 +133,7 @@ export default Home
 
 Now we have our state. You can use this state in any component but you must import [user, setUser] even when you don't need to use user.
 
-2. ## contextapi with useReducer
+## 2. contextapi with useReducer
 
 useReducer is one of the hook that helps in managing states
 You can use this hook as a replacement for useState, doesn't necessarily require contextapi, its a standalone hook
