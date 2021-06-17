@@ -42,6 +42,7 @@ export const useAuthContext = useContext(UserContext)
 
 Combining these things together we have
 
+`auth.js`
 ```JS
 import React, { createContext, useContext, useState } from "react"
 
@@ -68,4 +69,25 @@ export const useAuthContext = useContext(UserContext)
 Lets go and use it now
 
 In our `_app.js` lets import UserProvider and wrap our app in it
+If it was create react app boilder pltae you could use Provider inside `index.js`
 
+`_app.js`
+```JS
+...
+
+// import provider from auth js
+import { UserProvider } from "../context/auth"
+
+function MyApp({ Component, pageProps }) {
+    // Wrap the Component inside provider
+    return (
+        <UserProvider>
+            <Component {...pageProps} />
+        </UserProvider>
+    )
+}
+
+export default MyApp
+```
+
+Now our state is global, lets go and use/change it
