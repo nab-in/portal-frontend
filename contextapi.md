@@ -131,7 +131,7 @@ const Home = () => {
 export default Home
 ```
 
-Now we have our state. You can use this state in any component but you must import [user, setUser] even when you don't need to use user.
+Now we have our state. You can use this state in any component but you must import [user, setUser] even when you don't need to use user unless you create two context, one taking user as a value and another taking setUser as a value, we'll see it in action when using useReducer just below.
 
 ## 2. contextapi with useReducer
 
@@ -199,3 +199,96 @@ const [state, dispatch] = useReducer(reducer, {
 
 Now that we have our state, lets put them all in a component to see them in action
 
+Create any react component say `Login.js` where user can input data and login
+
+`Login.js`
+```JS
+import React, { useReducer, useState } from "react"
+
+// reducer function
+const reducer = ( state, action ) => {
+    const {type, payload}
+    switch (type) {
+        // Login user
+        case "LOGIN":
+            return {
+                ...state,
+                user: payload
+            }
+ 
+        case "LOGOUT":
+             return {
+                 ...state,
+                 user: null
+             }
+
+        default:
+            return state
+    }
+}
+
+const Login = () => {
+    // Declaring state using reducer
+    const [state, dispatch] = useReducer(reducer, {
+      user: null
+    })
+
+    // Creating form data state
+    const [formData, setFormData] = useState({
+      Name: "",
+      email: ""
+    })
+ 
+    // Collecting form data
+    const handleChange = e = {
+      let {name, value} = e.target
+      setFormData({...formData, [name]: value})
+    }
+
+    // Submitting form data
+    const handleSubmit = e => {
+      e.preventDefault()
+      // updating user state passing formdata as payload
+      dispatch({
+        type: "LOGIN",
+        payload: formData
+      })
+    }
+
+    //Logout
+    const logout = () => {
+      // updating user state(logging out user
+      dispatch ({
+        type: "LOGOUT"
+      })
+    }
+
+    return (
+      <>
+        <form onSubmit={e => handleSubmit(e)} >
+          <input name="Name" onChange={e => handleChange(e)} />
+          <input type="email" name="email" onChange={e => handleChange(e)} />
+          <button>Login</button>
+        </form>
+        <button onClick={logout}>Logout</button><br/>
+        {/* Displaying user data */}
+        {user?.Name && <h1>{user.Name}</h1>
+        {user?.email && <p>{user.email}</p>
+      </>
+    )
+}
+
+export default Login
+
+```
+
+Now that we have managed to use useReducer hook in a component, lets use it for contextapi, shall we?
+As I asid earlier, contextapi required a hook to set and update state, so as we implemented useState, we gonna implement useReducer the same, lets get into it.
+
+So for this we gonna create two context, one for dispatch and another for state in order to pass state and dispatch values differently ie
+```JS
+import React, { createContext, useContext, useReducer } from "react"
+
+const UserContext = createContext()
+consg DispatchContext = createContext()
+```
