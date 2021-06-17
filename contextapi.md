@@ -25,7 +25,8 @@ export const UserProvider = ({children}) => {
        isAuthenticated: false,
        user: null
     })
-    // the value passed in here will be accessible anywhere in our application and you can pass any value, in our case we pass user state and it update method 
+    // the value passed in here will be accessible anywhere in our application 
+    // you can pass any value, in our case we pass user state and it update method 
     return <UserContext.Provider value={[user, setUser]}>
         {children}
     </UserContext.Provider>
@@ -34,7 +35,8 @@ export const UserProvider = ({children}) => {
 
 Lastly lets declare a method to use oue context
 ```JS
-// we can access to user and setUser using this method anywhere in any component that's inside UserProvider
+// we can access to user and setUser using this method 
+// anywhere in any component that's inside UserProvider
 export const useAuthContext = useContext(UserContext)
 ```
 
@@ -50,15 +52,20 @@ export const UserProvider = ({children}) => {
        isAuthenticated: false,
        user: null
     })
-    // the value passed in here will be accessible anywhere in our application and you can pass any value, in our case we pass user state and it update method 
+    // the value passed in here will be accessible anywhere in our application 
+    // you can pass any value, in our case we pass user state and it update method 
     return <UserContext.Provider value={[user, setUser]}>
         {children}
     </UserContext.Provider>
 }
 
-// we can access to user and setUser using this method anywhere in any component that's inside UserProvider
+// we can access to user and setUser using this method 
+// anywhere in any component that's inside UserProvider
 export const useAuthContext = useContext(UserContext)
 
 ```
 
 Lets go and use it now
+
+In our `_app.js` lets import UserProvider and wrap our app in it
+
