@@ -4,7 +4,7 @@ Contextapi uses two main hooks (createContext and useContext), along with one ho
 
 Lets use both useState hook and useReducer hook just to get general idea even though in the app useReducer is used.
 
-## contextapi with useState
+## 1. contextapi with useState
 
 create a file say `auth.js` and start editing
 
@@ -91,3 +91,46 @@ export default MyApp
 ```
 
 Now our state is global, lets go and use/change it
+
+Create a any file lets say `index.js` in the pages
+
+In this file import useAuthContext from `auth.js`, lets see it in action
+
+`index.js`
+```JS
+...
+import { useAuthContext } from "../../context/auth.js"
+
+const Home = () => {
+    // declare state just like you did in auth js
+    // But instead of useState, use useAuthContext
+    const [user, setUser] = useAuthContext()
+    
+    update state using setUser say
+    useEffect(() => {
+        setUser({
+            ...,
+            isAuthenticated: true,
+            user: {
+                name: "John",
+                email: "john@email.com"
+            },
+        })
+    },[])
+
+    // state is set and we can now use user
+
+    return (
+        <div>
+            {user.name && user.name}<br/>
+            {user.email && user.email}
+        </div>
+    )
+}
+
+export default Home
+```
+
+Now we have our state. You can use this state in any component but you must import [user, setUser] even when you don't need to use user.
+
+2. contextapi with useReducer
