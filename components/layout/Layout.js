@@ -7,22 +7,29 @@ import FooterLoggedIn from "../footer/FooterLoggedIn"
 import { useAuthDispatch, useAuthState } from "../../context/auth"
 import { useAlertsDispatch } from "../../context/alerts"
 import Cookies from "js-cookie"
+import { API } from "../api"
+import axios from "axios"
 
-const Layout = ({ children }) => {
-  let [loading, setLoading] = useState(false)
+const Layout = ({ data, children }) => {
+  let [loading, setLoading] = useState(true)
   const { user } = useAuthState()
   const dispatch = useAuthDispatch()
   const alertDisptach = useAlertsDispatch()
   useEffect(() => {
     let token = Cookies.get("token")
-    if (token) {
-      setLoading(true)
+    if (token)
       dispatch({
         type: "AUTH",
       })
+    if (token && data) {
+      dispatch({
+        type: "AUTH",
+        payload: data,
+      })
       setLoading(false)
     }
-    if (token && !user)
+
+    if (token && !data)
       alertDisptach({
         type: "ADD",
         payload: {
@@ -35,7 +42,9 @@ const Layout = ({ children }) => {
           type: "danger",
         },
       })
-  }, [user, loading])
+
+    setLoading(false)
+  }, [data])
   return (
     <div className="layout">
       {loading ? (
@@ -49,6 +58,18 @@ const Layout = ({ children }) => {
       )}
     </div>
   )
+}
+
+Layout.getInitialProps = async (ctx) => {
+  let token = Cookies.get("token")
+  const res = await fetch(`${API}/me`)
+  const json = await res.json()
+  return {
+    data: {
+      token,
+      ctx,
+    },
+  }
 }
 
 export default Layout

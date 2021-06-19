@@ -36,7 +36,7 @@ const authReducer = (state, action) => {
     case "AUTH":
       return {
         ...state,
-        user: payload,
+        // user: payload,
         isAuthenticated: true,
       }
     default:

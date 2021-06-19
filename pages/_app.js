@@ -5,8 +5,12 @@ import Layout from "../components/layout/Layout"
 import { AuthProvider } from "../context/auth"
 import { AlertsProvider } from "../context/alerts"
 import Alert from "../components/alerts/GlobalAlert"
+import Cookies from "js-cookie"
+import { API } from "../components/api"
+import axios from "axios"
 
-function MyApp({ Component, pageProps }) {
+const MyApp = ({ Component, pageProps }) => {
+  // console.log(data)
   const router = useRouter()
   const Site = () => {
     if (
@@ -32,5 +36,17 @@ function MyApp({ Component, pageProps }) {
     </AuthProvider>
   )
 }
+
+// MyApp.getInitialProps = async (ctx) => {
+//   // let token = Cookies.get("token")
+//   // const res = await fetch(`${API}/me`)
+//   // const json = a
+//   return {
+//     data: {
+//       // token,
+//       ctx,
+//     },
+//   }
+// }
 
 export default MyApp
