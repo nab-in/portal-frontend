@@ -7,10 +7,9 @@ import { AlertsProvider } from "../context/alerts"
 import Alert from "../components/alerts/GlobalAlert"
 import Cookies from "js-cookie"
 import { API } from "../components/api"
-import axios from "axios"
 
-const MyApp = ({ Component, pageProps }) => {
-  // console.log(data)
+const MyApp = ({ data, Component, pageProps }) => {
+  console.log(data)
   const router = useRouter()
   const Site = () => {
     if (
@@ -37,16 +36,21 @@ const MyApp = ({ Component, pageProps }) => {
   )
 }
 
-// MyApp.getInitialProps = async (ctx) => {
-//   // let token = Cookies.get("token")
-//   // const res = await fetch(`${API}/me`)
-//   // const json = a
-//   return {
-//     data: {
-//       // token,
-//       ctx,
-//     },
-//   }
-// }
+let token = Cookies.get("token")
+
+let config = {
+  headers: {
+    "Content-Type": "application/json",
+    authorization: token,
+  }
+}
+
+MyApp.getInitialProps = async () => {
+  const res = await fetch(`${API}/me`, config)   
+  const data = res.json()
+  return {
+     data,
+  }
+}
 
 export default MyApp
