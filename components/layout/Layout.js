@@ -18,7 +18,7 @@ const Layout = ({ children }) => {
         <>
           <Header />
           {children}
-          {! isAuthenticated ? <Footer /> : <FooterLoggedIn />}
+          { !isAuthenticated ? <Footer /> : <FooterLoggedIn />}
         </>
       )}
     </div>
