@@ -8,8 +8,8 @@ import Alert from "../components/alerts/GlobalAlert"
 import Cookies from "js-cookie"
 import { API } from "../components/api"
 
-const MyApp = ({ data, Component, pageProps }) => {
-  console.log(data)
+const MyApp = ({ json, Component, pageProps }) => {
+  console.log(json)
   const router = useRouter()
   const Site = () => {
     if (
@@ -47,9 +47,9 @@ let config = {
 
 MyApp.getInitialProps = async () => {
   const res = await fetch(`${API}/me`, config)   
-  const data = res.json()
+  const json = res.json()
   return {
-     data,
+     json,
   }
 }
 
