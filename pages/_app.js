@@ -41,7 +41,7 @@ let token = Cookies.get("token")
 let config = {
   headers: {
     "Content-Type": "application/json",
-    authorization: token,
+    authorization: token && token,
   }
 }
 
