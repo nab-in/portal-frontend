@@ -106,7 +106,7 @@ const Home = () => {
     // But instead of useState, use useAuthContext
     const [user, setUser] = useAuthContext()
     
-    update state using setUser say
+    // update state using setUser say
     useEffect(() => {
         setUser({
             ...user,
@@ -207,7 +207,7 @@ import React, { useReducer, useState } from "react"
 
 // reducer function
 const reducer = ( state, action ) => {
-    const {type, payload}
+    const {type, payload} = action
     switch (type) {
         // Login user
         case "LOGIN":
@@ -334,7 +334,7 @@ const DispatchContext = createContext()
 
 // reducer function
 const reducer = ( state, action ) => {
-    const {type, payload}
+    const {type, payload} = action
     switch (type) {
         // Login user
         case "LOGIN":
