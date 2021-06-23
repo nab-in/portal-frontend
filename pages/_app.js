@@ -32,7 +32,6 @@ const MyApp = ({ json, Component, pageProps }) => {
         <Site />
         <Alert />
       </AlertsProvider>
-{json}
     </AuthProvider>
   )
 }
@@ -50,7 +49,7 @@ MyApp.getInitialProps = async () => {
   const res = await fetch(`${API}/me`, config)   
   const json = res.json()
   return {
-     json: JSON.stringify(json),
+     json,
   }
 }
 
