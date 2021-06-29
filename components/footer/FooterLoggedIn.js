@@ -1,9 +1,9 @@
-import styles from "./FooterLoggedIn.module.sass";
-import Link from "next/link";
+import styles from "./FooterLoggedIn.module.sass"
+import Link from "next/link"
 
 const FooterLoggedIn = () => {
   return (
-    <footer>
+    <footer className={styles.footer_container}>
       <div className={styles.flex_container}>
         <div className={styles.f_browse}>
           <h3>Company</h3>
@@ -96,7 +96,7 @@ const FooterLoggedIn = () => {
         </p>
       </div>
     </footer>
-  );
-};
+  )
+}
 
-export default FooterLoggedIn;
+export default FooterLoggedIn
