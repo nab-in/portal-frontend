@@ -13,18 +13,39 @@ const AddCompany = () => {
         <article>
           <form onSubmit={(e) => handleSubmit(e)}>
             <Input
-              title="Firstname:"
+              title="Company Name:"
               name="firstname"
               id="firstname"
               handleChange={handleChange}
-              placeholder="Enter your First name"
+              placeholder="Enter your Company name"
             />
             <Input
-              title="Lastname"
-              name="lastname"
-              id="lastname"
+              title="Location"
+              name="location"
+              id="location"
               handleChange={handleChange}
-              placeholder="Enter your Last name"
+              placeholder="Company location"
+            />
+            <Input
+              title="Website"
+              name="website"
+              id="website"
+              handleChange={handleChange}
+              placeholder="http://..."
+            />
+            <Input
+              title="Title"
+              name="title"
+              id="title"
+              handleChange={handleChange}
+              placeholder="Company Title"
+            />
+            <Input
+              title="Bio"
+              name="bio"
+              id="bio"
+              handleChange={handleChange}
+              placeholder="Bio..."
             />
             <Button text="Save" btnClass="btn-primary" />
           </form>
