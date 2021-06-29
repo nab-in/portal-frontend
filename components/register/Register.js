@@ -1,11 +1,15 @@
 import React, { useState } from "react"
+import { useRouter } from "next/router"
 import Link from "next/link"
 import Input from "../inputs/Input"
 import FormButton from "../buttons/FormButton"
 import axios from "axios"
 import { API } from "../api"
+import { useAlertsDispatch } from "../../context/alerts"
 
 const Register = () => {
+  const router = useRouter()
+  const alertDispatch = useAlertsDispatch()
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
@@ -36,6 +40,14 @@ const Register = () => {
       .then((res) => {
         console.log(res.data)
         setLoading(false)
+        alertDispatch({
+          type: "ADD",
+          payload: {
+            message: "You have successfully registered, Login now",
+            type: "success",
+          },
+        })
+        router.push("/login")
       })
       .catch((err) => {
         setLoading(false)

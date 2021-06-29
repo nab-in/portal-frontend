@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import Link from "next/link"
+import { useAlertsDispatch } from "../../context/alerts"
 import { useAuthState, useAuthDispatch } from "../../context/auth"
 import UseClickOutside from "../UseClickOutside"
 import styles from "./profile.module.sass"
@@ -7,6 +8,7 @@ import styles from "./profile.module.sass"
 const Profile = () => {
   const { user } = useAuthState()
   const dispatch = useAuthDispatch()
+  const alertDispatch = useAlertsDispatch()
   // const { username, dp, firstname, lastname } = user
   let name = user?.username?.split("")[0]
   // takes care of profile drop down
@@ -19,6 +21,13 @@ const Profile = () => {
   const logout = () => {
     dispatch({
       type: "LOGOUT",
+    })
+    alertDispatch({
+      type: "ADD",
+      payload: {
+        message: "You have successfully logged out",
+        type: "success",
+      },
     })
   }
 

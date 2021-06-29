@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import Link from "next/link"
-import getConfig from "next/config"
 import { useRouter } from "next/router"
 import Input from "../components/inputs/Input"
 import FormButton from "../components/buttons/FormButton"
@@ -12,7 +11,6 @@ import { API } from "../components/api"
 import { useAlertsDispatch } from "../context/alerts"
 
 const login = () => {
-  const { publicRuntimeConfig } = getConfig()
   let router = useRouter()
   const dispatch = useAuthDispatch()
   let alertDispatch = useAlertsDispatch()
