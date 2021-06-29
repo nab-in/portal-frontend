@@ -1,12 +1,11 @@
 import React, { useState } from "react"
-import getConfig from "next/config"
 import Link from "next/link"
 import Input from "../inputs/Input"
 import FormButton from "../buttons/FormButton"
 import axios from "axios"
+import { API } from "../api"
 
-const JobSeeker = () => {
-  const { publicRuntimeConfig } = getConfig()
+const Register = () => {
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
@@ -33,7 +32,7 @@ const JobSeeker = () => {
     e.preventDefault()
     setLoading(true)
     axios
-      .post(`${publicRuntimeConfig.API_URL}/users/register`, formData)
+      .post(`${API}/users/register`, formData)
       .then((res) => {
         console.log(res.data)
         setLoading(false)
@@ -45,7 +44,6 @@ const JobSeeker = () => {
   }
   return (
     <div className="register__jobseeker">
-      <h2>Job Seeker</h2>
       <form onSubmit={(e) => handleSubmit(e)}>
         <Input
           type="text"
@@ -122,4 +120,4 @@ const JobSeeker = () => {
   )
 }
 
-export default JobSeeker
+export default Register
