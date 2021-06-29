@@ -149,6 +149,19 @@ const Aside = ({ page, details, tab, isUser, isCompany }) => {
                   </a>
                 </Link>
               </li>
+              <li>
+                <Link href={`/profile/${id}?tab=companies`}>
+                  <a
+                    className={
+                      tab == "companies" || tab == "add-company"
+                        ? `${styles.active}`
+                        : ""
+                    }
+                  >
+                    Companies
+                  </a>
+                </Link>
+              </li>
             </ul>
           </nav>
         </aside>
@@ -194,6 +207,19 @@ const Aside = ({ page, details, tab, isUser, isCompany }) => {
                 <Link href={`/profile?tab=saved-jobs`}>
                   <a className={tab == "saved-jobs" ? `${styles.active}` : ""}>
                     Saved Jobs
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href={`/profile?tab=companies`}>
+                  <a
+                    className={
+                      tab == "companies" || tab == "add-company"
+                        ? `${styles.active}`
+                        : ""
+                    }
+                  >
+                    Companies
                   </a>
                 </Link>
               </li>

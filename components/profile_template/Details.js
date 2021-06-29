@@ -4,6 +4,8 @@ import Profile from "./profile/Profile"
 import AppliedJobs from "./jobs/AppliedJobs"
 import EditProfile from "./edit-profile/EditProfile"
 import Jobs from "./jobs/Jobs"
+import Companies from "./companies/Companies"
+import AddCompany from "./companies/AddCompany"
 
 const Details = ({ tab, details, page, isUser, isCompany }) => {
   const Content = () => {
@@ -13,6 +15,10 @@ const Details = ({ tab, details, page, isUser, isCompany }) => {
       return <Jobs page={page} details={details} />
     if (tab == "jobs" && page != "company")
       return <Profile page={page} details={details} />
+    if (tab == "companies" && page != "company")
+      return <Companies page={page} />
+    if (tab == "add-company" && page != "company")
+      return <AddCompany page={page} />
     if (tab == "edit-profile")
       return (
         <>
