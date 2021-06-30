@@ -1,11 +1,44 @@
+import { useState } from "react"
+import axios from "axios"
+import Cookies from "js-cookie"
 import Section from "../Section"
 import Input from "../../inputs/Input"
 import Button from "../../buttons/FormButton"
+import { API } from "../../api"
 
 const AddCompany = () => {
-  const handleChange = (e) => {}
+  const [formData, setFormData] = useState({
+    name: "",
+    location: "",
+    website: "",
+    title: "",
+    bio: "",
+  })
+  const [loading, setLoading] = useState(false)
+  const handleChange = (e) => {
+    let { name, value } = e.target
+    setFormData({ ...formData, [name]: value })
+  }
   const handleSubmit = (e) => {
     e.preventDefault()
+    setLoading(true)
+    let token = Cookies.get("token")
+    let config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ` + token,
+      },
+    }
+    axios
+      .post(`${API}/companies`, formData, config)
+      .then((res) => {
+        console.log(res.data)
+        setLoading(false)
+      })
+      .catch((err) => {
+        console.log(err)
+        setLoading(false)
+      })
   }
   return (
     <div>
@@ -14,8 +47,8 @@ const AddCompany = () => {
           <form onSubmit={(e) => handleSubmit(e)}>
             <Input
               title="Company Name:"
-              name="firstname"
-              id="firstname"
+              name="name"
+              id="name"
               handleChange={handleChange}
               placeholder="Enter your Company name"
             />
@@ -47,7 +80,7 @@ const AddCompany = () => {
               handleChange={handleChange}
               placeholder="Bio..."
             />
-            <Button text="Save" btnClass="btn-primary" />
+            <Button text="Save" btnClass="btn-primary" loading={loading} />
           </form>
         </article>
       </Section>
