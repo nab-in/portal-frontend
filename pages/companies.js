@@ -7,13 +7,15 @@ import NewsLetter from "../components/newsletter/NewsLetter"
 import Company from "../components/company/Company"
 import Loader from "../components/loaders/CardLoader"
 import Spinner from "../components/loaders/ButtonLoader"
-import companies from "../data/companies"
+// import companies from "../data/companies"
 import categories from "../data/company_categories"
 import styles from "../styles/template.module.sass"
+import { API } from "../components/api"
 
-let loading = false
-let loadMore = false
-const Companies = () => {
+const Companies = ({ data, error }) => {
+  const [loadMore, setLoadMore] = useState(false)
+  let [loading, setLoading] = useState(true)
+  let [companies, setCompanies] = useState([])
   const { isAuthenticated } = useAuthState()
   let [filter, setFilter] = useState(false)
   let [search, setSearch] = useState({
@@ -21,6 +23,21 @@ const Companies = () => {
     location: "",
     categories: [],
   })
+
+  useEffect(() => {
+    if (data) {
+      setLoading(false)
+      setCompanies(data.companies)
+    }
+  }, [data])
+
+  useEffect(() => {
+    if (error) {
+      setLoading(false)
+      console.log(error)
+    }
+  }, [error])
+
   let checkSearch = (obj) => {
     for (let key in obj) {
       if (obj[key] !== null && obj[key].length > 0) {
@@ -69,11 +86,9 @@ const Companies = () => {
               ) : (
                 <>
                   {companies.length > 0 &&
-                    companies
-                      .slice(1, 6)
-                      .map((company) => (
-                        <Company company={company} key={company.id} />
-                      ))}
+                    companies.map((company) => (
+                      <Company company={company} key={company.id} />
+                    ))}
                 </>
               )}
               <div
@@ -98,6 +113,25 @@ const Companies = () => {
       </main>
     </div>
   )
+}
+
+export async function getServerSideProps() {
+  let data = null
+  let error = null
+  try {
+    const res = await fetch(`${API}/companies?pageSize=8`)
+    data = await res.json()
+  } catch (err) {
+    console.log(err)
+    error = JSON.stringify(err)
+  }
+
+  return {
+    props: {
+      error,
+      data,
+    },
+  }
 }
 
 export default Companies

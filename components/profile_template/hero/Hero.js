@@ -3,22 +3,26 @@ import { useAuthState } from "../../../context/auth"
 import Loader from "../../loaders/HeroLoader"
 import styles from "./hero.module.sass"
 
-let loading = false
-
-const Hero = ({ details, page }) => {
+const Hero = ({ details, page, loading }) => {
   const Profile = () => {
     const { isAuthenticated, user } = useAuthState()
     if (page == "company" || page == "company/jobs") {
       let { logo, name, title, id } = details
+      let defaultdp = name.split("")[0]
       return (
         <div className={styles.container}>
           <div className={styles.dp__container}>
             <div className={styles.dp}>
-              <img
-                src={`/assets/companies/${logo}`}
-                alt={`${name} logo`}
-                loading="lazy"
-              />
+              {logo ? (
+                <img
+                  src={`/assets/companies/${logo}`}
+                  alt={`${name} logo`}
+                  layout="fill"
+                  objectFit="contain"
+                />
+              ) : (
+                <div className={styles.default}>{defaultdp}</div>
+              )}
             </div>
           </div>
           <div className={styles.heading}>
