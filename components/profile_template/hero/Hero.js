@@ -43,7 +43,6 @@ const Hero = ({ details, page, loading }) => {
     }
     if (page == "user" || page == "auth-user") {
       let { dp, firstname, lastname, username, title, id } = details
-      console.log(details)
       let name = username.split("")[0]
       return (
         <div className={styles.container}>
@@ -69,9 +68,11 @@ const Hero = ({ details, page, loading }) => {
                 </span>
               </h1>
             </div>
-            <div className={`${styles.title}`}>
-              <span>{title}</span>
-            </div>
+            {title && (
+              <div className={`${styles.title}`}>
+                <span>{title}</span>
+              </div>
+            )}
           </div>
         </div>
       )

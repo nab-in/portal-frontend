@@ -9,10 +9,12 @@ const Companies = () => {
     <div>
       <Section title="Your Companies">
         <article>
-          <p>You belong to no company</p>
-          <Link href={`${router.route}?tab=add-company`}>
-            <a>Add Company</a>
-          </Link>
+          <p>
+            You belong to no company &nbsp;
+            <Link href={`${router.route}?tab=add-company`}>
+              <a>Add Company</a>
+            </Link>
+          </p>
         </article>
       </Section>
     </div>
