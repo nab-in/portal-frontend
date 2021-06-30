@@ -1,14 +1,11 @@
 import { useState, useEffect } from "react"
-import { useRouter } from "next/router"
 import Error from "../../components/error/Error"
 import Profile_Template from "../../components/profile_template/Profile_Template"
-// import companies from "../../data/companies"
 import { API } from "../../components/api"
 
 const Company = ({ data, error }) => {
   let [details, setDetails] = useState()
   let [loading, setLoading] = useState(true)
-  console.log(data)
   useEffect(() => {
     if (data) {
       setDetails(data)
