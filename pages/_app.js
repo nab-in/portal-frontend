@@ -8,13 +8,6 @@ import Alert from "../components/alerts/GlobalAlert"
 import Cookies from "js-cookie"
 import { API } from "../components/api"
 import axios from "axios"
-// import axios from "axios"
-
-// console.log(config)
-
-let token = Cookies.get("token")
-
-// console.log(token)
 
 const MyApp = ({ Component, pageProps }) => {
   const Site = () => {
@@ -23,6 +16,7 @@ const MyApp = ({ Component, pageProps }) => {
     const { user } = useAuthState()
     const router = useRouter()
     useEffect(() => {
+      let token = Cookies.get("token")
       let config = {
         headers: {
           "Content-Type": "application/json",

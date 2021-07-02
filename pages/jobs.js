@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react"
 import Hero from "../components/filter_hero/Hero"
 import Jobs from "../components/jobs_template/Jobs"
-import categories from "../data/categories"
+// import categories from "../data/categories"
 import { API } from "../components/api"
 import axios from "axios"
 
 const jobs = ({ data, error }) => {
   const [loadMore, setLoadMore] = useState(false)
+  const [categories, setCategories] = useState([])
   let [page, setPage] = useState(data?.pager.page + 1)
   let [pages, setPages] = useState(data?.pager.page < data?.pager.pageCount)
   let [jobs, setJobs] = useState([])
@@ -29,9 +30,21 @@ const jobs = ({ data, error }) => {
     if (error) {
       setLoading(false)
       if ((JSON.parse(error).code = "EHOSTUNREACH"))
-        setMessage("Internet connection error")
+        setMessage(
+          "Client error, please make sure you are connected to internet"
+        )
     }
   }, [error])
+  useEffect(() => {
+    axios
+      .get(`${API}/jobCategories`)
+      .then((res) => {
+        setCategories(res.data.jobCategories)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [])
   const handleScroll = () => {
     let jobCards = document.querySelectorAll(".main__content > .card")
     let lastJob = jobCards[jobCards.length - 1]
