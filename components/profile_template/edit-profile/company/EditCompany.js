@@ -88,7 +88,6 @@ const EditProfile = ({ details }) => {
           </form>
         </article>
       </section>
-      <Settings />
     </div>
   )
 }
