@@ -1,42 +1,74 @@
-import React from "react"
+import { useEffect, useState } from "react"
+import axios from "axios"
+import Cookies from "js-cookie"
 import { useRouter } from "next/router"
 import { useAuthState } from "../../../context/auth"
 import Aside from "../aside/Aside"
 import Details from "../Details"
 import styles from "./template.module.sass"
+import { API } from "../../api"
 
-let isUser = false
-let isCompany = false
 const Template = ({ page, details }) => {
   let router = useRouter()
+  let [isUser, setUser] = useState(false)
+  let [isCompany, setCompany] = useState(false)
+  let [loading, setLoading] = useState(false)
   let tab
   tab = router.query.tab
   const { user } = useAuthState()
-  if (user?.role === "company" && page == "company" && user?.id == details.id) {
-    isCompany = true
-  } else if (page == "auth-user") {
-    isUser = true
-  } else if (user?.id == details.id) {
-    isUser = true
-  }
+
+  useEffect(() => {
+    setLoading(true)
+    let token = Cookies.get("token")
+    let config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ` + token,
+      },
+    }
+    axios
+      .get(`${API}/users/belongstocompany?company=${router.query.id}`, config)
+      .then((res) => {
+        setLoading(false)
+        if (page == "company") setCompany(res.data)
+      })
+      .catch((err) => {
+        setLoading(false)
+        console.log(err.message)
+      })
+  }, [])
+  useEffect(() => {
+    if (page == "auth-user") {
+      setUser(true)
+    }
+    if (page == "user" && user?.id == details.id) {
+      setUser(true)
+    }
+  }, [])
   return (
     <section className={styles.template}>
-      <Aside
-        page={page}
-        details={details}
-        tab={tab}
-        isCompany={isCompany}
-        isUser={isUser}
-      />
-      <div className={styles.main__details}>
-        <Details
-          page={page}
-          details={details}
-          tab={tab}
-          isCompany={isCompany}
-          isUser={isUser}
-        />
-      </div>
+      {loading ? (
+        <></>
+      ) : (
+        <>
+          <Aside
+            page={page}
+            details={details}
+            tab={tab}
+            isCompany={isCompany}
+            isUser={isUser}
+          />
+          <div className={styles.main__details}>
+            <Details
+              page={page}
+              details={details}
+              tab={tab}
+              isCompany={isCompany}
+              isUser={isUser}
+            />
+          </div>
+        </>
+      )}
     </section>
   )
 }

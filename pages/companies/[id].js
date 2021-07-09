@@ -4,11 +4,13 @@ import Profile_Template from "../../components/profile_template/Profile_Template
 import { API } from "../../components/api"
 
 const Company = ({ data, error }) => {
-  let [details, setDetails] = useState()
+  let [details, setDetails] = useState(null)
   let [loading, setLoading] = useState(true)
   useEffect(() => {
-    if (data) {
+    if (data && data.id) {
       setDetails(data)
+      setLoading(false)
+    } else {
       setLoading(false)
     }
   }, [data])
@@ -20,10 +22,10 @@ const Company = ({ data, error }) => {
   }, [error])
   return (
     <div>
-      {details && (
+      {details && !loading && (
         <Profile_Template page="company" details={details} loading={loading} />
       )}
-      {!details && !loading && <Error />}
+      {!loading && (!details || details == undefined) && <Error />}
     </div>
   )
 }

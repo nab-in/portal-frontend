@@ -7,9 +7,6 @@ import companies from "../data/companies"
 const Company = () => {
   let { isAuthenticated } = useAuthState()
   let details
-  let id = 1
-  let company = companies.filter((el) => el.id == id)
-  if (company.length > 0) details = company[0]
   return (
     <div>
       {details && isAuthenticated && (
