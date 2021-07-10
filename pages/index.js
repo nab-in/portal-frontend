@@ -17,6 +17,7 @@ const Home = ({ data, companies, error }) => {
       if (data.jobs.length === 0) setMessage("Ooops! not a single job found")
     }
   }, [data])
+  console.log(data)
   useEffect(() => {
     if (error) {
       setLoading(false)
@@ -55,7 +56,9 @@ export async function getServerSideProps() {
   let companies = null
   let error = null
   try {
-    const res = await fetch(`${API}/jobs?pageSize=8`)
+    const res = await fetch(
+      `${API}/jobs?pageSize=8&fields=name,title,closeDate,created,company,id,location`
+    )
     companies = await (await fetch(`${API}/companies`)).json()
     data = await res.json()
   } catch (err) {

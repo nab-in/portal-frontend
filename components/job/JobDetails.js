@@ -47,36 +47,59 @@ const JobDetails = ({ job }) => {
         Authorization: `Bearer ` + token,
       },
     }
-    axios
-      .post(`${API}/jobs/${id}/apply`, config)
-      .then((res) => {
-        console.log(res)
-        setLoading(false)
-        setText("Applied!")
-      })
-      .catch((err) => {
-        setLoading(false)
-        console.log(err.message)
-      })
+    if (text == "Apply") {
+      axios
+        .post(`${API}/jobs/${id}/apply`, config)
+        .then((res) => {
+          console.log(res)
+          setLoading(false)
+          setText("Revoke")
+        })
+        .catch((err) => {
+          setLoading(false)
+          console.log(err.message)
+        })
+    }
+    if (text == "Revoke") {
+      axios
+        .post(`${API}/jobs/${id}/revoke`, config)
+        .then((res) => {
+          console.log(res)
+          setLoading(false)
+          setText("Revert")
+        })
+        .catch((err) => {
+          setLoading(false)
+          console.log(err.message)
+        })
+    }
   }
 
   return (
     <div className={styles.details}>
-      <div className={styles.title}>
-        Company/Organisation: <span>{company?.name}</span>
-      </div>
-      <div className={styles.title}>
-        Location: <span>{location}</span>
-      </div>
-      <div className={styles.title}>
-        Open To: <span>{job_type}</span>
-      </div>
-      <div className={styles.title}>
-        Email:
-        <a href={`mailto:${email}`}>
-          <span>{email}</span>
-        </a>
-      </div>
+      {company && (
+        <div className={styles.title}>
+          Company/Organisation: <span>{company?.name}</span>
+        </div>
+      )}
+      {location && (
+        <div className={styles.title}>
+          Location: <span>{location}</span>
+        </div>
+      )}
+      {job_type && (
+        <div className={styles.title}>
+          Open To: <span>{job_type}</span>
+        </div>
+      )}
+      {email && (
+        <div className={styles.title}>
+          Email:
+          <a href={`mailto:${email}`}>
+            <span>{email}</span>
+          </a>
+        </div>
+      )}
       {attachment && (
         <div className={styles.title}>
           Attachment:
