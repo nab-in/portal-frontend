@@ -7,6 +7,7 @@ import { API } from "../api"
 import axios from "axios"
 import Cookies from "js-cookie"
 import Button from "../buttons/FormButton"
+import moment from "moment"
 
 const JobDetails = ({ job }) => {
   let [rate, setRate] = useState(0)
@@ -15,8 +16,18 @@ const JobDetails = ({ job }) => {
   const [text, setText] = useState("Apply")
   let stars = [1, 2, 3, 4, 5]
   let style = { "--rating": rate }
-  let { id, job_type, location, company, email, attachment, bio } = job
-  console.log(job)
+  let {
+    id,
+    job_type,
+    location,
+    company,
+    email,
+    attachment,
+    bio,
+    description,
+    closeDate,
+  } = job
+
   const save = () => {
     let token = Cookies.get("token")
     let config = {
@@ -92,6 +103,16 @@ const JobDetails = ({ job }) => {
           Open To: <span>{job_type}</span>
         </div>
       )}
+      {bio && (
+        <div className={styles.title}>
+          Bio: <span>{bio}</span>
+        </div>
+      )}
+      {closeDate && (
+        <div className={styles.title}>
+          Deadline: <span>{moment(closeDate).format("MMM DD, YYYY")}</span>
+        </div>
+      )}
       {email && (
         <div className={styles.title}>
           Email:
@@ -111,7 +132,7 @@ const JobDetails = ({ job }) => {
         </div>
       )}
       <div className={styles.descriptions}>
-        <Linkify>{bio}</Linkify>
+        <Linkify>{description}</Linkify>
       </div>
       {!isAuthenticated && (
         <section className={styles.job__footer}>

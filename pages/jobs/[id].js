@@ -115,7 +115,7 @@ export async function getServerSideProps(context) {
   let error = null
   try {
     const res = await fetch(
-      `${API}/jobs/${context.params.id}?fields=name,title,closeDate,created,company,id,description,bio,location`
+      `${API}/jobs/${context.params.id}?fields=name,title,closeDate,created,company,id,description,bio,location,email,attachment`
     )
     data = await res.json()
   } catch (err) {
