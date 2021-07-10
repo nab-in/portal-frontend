@@ -24,8 +24,9 @@ const MyApp = ({ Component, pageProps }) => {
         },
       }
       axios
-        .get(`${API}/me`, config)
+        .get(`${API}/me?fields=firstname`, config)
         .then((res) => {
+          console.log(res)
           if (!user)
             dispatch({
               type: "AUTH",

@@ -18,7 +18,7 @@ const Template = ({ page, details }) => {
   const { user } = useAuthState()
 
   useEffect(() => {
-    setLoading(true)
+    if (page == "company" || page == "auth-company") setLoading(true)
     let token = Cookies.get("token")
     let config = {
       headers: {
