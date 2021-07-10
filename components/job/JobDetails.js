@@ -3,13 +3,63 @@ import Link from "next/link"
 import Linkify from "react-linkify"
 import styles from "./job_details.module.sass"
 import { useAuthState } from "../../context/auth"
+import { API } from "../api"
+import axios from "axios"
+import Cookies from "js-cookie"
+import Button from "../buttons/FormButton"
 
 const JobDetails = ({ job }) => {
   let [rate, setRate] = useState(0)
-  let { user, isAuthenticated } = useAuthState()
+  let { isAuthenticated } = useAuthState()
+  let [loading, setLoading] = useState(false)
+  const [text, setText] = useState("Apply")
   let stars = [1, 2, 3, 4, 5]
   let style = { "--rating": rate }
   let { id, job_type, location, company, email, attachment, bio } = job
+
+  const save = () => {
+    let token = Cookies.get("token")
+    let config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ` + token,
+      },
+    }
+    axios
+      .post(`${API}/jobs/${id}/save`, config)
+      .then((res) => {
+        console.log(res)
+        setLoading(false)
+        setText("Applied!")
+      })
+      .catch((err) => {
+        setLoading(false)
+        console.log(err.message)
+      })
+  }
+
+  const apply = () => {
+    setLoading(true)
+    let token = Cookies.get("token")
+    let config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ` + token,
+      },
+    }
+    axios
+      .post(`${API}/jobs/${id}/apply`, config)
+      .then((res) => {
+        console.log(res)
+        setLoading(false)
+        setText("Applied!")
+      })
+      .catch((err) => {
+        setLoading(false)
+        console.log(err.message)
+      })
+  }
+
   return (
     <div className={styles.details}>
       <div className={styles.title}>
@@ -27,14 +77,16 @@ const JobDetails = ({ job }) => {
           <span>{email}</span>
         </a>
       </div>
-      <div className={styles.title}>
-        Attachment:
-        <Link href={`/assets/docs/attachment1.pdf`}>
-          <a target="_blank">
-            <span>{attachment}.pdf</span>
-          </a>
-        </Link>
-      </div>
+      {attachment && (
+        <div className={styles.title}>
+          Attachment:
+          <Link href={`/assets/docs/attachment1.pdf`}>
+            <a target="_blank">
+              <span>{attachment}.pdf</span>
+            </a>
+          </Link>
+        </div>
+      )}
       <div className={styles.descriptions}>
         <Linkify>{bio}</Linkify>
       </div>
@@ -46,11 +98,21 @@ const JobDetails = ({ job }) => {
           </p>
         </section>
       )}
-      {isAuthenticated && user.verified && user.role !== "company" && (
+      {isAuthenticated && (
         <section>
           <div className={styles.btns}>
-            <button className="btn btn-secondary">Save</button>
-            <button className="btn btn-primary">Apply</button>
+            <Button
+              click={save}
+              btnClass="btn-secondary"
+              text="Save"
+              loading={loading}
+            />
+            <Button
+              click={apply}
+              btnClass={text === "Applied!" ? "btn-secondary" : "btn-primary"}
+              text={text}
+              loading={loading}
+            />
           </div>
           <div className={styles.rate}>
             <p>Rate this job</p>
