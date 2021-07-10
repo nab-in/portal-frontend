@@ -16,7 +16,7 @@ const JobDetails = ({ job }) => {
   let stars = [1, 2, 3, 4, 5]
   let style = { "--rating": rate }
   let { id, job_type, location, company, email, attachment, bio } = job
-
+  console.log(job)
   const save = () => {
     let token = Cookies.get("token")
     let config = {

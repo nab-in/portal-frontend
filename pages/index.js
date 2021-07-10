@@ -17,7 +17,6 @@ const Home = ({ data, companies, error }) => {
       if (data.jobs.length === 0) setMessage("Ooops! not a single job found")
     }
   }, [data])
-  console.log(data)
   useEffect(() => {
     if (error) {
       setLoading(false)

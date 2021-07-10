@@ -57,9 +57,8 @@ const job = ({ data, error }) => {
                     <div className={`${styles.time} ${styles.deadline}`}>
                       <span>
                         Deadline:{" "}
-                        {moment(job.created).format("MMM DD, YYYY HH:mm")}
+                        {moment(job.closeDate).format("MMM DD, YYYY HH:mm")}
                       </span>
-                      <span>{job[0]?.close_time}</span>
                     </div>
                     <div
                       className={`stars bg__stars ${styles.stars}`}

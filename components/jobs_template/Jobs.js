@@ -55,7 +55,7 @@ const Jobs = ({
         s += `&filter=name:ilike:${sub.name}`
       })
     })
-    let url = `${API}/jobs?${s}`
+    let url = `${API}/jobs?${s}&fields=name,title,closeDate,created,company,id,location`
     axios
       .get(url)
       .then((res) => {

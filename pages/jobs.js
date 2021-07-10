@@ -59,7 +59,9 @@ const jobs = ({ data, error }) => {
         ) {
           setLoadMore(true)
           axios
-            .get(`${API}/jobs?page=${page}&pageSize=8`)
+            .get(
+              `${API}/jobs?page=${page}&pageSize=8&fields=name,title,closeDate,created,company,id,location`
+            )
             .then((res) => {
               if (res.data) {
                 setPages(
@@ -119,7 +121,9 @@ export async function getServerSideProps() {
   let data = null
   let error = null
   try {
-    const res = await fetch(`${API}/jobs?pageSize=8`)
+    const res = await fetch(
+      `${API}/jobs?pageSize=8&fields=name,title,closeDate,created,company,id,location`
+    )
     data = await res.json()
   } catch (err) {
     console.log(err)
