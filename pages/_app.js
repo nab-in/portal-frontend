@@ -24,9 +24,8 @@ const MyApp = ({ Component, pageProps }) => {
         },
       }
       axios
-        .get(`${API}/me?fields=firstname`, config)
+        .get(`${API}/me`, config)
         .then((res) => {
-          console.log(res)
           if (!user)
             dispatch({
               type: "AUTH",
@@ -62,29 +61,5 @@ const MyApp = ({ Component, pageProps }) => {
     </AuthProvider>
   )
 }
-
-// MyApp.getInitialProps = async () => {
-//   let error = null
-//   let json
-//   let config = {
-//     headers: {
-//       "Content-Type": "application/json",
-//       Authorization: `Bearer ` + token,
-//     },
-//   }
-//   try {
-//     const res = await fetch(`${API}/me`, config)
-//     json = await res.json()
-//   } catch (err) {
-//     console.log(err)
-//   }
-
-//   return {
-//     json: {
-//       json,
-//       config,
-//     },
-//   }
-// }
 
 export default MyApp
