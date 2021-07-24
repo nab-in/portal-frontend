@@ -40,7 +40,7 @@ const Profile = () => {
         <div className={styles.dp__container}>
           {user?.dp ? (
             <img
-              src={`/assets/images/dp.jpeg`}
+              src={user.dp}
               alt={`dp`}
               height={40}
               width={40}
@@ -60,7 +60,7 @@ const Profile = () => {
           <div className={styles.dp__container}>
             {user?.dp ? (
               <img
-                src={`/assets/images/dp.jpeg`}
+                src={user.dp}
                 alt={`dp`}
                 height={40}
                 width={40}

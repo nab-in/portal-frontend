@@ -16,6 +16,7 @@ const JobDetails = ({ job }) => {
   const [text, setText] = useState("Apply")
   let stars = [1, 2, 3, 4, 5]
   let style = { "--rating": rate }
+  console.log(job)
   let {
     id,
     job_type,
@@ -124,7 +125,7 @@ const JobDetails = ({ job }) => {
       {attachment && (
         <div className={styles.title}>
           Attachment:
-          <Link href={`/assets/docs/attachment1.pdf`}>
+          <Link href={attachment}>
             <a target="_blank">
               <span>{attachment}.pdf</span>
             </a>
