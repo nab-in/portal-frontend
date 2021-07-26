@@ -6,8 +6,12 @@ import Upload from "../Upload"
 import styles from "../edit_profile.module.sass"
 import Settings from "../settings/Settings"
 import CV from "./CV"
+import axios from "axios"
+import { API } from "../../../api"
+import Cookies from "js-cookie"
 
 const EditProfile = ({ details }) => {
+  let [loading, setLoading] = useState(false)
   let [formData, setFormData] = useState({
     firstname: details?.firstname ? details.firstname : "",
     lastname: details?.lastname ? details.lastname : "",
@@ -24,6 +28,24 @@ const EditProfile = ({ details }) => {
   }
   const handleSubmit = (e) => {
     e.preventDefault(e)
+    setLoading(true)
+    let token = Cookies.get("token")
+    let config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ` + token,
+      },
+    }
+    axios
+      .post(`${API}/`, formData, config)
+      .then((res) => {
+        setLoading(false)
+        console.log(res)
+      })
+      .catch((err) => {
+        setLoading(false)
+        console.log(err)
+      })
   }
   return (
     <div className={styles.profile}>

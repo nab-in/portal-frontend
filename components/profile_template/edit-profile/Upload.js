@@ -4,10 +4,12 @@ import axios from "axios"
 import { FaCamera } from "react-icons/fa"
 import { API } from "../../api"
 import { useAuthDispatch } from "../../../context/auth"
+import { useAlertsDispatch } from "../../../context/alerts"
 import styles from "./upload.module.sass"
 
 const Upload = ({ dp, name }) => {
   const dispatch = useAuthDispatch()
+  const alertDispatch = useAlertsDispatch()
   name = name.split("")[0]
   let [imgData, setImgData] = useState(null)
   const handleChange = (e) => {
@@ -36,11 +38,25 @@ const Upload = ({ dp, name }) => {
             type: "ADD_DP",
             payload: res.data,
           })
+          alertDispatch({
+            type: "ADD",
+            payload: {
+              type: "success",
+              message: res.data.message,
+            },
+          })
           // setLoading(false)
         })
         .catch((err) => {
           // setLoading(false)
           console.log(err)
+          alertDispatch({
+            type: "ADD",
+            payload: {
+              type: "danger",
+              message: err.response?.data?.message,
+            },
+          })
         })
     }
   }

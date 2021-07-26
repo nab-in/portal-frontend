@@ -38,7 +38,15 @@ const authReducer = (state, action) => {
         ...state.user,
         dp: `http://localhost:5000${payload.path}`,
       }
-      console.log(userCopy.dp)
+      return {
+        ...state,
+        user: userCopy,
+      }
+    case "ADD_CV":
+      userCopy = {
+        ...state.user,
+        cv: `http://localhost:5000${payload.path}`,
+      }
       return {
         ...state,
         user: userCopy,
