@@ -13,10 +13,12 @@ const JobDetails = ({ job }) => {
   let [rate, setRate] = useState(0)
   let { isAuthenticated } = useAuthState()
   let [loading, setLoading] = useState(false)
+  let [saveLoading, setSaveLoading] = useState(false)
   const [text, setText] = useState("Apply")
+  const [saveText, setSaveText] = useState("Save")
   let stars = [1, 2, 3, 4, 5]
   let style = { "--rating": rate }
-  console.log(job)
+  // console.log(job)
   let {
     id,
     job_type,
@@ -30,6 +32,7 @@ const JobDetails = ({ job }) => {
   } = job
 
   const save = () => {
+    setSaveLoading(true)
     let token = Cookies.get("token")
     let config = {
       headers: {
@@ -37,17 +40,31 @@ const JobDetails = ({ job }) => {
         Authorization: `Bearer ` + token,
       },
     }
-    axios
-      .post(`${API}/jobs/${id}/save`, config)
-      .then((res) => {
-        console.log(res)
-        setLoading(false)
-        setText("Applied!")
-      })
-      .catch((err) => {
-        setLoading(false)
-        console.log(err.message)
-      })
+    if (saveText == "Save") {
+      axios
+        .post(`${API}/jobs/${id}/save`, {}, config)
+        .then((res) => {
+          console.log(res)
+          setSaveLoading(false)
+          setSaveText("Saved!")
+        })
+        .catch((err) => {
+          setSaveLoading(false)
+          console.log(err.response)
+        })
+    } else {
+      axios
+        .delete(`${API}/jobs/${id}/remove`, config)
+        .then((res) => {
+          console.log(res)
+          setSaveLoading(false)
+          setSaveText("Save")
+        })
+        .catch((err) => {
+          setSaveLoading(false)
+          console.log(err.response)
+        })
+    }
   }
 
   const apply = () => {
@@ -61,7 +78,7 @@ const JobDetails = ({ job }) => {
     }
     if (text == "Apply") {
       axios
-        .post(`${API}/jobs/${id}/apply`, config)
+        .post(`${API}/jobs/${id}/apply`, {}, config)
         .then((res) => {
           console.log(res)
           setLoading(false)
@@ -69,16 +86,16 @@ const JobDetails = ({ job }) => {
         })
         .catch((err) => {
           setLoading(false)
-          console.log(err.message)
+          console.log(err.response)
         })
     }
     if (text == "Revoke") {
       axios
-        .post(`${API}/jobs/${id}/revoke`, config)
+        .delete(`${API}/jobs/${id}/revoke`, config)
         .then((res) => {
           console.log(res)
           setLoading(false)
-          setText("Revert")
+          setText("Apply")
         })
         .catch((err) => {
           setLoading(false)
@@ -149,7 +166,7 @@ const JobDetails = ({ job }) => {
             <Button
               click={save}
               btnClass="btn-secondary"
-              text="Save"
+              text={saveText}
               loading={loading}
             />
             <Button

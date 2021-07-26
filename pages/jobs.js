@@ -37,7 +37,7 @@ const jobs = ({ data, error }) => {
   }, [error])
   useEffect(() => {
     axios
-      .get(`${API}/jobCategories`)
+      .get(`${API}/jobCategories?fields=id,name,children[id, name]`)
       .then((res) => {
         setCategories(res.data.jobCategories)
       })

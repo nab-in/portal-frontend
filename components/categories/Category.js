@@ -7,7 +7,7 @@ import styles from "./category.module.sass"
 // filter dropdown component per each category
 const Category = ({ category, search, setSearch }) => {
   let [openDropdown, setOpenDropdown] = useState(false)
-  let { name, sub_categories, id } = category
+  let { name, children, id } = category
   const open = () => {
     setOpenDropdown(!openDropdown)
   }
@@ -19,7 +19,7 @@ const Category = ({ category, search, setSearch }) => {
 
   return (
     <>
-      {sub_categories.length > 0 && (
+      {children?.length > 0 && (
         <div className={styles.category} ref={node}>
           <button onClick={open}>
             {name}{" "}
@@ -36,7 +36,7 @@ const Category = ({ category, search, setSearch }) => {
                 : `${styles.dropdown}`
             }
           >
-            {sub_categories.map((sub) => (
+            {children.map((sub) => (
               <SubCategory
                 key={sub.id}
                 sub={sub}

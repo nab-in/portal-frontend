@@ -44,7 +44,7 @@ const Profile = () => {
               alt={`dp`}
               height={40}
               width={40}
-              objectFit="cover"
+              // objectFit="cover"
             />
           ) : (
             <>{name && <div className={styles.default}>{name}</div>}</>
@@ -64,7 +64,7 @@ const Profile = () => {
                 alt={`dp`}
                 height={40}
                 width={40}
-                objectFit="cover"
+                // objectFit="cover"
               />
             ) : (
               <>{name && <div className={styles.default}>{name}</div>}</>

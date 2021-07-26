@@ -6,7 +6,7 @@ const Job = ({ job }) => {
   let {
     id,
     name,
-    // company,
+    company,
     created,
     closeDate,
     job_type,
@@ -15,13 +15,12 @@ const Job = ({ job }) => {
   } = job
   let reviews = 0.85
   let style = { "--rating": reviews * 5 }
-  // console.log(job)
   return (
     <article className={`card ${styles.job__card}`}>
       <div className={styles.logo__container}>
         <div className={styles.logo}>
           <img
-            src={`/assets/companies/logo1.png`}
+            src={company.logo}
             alt={`${job.company?.name} logo`}
             loading="lazy"
           />
@@ -47,7 +46,9 @@ const Job = ({ job }) => {
             <a>{job.company?.name}</a>
           </Link>
         </p>
-        <p>{/* Job Type: <span>{job_type}</span> */}</p>
+        <p>
+          Job Type: <span>{job_type}</span>
+        </p>
         {location && (
           <p>
             Location: <span>{location}</span>
