@@ -54,7 +54,6 @@ const authReducer = (state, action) => {
 
     // Get user data
     case "AUTH":
-      console.log(state.user)
       return {
         ...state,
         user: payload,

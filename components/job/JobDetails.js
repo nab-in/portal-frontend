@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import Linkify from "react-linkify"
 import styles from "./job_details.module.sass"
@@ -103,6 +103,25 @@ const JobDetails = ({ job }) => {
         })
     }
   }
+
+  useEffect(() => {
+    let token = Cookies.get("token")
+    let config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ` + token,
+      },
+    }
+    axios
+      .get(`${API}/users/appliedJobs?filter=jobId:eq:${id}`, config)
+      .then((res) => {
+        console.log(`${API}/users/appliedJobs?filter=jobId:eq:${id}`)
+        console.log(res.data.jobs)
+      })
+      .catch((err) => {
+        console.log(err.response.data.message)
+      })
+  }, [])
 
   return (
     <div className={styles.details}>
