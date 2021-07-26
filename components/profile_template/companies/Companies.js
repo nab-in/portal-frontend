@@ -3,6 +3,7 @@ import { useRouter } from "next/router"
 import axios from "axios"
 import Link from "next/link"
 import Section from "../Section"
+import Company from "../../company/Company"
 import { API } from "../../api"
 import Cookies from "js-cookie"
 
@@ -21,25 +22,35 @@ const Companies = () => {
     axios
       .get(`${API}/me?fields=companies`, config)
       .then((res) => {
-        console.log(res)
-        setCompanies(res.data)
+        // console.log(res)
+        setCompanies(res.data.companies)
       })
       .catch((err) => {
         console.log(err)
       })
   }, [])
   // add them in a global state
-  console.log(companies)
+  // console.log(companies)
   return (
     <div>
       <Section title="Your Companies">
         <article>
-          <p>
-            You belong to no company &nbsp;
-            <Link href={`${router.route}?tab=add-company`}>
-              <a>Add Company</a>
-            </Link>
-          </p>
+          {companies.length > 0 ? (
+            <>
+              {companies.map((company) => (
+                <Company key={company.id} company={company} page="auth" />
+              ))}
+            </>
+          ) : (
+            <>
+              <p>
+                You belong to no company &nbsp;
+                <Link href={`${router.route}?tab=add-company`}>
+                  <a>Add Company</a>
+                </Link>
+              </p>
+            </>
+          )}
         </article>
       </Section>
     </div>

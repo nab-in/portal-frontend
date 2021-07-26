@@ -3,31 +3,37 @@ import Link from "next/link"
 import { GoVerified } from "react-icons/go"
 import styles from "./company.module.sass"
 
-const Company = ({ company }) => {
+const Company = ({ company, page }) => {
   let { id, logo, name, jobs } = company
   return (
     <div className={`card ${styles.card}`}>
       <div className={styles.company}>
         <div className={styles.logo}>
-          <img
-            src={`/assets/companies/${logo}`}
-            alt={`${name} logo`}
-            loading="lazy"
-          />
+          <img src={logo} alt={`${name} logo`} loading="lazy" />
         </div>
         <div className={styles.name}>
           <Link href={`/companies/${id}`}>{name}</Link>
         </div>
       </div>
       <div className={styles.details}>
-        <div className={`badge verified ${styles.verified}`}>
-          Verified <GoVerified className="icon" />
-        </div>
-        <div className={styles.jobs}>
-          <Link href={`/companies/${id}/jobs`}>
-            <a>Jobs: {jobs}</a>
-          </Link>
-        </div>
+        {page == "auth" ? (
+          <>
+            <a href={`http://localhost:3005/?company=${id}`} target="_blank">
+              Visit Dashboard
+            </a>
+          </>
+        ) : (
+          <>
+            <div className={`badge verified ${styles.verified}`}>
+              Verified <GoVerified className="icon" />
+            </div>
+            <div className={styles.jobs}>
+              <Link href={`/companies/${id}/jobs`}>
+                <a>Jobs: {jobs}</a>
+              </Link>
+            </div>
+          </>
+        )}
       </div>
     </div>
   )

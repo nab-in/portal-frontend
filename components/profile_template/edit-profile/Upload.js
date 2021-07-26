@@ -1,18 +1,47 @@
-import React, { useState } from "react"
+import { useState } from "react"
+import Cookies from "js-cookie"
+import axios from "axios"
 import { FaCamera } from "react-icons/fa"
+import { API } from "../../api"
+import { useAuthDispatch } from "../../../context/auth"
 import styles from "./upload.module.sass"
 
 const Upload = ({ dp, name }) => {
+  const dispatch = useAuthDispatch()
   name = name.split("")[0]
   let [imgData, setImgData] = useState(null)
   const handleChange = (e) => {
     if (e.target.files) {
       const reader = new FileReader()
+      const data = new FormData()
       reader.addEventListener("load", () => {
         setImgData(reader.result)
-        console.log(imgData)
       })
       reader.readAsDataURL(e.target.files[0])
+
+      // uploading file
+      let token = Cookies.get("token")
+      let config = {
+        headers: {
+          Authorization: `Bearer ` + token,
+        },
+      }
+
+      data.append("", e.target.files[0])
+      axios
+        .post(`${API}/users/dp`, data, config)
+        .then((res) => {
+          console.log(res.data)
+          dispatch({
+            type: "ADD_DP",
+            payload: res.data,
+          })
+          // setLoading(false)
+        })
+        .catch((err) => {
+          // setLoading(false)
+          console.log(err)
+        })
     }
   }
 
@@ -32,7 +61,7 @@ const Upload = ({ dp, name }) => {
             ) : (
               <>
                 {dp ? (
-                  <img src="/assets/companies/logo2.png" alt="dp" />
+                  <img src={dp} alt="dp" />
                 ) : (
                   <div className={styles.default}>{name}</div>
                 )}

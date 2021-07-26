@@ -14,12 +14,7 @@ const Hero = ({ details, page, loading }) => {
           <div className={styles.dp__container}>
             <div className={styles.dp}>
               {logo ? (
-                <img
-                  src={`/assets/companies/${logo}`}
-                  alt={`${name} logo`}
-                  layout="fill"
-                  objectFit="contain"
-                />
+                <img src={logo} alt={`${name} logo`} />
               ) : (
                 <div className={styles.default}>{defaultdp}</div>
               )}
@@ -50,10 +45,10 @@ const Hero = ({ details, page, loading }) => {
             <div className={styles.dp}>
               {dp ? (
                 <img
-                  src={`/assets/companies/${dp}`}
-                  alt={`${username} logo`}
-                  layout="fill"
-                  objectFit="contain"
+                  src={dp}
+                  alt={`${username}`}
+                  // layout="fill"
+                  // objectFit="contain"
                 />
               ) : (
                 <div className={styles.default}>{name}</div>

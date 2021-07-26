@@ -9,6 +9,7 @@ if (token === "") Cookies.set("token", "")
 
 const authReducer = (state, action) => {
   let { type, payload } = action
+  let userCopy
   switch (type) {
     case "LOGIN":
       Cookies.set("token", payload.token)
@@ -32,8 +33,20 @@ const authReducer = (state, action) => {
         isAuthenticated: false,
       }
 
+    case "ADD_DP":
+      userCopy = {
+        ...state.user,
+        dp: `http://localhost:5000${payload.path}`,
+      }
+      console.log(userCopy.dp)
+      return {
+        ...state,
+        user: userCopy,
+      }
+
     // Get user data
     case "AUTH":
+      console.log(state.user)
       return {
         ...state,
         user: payload,
