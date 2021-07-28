@@ -39,7 +39,7 @@ const job = ({ data, error }) => {
                 <div className={styles.logo__container}>
                   <div className={styles.logo}>
                     <img
-                      src={`/assets/companies/logo1.png`}
+                      src={job.company.logo}
                       alt={`${job.name} logo`}
                       loading="lazy"
                     />
