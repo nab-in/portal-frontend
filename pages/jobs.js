@@ -6,6 +6,7 @@ import { API } from "../components/api"
 import axios from "axios"
 
 const jobs = ({ data, error }) => {
+  // state
   const [loadMore, setLoadMore] = useState(false)
   const [categories, setCategories] = useState([])
   let [page, setPage] = useState(data?.pager.page + 1)
@@ -49,17 +50,22 @@ const jobs = ({ data, error }) => {
   }, [])
 
   const handleScroll = () => {
+    // getting the last job card
     let jobCards = document.querySelectorAll(".main__content > .card")
     let lastJob = jobCards[jobCards.length - 1]
+
+    // checking for the last job item
     if (lastJob) {
       let lastJobOffset = lastJob.offsetTop + lastJob.clientHeight
       let pageOffset = window.pageYOffset + window.innerHeight
       if (pageOffset > lastJobOffset) {
+        // checking if page number is less than the actual number of pages sent from api
         if (
           page <= Math.ceil(data?.pager.total / data?.pager.pageSize) &&
           !loadMore &&
           pages
         ) {
+          // fetching more jobs
           setLoadMore(true)
           axios
             .get(
@@ -67,12 +73,17 @@ const jobs = ({ data, error }) => {
             )
             .then((res) => {
               if (res.data) {
+                // check if number of pages returned from api is less than the actual number of pages
                 setPages(
                   res.data.pager.page <=
                     Math.ceil(res.data.pager.total / res.data.pager.pageSize)
                 )
+
+                // concatenating jobs items
                 setJobs(jobs.concat(res.data.jobs))
                 setLoadMore(false)
+
+                // setting the page number
                 setPage(parseInt(res.data?.pager.page) + 1)
               }
             })
@@ -81,6 +92,8 @@ const jobs = ({ data, error }) => {
               setLoadMore(false)
             })
         }
+
+        // checks if existing page number is greater than the page returned from the api
         if (page > Math.ceil(data?.pager.total / data?.pager.pageSize)) {
           setLoadMore(false)
           setMessage("You have seen it all")
