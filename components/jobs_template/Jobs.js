@@ -44,10 +44,11 @@ const Jobs = ({
     }
   }
   const searching = () => {
-    setLoading(true)
     let s = ""
-    if (search?.keyword.trim != "") s += `&filter=name:ilike:${search?.keyword}`
-    if (search?.location.trim != "")
+    if (search?.keyword.trim() != "")
+      s += `&filter=name:ilike:${search?.keyword}`
+
+    if (search?.location.trim() != "")
       s += `&filter=location:ilike:${search?.location}`
     search?.categories.forEach((category) => {
       s += `&filter=name:ilike:${category.name}`
@@ -56,16 +57,19 @@ const Jobs = ({
       })
     })
     let url = `${API}/jobs?${s}&fields=name,title,closeDate,created,company,id,location`
-    axios
-      .get(url)
-      .then((res) => {
-        setResults(res.data.jobs)
-        setLoading(false)
-      })
-      .catch((err) => {
-        console.log(err)
-        setLoading(false)
-      })
+    if (s.trim().length > 0) {
+      setLoading(true)
+      axios
+        .get(url)
+        .then((res) => {
+          setResults(res.data.jobs)
+          setLoading(false)
+        })
+        .catch((err) => {
+          console.log(err)
+          setLoading(false)
+        })
+    }
   }
   // updating UI
   useEffect(() => {

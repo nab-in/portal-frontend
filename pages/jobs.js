@@ -26,6 +26,7 @@ const jobs = ({ data, error }) => {
       if (data.jobs.length === 0) setMessage("Ooops! not a single job found")
     }
   }, [data])
+
   useEffect(() => {
     if (error) {
       setLoading(false)
@@ -35,6 +36,7 @@ const jobs = ({ data, error }) => {
         )
     }
   }, [error])
+
   useEffect(() => {
     axios
       .get(`${API}/jobCategories?fields=id,name,children[id, name]`)
@@ -45,6 +47,7 @@ const jobs = ({ data, error }) => {
         console.log(err)
       })
   }, [])
+
   const handleScroll = () => {
     let jobCards = document.querySelectorAll(".main__content > .card")
     let lastJob = jobCards[jobCards.length - 1]
