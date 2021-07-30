@@ -8,22 +8,13 @@ let loading = false
 let Card = ({ title, content, url }) => (
   <div className={styles.card}>
     <h3>{title}</h3>
-    <p>{url ? <a href={content}>{content}</a> : ` ${content} `}</p>
+    <p>{url ? <a href={url}>{content}</a> : ` ${content} `}</p>
   </div>
 )
 
 const Profile = ({ details }) => {
-  let { id, title, bio, about, website, cv, location } = details
-  let data = {
-    title,
-    bio,
-    about,
-    website,
-    cv,
-    location,
-  }
-  let check = Object.values(data)
-  console.log(check)
+  let { id, title, bio, about, website, cv, location, firstname } = details
+
   return (
     <div className={styles.profile}>
       <Section title="About">
@@ -50,8 +41,8 @@ const Profile = ({ details }) => {
               {bio && <Card title="Bio" content={bio} />}
               {location && <Card title="Location" content={location} />}
               {about && <Card title="About" content={about} />}
-              {website && <Card title="Website" content={website} url={true} />}
-              {cv && <Card title="CV" content={cv} url="true" />}
+              {website && <Card title="Website" content={website} url={url} />}
+              {cv && <Card title="CV" content={`${firstname} cv`} url={cv} />}
             </>
           )}
         </article>

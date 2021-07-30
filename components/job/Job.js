@@ -46,9 +46,11 @@ const Job = ({ job }) => {
             <a>{job.company?.name}</a>
           </Link>
         </p>
-        <p>
-          Job Type: <span>{job_type}</span>
-        </p>
+        {job_type && (
+          <p>
+            Job Type: <span>{job_type}</span>
+          </p>
+        )}
         {location && (
           <p>
             Location: <span>{location}</span>

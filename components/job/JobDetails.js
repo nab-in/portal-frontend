@@ -186,7 +186,7 @@ const JobDetails = ({ job }) => {
               click={save}
               btnClass="btn-secondary"
               text={saveText}
-              loading={loading}
+              loading={saveLoading}
             />
             <Button
               click={apply}
