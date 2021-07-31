@@ -28,8 +28,8 @@ const Company = ({ company, page }) => {
               Verified <GoVerified className="icon" />
             </div>
             <div className={styles.jobs}>
-              <Link href={`/companies/${id}/jobs`}>
-                <a>Jobs: {jobs}</a>
+              <Link href={`/companies/${id}?tab=jobs`}>
+                <a>Jobs</a>
               </Link>
             </div>
           </>

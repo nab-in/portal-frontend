@@ -24,9 +24,9 @@ const Hero = ({ details, page, loading }) => {
             <div className={styles.name}>
               <h1>
                 <span>{name}</span>
-                {isAuthenticated && user?.role !== "company" && (
+                {/* {isAuthenticated && user?.role !== "company" && (
                   <span className="badge unverified">Follow</span>
-                )}
+                )} */}
               </h1>
             </div>
             <div className={`${styles.title}`}>

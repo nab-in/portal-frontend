@@ -26,12 +26,12 @@ const Companies = ({ companies, loading }) => {
                       <Link href={`/companies/${id}`}>
                         <div className={`${styles.logo__container}`}>
                           <img
-                            src={`/assets/companies/${logo}`}
+                            src={logo}
                             alt={`${name} logo`}
                           />
                         </div>
                       </Link>
-                      <Link href={`/companies/${id}/jobs/`}>
+                      <Link href={`/companies/${id}?tab=jobs`}>
                         <a>View {jobs} Jobs</a>
                       </Link>
                     </article>

@@ -41,7 +41,9 @@ const Profile = ({ details }) => {
               {bio && <Card title="Bio" content={bio} />}
               {location && <Card title="Location" content={location} />}
               {about && <Card title="About" content={about} />}
-              {website && <Card title="Website" content={website} url={url} />}
+              {website && (
+                <Card title="Website" content={website} url={website} />
+              )}
               {cv && <Card title="CV" content={`${firstname} cv`} url={cv} />}
             </>
           )}
