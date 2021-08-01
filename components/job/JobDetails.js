@@ -18,7 +18,7 @@ const JobDetails = ({ job }) => {
   const [saveText, setSaveText] = useState("Save")
   let stars = [1, 2, 3, 4, 5]
   let style = { "--rating": rate }
-  // console.log(job)
+  console.log(job)
   let {
     id,
     job_type,
@@ -147,7 +147,8 @@ const JobDetails = ({ job }) => {
       )}
       {closeDate && (
         <div className={styles.title}>
-          Deadline: <span>{moment(closeDate).format("MMM DD, YYYY")}</span>
+          Deadline:{" "}
+          <span>{moment(closeDate).format("MMM DD, YYYY HH:mm")}</span>
         </div>
       )}
       {email && (

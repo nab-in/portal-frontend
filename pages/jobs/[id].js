@@ -8,6 +8,7 @@ import DetailsLoader from "../../components/loaders/DetailsLoader"
 import styles from "../../styles/job.module.sass"
 import { API } from "../../components/api"
 import { useAuthState } from "../../context/auth"
+import Error from "../../components/error/Error"
 
 const job = ({ data, error }) => {
   let [loading, setLoading] = useState(true)
@@ -27,61 +28,13 @@ const job = ({ data, error }) => {
   let style = { "--rating": 0.85 * 5 }
   return (
     <div>
-      <div className={styles.hero}>
-        {loading ? (
-          <>
+      {loading ? (
+        <>
+          <div className={styles.hero}>
             <HeroLoader />
-          </>
-        ) : (
-          <>
-            {job && (
-              <div className={styles.container}>
-                <div className={styles.logo__container}>
-                  <div className={styles.logo}>
-                    <img
-                      src={job.company.logo}
-                      alt={`${job.name} logo`}
-                      loading="lazy"
-                    />
-                  </div>
-                </div>
-                <div className={styles.job__heading}>
-                  <div className={styles.title}>
-                    <h1>{job.name}</h1>
-                  </div>
-                  <div className={styles.time__details}>
-                    <div className={`${styles.time} ${styles.posted}`}>
-                      Posted at:&nbsp;{" "}
-                      {moment(job.created).format("MMM DD, YYYY")}
-                    </div>
-                    <div className={`${styles.time} ${styles.deadline}`}>
-                      <span>
-                        Deadline:{" "}
-                        {moment(job.closeDate).format("MMM DD, YYYY HH:mm")}
-                      </span>
-                    </div>
-                    <div
-                      className={`stars bg__stars ${styles.stars}`}
-                      style={style}
-                    ></div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </>
-        )}
-      </div>
-      <main>
-        <div className={styles.template}>
-          {error ? (
-            <>
-              <p>
-                Failed to load, please check your internet connection and try
-                again
-              </p>
-            </>
-          ) : (
-            <>
+          </div>
+          <main>
+            <div className={styles.template}>
               <h1 className="primary__header">Details</h1>
               <div className={`${styles.template__layout} template__layout`}>
                 <div className={`${styles.main__content} main__content`}>
@@ -93,19 +46,76 @@ const job = ({ data, error }) => {
                     <>{job && <JobDetails job={job} />}</>
                   )}
                 </div>
-                <div className={`${styles.sub__content} sub__content`}>
-                  <RelatedJobs />
-                  {!isAuthenticated && (
-                    <div className={styles.newsletter}>
-                      <NewsLetter />
-                    </div>
-                  )}
-                </div>
               </div>
+            </div>
+          </main>
+        </>
+      ) : (
+        <>
+          {job?.id ? (
+            <>
+              <div className={styles.hero}>
+                <>
+                  <div className={styles.container}>
+                    <div className={styles.logo__container}>
+                      <div className={styles.logo}>
+                        <img
+                          src={job.company?.logo}
+                          alt={`${job?.name} logo`}
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                    <div className={styles.job__heading}>
+                      <div className={styles.title}>
+                        <h1>{job.name}</h1>
+                      </div>
+                      <div className={styles.time__details}>
+                        <div className={`${styles.time} ${styles.posted}`}>
+                          Posted at:&nbsp;{" "}
+                          {moment(job.created).format("MMM DD, YYYY")}
+                        </div>
+                        <div className={`${styles.time} ${styles.deadline}`}>
+                          <span>
+                            Deadline:{" "}
+                            {moment(job.closeDate).format("MMM DD, YYYY HH:mm")}
+                          </span>
+                        </div>
+                        <div
+                          className={`stars bg__stars ${styles.stars}`}
+                          style={style}
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              </div>
+              <main>
+                <div className={styles.template}>
+                  <h1 className="primary__header">Details</h1>
+                  <div
+                    className={`${styles.template__layout} template__layout`}
+                  >
+                    <div className={`${styles.main__content} main__content`}>
+                      {job && <JobDetails job={job} />}
+                    </div>
+                    <div className={`${styles.sub__content} sub__content`}>
+                      <RelatedJobs />
+                      {!isAuthenticated && (
+                        <div className={styles.newsletter}>
+                          <NewsLetter />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </main>
             </>
+          ) : (
+            <Error />
           )}
-        </div>
-      </main>
+        </>
+      )}
     </div>
   )
 }
