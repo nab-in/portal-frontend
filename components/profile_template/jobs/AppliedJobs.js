@@ -15,7 +15,7 @@ const AppliedJobs = () => {
     }
     axios
       .get(
-        `${API}/users/savedJobs?fields=id,name,company,location,created,closeDate`,
+        `${API}/users/appliesJobs?fields=id,name,company,location,created,closeDate`,
         config
       )
       .then((res) => {

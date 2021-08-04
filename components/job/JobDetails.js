@@ -18,7 +18,7 @@ const JobDetails = ({ job }) => {
   const [saveText, setSaveText] = useState("Save")
   let stars = [1, 2, 3, 4, 5]
   let style = { "--rating": rate }
-  console.log(job)
+
   let {
     id,
     job_type,
@@ -164,7 +164,7 @@ const JobDetails = ({ job }) => {
           Attachment:
           <Link href={attachment}>
             <a target="_blank">
-              <span>{attachment}.pdf</span>
+              <span>Attachment.pdf</span>
             </a>
           </Link>
         </div>
@@ -196,7 +196,7 @@ const JobDetails = ({ job }) => {
               loading={loading}
             />
           </div>
-          <div className={styles.rate}>
+          {/* <div className={styles.rate}>
             <p>Rate this job</p>
             <div className={styles.stars} style={style}>
               {stars.map((star) => (
@@ -207,7 +207,7 @@ const JobDetails = ({ job }) => {
                 ></span>
               ))}
             </div>
-          </div>
+          </div> */}
         </section>
       )}
     </div>

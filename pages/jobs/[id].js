@@ -25,7 +25,7 @@ const job = ({ data, error }) => {
       setLoading(false)
     }
   }, [error])
-  let style = { "--rating": 0.85 * 5 }
+  // let style = { "--rating": 0.85 * 5 }
   return (
     <div>
       {loading ? (
@@ -81,10 +81,10 @@ const job = ({ data, error }) => {
                             {moment(job.closeDate).format("MMM DD, YYYY HH:mm")}
                           </span>
                         </div>
-                        <div
+                        {/* <div
                           className={`stars bg__stars ${styles.stars}`}
                           style={style}
-                        ></div>
+                        ></div> */}
                       </div>
                     </div>
                   </div>
