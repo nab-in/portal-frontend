@@ -8,7 +8,7 @@ import UseClickOutside from "../UseClickOutside"
 import styles from "./Header.module.sass"
 import rippleEffect from "../rippleEffect.js"
 import Profile from "./Profile"
-import Notifications from "./Notifications"
+// import Notifications from "./Notifications"
 import Logo from "../Logo"
 
 const Search = () => {
@@ -117,7 +117,7 @@ const Header = () => {
           )}
           {isAuthenticated && (
             <div className={styles.auth}>
-              <Notifications />
+              {/* <Notifications /> */}
               <Profile />
             </div>
           )}
