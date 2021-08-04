@@ -1,5 +1,4 @@
 import { useState } from "react"
-// import { AiOutlineCloudUpload } from "react-icons/ai"
 import Section from "../../Section"
 import Button from "../../../buttons/FormButton"
 import styles from "./cv.module.sass"
@@ -9,7 +8,7 @@ import Cookies from "js-cookie"
 import { useAlertsDispatch } from "../../../../context/alerts"
 import { useAuthDispatch } from "../../../../context/auth"
 
-const CV = () => {
+const CV = ({ userCv }) => {
   let [loading, setLoading] = useState(false)
   const [cv, setCv] = useState("")
   const dispatch = useAuthDispatch()
@@ -60,6 +59,27 @@ const CV = () => {
   return (
     <Section title="Upload CV">
       <article className={styles.cv}>
+        {userCv && (
+          <p
+            style={{
+              marginBottom: "1rem",
+            }}
+          >
+            CV:{" "}
+            <a href={userCv} target="_blank">
+              Your CV
+            </a>
+            <br />
+            <span
+              style={{
+                marginTop: ".7rem",
+                display: "block",
+              }}
+            >
+              Change?
+            </span>
+          </p>
+        )}
         <form onSubmit={(e) => handleFileSubmit(e)}>
           <label htmlFor="cv">
             <input
@@ -69,7 +89,7 @@ const CV = () => {
               onChange={(e) => handleFileChange(e)}
             />
           </label>
-          <Button text="Upload" btnClass="btn-primary" />
+          <Button text="Upload" btnClass="btn-primary" loading={loading} />
         </form>
       </article>
     </Section>

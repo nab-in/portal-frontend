@@ -52,6 +52,15 @@ const authReducer = (state, action) => {
         user: userCopy,
       }
 
+    case "ADD_PROFILE":
+      let id = Cookies.get("identity")
+      if (id) id = JSON.parse(id)
+      userCopy = { ...payload, identity: id }
+      return {
+        ...state,
+        user: userCopy,
+      }
+
     // Get user data
     case "AUTH":
       return {

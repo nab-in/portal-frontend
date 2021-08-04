@@ -33,7 +33,7 @@ const Upload = ({ dp, name }) => {
       axios
         .post(`${API}/users/dp`, data, config)
         .then((res) => {
-          console.log(res.data)
+          // console.log(res.data)
           dispatch({
             type: "ADD_DP",
             payload: res.data,
@@ -49,7 +49,7 @@ const Upload = ({ dp, name }) => {
         })
         .catch((err) => {
           // setLoading(false)
-          console.log(err)
+          // console.log(err)
           alertDispatch({
             type: "ADD",
             payload: {

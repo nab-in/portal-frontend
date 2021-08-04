@@ -9,6 +9,8 @@ import CV from "./CV"
 import axios from "axios"
 import { API } from "../../../api"
 import Cookies from "js-cookie"
+import { useAuthDispatch } from "../../../../context/auth"
+import { useAlertsDispatch } from "../../../../context/alerts"
 
 const EditProfile = ({ details }) => {
   let [loading, setLoading] = useState(false)
@@ -20,8 +22,23 @@ const EditProfile = ({ details }) => {
     location: details.location ? details.location : "",
     about: details.about ? details.about : "",
     website: details.website ? details.website : "",
+    websitelink: details?.websitelink ? details.websitelink : "",
+    cvlink: details?.cvlink ? details.cvlink : "",
   })
-  let { firstname, lastname, title, bio, location, about, website } = formData
+  let {
+    firstname,
+    lastname,
+    title,
+    bio,
+    location,
+    about,
+    websitelink,
+    cvlink,
+  } = formData
+
+  const dispatch = useAlertsDispatch()
+  const authDispatch = useAuthDispatch()
+
   const handleChange = (e) => {
     let { name, value } = e.target
     setFormData({ ...formData, [name]: value })
@@ -37,14 +54,24 @@ const EditProfile = ({ details }) => {
       },
     }
     axios
-      .post(`${API}/`, formData, config)
+      .put(`${API}/users/${details?.id}`, formData, config)
       .then((res) => {
+        dispatch({
+          type: "ADD",
+          payload: {
+            type: "success",
+            message: "Profile updates successfully",
+          },
+        })
+        authDispatch({
+          type: "ADD_PROFILE",
+          payload: res.data.payload,
+        })
         setLoading(false)
-        console.log(res)
       })
       .catch((err) => {
+        console.log(err?.response)
         setLoading(false)
-        console.log(err)
       })
   }
   return (
@@ -108,17 +135,26 @@ const EditProfile = ({ details }) => {
             <Input
               type="url"
               title="Website"
-              name="website"
+              name="websitelink"
               id="website"
-              value={website}
+              value={websitelink}
               handleChange={handleChange}
               placeholder="http://..."
             />
-            <Button text="Save" btnClass="btn-primary" />
+            <Input
+              type="url"
+              title="Enter url if you have your cv on other website"
+              name="cvlink"
+              id="cvlink"
+              value={cvlink}
+              handleChange={handleChange}
+              placeholder="http://..."
+            />
+            <Button text="Save" btnClass="btn-primary" loading={loading} />
           </form>
         </article>
       </Section>
-      <CV />
+      <CV userCv={details.cv} />
       <Settings page="user" />
     </div>
   )
