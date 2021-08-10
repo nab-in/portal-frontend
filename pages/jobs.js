@@ -4,14 +4,17 @@ import Jobs from "../components/jobs_template/Jobs"
 // import categories from "../data/categories"
 import { API } from "../components/api"
 import axios from "axios"
+import infiniteScroll, { searching } from "../components/infiniteScroll"
 
 const jobs = ({ data, error }) => {
-  // state
+  // states
   const [loadMore, setLoadMore] = useState(false)
   const [categories, setCategories] = useState([])
   let [page, setPage] = useState(data?.pager.page + 1)
   let [pages, setPages] = useState(data?.pager.page < data?.pager.pageCount)
   let [jobs, setJobs] = useState([])
+  let [errors, setErrors] = useState(null)
+  let [results, setResults] = useState(null)
   let [message, setMessage] = useState(null)
   let [loading, setLoading] = useState(true)
   let [search, setSearch] = useState({
@@ -19,6 +22,53 @@ const jobs = ({ data, error }) => {
     location: "",
     categories: [],
   })
+
+  let returnValue = "res.data.jobs"
+
+  let url = `${API}/jobs?&fields=name,title,closeDate,created,company,id,location`
+
+  let searchUrl = ``
+
+  // const searching = () => {
+  //   let s = ""
+  //   if (search?.keyword.trim() != "")
+  //     s += `&filter=name:ilike:${search?.keyword}`
+
+  //   if (search?.location.trim() != "")
+  //     s += `&filter=location:ilike:${search?.location}`
+  //   search?.categories.forEach((category) => {
+  //     s += `&filter=name:ilike:${category.name}`
+  //     category.sub_categories.forEach((sub) => {
+  //       s += `&filter=name:ilike:${sub.name}`
+  //     })
+  //   })
+  //   let url = `${API}/jobs?${s}&fields=name,title,closeDate,created,company,id,location`
+  //   if (s.trim().length > 0) {
+  //     setLoading(true)
+  //     axios
+  //       .get(url)
+  //       .then((res) => {
+  //         console.log(res.data)
+  //         setResults(res.data.jobs)
+  //         setLoading(false)
+  //       })
+  //       .catch((err) => {
+  //         console.log(err)
+  //         setLoading(false)
+  //       })
+  //   }
+  // }
+  // updating UI
+  useEffect(() => {
+    searching({
+      url,
+      searchUrl,
+      setLoading,
+      setErrors,
+      returnValue,
+      setResults,
+    })
+  }, [search])
 
   useEffect(() => {
     if (data) {
@@ -49,62 +99,80 @@ const jobs = ({ data, error }) => {
       })
   }, [])
 
-  const handleScroll = () => {
-    // getting the last job card
-    let jobCards = document.querySelectorAll(".main__content > .card")
-    let lastJob = jobCards[jobCards.length - 1]
+  // const handleScroll = () => {
+  //   // getting the last job card
+  //   let jobCards = document.querySelectorAll(".main__content > .card")
+  //   let lastJob = jobCards[jobCards.length - 1]
 
-    // checking for the last job item
-    if (lastJob) {
-      let lastJobOffset = lastJob.offsetTop + lastJob.clientHeight
-      let pageOffset = window.pageYOffset + window.innerHeight
-      if (pageOffset > lastJobOffset) {
-        // checking if page number is less than the actual number of pages sent from api
-        if (
-          page <= Math.ceil(data?.pager.total / data?.pager.pageSize) &&
-          !loadMore &&
-          pages
-        ) {
-          // fetching more jobs
-          setLoadMore(true)
-          axios
-            .get(
-              `${API}/jobs?page=${page}&pageSize=8&fields=name,title,closeDate,created,company,id,location`
-            )
-            .then((res) => {
-              if (res.data) {
-                // check if number of pages returned from api is less than the actual number of pages
-                setPages(
-                  res.data.pager.page <=
-                    Math.ceil(res.data.pager.total / res.data.pager.pageSize)
-                )
+  //   // checking for the last job item
+  //   if (lastJob) {
+  //     let lastJobOffset = lastJob.offsetTop + lastJob.clientHeight
+  //     let pageOffset = window.pageYOffset + window.innerHeight
+  //     if (pageOffset > lastJobOffset) {
+  //       // checking if page number is less than the actual number of pages sent from api
+  //       if (
+  //         page <= Math.ceil(data?.pager.total / data?.pager.pageSize) &&
+  //         !loadMore &&
+  //         pages
+  //       ) {
+  //         // fetching more jobs
+  //         setLoadMore(true)
+  //         axios
+  //           .get(
+  //             `${API}/jobs?page=${page}&pageSize=8&fields=name,title,closeDate,created,company,id,location`
+  //           )
+  //           .then((res) => {
+  //             if (res.data) {
+  //               // check if number of pages returned from api is less than the actual number of pages
+  //               setPages(
+  //                 res.data.pager.page <=
+  //                   Math.ceil(res.data.pager.total / res.data.pager.pageSize)
+  //               )
 
-                // concatenating jobs items
-                setJobs(jobs.concat(res.data.jobs))
-                setLoadMore(false)
+  //               // concatenating jobs items
+  //               setJobs(jobs.concat(res.data.jobs))
+  //               setLoadMore(false)
 
-                // setting the page number
-                setPage(parseInt(res.data?.pager.page) + 1)
-              }
-            })
-            .catch((err) => {
-              console.log(err)
-              setLoadMore(false)
-            })
-        }
+  //               // setting the page number
+  //               setPage(parseInt(res.data?.pager.page) + 1)
+  //             }
+  //           })
+  //           .catch((err) => {
+  //             console.log(err)
+  //             setLoadMore(false)
+  //           })
+  //       }
 
-        // checks if existing page number is greater than the page returned from the api
-        if (page > Math.ceil(data?.pager.total / data?.pager.pageSize)) {
-          setLoadMore(false)
-          setMessage("You have seen it all")
-        }
-      }
-    }
-  }
+  //       // checks if existing page number is greater than the page returned from the api
+  //       if (page > Math.ceil(data?.pager.total / data?.pager.pageSize)) {
+  //         setLoadMore(false)
+  //         setMessage("You have seen it all")
+  //       }
+  //     }
+  //   }
+  // }
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleScroll)
+  //   return () => window.removeEventListener("scroll", handleScroll)
+  // })
+
+  infiniteScroll({
+    url,
+    searchUrl,
+    setErrors,
+    setPages,
+    setPage,
+    setItems: setJobs,
+    setResults,
+    items: jobs,
+    results,
+    page,
+    loadMore,
+    setLoadMore,
+    data,
+    returnValue,
+    setMessage,
   })
 
   return (
@@ -127,6 +195,8 @@ const jobs = ({ data, error }) => {
           setLoading={setLoading}
           loadMore={loadMore}
           message={message}
+          results={results}
+          setResults={setResults}
         />
       </main>
     </div>

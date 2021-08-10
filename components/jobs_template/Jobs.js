@@ -19,12 +19,11 @@ const Jobs = ({
   page,
   jobs,
   loading,
-  setLoading,
+  results,
   loadMore,
   message,
 }) => {
   let [filter, setFilter] = useState(false)
-  let [searchResults, setResults] = useState([])
 
   let { isAuthenticated } = useAuthState()
 
@@ -43,40 +42,10 @@ const Jobs = ({
       return
     }
   }
-  const searching = () => {
-    let s = ""
-    if (search?.keyword.trim() != "")
-      s += `&filter=name:ilike:${search?.keyword}`
 
-    if (search?.location.trim() != "")
-      s += `&filter=location:ilike:${search?.location}`
-    search?.categories.forEach((category) => {
-      s += `&filter=name:ilike:${category.name}`
-      category.sub_categories.forEach((sub) => {
-        s += `&filter=name:ilike:${sub.name}`
-      })
-    })
-    let url = `${API}/jobs?${s}&fields=name,title,closeDate,created,company,id,location`
-    if (s.trim().length > 0) {
-      setLoading(true)
-      axios
-        .get(url)
-        .then((res) => {
-          setResults(res.data.jobs)
-          setLoading(false)
-        })
-        .catch((err) => {
-          console.log(err)
-          setLoading(false)
-        })
-    }
-  }
-  // updating UI
   useEffect(() => {
     checkSearch(search)
-    searching()
   }, [search])
-
   return (
     <Template heading={filter ? "Filter Criteria" : heading}>
       <div
@@ -97,11 +66,11 @@ const Jobs = ({
             </>
           ) : (
             <>
-              {searchResults?.length > 0 ? (
+              {results != null && typeof results == "object" ? (
                 <>
-                  {searchResults?.length > 0 ? (
+                  {results?.length > 0 ? (
                     <>
-                      {searchResults.map((job) => (
+                      {results.map((job) => (
                         <Job job={job} key={job.id} />
                       ))}
                     </>

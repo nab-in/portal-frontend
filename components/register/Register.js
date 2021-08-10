@@ -51,7 +51,7 @@ const Register = () => {
       })
       .catch((err) => {
         setLoading(false)
-        console.log(err)
+        console.log(err.response)
       })
   }
   return (
