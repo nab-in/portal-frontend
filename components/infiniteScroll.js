@@ -6,20 +6,28 @@ export const searching = ({
   setResults,
   setLoading,
   setErrors,
-  returnValue,
+  pageName,
   searchUrl,
 }) => {
-  setLoading(true)
-  axios
-    .get(url + searchUrl)
-    .then((res) => {
-      setResults(returnValue)
-      setLoading(false)
-    })
-    .catch((err) => {
-      console.log(err)
-      setLoading(false)
-    })
+  if (searchUrl.trim().length > 0) {
+    setLoading(true)
+    axios
+      .get(url + searchUrl)
+      .then((res) => {
+        setResults(
+          pageName == "jobs"
+            ? res.data.jobs
+            : pageName == "companies"
+            ? res.data.companies
+            : ""
+        )
+        setLoading(false)
+      })
+      .catch((err) => {
+        console.log(err)
+        setLoading(false)
+      })
+  }
 }
 
 const infiniteScroll = ({
@@ -36,8 +44,9 @@ const infiniteScroll = ({
   setLoadMore,
   loadMore,
   data,
-  returnValue,
+  pageName,
   setMessage,
+  pages,
 }) => {
   const handleScroll = () => {
     // getting the last item card
@@ -61,7 +70,7 @@ const infiniteScroll = ({
             axios
               .get(url + searchUrl)
               .then((res) => {
-                console.log("here")
+                // console.log(res.data)
                 if (res.data) {
                   // check if number of pages returned from api is less than the actual number of pages
                   setPages(
@@ -69,8 +78,16 @@ const infiniteScroll = ({
                       Math.ceil(res.data.pager.total / res.data.pager.pageSize)
                   )
 
-                  // concatenating jobs items
-                  setResults(results.concat(returnValue))
+                  //   concatenating jobs items
+                  setResults(
+                    results.concat(
+                      pageName == "jobs"
+                        ? res.data.jobs
+                        : pageName == "companies"
+                        ? res.data.companies
+                        : ""
+                    )
+                  )
                   setLoadMore(false)
 
                   // setting the page number
@@ -87,13 +104,22 @@ const infiniteScroll = ({
               .then((res) => {
                 if (res.data) {
                   // check if number of pages returned from api is less than the actual number of pages
+                  //   console.log(res.data)
                   setPages(
                     res.data.pager.page <=
                       Math.ceil(res.data.pager.total / res.data.pager.pageSize)
                   )
 
-                  // concatenating jobs items
-                  setItems(items.concat(returnValue))
+                  //   concatenating jobs items
+                  setItems(
+                    items.concat(
+                      pageName == "jobs"
+                        ? res.data.jobs
+                        : pageName == "companies"
+                        ? res.data.companies
+                        : ""
+                    )
+                  )
                   setLoadMore(false)
 
                   // setting the page number

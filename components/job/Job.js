@@ -20,8 +20,8 @@ const Job = ({ job }) => {
       <div className={styles.logo__container}>
         <div className={styles.logo}>
           <img
-            src={company.logo}
-            alt={`${job.company?.name} logo`}
+            src={company?.logo}
+            alt={`${job?.company?.name} logo`}
             loading="lazy"
           />
         </div>
@@ -43,7 +43,7 @@ const Job = ({ job }) => {
         <p className={styles.company__name}>
           Company:{" "}
           <Link href={`/companies/${job.company?.id}`}>
-            <a>{job.company?.name}</a>
+            <a>{job?.company?.name}</a>
           </Link>
         </p>
         {job_type && (
