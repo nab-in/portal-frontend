@@ -3,12 +3,41 @@ import { useRouter } from "next/router"
 import styles from "./hero.module.sass"
 import Category from "../categories/Category"
 
-const Hero = ({ setSearch, search, title, categories }) => {
+const Hero = ({ setSearch, search, title, categories, url, setUrl }) => {
   let router = useRouter()
+
+  // working on search url
+  let urlBreak = url?.split("&")
+
+  let inputArr = urlBreak?.filter((el) => {
+    return el.includes("ilike")
+  })
+
   const handleChange = (e) => {
     let { name, value } = e.target
     setSearch({ ...search, [name]: value })
+    let input = inputArr.find((el) => el.includes(name))
+    if (value.trim().length > 0 && input) {
+      setUrl(
+        url.replace(
+          url?.split("&")?.find((el) => el.includes(name)),
+          `filter=${[name]}:ilike:${value}`
+        )
+      )
+    } else if (value.trim().length > 0 && !input) {
+      setUrl(url + `&filter=${[name]}:ilike:${value}`)
+    } else if (value.trim().length == 0 && input) {
+      setUrl(
+        url.replace(
+          url?.split("&")?.find((el) => el.includes(name)),
+          ``
+        )
+      )
+    }
   }
+
+  console.log(url)
+
   const handleSubmit = (e) => {
     e.preventDefault()
   }
@@ -16,7 +45,7 @@ const Hero = ({ setSearch, search, title, categories }) => {
     if (router.query)
       setSearch({
         ...search,
-        keyword: router.query.keyword ? router.query.keyword : "",
+        name: router.query.keyword ? router.query.keyword : "",
         location: router.query.location ? router.query.location : "",
       })
   }, [])
@@ -47,9 +76,9 @@ const Hero = ({ setSearch, search, title, categories }) => {
                 <input
                   type="text"
                   placeholder="Type to search..."
-                  value={search.keyword}
+                  value={search.name}
                   onChange={(e) => handleChange(e)}
-                  name="keyword"
+                  name="name"
                 />
                 <input
                   type="text"

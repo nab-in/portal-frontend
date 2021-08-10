@@ -12,34 +12,38 @@ const jobs = ({ data, error }) => {
   let [categories, setCategories] = useState([])
   let [page, setPage] = useState(data?.pager.page + 1)
   let [pages, setPages] = useState(data?.pager.page < data?.pager.pageCount)
+  let [resultsPage, setResultsPage] = useState(1)
+  let [resultsPages, setResultsPages] = useState(true)
   let [jobs, setJobs] = useState([])
   let [errors, setErrors] = useState(null)
   let [results, setResults] = useState(null)
   let [message, setMessage] = useState(null)
   let [loading, setLoading] = useState(true)
+  let [url, setUrl] = useState("")
   let [search, setSearch] = useState({
-    keyword: "",
+    name: "",
     location: "",
     categories: [],
   })
 
   let pageName = "jobs"
 
-  let url = `${API}/jobs?pageSize=2&page=${page}&fields=name,title,closeDate,created,company,id,location`
-
-  let searchUrl = ``
-
-  console.log(jobs)
+  let apiUrl = `${API}/jobs?pageSize=2&page=${page}&fields=name,title,closeDate,created,company,id,location`
+  let searchUrl = `${API}/jobs?pageSize=2&page=${resultsPage}&fields=name,title,closeDate,created,company,id,location`
 
   // updating UI
   useEffect(() => {
     searching({
-      url,
       searchUrl,
+      url,
       setLoading,
       setErrors,
       pageName,
       setResults,
+      resultsPage,
+      setResultsPage,
+      resultsPages,
+      setResultsPages,
     })
   }, [search])
 
@@ -72,23 +76,35 @@ const jobs = ({ data, error }) => {
       })
   }, [])
 
-  infiniteScroll({
-    url,
-    searchUrl,
-    setErrors,
-    setPages,
-    setPage,
-    setItems: setJobs,
-    setResults,
-    items: jobs,
-    results,
-    page,
-    loadMore,
-    setLoadMore,
-    data,
-    pageName,
-    setMessage,
-    pages,
+  const handleScroll = () => {
+    infiniteScroll({
+      apiUrl,
+      searchUrl,
+      resultsPage,
+      setResultsPage,
+      resultsPages,
+      setResultsPages,
+      url,
+      setErrors,
+      setPages,
+      setPage,
+      setItems: setJobs,
+      setResults,
+      items: jobs,
+      results,
+      page,
+      loadMore,
+      setLoadMore,
+      data,
+      pageName,
+      setMessage,
+      pages,
+    })
+  }
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
   })
 
   return (
@@ -98,6 +114,8 @@ const jobs = ({ data, error }) => {
         search={search}
         categories={categories}
         title="Search for different Jobs."
+        url={url}
+        setUrl={setUrl}
       />
       <main>
         <Jobs
@@ -113,6 +131,8 @@ const jobs = ({ data, error }) => {
           message={message}
           results={results}
           setResults={setResults}
+          url={url}
+          setUrl={setUrl}
         />
       </main>
     </div>

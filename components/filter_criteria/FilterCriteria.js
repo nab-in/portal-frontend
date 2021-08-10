@@ -8,18 +8,18 @@ const FilterCriteria = ({ search, setSearch }) => {
 
   return (
     <div className="filter__criteria">
-      {search?.keyword && (
+      {search?.name && (
         <div className="criteria">
           <div className="criteria__title">Keyword:</div>
           <div className="criteria__showcase">
             <span>
-              {search.keyword}
+              {search.name}
               <span
                 className="close"
                 onClick={() =>
                   setSearch({
                     ...search,
-                    keyword: "",
+                    name: "",
                   })
                 }
               >
