@@ -21,7 +21,7 @@ const Hero = ({ setSearch, search, title, categories, url, setUrl }) => {
       setUrl(
         url.replace(
           url?.split("&")?.find((el) => el.includes(name)),
-          `filter=${[name]}:ilike:${value}`
+          `&filter=${[name]}:ilike:${value}`
         )
       )
     } else if (value.trim().length > 0 && !input) {
@@ -42,13 +42,26 @@ const Hero = ({ setSearch, search, title, categories, url, setUrl }) => {
     e.preventDefault()
   }
   useEffect(() => {
-    if (router.query)
+    if (router.query) {
       setSearch({
         ...search,
         name: router.query.keyword ? router.query.keyword : "",
         location: router.query.location ? router.query.location : "",
       })
-  }, [])
+      setUrl(
+        `${
+          router.query?.keyword
+            ? "&filter=name:ilike:" + router.query.keyword
+            : ""
+        }` +
+          `${
+            router.query?.location
+              ? "&filter=location:ilike:" + router.query.location
+              : ""
+          }`
+      )
+    }
+  }, [router.query])
 
   return (
     <div className={styles.hero}>

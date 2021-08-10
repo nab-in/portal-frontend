@@ -33,6 +33,8 @@ const jobs = ({ data, error }) => {
 
   // updating UI
   useEffect(() => {
+    setResultsPages(true)
+    setResultsPage(1)
     searching({
       searchUrl,
       url,
@@ -45,7 +47,9 @@ const jobs = ({ data, error }) => {
       resultsPages,
       setResultsPages,
     })
-  }, [search])
+  }, [url, search])
+
+  console.log(resultsPage, resultsPages)
 
   useEffect(() => {
     if (data) {

@@ -15,6 +15,7 @@ export const searching = ({
     axios
       .get(searchUrl + url)
       .then((res) => {
+        console.log(res.data, searchUrl)
         setResults(
           pageName == "jobs"
             ? res.data.jobs
