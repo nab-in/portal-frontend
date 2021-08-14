@@ -21,7 +21,7 @@ const jobs = ({ data, error }) => {
   let [number, setNumber] = useState(0)
   let [url, setUrl] = useState("")
   let [searchUrl, setSearchUrl] = useState(
-    `${API}/jobs?pageSize=2&page=${resultsPage}&fields=name,title,closeDate,created,company,id,location${url}`
+    `${API}/jobs?pageSize=2&page=1&fields=name,title,closeDate,created,company,id,location${url}`
   )
   let [search, setSearch] = useState({
     name: "",
@@ -36,25 +36,28 @@ const jobs = ({ data, error }) => {
   // updating UI
 
   useEffect(() => {
+    if (
+      search?.name?.trim().length == 0 &&
+      search?.location?.trim().length == 0 &&
+      search?.categories?.length == 0
+    )
+      setErrors(null)
+    setResultsPages(true)
+    setResultsPage(1)
+    console.log(url)
+    let searchingUrl = `${API}/jobs?pageSize=2&page=1&fields=name,title,closeDate,created,company,id,location${url}`
+
     searching({
-      searchUrl,
-      url,
+      setResults,
       setLoading,
       setErrors,
       pageName,
-      setResults,
-      resultsPage,
+      searchingUrl,
       setResultsPage,
-      resultsPages,
       setResultsPages,
-      setNumber,
       search,
+      setNumber,
     })
-    setResultsPages(true)
-    setResultsPage(1)
-    setSearchUrl(
-      `${API}/jobs?pageSize=2&page=1&fields=name,title,closeDate,created,company,id,location${url}`
-    )
   }, [search, url])
 
   useEffect(() => {
@@ -68,10 +71,22 @@ const jobs = ({ data, error }) => {
   useEffect(() => {
     if (error) {
       setLoading(false)
-      if ((JSON.parse(error).code = "EHOSTUNREACH"))
-        setMessage(
-          "Client error, please make sure you are connected to internet"
-        )
+      if (JSON.parse(error)?.response) {
+        setErrors({
+          type: "danger",
+          msg: err?.response?.data?.message,
+        })
+      } else if (JSON.parse(error)?.message == "Network Error") {
+        setErrors({
+          type: "danger",
+          msg: "Network Error",
+        })
+      } else {
+        setErrors({
+          type: "danger",
+          msg: "Internal server error, please try again",
+        })
+      }
     }
   }, [error])
 
@@ -133,6 +148,7 @@ const jobs = ({ data, error }) => {
       />
       <main>
         <Jobs
+          errors={errors}
           filter={true}
           search={search}
           setSearch={setSearch}

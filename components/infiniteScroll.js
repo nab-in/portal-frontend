@@ -1,11 +1,12 @@
 import axios from "axios"
+import { API } from "../components/api"
 
 export const searching = ({
   setResults,
   setLoading,
   setErrors,
   pageName,
-  searchUrl,
+  searchingUrl,
   setResultsPage,
   setResultsPages,
   search,
@@ -17,8 +18,9 @@ export const searching = ({
     search?.categories?.length > 0
   ) {
     setLoading(true)
+    setErrors(null)
     axios
-      .get(searchUrl)
+      .get(searchingUrl)
       .then((res) => {
         setNumber(res?.data?.pager.total)
         setResults(
@@ -41,6 +43,22 @@ export const searching = ({
         console.log(err)
         setLoading(false)
         setResults(null)
+        if (err?.response) {
+          setErrors({
+            type: "danger",
+            msg: err?.response?.data?.message,
+          })
+        } else if (err?.message == "Network Error") {
+          setErrors({
+            type: "danger",
+            msg: "Network Error",
+          })
+        } else {
+          setErrors({
+            type: "danger",
+            msg: "Internal server error, please try again",
+          })
+        }
       })
   } else {
     setResults(null)
@@ -70,6 +88,8 @@ const infiniteScroll = ({
   // getting the last item card
   let itemCards = document.querySelectorAll(".main__content > .card")
   let lastItem = itemCards[itemCards.length - 1]
+
+  setErrors({})
 
   // checking for the last job item
   if (lastItem) {
@@ -115,6 +135,22 @@ const infiniteScroll = ({
             .catch((err) => {
               console.log(err)
               setLoadMore(false)
+              if (err?.response) {
+                setErrors({
+                  type: "danger",
+                  msg: err?.response?.data?.message,
+                })
+              } else if (err?.message == "Network Error") {
+                setErrors({
+                  type: "danger",
+                  msg: "Network Error",
+                })
+              } else {
+                setErrors({
+                  type: "danger",
+                  msg: "Internal server error, please try again",
+                })
+              }
             })
         } else {
           setLoadMore(false)
@@ -153,6 +189,22 @@ const infiniteScroll = ({
             .catch((err) => {
               console.log(err)
               setLoadMore(false)
+              if (err?.response) {
+                setErrors({
+                  type: "danger",
+                  msg: err?.response?.data?.message,
+                })
+              } else if (err?.message == "Network Error") {
+                setErrors({
+                  type: "danger",
+                  msg: "Network Error",
+                })
+              } else {
+                setErrors({
+                  type: "danger",
+                  msg: "Internal server error, please try again",
+                })
+              }
             })
         } else {
           //  checks if existing page number is greater than the page returned from the api

@@ -25,6 +25,7 @@ const Jobs = ({
   number,
   url,
   setUrl,
+  errors,
 }) => {
   let [filter, setFilter] = useState(false)
 
@@ -74,29 +75,35 @@ const Jobs = ({
             </>
           ) : (
             <>
-              {results != null && typeof results == "object" ? (
-                <>
-                  {results?.length > 0 ? (
-                    <>
-                      <p>Showing {number} results</p>
-                      {results.map((job) => (
-                        <Job job={job} key={job.id} />
-                      ))}
-                    </>
-                  ) : (
-                    <></>
-                  )}
-                </>
+              {errors?.msg ? (
+                <p className={`alerts ${errors.type}`}>{errors.msg}</p>
               ) : (
                 <>
-                  {jobs?.length > 0 ? (
+                  {results != null && typeof results == "object" ? (
                     <>
-                      {jobs.map((job) => (
-                        <Job job={job} key={job.id} />
-                      ))}
+                      {results?.length > 0 ? (
+                        <>
+                          <p>Showing {number} results</p>
+                          {results.map((job) => (
+                            <Job job={job} key={job.id} />
+                          ))}
+                        </>
+                      ) : (
+                        <p>No Job match your Criteria</p>
+                      )}
                     </>
                   ) : (
-                    <></>
+                    <>
+                      {jobs?.length > 0 ? (
+                        <>
+                          {jobs.map((job) => (
+                            <Job job={job} key={job.id} />
+                          ))}
+                        </>
+                      ) : (
+                        <></>
+                      )}
+                    </>
                   )}
                 </>
               )}

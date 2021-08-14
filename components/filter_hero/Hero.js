@@ -93,7 +93,6 @@ const Hero = ({ setSearch, search, title, categories, url, setUrl }) => {
                   value={search.name}
                   onChange={(e) => handleChange(e)}
                   name="name"
-                  autoComplete="off"
                 />
                 <input
                   type="text"
@@ -101,7 +100,6 @@ const Hero = ({ setSearch, search, title, categories, url, setUrl }) => {
                   value={search.location}
                   onChange={(e) => handleChange(e)}
                   name="location"
-                  autoComplete="off"
                 />
                 <button className={`btn btn-primary ${styles.btn}`}>
                   Search
