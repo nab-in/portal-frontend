@@ -23,6 +23,8 @@ const Jobs = ({
   loadMore,
   message,
   number,
+  url,
+  setUrl,
 }) => {
   let [filter, setFilter] = useState(false)
 
@@ -57,7 +59,12 @@ const Jobs = ({
         }
       >
         <div className={`${styles.main__content} main__content`}>
-          <FilterCriteria search={search} setSearch={setSearch} />
+          <FilterCriteria
+            search={search}
+            setSearch={setSearch}
+            url={url}
+            setUrl={setUrl}
+          />
           {filter && <h3 className={styles.results__header}>Results</h3>}
           {loading ? (
             <>
