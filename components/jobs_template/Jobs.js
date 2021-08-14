@@ -9,8 +9,8 @@ import FilterCriteria from "../filter_criteria/FilterCriteria"
 import NewsLetter from "../newsletter/NewsLetter"
 import styles from "../../styles/template.module.sass"
 import { useAuthState } from "../../context/auth"
-import { API } from "../api"
-import axios from "axios"
+import Category from "../categories/Category"
+
 // main template to display jobs in landing page and jobs page
 const Jobs = ({
   search,
@@ -26,6 +26,7 @@ const Jobs = ({
   url,
   setUrl,
   errors,
+  categories,
 }) => {
   let [filter, setFilter] = useState(false)
 
@@ -50,8 +51,32 @@ const Jobs = ({
   useEffect(() => {
     checkSearch(search)
   }, [search])
+
+  const filters = (
+    <div className={styles.categories}>
+      <p>Filter By</p>
+      {categories?.length > 0 && (
+        <>
+          {categories.map((category) => (
+            <Category
+              key={category.id}
+              category={category}
+              search={search}
+              setSearch={setSearch}
+              url={url}
+              setUrl={setUrl}
+            />
+          ))}
+        </>
+      )}
+    </div>
+  )
+
   return (
-    <Template heading={filter ? "Filter Criteria" : heading}>
+    <Template
+      heading={filter ? "Filter Criteria" : heading}
+      filters={page == "jobs" ? filters : ""}
+    >
       <div
         className={
           isAuthenticated

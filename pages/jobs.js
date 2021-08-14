@@ -57,6 +57,7 @@ const jobs = ({ data, error }) => {
       setResultsPages,
       search,
       setNumber,
+      setMessage,
     })
   }, [search, url])
 
@@ -141,13 +142,13 @@ const jobs = ({ data, error }) => {
       <Hero
         setSearch={setSearch}
         search={search}
-        categories={categories}
         title="Search for different Jobs."
         url={url}
         setUrl={setUrl}
       />
       <main>
         <Jobs
+          categories={categories}
           errors={errors}
           filter={true}
           search={search}

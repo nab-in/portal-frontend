@@ -1,5 +1,4 @@
 import axios from "axios"
-import { API } from "../components/api"
 
 export const searching = ({
   setResults,
@@ -11,6 +10,7 @@ export const searching = ({
   setResultsPages,
   search,
   setNumber,
+  setMessage,
 }) => {
   if (
     search?.name.trim().length > 0 ||
@@ -18,10 +18,10 @@ export const searching = ({
     search?.categories?.length > 0
   ) {
     setLoading(true)
-    setErrors(null)
     axios
       .get(searchingUrl)
       .then((res) => {
+        setErrors(null)
         setNumber(res?.data?.pager.total)
         setResults(
           pageName == "jobs"
@@ -40,7 +40,6 @@ export const searching = ({
         setLoading(false)
       })
       .catch((err) => {
-        console.log(err)
         setLoading(false)
         setResults(null)
         if (err?.response) {
@@ -59,9 +58,11 @@ export const searching = ({
             msg: "Internal server error, please try again",
           })
         }
+        setMessage(null)
       })
   } else {
     setResults(null)
+    setMessage(null)
   }
 }
 
@@ -89,8 +90,6 @@ const infiniteScroll = ({
   let itemCards = document.querySelectorAll(".main__content > .card")
   let lastItem = itemCards[itemCards.length - 1]
 
-  setErrors({})
-
   // checking for the last job item
   if (lastItem) {
     let lastItemOffset = lastItem.offsetTop + lastItem.clientHeight
@@ -109,7 +108,7 @@ const infiniteScroll = ({
           axios
             .get(searchUrl)
             .then((res) => {
-              console.log(res.data, searchUrl)
+              setErrors(null)
 
               // check if number of pages returned from api is less than the actual number of pages
               setResultsPages(
@@ -164,7 +163,7 @@ const infiniteScroll = ({
             .get(apiUrl)
             .then((res) => {
               if (res.data) {
-                console.log(res.data)
+                setErrors(null)
                 setPages(
                   res.data.pager.page <=
                     Math.ceil(res.data.pager.total / res.data.pager.pageSize)

@@ -1,9 +1,8 @@
 import React, { useEffect } from "react"
 import { useRouter } from "next/router"
 import styles from "./hero.module.sass"
-import Category from "../categories/Category"
 
-const Hero = ({ setSearch, search, title, categories, url, setUrl }) => {
+const Hero = ({ setSearch, search, title, url, setUrl }) => {
   let router = useRouter()
 
   // working on search url
@@ -40,6 +39,7 @@ const Hero = ({ setSearch, search, title, categories, url, setUrl }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
   }
+
   useEffect(() => {
     if (router.query) {
       setSearch({
@@ -66,26 +66,12 @@ const Hero = ({ setSearch, search, title, categories, url, setUrl }) => {
     <div className={styles.hero}>
       <div className={styles.container}>
         <div className={styles.wrapper}>
-          <h1>{title}</h1>
+          {/* <h1>{title}</h1> */}
           <div className={styles.search__container}>
             <form
               onSubmit={(e) => handleSubmit(e)}
               className={`search__form ${styles.search__form}`}
             >
-              {categories?.length > 0 && (
-                <div className={styles.categories}>
-                  {categories.map((category) => (
-                    <Category
-                      key={category.id}
-                      category={category}
-                      search={search}
-                      setSearch={setSearch}
-                      url={url}
-                      setUrl={setUrl}
-                    />
-                  ))}
-                </div>
-              )}
               <div className={styles.inputs}>
                 <input
                   type="text"
