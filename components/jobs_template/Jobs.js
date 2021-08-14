@@ -22,6 +22,7 @@ const Jobs = ({
   results,
   loadMore,
   message,
+  number,
 }) => {
   let [filter, setFilter] = useState(false)
 
@@ -70,6 +71,7 @@ const Jobs = ({
                 <>
                   {results?.length > 0 ? (
                     <>
+                      <p>Showing {number} results</p>
                       {results.map((job) => (
                         <Job job={job} key={job.id} />
                       ))}

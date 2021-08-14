@@ -17,6 +17,7 @@ const Hero = ({ setSearch, search, title, categories, url, setUrl }) => {
     let { name, value } = e.target
     setSearch({ ...search, [name]: value })
     let input = inputArr.find((el) => el.includes(name))
+
     if (value.trim().length > 0 && input) {
       setUrl(
         url.replace(
@@ -24,9 +25,9 @@ const Hero = ({ setSearch, search, title, categories, url, setUrl }) => {
           `&filter=${[name]}:ilike:${value}`
         )
       )
-    } else if (value.trim().length > 0 && !input) {
+    } else if (value.trim().length > 0 && input == undefined) {
       setUrl(url + `&filter=${[name]}:ilike:${value}`)
-    } else if (value.trim().length == 0 && input) {
+    } else if (value.trim().length == 0) {
       setUrl(
         url.replace(
           url?.split("&")?.find((el) => el.includes(name)),
@@ -79,6 +80,8 @@ const Hero = ({ setSearch, search, title, categories, url, setUrl }) => {
                       category={category}
                       search={search}
                       setSearch={setSearch}
+                      url={url}
+                      setUrl={setUrl}
                     />
                   ))}
                 </div>
@@ -90,6 +93,7 @@ const Hero = ({ setSearch, search, title, categories, url, setUrl }) => {
                   value={search.name}
                   onChange={(e) => handleChange(e)}
                   name="name"
+                  autoComplete="off"
                 />
                 <input
                   type="text"
@@ -97,6 +101,7 @@ const Hero = ({ setSearch, search, title, categories, url, setUrl }) => {
                   value={search.location}
                   onChange={(e) => handleChange(e)}
                   name="location"
+                  autoComplete="off"
                 />
                 <button className={`btn btn-primary ${styles.btn}`}>
                   Search

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import Hero from "../components/filter_hero/Hero"
 import Jobs from "../components/jobs_template/Jobs"
 import { API } from "../components/api"
@@ -18,6 +18,7 @@ const jobs = ({ data, error }) => {
   let [results, setResults] = useState(null)
   let [message, setMessage] = useState(null)
   let [loading, setLoading] = useState(true)
+  let [number, setNumber] = useState(0)
   let [url, setUrl] = useState("")
   let [searchUrl, setSearchUrl] = useState(
     `${API}/jobs?pageSize=2&page=${resultsPage}&fields=name,title,closeDate,created,company,id,location${url}`
@@ -46,13 +47,15 @@ const jobs = ({ data, error }) => {
       setResultsPage,
       resultsPages,
       setResultsPages,
+      setNumber,
+      search,
     })
     setResultsPages(true)
     setResultsPage(1)
     setSearchUrl(
       `${API}/jobs?pageSize=2&page=1&fields=name,title,closeDate,created,company,id,location${url}`
     )
-  }, [url])
+  }, [search, url])
 
   useEffect(() => {
     if (data) {
@@ -109,6 +112,7 @@ const jobs = ({ data, error }) => {
       pageName,
       setMessage,
       pages,
+      search,
     })
   }
 
@@ -143,6 +147,7 @@ const jobs = ({ data, error }) => {
           setResults={setResults}
           url={url}
           setUrl={setUrl}
+          number={number}
         />
       </main>
     </div>

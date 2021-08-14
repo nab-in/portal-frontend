@@ -1,7 +1,6 @@
 import axios from "axios"
 
 export const searching = ({
-  url,
   setResults,
   setLoading,
   setErrors,
@@ -9,20 +8,19 @@ export const searching = ({
   searchUrl,
   setResultsPage,
   setResultsPages,
+  search,
+  setNumber,
 }) => {
-  // setResultsPage((prev) => {
-  //   console.log("here", prev)
-  //   return 1
-  // })
-  // setResultsPages(true)
-  console.log(searchUrl)
-  if (url.trim().length > 0) {
+  if (
+    search?.name.trim().length > 0 ||
+    search?.location.trim().length > 0 ||
+    search?.categories?.length > 0
+  ) {
     setLoading(true)
     axios
       .get(searchUrl)
       .then((res) => {
-        // console.log(searchUrl + url)
-        console.log(res.data)
+        setNumber(res?.data?.pager.total)
         setResults(
           pageName == "jobs"
             ? res.data.jobs
@@ -42,12 +40,14 @@ export const searching = ({
       .catch((err) => {
         console.log(err)
         setLoading(false)
+        setResults(null)
       })
+  } else {
+    setResults(null)
   }
 }
 
 const infiniteScroll = ({
-  url,
   apiUrl,
   searchUrl,
   setErrors,
@@ -64,11 +64,9 @@ const infiniteScroll = ({
   pages,
   setResultsPage,
   resultsPages,
-  resultsPage,
   setResultsPages,
+  search,
 }) => {
-  console.log(resultsPage, resultsPages)
-
   // getting the last item card
   let itemCards = document.querySelectorAll(".main__content > .card")
   let lastItem = itemCards[itemCards.length - 1]
@@ -79,7 +77,11 @@ const infiniteScroll = ({
     let pageOffset = window.pageYOffset + window.innerHeight
     if (pageOffset > lastItemOffset) {
       // fetch more items
-      if (url.trim().length > 0) {
+      if (
+        search?.name.trim().length > 0 ||
+        search?.location.trim().length > 0 ||
+        search?.categories?.length > 0
+      ) {
         // checking if page number is less than the actual number of pages sent from api
         //   console.log(resultsPage, resultsData)
         if (!loadMore && resultsPages) {
@@ -87,6 +89,8 @@ const infiniteScroll = ({
           axios
             .get(searchUrl)
             .then((res) => {
+              console.log(res.data, searchUrl)
+
               // check if number of pages returned from api is less than the actual number of pages
               setResultsPages(
                 res.data.pager.page <=
@@ -124,8 +128,7 @@ const infiniteScroll = ({
             .get(apiUrl)
             .then((res) => {
               if (res.data) {
-                // check if number of pages returned from api is less than the actual number of pages
-                //   console.log(res.data)
+                console.log(res.data)
                 setPages(
                   res.data.pager.page <=
                     Math.ceil(res.data.pager.total / res.data.pager.pageSize)
