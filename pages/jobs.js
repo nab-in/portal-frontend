@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import Hero from "../components/filter_hero/Hero"
 import Jobs from "../components/jobs_template/Jobs"
-// import categories from "../data/categories"
 import { API } from "../components/api"
 import axios from "axios"
 import infiniteScroll, { searching } from "../components/infiniteScroll"
@@ -20,6 +19,9 @@ const jobs = ({ data, error }) => {
   let [message, setMessage] = useState(null)
   let [loading, setLoading] = useState(true)
   let [url, setUrl] = useState("")
+  let [searchUrl, setSearchUrl] = useState(
+    `${API}/jobs?pageSize=2&page=${resultsPage}&fields=name,title,closeDate,created,company,id,location${url}`
+  )
   let [search, setSearch] = useState({
     name: "",
     location: "",
@@ -29,12 +31,10 @@ const jobs = ({ data, error }) => {
   let pageName = "jobs"
 
   let apiUrl = `${API}/jobs?pageSize=2&page=${page}&fields=name,title,closeDate,created,company,id,location`
-  let searchUrl = `${API}/jobs?pageSize=2&page=${resultsPage}&fields=name,title,closeDate,created,company,id,location`
 
   // updating UI
+
   useEffect(() => {
-    setResultsPages(true)
-    setResultsPage(1)
     searching({
       searchUrl,
       url,
@@ -47,9 +47,12 @@ const jobs = ({ data, error }) => {
       resultsPages,
       setResultsPages,
     })
-  }, [url, search])
-
-  console.log(resultsPage, resultsPages)
+    setResultsPages(true)
+    setResultsPage(1)
+    setSearchUrl(
+      `${API}/jobs?pageSize=2&page=1&fields=name,title,closeDate,created,company,id,location${url}`
+    )
+  }, [url])
 
   useEffect(() => {
     if (data) {
@@ -81,6 +84,9 @@ const jobs = ({ data, error }) => {
   }, [])
 
   const handleScroll = () => {
+    setSearchUrl(
+      `${API}/jobs?pageSize=2&page=${resultsPage}&fields=name,title,closeDate,created,company,id,location${url}`
+    )
     infiniteScroll({
       apiUrl,
       searchUrl,

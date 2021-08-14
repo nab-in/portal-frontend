@@ -18,6 +18,7 @@ const Companies = ({ data, error }) => {
   let [companies, setCompanies] = useState([])
   const { isAuthenticated } = useAuthState()
   let [filter, setFilter] = useState(false)
+  const [url, setUrl] = useState("")
   let [search, setSearch] = useState({
     keyword: "",
     location: "",
@@ -64,6 +65,8 @@ const Companies = ({ data, error }) => {
         setSearch={setSearch}
         categories={categories}
         title="Search for different Companies."
+        url={url}
+        setUrl={setUrl}
       />
       <main>
         <Template heading={filter ? "Filter Criteria" : "Companies"}>
@@ -75,7 +78,12 @@ const Companies = ({ data, error }) => {
             }
           >
             <div className={`${styles.main__content} main__content`}>
-              <FilterCriteria search={search} setSearch={setSearch} />
+              <FilterCriteria
+                search={search}
+                setSearch={setSearch}
+                url={url}
+                setUrl={setUrl}
+              />
               {filter && <h3 className={styles.results__header}>Results</h3>}
               {loading ? (
                 <>

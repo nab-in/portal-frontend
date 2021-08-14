@@ -36,8 +36,6 @@ const Hero = ({ setSearch, search, title, categories, url, setUrl }) => {
     }
   }
 
-  console.log(url)
-
   const handleSubmit = (e) => {
     e.preventDefault()
   }

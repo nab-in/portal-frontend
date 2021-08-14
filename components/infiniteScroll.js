@@ -10,12 +10,19 @@ export const searching = ({
   setResultsPage,
   setResultsPages,
 }) => {
+  // setResultsPage((prev) => {
+  //   console.log("here", prev)
+  //   return 1
+  // })
+  // setResultsPages(true)
+  console.log(searchUrl)
   if (url.trim().length > 0) {
     setLoading(true)
     axios
-      .get(searchUrl + url)
+      .get(searchUrl)
       .then((res) => {
-        console.log(res.data, searchUrl)
+        // console.log(searchUrl + url)
+        console.log(res.data)
         setResults(
           pageName == "jobs"
             ? res.data.jobs
@@ -25,7 +32,6 @@ export const searching = ({
         )
 
         setResultsPage(res.data?.pager.page + 1)
-
         setResultsPages(
           res.data.pager.page <=
             Math.ceil(res.data.pager.total / res.data.pager.pageSize)
@@ -58,8 +64,11 @@ const infiniteScroll = ({
   pages,
   setResultsPage,
   resultsPages,
+  resultsPage,
   setResultsPages,
 }) => {
+  console.log(resultsPage, resultsPages)
+
   // getting the last item card
   let itemCards = document.querySelectorAll(".main__content > .card")
   let lastItem = itemCards[itemCards.length - 1]
@@ -76,7 +85,7 @@ const infiniteScroll = ({
         if (!loadMore && resultsPages) {
           setLoadMore(true)
           axios
-            .get(searchUrl + url)
+            .get(searchUrl)
             .then((res) => {
               // check if number of pages returned from api is less than the actual number of pages
               setResultsPages(
