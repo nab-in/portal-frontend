@@ -5,15 +5,7 @@ import UseClickOutside from "../UseClickOutside"
 import styles from "./category.module.sass"
 
 // filter dropdown component per each category
-const Category = ({
-  category,
-  search,
-  setSearch,
-  url,
-  setUrl,
-  heights,
-  setHeights,
-}) => {
+const Category = ({ category, search, setSearch, url, setUrl, heights }) => {
   let [openDropdown, setOpenDropdown] = useState(false)
   let { name, children, id } = category
   const dropdownRef = useRef()
@@ -27,10 +19,8 @@ const Category = ({
   })
 
   useEffect(() => {
-    if (dropdownRef) {
-      heights.push(dropdownRef.current?.scrollHeight)
-    }
-  }, [])
+    heights.push(dropdownRef.current?.scrollHeight)
+  }, [dropdownRef])
 
   return (
     <>

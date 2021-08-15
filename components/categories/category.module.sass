@@ -1,15 +1,18 @@
 @import "../../styles/_colorsVariables"
 
-.main
+.main_content
     overflow-x: hidden
     padding: 1rem .5rem
-    // padding-bottom: 250px
-    // margin-bottom: -250px
     z-index: 2
+    &::-webkit-scrollbar
+        display: none
 .swiper
     display: flex
     transition-property: transform
     will-change: transform
+    cursor: grab
+    scroll-snap-type: x mandatory
+    scroll-behavior: smooth
 
 .category
     height: 30px
@@ -19,7 +22,7 @@
     position: relative
     color: $primary
     button
-        padding: .2rem 1rem
+        padding: .3rem 1rem
         background: #E2E8EC
         border-radius: 15px
         display: flex

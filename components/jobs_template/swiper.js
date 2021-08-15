@@ -1,10 +1,14 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Category from "../categories/Category"
 import styles from "../categories/category.module.sass"
 
 const Swiper = ({ categories, search, setSearch, url, setUrl }) => {
   const node = useRef()
-  const [heights, setHeights] = useState([])
+  let output = []
+  const [start, setStart] = useState(false)
+  const [clientX, setClientX] = useState(0)
+  const [isMoving, setIsMoving] = useState(false)
+  const [heights, setHeights] = useState(output)
   const WIDTH = node.current?.scrollWidth
   const [lastTouch, setLastTouch] = useState(0)
   const [movement, setMovement] = useState(0)
@@ -40,41 +44,103 @@ const Swiper = ({ categories, search, setSearch, url, setUrl }) => {
     })
   }
 
-  const maxWidth = Math.max(...heights)
+  const handleMouseMovement = (e) => {
+    setClientX(e.clientX)
+  }
 
-  const handleMovementEnd = (e) => {}
+  let maxHeight = 100
+
+  useEffect(() => {
+    if (heights.length > 0) maxHeight = Math.max(...heights)
+  }, [heights])
+
+  const handleMouseStart = (e) => {
+    setStart(true)
+    setClientX(e.clientX)
+    setIsMoving(false)
+  }
+
+  const handleMouseMove = (e) => {
+    setIsMoving(true)
+    if (start && isMoving) handleMouseMovement(e)
+  }
+
+  const handleMouseEnd = (e) => {
+    setStart(false)
+    setIsMoving(false)
+    setClientX(e.clientX)
+  }
+
+  useEffect(() => {
+    if (isMoving)
+      setMovement((prevMov) => {
+        let nextMovement
+        if (clientX > prevMov) {
+          console.log("clie > prev")
+          nextMovement = clientX
+        }
+        if (clientX < prevMov) {
+          console.log("prev > clien")
+          nextMovement = clientX
+        }
+        if (prevMov == clientX) {
+          console.log("prev == clie")
+          nextMovement = 0
+        }
+        if (clientX == 0) {
+          console.log("prev < 0")
+          nextMovement = 0
+        }
+        if (nextMovement > WIDTH - 200) {
+          console.log("end")
+          nextMovement = WIDTH - 200
+        }
+        console.log(clientX)
+        console.log(prevMov)
+        console.log(nextMovement)
+        return nextMovement
+      })
+  }, [clientX])
 
   return (
     <div
-      className={styles.main}
+      className={styles.main_content}
       style={{
-        paddingBottom: maxWidth + 50,
-        marginBottom: -maxWidth - 50,
+        paddingBottom: maxHeight + 50,
+        marginBottom: -maxHeight - 50,
       }}
-      onWheel={handleWheel}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
     >
       <div
-        className={styles.swiper}
-        style={{
-          transform: `translateX(${movement * -1}px)`,
-        }}
-        ref={node}
+        className={styles.main}
+        onWheel={handleWheel}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        onMouseDown={handleMouseStart}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseEnd}
       >
-        {categories.map((category) => (
-          <Category
-            key={category.id}
-            category={category}
-            search={search}
-            setSearch={setSearch}
-            url={url}
-            setUrl={setUrl}
-            setHeights={setHeights}
-            heights={heights}
-          />
-        ))}
+        <div
+          className={styles.swiper}
+          style={{
+            transform: `translateX(${movement * -1}px)`,
+          }}
+          ref={node}
+        >
+          {categories.map((category) => (
+            <Category
+              key={category.id}
+              category={category}
+              search={search}
+              setSearch={setSearch}
+              url={url}
+              setUrl={setUrl}
+              output={output}
+              heights={heights}
+              setHeights={setHeights}
+            />
+          ))}
+        </div>
       </div>
     </div>
   )
