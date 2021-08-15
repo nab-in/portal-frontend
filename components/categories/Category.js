@@ -1,13 +1,22 @@
-import React, { useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { FaChevronDown, FaChevronUp } from "react-icons/fa"
 import SubCategory from "./SubCategory"
 import UseClickOutside from "../UseClickOutside"
 import styles from "./category.module.sass"
 
 // filter dropdown component per each category
-const Category = ({ category, search, setSearch, url, setUrl }) => {
+const Category = ({
+  category,
+  search,
+  setSearch,
+  url,
+  setUrl,
+  heights,
+  setHeights,
+}) => {
   let [openDropdown, setOpenDropdown] = useState(false)
   let { name, children, id } = category
+  const dropdownRef = useRef()
   const open = () => {
     setOpenDropdown(!openDropdown)
   }
@@ -16,6 +25,12 @@ const Category = ({ category, search, setSearch, url, setUrl }) => {
   let node = UseClickOutside(() => {
     setOpenDropdown(false)
   })
+
+  useEffect(() => {
+    if (dropdownRef) {
+      heights.push(dropdownRef.current?.scrollHeight)
+    }
+  }, [])
 
   return (
     <>
@@ -35,6 +50,7 @@ const Category = ({ category, search, setSearch, url, setUrl }) => {
                 ? `${styles.open} ${styles.dropdown}`
                 : `${styles.dropdown}`
             }
+            ref={dropdownRef}
           >
             {children.map((sub) => (
               <SubCategory

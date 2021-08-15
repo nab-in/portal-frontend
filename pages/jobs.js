@@ -33,18 +33,14 @@ const jobs = ({ data, error }) => {
 
   let apiUrl = `${API}/jobs?pageSize=8&page=${page}&fields=name,title,closeDate,created,company,id,location`
 
-  // updating UI
-
   useEffect(() => {
     if (
       search?.name?.trim().length == 0 &&
       search?.location?.trim().length == 0 &&
       search?.categories?.length == 0
     )
-      setErrors(null)
-    setResultsPages(true)
+      setResultsPages(true)
     setResultsPage(1)
-    console.log(url)
     let searchingUrl = `${API}/jobs?pageSize=2&page=1&fields=name,title,closeDate,created,company,id,location${url}`
 
     searching({
@@ -59,6 +55,10 @@ const jobs = ({ data, error }) => {
       setNumber,
       setMessage,
     })
+  }, [search, url])
+
+  useEffect(() => {
+    setErrors(null)
   }, [search, url])
 
   useEffect(() => {
@@ -95,7 +95,16 @@ const jobs = ({ data, error }) => {
     axios
       .get(`${API}/jobCategories?fields=id,name,children[id, name]`)
       .then((res) => {
-        setCategories(res.data.jobCategories)
+        let data
+        let filter = []
+        data = res.data?.jobCategories
+        data.forEach((el) => {
+          if (el.children) filter = filter.concat(el.children)
+        })
+        filter.forEach((el) => {
+          data = data.filter((o) => o.id != el.id)
+        })
+        setCategories(data)
       })
       .catch((err) => {
         console.log(err)

@@ -1,18 +1,20 @@
 @import "../../styles/_colorsVariables"
 
+.main
+    overflow-x: hidden
+    padding: 1rem .5rem
+    // padding-bottom: 250px
+    // margin-bottom: -250px
+    z-index: 2
 .swiper
     display: flex
-//   overflow-x: visible
     transition-property: transform
     will-change: transform
 
 .category
     height: 30px
-    // min-width: 150px
-    width: 250px
-    // width: 100%
-    // display: inline-block
-    // max-width: 90%
+    min-width: 200px
+    max-width: 150%
     margin-right: .7rem
     position: relative
     color: $primary
@@ -43,14 +45,16 @@
         background: #ffffff
         width: 110%
         min-width: 180px
-        display: none
+        opacity: 0
+        pointer-events: none
         z-index: 5
         padding: 1.5rem 1.5rem
         box-shadow: 4px 4px 15px 10px rgba(0, 0, 0, 0.08)
         border-radius: 10px
         text-align: left
         &.open
-            display: block
+            opacity: 1
+            pointer-events: all
         .sub__category
             padding: .7rem 0
             border-bottom: 1px solid #BBBBBB
@@ -101,15 +105,3 @@
 
     100%
         stroke-dashoffset: 0
-
-@media screen and ( max-width: 767px )
-    .category
-        margin: .7rem 0
-        min-width: 400px
-        max-width: 100%
-
-@media screen and ( max-width: 520px )
-    .category
-        margin: .7rem 0
-        min-width: 250px
-        max-width: 100%

@@ -1,10 +1,11 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import Category from "../categories/Category"
 import styles from "../categories/category.module.sass"
 
 const Swiper = ({ categories, search, setSearch, url, setUrl }) => {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const WIDTH = 200
+  const node = useRef()
+  const [heights, setHeights] = useState([])
+  const WIDTH = node.current?.scrollWidth
   const [lastTouch, setLastTouch] = useState(0)
   const [movement, setMovement] = useState(0)
   const handleWheel = (e) => {
@@ -28,16 +29,18 @@ const Swiper = ({ categories, search, setSearch, url, setUrl }) => {
 
   const handleMovement = (delta) => {
     setMovement((prevMov) => {
-      //   let maxLength = categories.length - 1
       let nextMovement = prevMov + delta
       if (prevMov < 0) {
         nextMovement = 0
+      }
+      if (nextMovement > WIDTH - 200) {
+        nextMovement = WIDTH - 200
       }
       return nextMovement
     })
   }
 
-  console.log(lastTouch, movement)
+  const maxWidth = Math.max(...heights)
 
   const handleMovementEnd = (e) => {}
 
@@ -45,15 +48,8 @@ const Swiper = ({ categories, search, setSearch, url, setUrl }) => {
     <div
       className={styles.main}
       style={{
-        // width: "100%",
-        // height: "auto",
-        overflowX: "hidden",
-        // padding: ".7rem",
-        paddingBottom: "50px",
-        marginBottom: "-50px",
-        zIndex: 2,
-        // overflowY: "visible",
-        // marginRight: "1rem",
+        paddingBottom: maxWidth + 50,
+        marginBottom: -maxWidth - 50,
       }}
       onWheel={handleWheel}
       onTouchStart={handleTouchStart}
@@ -64,19 +60,20 @@ const Swiper = ({ categories, search, setSearch, url, setUrl }) => {
         className={styles.swiper}
         style={{
           transform: `translateX(${movement * -1}px)`,
-          //   height: "auto",
         }}
+        ref={node}
       >
         {categories.map((category) => (
-          <div key={category.id} className={styles.category}>
-            <Category
-              category={category}
-              search={search}
-              setSearch={setSearch}
-              url={url}
-              setUrl={setUrl}
-            />
-          </div>
+          <Category
+            key={category.id}
+            category={category}
+            search={search}
+            setSearch={setSearch}
+            url={url}
+            setUrl={setUrl}
+            setHeights={setHeights}
+            heights={heights}
+          />
         ))}
       </div>
     </div>

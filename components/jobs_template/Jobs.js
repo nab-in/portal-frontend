@@ -60,15 +60,7 @@ const Jobs = ({
   }, [search])
 
   const filters = (
-    <div
-      className={styles.categories}
-      style={{
-        // width: "100%",
-        // height: "auto",
-        overflowX: "visible",
-        // overflowY: "visible",
-      }}
-    >
+    <div className={styles.categories}>
       <p>Filter By</p>
       {categories?.length > 0 && (
         <Swiper
