@@ -21,7 +21,7 @@ const jobs = ({ data, error }) => {
   let [number, setNumber] = useState(0)
   let [url, setUrl] = useState("")
   let [searchUrl, setSearchUrl] = useState(
-    `${API}/jobs?pageSize=2&page=1&fields=name,title,closeDate,created,company,id,location${url}`
+    `${API}/jobs?pageSize=8&page=1&fields=name,title,closeDate,created,company,id,location${url}`
   )
   let [search, setSearch] = useState({
     name: "",
@@ -31,7 +31,7 @@ const jobs = ({ data, error }) => {
 
   let pageName = "jobs"
 
-  let apiUrl = `${API}/jobs?pageSize=2&page=${page}&fields=name,title,closeDate,created,company,id,location`
+  let apiUrl = `${API}/jobs?pageSize=8&page=${page}&fields=name,title,closeDate,created,company,id,location`
 
   // updating UI
 
@@ -104,7 +104,7 @@ const jobs = ({ data, error }) => {
 
   const handleScroll = () => {
     setSearchUrl(
-      `${API}/jobs?pageSize=2&page=${resultsPage}&fields=name,title,closeDate,created,company,id,location${url}`
+      `${API}/jobs?pageSize=8&page=${resultsPage}&fields=name,title,closeDate,created,company,id,location${url}`
     )
     infiniteScroll({
       apiUrl,
@@ -176,7 +176,7 @@ export async function getServerSideProps() {
   let error = null
   try {
     const res = await fetch(
-      `${API}/jobs?pageSize=2&fields=name,title,closeDate,created,company,id,location`
+      `${API}/jobs?pageSize=8&fields=name,title,closeDate,created,company,id,location`
     )
     data = await res.json()
   } catch (err) {

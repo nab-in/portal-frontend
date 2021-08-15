@@ -10,6 +10,7 @@ import NewsLetter from "../newsletter/NewsLetter"
 import styles from "../../styles/template.module.sass"
 import { useAuthState } from "../../context/auth"
 import Category from "../categories/Category"
+import Swiper from "react-id-swiper"
 
 // main template to display jobs in landing page and jobs page
 const Jobs = ({
@@ -31,6 +32,12 @@ const Jobs = ({
   let [filter, setFilter] = useState(false)
 
   let { isAuthenticated } = useAuthState()
+
+  const params = {
+    direction: "horizontal",
+    slidesPerView: "auto",
+    spaceBetween: 15,
+  }
 
   // check if search object has any value to dynamically render heading
   let checkSearch = (obj) => {
@@ -56,7 +63,7 @@ const Jobs = ({
     <div className={styles.categories}>
       <p>Filter By</p>
       {categories?.length > 0 && (
-        <>
+        <Swiper {...params}>
           {categories.map((category) => (
             <Category
               key={category.id}
@@ -67,7 +74,7 @@ const Jobs = ({
               setUrl={setUrl}
             />
           ))}
-        </>
+        </Swiper>
       )}
     </div>
   )

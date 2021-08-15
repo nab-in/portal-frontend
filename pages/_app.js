@@ -8,6 +8,7 @@ import Alert from "../components/alerts/GlobalAlert"
 import Cookies from "js-cookie"
 import { API } from "../components/api"
 import axios from "axios"
+import "swiper/swiper.scss"
 
 const MyApp = ({ Component, pageProps }) => {
   const Site = () => {

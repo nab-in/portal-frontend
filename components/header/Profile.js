@@ -1,4 +1,7 @@
-import React, { useState } from "react"
+import { useState } from "react"
+import axios from "axios"
+import Cookies from "js-cookie"
+import { API } from "../api";
 import Link from "next/link"
 import { useAlertsDispatch } from "../../context/alerts"
 import { useAuthState, useAuthDispatch } from "../../context/auth"
@@ -19,16 +22,52 @@ const Profile = () => {
   let node = UseClickOutside(() => setOpen(false))
 
   const logout = () => {
-    dispatch({
-      type: "LOGOUT",
-    })
-    alertDispatch({
-      type: "ADD",
-      payload: {
-        message: "You have successfully logged out",
-        type: "success",
+    const token = Cookies.get("token")
+    const config = {
+      headers: {
+        authorization: `Bearer ` + token,
       },
-    })
+    }
+    axios(`${API}/logout`, config)
+      .then((res) => {
+        dispatch({
+          type: "LOGOUT",
+        })
+        alertDispatch({
+          type: "ADD",
+          payload: {
+            message: "You have successfully logged out",
+            type: "success",
+          },
+        })
+      })
+      .catch((err) => {
+        if (err?.response) {
+          alertsDispatch({
+            type: "ADD",
+            payload: {
+              type: "danger",
+              message: err?.response?.data?.message,
+            },
+          })
+        } else if (err?.message == "Network Error") {
+          alertsDispatch({
+            type: "ADD",
+            payload: {
+              type: "danger",
+              message: "Network Error",
+            },
+          })
+        } else {
+          alertsDispatch({
+            type: "ADD",
+            payload: {
+              type: "danger",
+              message: "Internal server error, please try again",
+            },
+          })
+        }
+      })
   }
 
   return (
