@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import Link from "next/link"
-import { IoMdRefresh } from "react-icons/io"
+// import { IoMdRefresh } from "react-icons/io"
 import Template from "../template/Template"
 import Job from "../job/Job"
 import Loader from "../loaders/CardLoader"
@@ -9,8 +9,8 @@ import FilterCriteria from "../filter_criteria/FilterCriteria"
 import NewsLetter from "../newsletter/NewsLetter"
 import styles from "../../styles/template.module.sass"
 import { useAuthState } from "../../context/auth"
-import Category from "../categories/Category"
-import Swiper from "react-id-swiper"
+// import Category from "../categories/Category"
+import Swiper from "./swiper"
 
 // main template to display jobs in landing page and jobs page
 const Jobs = ({
@@ -60,21 +60,36 @@ const Jobs = ({
   }, [search])
 
   const filters = (
-    <div className={styles.categories}>
+    <div
+      className={styles.categories}
+      style={{
+        // width: "100%",
+        // height: "auto",
+        overflowX: "visible",
+        // overflowY: "visible",
+      }}
+    >
       <p>Filter By</p>
       {categories?.length > 0 && (
-        <Swiper {...params}>
-          {categories.map((category) => (
-            <Category
-              key={category.id}
-              category={category}
-              search={search}
-              setSearch={setSearch}
-              url={url}
-              setUrl={setUrl}
-            />
-          ))}
-        </Swiper>
+        <Swiper
+          categories={categories}
+          search={search}
+          setSearch={setSearch}
+          url={url}
+          setUrl={setUrl}
+        />
+        //   {categories.map((category) => (
+        //     <div key={category.id} className={styles.category}>
+        //       <Category
+        //         category={category}
+        //         search={search}
+        //         setSearch={setSearch}
+        //         url={url}
+        //         setUrl={setUrl}
+        //       />
+        //     </div>
+        //   ))}
+        // </Swiper>
       )}
     </div>
   )
