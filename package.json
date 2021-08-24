@@ -16,12 +16,12 @@
     "moment": "^2.29.1",
     "next": "^11.0.1",
     "next-images": "^1.8.1",
-    "next-pwa": "^5.2.24",
+    "next-pwa": "^5.3.1",
     "npm": "^7.21.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-icons": "^4.2.0",
     "react-linkify": "^1.0.0-alpha",
-    "sass": "^1.37.5"
+    "sass": "^1.38.1"
   }
 }
