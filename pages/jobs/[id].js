@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import moment from "moment"
+import dayjs from "dayjs"
 import JobDetails from "../../components/job/JobDetails"
 import RelatedJobs from "../../components/job/RelatedJobs"
 import NewsLetter from "../../components/newsletter/NewsLetter"
@@ -25,7 +25,6 @@ const job = ({ data, error }) => {
       setLoading(false)
     }
   }, [error])
-  // let style = { "--rating": 0.85 * 5 }
   return (
     <div>
       {loading ? (
@@ -73,18 +72,14 @@ const job = ({ data, error }) => {
                       <div className={styles.time__details}>
                         <div className={`${styles.time} ${styles.posted}`}>
                           Posted at:&nbsp;{" "}
-                          {moment(job.created).format("MMM DD, YYYY")}
+                          {dayjs(job.created).format("MMM DD, YYYY")}
                         </div>
                         <div className={`${styles.time} ${styles.deadline}`}>
                           <span>
                             Deadline:{" "}
-                            {moment(job.closeDate).format("MMM DD, YYYY HH:mm")}
+                            {dayjs(job.closeDate).format("MMM DD, YYYY HH:mm")}
                           </span>
                         </div>
-                        {/* <div
-                          className={`stars bg__stars ${styles.stars}`}
-                          style={style}
-                        ></div> */}
                       </div>
                     </div>
                   </div>

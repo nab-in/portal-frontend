@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react"
 import Link from "next/link"
 import Loader from "../../loaders/CompaniesLoader"
 import styles from "./companies.module.sass"
-import { API } from "../../api"
 
 // let loading = false
 const Companies = ({ companies, loading }) => {
@@ -25,10 +24,7 @@ const Companies = ({ companies, loading }) => {
                     <article key={id}>
                       <Link href={`/companies/${id}`}>
                         <div className={`${styles.logo__container}`}>
-                          <img
-                            src={logo}
-                            alt={`${name} logo`}
-                          />
+                          <img src={logo} alt={`${name} logo`} />
                         </div>
                       </Link>
                       <Link href={`/companies/${id}?tab=jobs`}>

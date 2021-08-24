@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import moment from "moment"
+import dayjs from "dayjs"
 import Section from "../Section"
 import styles from "./jobs.module.sass"
 import Cookies from "js-cookie"
@@ -49,35 +49,24 @@ const Jobs = ({ page, details }) => {
               {jobs?.length > 0 ? (
                 <>
                   {jobs.map(
-                    ({
-                      id,
-                      name,
-                      created,
-                      closeDate,
-                      job_type,
-                      location,
-                      reviews,
-                    }) => {
-                      // let style = { "--rating": reviews * 5 }
-                      console.log(id)
+                    ({ id, name, created, closeDate, job_type, location }) => {
                       return (
                         <div className={`${styles.job} card`} key={id}>
                           <div className={styles.time__details}>
                             <h2>
                               <Link href={`/jobs/${id}`}>{name}</Link>
                             </h2>
-                            {/* <div className="stars" style={style}></div> */}
                             <p>
                               Posted:{" "}
                               <span>
                                 {" "}
-                                {moment(created).format("MMM DD, YYYY")}
+                                {dayjs(created).format("MMM DD, YYYY")}
                               </span>
                             </p>
                             <p>
                               Deadline:{" "}
                               <span>
-                                {moment(closeDate).format("MMM DD, YYYY HH:mm")}
+                                {dayjs(closeDate).format("MMM DD, YYYY HH:mm")}
                               </span>
                             </p>
                           </div>

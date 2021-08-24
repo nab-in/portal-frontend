@@ -7,17 +7,14 @@ import { API } from "../api"
 import axios from "axios"
 import Cookies from "js-cookie"
 import Button from "../buttons/FormButton"
-import moment from "moment"
+import dayjs from "dayjs"
 
 const JobDetails = ({ job }) => {
-  let [rate, setRate] = useState(0)
   let { isAuthenticated } = useAuthState()
   let [loading, setLoading] = useState(false)
   let [saveLoading, setSaveLoading] = useState(false)
   const [text, setText] = useState("Apply")
   const [saveText, setSaveText] = useState("Save")
-  let stars = [1, 2, 3, 4, 5]
-  let style = { "--rating": rate }
 
   let {
     id,
@@ -147,8 +144,7 @@ const JobDetails = ({ job }) => {
       )}
       {closeDate && (
         <div className={styles.title}>
-          Deadline:{" "}
-          <span>{moment(closeDate).format("MMM DD, YYYY HH:mm")}</span>
+          Deadline: <span>{dayjs(closeDate).format("MMM DD, YYYY HH:mm")}</span>
         </div>
       )}
       {email && (
@@ -196,18 +192,6 @@ const JobDetails = ({ job }) => {
               loading={loading}
             />
           </div>
-          {/* <div className={styles.rate}>
-            <p>Rate this job</p>
-            <div className={styles.stars} style={style}>
-              {stars.map((star) => (
-                <span
-                  key={star}
-                  className={styles.star}
-                  onClick={() => setRate(star)}
-                ></span>
-              ))}
-            </div>
-          </div> */}
         </section>
       )}
     </div>

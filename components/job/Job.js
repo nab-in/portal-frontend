@@ -1,20 +1,9 @@
 import Link from "next/link"
-import moment from "moment"
+import dayjs from "dayjs"
 import styles from "./job.module.sass"
 
 const Job = ({ job }) => {
-  let {
-    id,
-    name,
-    company,
-    created,
-    closeDate,
-    job_type,
-    location,
-    // reviews: 0.8
-  } = job
-  let reviews = 0.85
-  let style = { "--rating": reviews * 5 }
+  let { id, name, company, created, closeDate, job_type, location } = job
   return (
     <article className={`card ${styles.job__card}`}>
       <div className={styles.logo__container}>
@@ -30,13 +19,11 @@ const Job = ({ job }) => {
         <h2>
           <Link href={`/jobs/${id}`}>{name}</Link>
         </h2>
-        {/* {reviews && <div className="stars" style={style}></div>} */}
         <p>
-          Posted: <span> {moment(created).format("MMM DD, YYYY")}</span>
+          Posted: <span> {dayjs(created).format("MMM DD, YYYY")}</span>
         </p>
         <p>
-          Deadline:{" "}
-          <span>{moment(closeDate).format("MMM DD, YYYY HH:mm")}</span>
+          Deadline: <span>{dayjs(closeDate).format("MMM DD, YYYY HH:mm")}</span>
         </p>
       </div>
       <div className={styles.job__descriptions}>

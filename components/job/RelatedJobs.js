@@ -4,7 +4,7 @@ import axios from "axios"
 import { API } from "../api"
 import Loader from "../loaders/CardLoader"
 import styles from "./related_jobs.module.sass"
-import moment from "moment"
+import dayjs from "dayjs"
 
 const RelatedJobs = () => {
   const [loading, setLoading] = useState(true)
@@ -30,9 +30,9 @@ const RelatedJobs = () => {
       <div className={styles.showcase}>
         {loading ? (
           <>
-            <Loader stars={true} />
-            <Loader stars={true} />
-            <Loader stars={true} />
+            <Loader />
+            <Loader />
+            <Loader />
           </>
         ) : (
           <>
@@ -60,12 +60,12 @@ const RelatedJobs = () => {
                     <div className={styles.time__details}>
                       <p className={styles.time}>
                         Posted:{" "}
-                        <span>{moment(created).format("MMM DD, YYYY")}</span>
+                        <span>{dayjs(created).format("MMM DD, YYYY")}</span>
                       </p>
                       <p className={styles.time}>
                         Deadline:{" "}
                         <span>
-                          {moment(closeDate).format("MMM DD, YYYY HH:mm")}
+                          {dayjs(closeDate).format("MMM DD, YYYY HH:mm")}
                         </span>
                       </p>
                     </div>

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import Link from "next/link"
-// import { IoMdRefresh } from "react-icons/io"
 import Template from "../template/Template"
 import Job from "../job/Job"
 import Loader from "../loaders/CardLoader"
@@ -9,7 +8,6 @@ import FilterCriteria from "../filter_criteria/FilterCriteria"
 import NewsLetter from "../newsletter/NewsLetter"
 import styles from "../../styles/template.module.sass"
 import { useAuthState } from "../../context/auth"
-// import Category from "../categories/Category"
 import Swiper from "./swiper"
 
 // main template to display jobs in landing page and jobs page
