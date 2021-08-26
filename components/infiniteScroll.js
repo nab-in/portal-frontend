@@ -159,11 +159,13 @@ const infiniteScroll = ({
       } else {
         // checking if page number is less than the actual number of pages sent from api
         if (!loadMore && pages) {
+          console.log("here")
           setLoadMore(true)
           axios
             .get(apiUrl, config)
             .then((res) => {
               if (res.data) {
+                console.log(res.data)
                 setErrors(null)
                 setPages(
                   res.data.pager.page <=

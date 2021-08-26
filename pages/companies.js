@@ -10,19 +10,61 @@ import Spinner from "../components/loaders/ButtonLoader"
 import categories from "../data/company_categories"
 import styles from "../styles/template.module.sass"
 import { API } from "../components/api"
+import infiniteScroll, { searching } from "../components/infiniteScroll"
 
 const Companies = ({ data, error }) => {
   const [loadMore, setLoadMore] = useState(false)
   let [loading, setLoading] = useState(true)
   let [companies, setCompanies] = useState([])
+  let [page, setPage] = useState(data?.pager.page + 1)
+  let [pages, setPages] = useState(
+    data?.pager.page <= Math.ceil(data?.pager.total / data?.pager.pageSize)
+  )
+  let [resultsPage, setResultsPage] = useState(1)
+  let [resultsPages, setResultsPages] = useState(true)
+  let [errors, setErrors] = useState(null)
+  let [results, setResults] = useState(null)
+  let [message, setMessage] = useState(null)
+  let [number, setNumber] = useState(0)
+  let [url, setUrl] = useState("")
+  let [searchUrl, setSearchUrl] = useState(
+    `${API}/companies?pageSize=1&page=1${url}`
+  )
   const { isAuthenticated } = useAuthState()
   let [filter, setFilter] = useState(false)
-  const [url, setUrl] = useState("")
   let [search, setSearch] = useState({
-    keyword: "",
+    name: "",
     location: "",
-    categories: [],
   })
+
+  console.log(data?.pager)
+
+  let pageName = "companies"
+
+  let apiUrl = `${API}/companies?pageSize=1&page=${page}`
+
+  useEffect(() => {
+    if (
+      search?.name?.trim().length == 0 &&
+      search?.location?.trim().length == 0
+    )
+      setResultsPages(true)
+    setResultsPage(1)
+    let searchingUrl = `${API}/companies?pageSize=1&page=1&${url}`
+
+    searching({
+      setResults,
+      setLoading,
+      setErrors,
+      pageName,
+      searchingUrl,
+      setResultsPage,
+      setResultsPages,
+      search,
+      setNumber,
+      setMessage,
+    })
+  }, [search, url])
 
   useEffect(() => {
     if (data) {
@@ -44,10 +86,6 @@ const Companies = ({ data, error }) => {
         setFilter(true)
         return
       }
-      if (obj[key] == [] && obj.categories.length > 0) {
-        setFilter(true)
-        return
-      }
       setFilter(false)
       return
     }
@@ -57,6 +95,43 @@ const Companies = ({ data, error }) => {
   useEffect(() => {
     checkSearch(search)
   }, [search])
+
+  console.log(companies)
+
+  // infinite scroll
+  const handleScroll = () => {
+    setSearchUrl(`${API}/companies?pageSize=1&page=${resultsPage}&${url}`)
+    infiniteScroll({
+      apiUrl,
+      searchUrl,
+      resultsPage,
+      setResultsPage,
+      resultsPages,
+      setResultsPages,
+      url,
+      setErrors,
+      setPages,
+      setPage,
+      setItems: setCompanies,
+      setResults,
+      items: companies,
+      results,
+      page,
+      loadMore,
+      setLoadMore,
+      data,
+      pageName,
+      setMessage,
+      pages,
+      search,
+    })
+  }
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  })
+
   return (
     <div>
       <Hero
@@ -126,7 +201,7 @@ export async function getServerSideProps() {
   let data = null
   let error = null
   try {
-    const res = await fetch(`${API}/companies?pageSize=8`)
+    const res = await fetch(`${API}/companies?pageSize=1`)
     data = await res.json()
   } catch (err) {
     console.log(err)
