@@ -43,7 +43,7 @@ const Profile = () => {
       })
       .catch((err) => {
         if (err?.response) {
-          alertsDispatch({
+          alertDispatch({
             type: "ADD",
             payload: {
               type: "danger",
@@ -51,7 +51,7 @@ const Profile = () => {
             },
           })
         } else if (err?.message == "Network Error") {
-          alertsDispatch({
+          alertDispatch({
             type: "ADD",
             payload: {
               type: "danger",
@@ -59,7 +59,7 @@ const Profile = () => {
             },
           })
         } else {
-          alertsDispatch({
+          alertDispatch({
             type: "ADD",
             payload: {
               type: "danger",
