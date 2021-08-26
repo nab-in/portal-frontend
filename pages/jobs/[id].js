@@ -95,7 +95,7 @@ const job = ({ data, error }) => {
                       {job && <JobDetails job={job} />}
                     </div>
                     <div className={`${styles.sub__content} sub__content`}>
-                      <RelatedJobs id={job?.id} />
+                      <RelatedJobs job={job} />
                       {!isAuthenticated && (
                         <div className={styles.newsletter}>
                           <NewsLetter />

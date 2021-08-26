@@ -26,16 +26,17 @@ const Template = ({ page, details }) => {
         Authorization: `Bearer ` + token,
       },
     }
-    axios
-      .get(`${API}/users/belongstocompany?company=${router.query.id}`, config)
-      .then((res) => {
-        setLoading(false)
-        if (page == "company") setCompany(res.data)
-      })
-      .catch((err) => {
-        setLoading(false)
-        console.log(err.message)
-      })
+    if (page == "company")
+      axios
+        .get(`${API}/users/belongstocompany?company=${router.query.id}`, config)
+        .then((res) => {
+          setLoading(false)
+          if (page == "company") setCompany(res.data)
+        })
+        .catch((err) => {
+          setLoading(false)
+          console.log(err.message)
+        })
   }, [])
   useEffect(() => {
     if (page == "auth-user") {

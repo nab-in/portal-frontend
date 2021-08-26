@@ -85,6 +85,7 @@ const infiniteScroll = ({
   resultsPages,
   setResultsPages,
   search,
+  config,
 }) => {
   // getting the last item card
   let itemCards = document.querySelectorAll(".main__content > .card")
@@ -106,7 +107,7 @@ const infiniteScroll = ({
         if (!loadMore && resultsPages) {
           setLoadMore(true)
           axios
-            .get(searchUrl)
+            .get(searchUrl, config)
             .then((res) => {
               setErrors(null)
 
@@ -160,7 +161,7 @@ const infiniteScroll = ({
         if (!loadMore && pages) {
           setLoadMore(true)
           axios
-            .get(apiUrl)
+            .get(apiUrl, config)
             .then((res) => {
               if (res.data) {
                 setErrors(null)
@@ -189,6 +190,7 @@ const infiniteScroll = ({
               console.log(err)
               setLoadMore(false)
               if (err?.response) {
+                console.log("here")
                 setErrors({
                   type: "danger",
                   msg: err?.response?.data?.message,

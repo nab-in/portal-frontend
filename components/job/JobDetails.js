@@ -10,11 +10,19 @@ import Button from "../buttons/FormButton"
 import dayjs from "dayjs"
 
 const JobDetails = ({ job }) => {
-  let { isAuthenticated } = useAuthState()
+  let { isAuthenticated, user } = useAuthState()
   let [loading, setLoading] = useState(false)
   let [saveLoading, setSaveLoading] = useState(false)
   const [text, setText] = useState("Apply")
   const [saveText, setSaveText] = useState("Save")
+
+  let token = Cookies.get("token")
+  let config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ` + token,
+    },
+  }
 
   let {
     id,
@@ -30,13 +38,6 @@ const JobDetails = ({ job }) => {
 
   const save = () => {
     setSaveLoading(true)
-    let token = Cookies.get("token")
-    let config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ` + token,
-      },
-    }
     if (saveText == "Save") {
       axios
         .post(`${API}/jobs/${id}/save`, {}, config)
@@ -49,7 +50,7 @@ const JobDetails = ({ job }) => {
           setSaveLoading(false)
           console.log(err.response)
         })
-    } else {
+    } else if (saveText == "Saved!") {
       axios
         .delete(`${API}/jobs/${id}/remove`, config)
         .then((res) => {
@@ -66,13 +67,6 @@ const JobDetails = ({ job }) => {
 
   const apply = () => {
     setLoading(true)
-    let token = Cookies.get("token")
-    let config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ` + token,
-      },
-    }
     if (text == "Apply") {
       axios
         .post(`${API}/jobs/${id}/apply`, {}, config)
@@ -102,23 +96,28 @@ const JobDetails = ({ job }) => {
   }
 
   useEffect(() => {
-    let token = Cookies.get("token")
-    let config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ` + token,
-      },
-    }
     axios
-      .get(`${API}/users/appliedJobs?filter=jobId:eq:${id}`, config)
+      .get(`${API}/jobs/${id}/applications/${user?.id}`, config)
       .then((res) => {
-        console.log(`${API}/users/appliedJobs?filter=jobId:eq:${id}`)
-        console.log(res.data.jobs)
+        console.log(res.data)
+        setText("Revoke")
       })
       .catch((err) => {
         console.log(err.response.data.message)
       })
   }, [])
+
+  useEffect(() => {
+    axios
+      .get(`${API}/jobs/${id}/saves/${user?.id}`, config)
+      .then((res) => {
+        setSaveText("Saved!")
+        console.log(res.data)
+      })
+      .catch((err) => {
+        console.log(err.response.data.message)
+      })
+  })
 
   return (
     <div className={styles.details}>

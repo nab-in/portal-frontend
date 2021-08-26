@@ -54,7 +54,7 @@ const EditProfile = ({ details }) => {
       },
     }
     axios
-      .put(`${API}/users/${details?.id}`, formData, config)
+      .put(`${API}/users`, formData, config)
       .then((res) => {
         dispatch({
           type: "ADD",

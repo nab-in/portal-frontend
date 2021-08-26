@@ -31,12 +31,6 @@ const Jobs = ({
 
   let { isAuthenticated } = useAuthState()
 
-  const params = {
-    direction: "horizontal",
-    slidesPerView: "auto",
-    spaceBetween: 15,
-  }
-
   // check if search object has any value to dynamically render heading
   let checkSearch = (obj) => {
     for (let key in obj) {

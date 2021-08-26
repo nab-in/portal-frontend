@@ -37,6 +37,16 @@ const Companies = () => {
         <article>
           {companies.length > 0 ? (
             <>
+              <p
+                style={{
+                  textAlign: "right",
+                  marginBottom: "1rem",
+                }}
+              >
+                <Link href={`${router.route}?tab=add-company`}>
+                  <a>Register a Company</a>
+                </Link>
+              </p>
               {companies.map((company) => (
                 <Company key={company.id} company={company} page="auth" />
               ))}
@@ -46,7 +56,7 @@ const Companies = () => {
               <p>
                 You belong to no company &nbsp;
                 <Link href={`${router.route}?tab=add-company`}>
-                  <a>Add Company</a>
+                  <a>Register a Company</a>
                 </Link>
               </p>
             </>
