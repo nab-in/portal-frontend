@@ -6,7 +6,7 @@ import Loader from "../loaders/CardLoader"
 import styles from "./related_jobs.module.sass"
 import dayjs from "dayjs"
 
-const RelatedJobs = () => {
+const RelatedJobs = ({ id }) => {
   const [loading, setLoading] = useState(true)
   const [jobs, setJobs] = useState([])
 
@@ -16,7 +16,9 @@ const RelatedJobs = () => {
         `${API}/jobs?pageSize=3&fields=name,company,location,closeDate,created,id`
       )
       .then((res) => {
-        setJobs(res.data.jobs)
+        let results = res.data.jobs
+        results = results.filter((el) => el.id != id)
+        setJobs(results)
         setLoading(false)
       })
       .catch((err) => {
