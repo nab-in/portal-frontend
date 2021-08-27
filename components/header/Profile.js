@@ -1,7 +1,7 @@
 import { useState } from "react"
 import axios from "axios"
-import Cookies from "js-cookie"
-import { API } from "../api";
+import { config } from "../config"
+import { API } from "../api"
 import Link from "next/link"
 import { useAlertsDispatch } from "../../context/alerts"
 import { useAuthState, useAuthDispatch } from "../../context/auth"
@@ -12,22 +12,14 @@ const Profile = () => {
   const { user } = useAuthState()
   const dispatch = useAuthDispatch()
   const alertDispatch = useAlertsDispatch()
-  // const { username, dp, firstname, lastname } = user
   let name = user?.username?.split("")[0]
   // takes care of profile drop down
   let [open, setOpen] = useState(false)
-  //   const toggleDropdown = () => setOpen(!open)
 
   // detect outside click hook
   let node = UseClickOutside(() => setOpen(false))
 
   const logout = () => {
-    const token = Cookies.get("token")
-    const config = {
-      headers: {
-        authorization: `Bearer ` + token,
-      },
-    }
     axios(`${API}/logout`, config)
       .then((res) => {
         dispatch({

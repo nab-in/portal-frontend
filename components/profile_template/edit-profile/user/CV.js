@@ -4,7 +4,7 @@ import Button from "../../../buttons/FormButton"
 import styles from "./cv.module.sass"
 import axios from "axios"
 import { API } from "../../../api"
-import Cookies from "js-cookie"
+import { config } from "../../../config"
 import { useAlertsDispatch } from "../../../../context/alerts"
 import { useAuthDispatch } from "../../../../context/auth"
 
@@ -21,13 +21,6 @@ const CV = ({ userCv }) => {
   const handleFileSubmit = (e) => {
     e.preventDefault(e)
     setLoading(true)
-    let token = Cookies.get("token")
-    let config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ` + token,
-      },
-    }
     axios
       .post(`${API}/users/cv`, cv, config)
       .then((res) => {

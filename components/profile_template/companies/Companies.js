@@ -5,20 +5,13 @@ import Link from "next/link"
 import Section from "../Section"
 import Company from "../../company/Company"
 import { API } from "../../api"
-import Cookies from "js-cookie"
+import { config } from "../../config"
 
 const Companies = () => {
   let router = useRouter()
   let [companies, setCompanies] = useState([])
 
   useEffect(() => {
-    let token = Cookies.get("token")
-    let config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ` + token,
-      },
-    }
     axios
       .get(`${API}/me?fields=companies`, config)
       .then((res) => {

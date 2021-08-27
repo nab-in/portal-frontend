@@ -5,8 +5,8 @@ import Layout from "../components/layout/Layout"
 import { AuthProvider, useAuthDispatch, useAuthState } from "../context/auth"
 import { AlertsProvider } from "../context/alerts"
 import Alert from "../components/alerts/GlobalAlert"
-import Cookies from "js-cookie"
 import { API } from "../components/api"
+import { config } from "../components/config"
 import axios from "axios"
 
 const MyApp = ({ Component, pageProps }) => {
@@ -16,13 +16,6 @@ const MyApp = ({ Component, pageProps }) => {
     const { user } = useAuthState()
     const router = useRouter()
     useEffect(() => {
-      let token = Cookies.get("token")
-      let config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ` + token,
-        },
-      }
       axios
         .get(`${API}/me`, config)
         .then((res) => {

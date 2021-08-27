@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import Link from "next/link"
-import Image from "next/image"
 import { useAuthState } from "../../context/auth"
 import { useRouter } from "next/router"
 import { AiOutlineSearch } from "react-icons/ai"

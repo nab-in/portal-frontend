@@ -8,7 +8,7 @@ import Settings from "../settings/Settings"
 import CV from "./CV"
 import axios from "axios"
 import { API } from "../../../api"
-import Cookies from "js-cookie"
+import { config } from "../../../config"
 import { useAuthDispatch } from "../../../../context/auth"
 import { useAlertsDispatch } from "../../../../context/alerts"
 
@@ -46,13 +46,6 @@ const EditProfile = ({ details, page }) => {
   const handleSubmit = (e) => {
     e.preventDefault(e)
     setLoading(true)
-    let token = Cookies.get("token")
-    let config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ` + token,
-      },
-    }
     axios
       .put(`${API}/users`, formData, config)
       .then((res) => {

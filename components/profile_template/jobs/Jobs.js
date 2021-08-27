@@ -3,7 +3,6 @@ import Link from "next/link"
 import dayjs from "dayjs"
 import Section from "../Section"
 import styles from "./jobs.module.sass"
-import Cookies from "js-cookie"
 import axios from "axios"
 import { API } from "../../api"
 import Loader from "../../loaders/CardLoader"
@@ -15,14 +14,8 @@ const Jobs = ({ page, details }) => {
   useEffect(() => {
     if (page == "company") {
       setLoading(true)
-      const token = Cookies.get("token")
-      const config = {
-        headers: {
-          authorization: `Bearer ` + token,
-        },
-      }
       axios
-        .get(`${API}/companies/${details.id}?fields=jobs`, config)
+        .get(`${API}/companies/${details.id}?fields=jobs`)
         .then((res) => {
           setJobs(res.data.jobs)
           setLoading(false)

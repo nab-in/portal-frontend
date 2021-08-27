@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import Cookies from "js-cookie"
+import { config } from "../../config"
 import axios from "axios"
 import { API } from "../../api"
 import Section from "../Section"
@@ -19,13 +19,6 @@ const SavedJobs = () => {
   const apiUrl = `${API}/users/savedJobs?page=${page}&pageSize=1&fields=id,name,company,location,created,closeDate`
 
   const pageName = "jobs"
-
-  const token = Cookies.get("token")
-  const config = {
-    headers: {
-      authorization: `Bearer ` + token,
-    },
-  }
 
   useEffect(() => {
     setLoading(true)

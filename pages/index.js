@@ -20,10 +20,7 @@ const Home = ({ data, companies, error }) => {
   useEffect(() => {
     if (error) {
       setLoading(false)
-      if ((JSON.parse(error).code = "EHOSTUNREACH"))
-        setMessage(
-          "Client error, please make sure you are connected to internet"
-        )
+      setMessage("Client error, please make sure you are connected to internet")
     }
   }, [error])
   useEffect(() => {

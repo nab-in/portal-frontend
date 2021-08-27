@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import Section from "../Section"
-import Cookies from "js-cookie"
+import { config } from "../../config"
 import axios from "axios"
 import { API } from "../../api"
 import Job from "../../job/Job"
@@ -8,12 +8,6 @@ import Job from "../../job/Job"
 const AppliedJobs = () => {
   const [jobs, setJobs] = useState([])
   useEffect(() => {
-    const token = Cookies.get("token")
-    const config = {
-      headers: {
-        authorization: `Bearer ` + token,
-      },
-    }
     axios
       .get(
         `${API}/users/appliedJobs?fields=id,name,companies,jobType,location,created,closeDate`,

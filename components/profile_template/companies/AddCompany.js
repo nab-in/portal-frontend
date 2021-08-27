@@ -1,6 +1,6 @@
 import { useState } from "react"
 import axios from "axios"
-import Cookies from "js-cookie"
+import { config } from "../../config"
 import Section from "../Section"
 import Input from "../../inputs/Input"
 import Button from "../../buttons/FormButton"
@@ -22,13 +22,6 @@ const AddCompany = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     setLoading(true)
-    let token = Cookies.get("token")
-    let config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ` + token,
-      },
-    }
     axios
       .post(`${API}/companies`, formData, config)
       .then((res) => {

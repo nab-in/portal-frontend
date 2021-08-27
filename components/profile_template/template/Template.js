@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
-import Cookies from "js-cookie"
+import { config } from "../../config"
 import { useRouter } from "next/router"
 import { useAuthState } from "../../../context/auth"
 import Aside from "../aside/Aside"
@@ -18,13 +18,6 @@ const Template = ({ page, details, setDetails }) => {
 
   useEffect(() => {
     if (page == "company" || page == "auth-company") setLoading(true)
-    let token = Cookies.get("token")
-    let config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ` + token,
-      },
-    }
     if (page == "company")
       axios
         .get(`${API}/users/belongstocompany?company=${router.query.id}`, config)
@@ -37,6 +30,7 @@ const Template = ({ page, details, setDetails }) => {
           console.log(err.message)
         })
   }, [])
+
   useEffect(() => {
     if (page == "auth-user") {
       setUser(true)
@@ -45,6 +39,7 @@ const Template = ({ page, details, setDetails }) => {
       setUser(true)
     }
   }, [])
+
   return (
     <section className={styles.template}>
       {loading ? (
