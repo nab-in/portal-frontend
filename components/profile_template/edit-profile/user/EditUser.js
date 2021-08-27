@@ -12,7 +12,7 @@ import Cookies from "js-cookie"
 import { useAuthDispatch } from "../../../../context/auth"
 import { useAlertsDispatch } from "../../../../context/alerts"
 
-const EditProfile = ({ details }) => {
+const EditProfile = ({ details, page }) => {
   let [loading, setLoading] = useState(false)
   let [formData, setFormData] = useState({
     firstname: details?.firstname ? details.firstname : "",
@@ -80,6 +80,7 @@ const EditProfile = ({ details }) => {
         <Upload
           dp={details.dp ? details.dp : details.logo}
           name={details.username ? details.username : details.name}
+          page={page}
         />
         <article className={styles.contents}>
           <form onSubmit={(e) => handleSubmit(e)}>
@@ -108,12 +109,13 @@ const EditProfile = ({ details }) => {
               placeholder="Title..."
             />
             <Input
-              title="Bio"
+              title="About"
               name="bio"
               id="bio"
               value={bio}
               placeholder="Bio"
               handleChange={handleChange}
+              textarea={true}
             />
             <Input
               title="Location"
@@ -123,7 +125,7 @@ const EditProfile = ({ details }) => {
               handleChange={handleChange}
               placeholder="Location"
             />
-            <Input
+            {/* <Input
               title="About"
               name="about"
               id="about"
@@ -131,7 +133,7 @@ const EditProfile = ({ details }) => {
               handleChange={handleChange}
               placeholder="About"
               textarea={true}
-            />
+            /> */}
             <Input
               type="url"
               title="Website"

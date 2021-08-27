@@ -1,17 +1,18 @@
 import { useState } from "react"
-import Cookies from "js-cookie"
+import { config } from "../../config"
 import axios from "axios"
 import { FaCamera } from "react-icons/fa"
-import { API } from "../../api"
+import { API, BACKEND } from "../../api"
 import { useAuthDispatch } from "../../../context/auth"
 import { useAlertsDispatch } from "../../../context/alerts"
 import styles from "./upload.module.sass"
 
-const Upload = ({ dp, name }) => {
+const Upload = ({ details, setDetails, dp, name, page }) => {
   const dispatch = useAuthDispatch()
   const alertDispatch = useAlertsDispatch()
   name = name.split("")[0]
   let [imgData, setImgData] = useState(null)
+
   const handleChange = (e) => {
     if (e.target.files) {
       const reader = new FileReader()
@@ -22,42 +23,57 @@ const Upload = ({ dp, name }) => {
       reader.readAsDataURL(e.target.files[0])
 
       // uploading file
-      let token = Cookies.get("token")
-      let config = {
-        headers: {
-          Authorization: `Bearer ` + token,
-        },
-      }
-
       data.append("", e.target.files[0])
-      axios
-        .post(`${API}/users/dp`, data, config)
-        .then((res) => {
-          // console.log(res.data)
-          dispatch({
-            type: "ADD_DP",
-            payload: res.data,
+      if (page == "auth-user")
+        axios
+          .post(`${API}/users/dp`, data, config)
+          .then((res) => {
+            dispatch({
+              type: "ADD_DP",
+              payload: res.data,
+            })
+            alertDispatch({
+              type: "ADD",
+              payload: {
+                type: "success",
+                message: res.data.message,
+              },
+            })
           })
-          alertDispatch({
-            type: "ADD",
-            payload: {
-              type: "success",
-              message: res.data.message,
-            },
+          .catch((err) => {
+            alertDispatch({
+              type: "ADD",
+              payload: {
+                type: "danger",
+                message: err.response?.data?.message,
+              },
+            })
           })
-          // setLoading(false)
-        })
-        .catch((err) => {
-          // setLoading(false)
-          // console.log(err)
-          alertDispatch({
-            type: "ADD",
-            payload: {
-              type: "danger",
-              message: err.response?.data?.message,
-            },
+      if (page == "company") {
+        axios
+          .post(`${API}/companies/${details?.id}/logo`, data, config)
+          .then((res) => {
+            console.log(res.data)
+            setDetails({ ...details, logo: BACKEND + res.data?.path })
+            alertDispatch({
+              type: "ADD",
+              payload: {
+                type: "success",
+                message: res.data.message,
+              },
+            })
           })
-        })
+          .catch((err) => {
+            console.log(err)
+            alertDispatch({
+              type: "ADD",
+              payload: {
+                type: "danger",
+                message: err.response?.data?.message,
+              },
+            })
+          })
+      }
     }
   }
 

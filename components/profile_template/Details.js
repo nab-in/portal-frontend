@@ -7,7 +7,7 @@ import Jobs from "./jobs/Jobs"
 import Companies from "./companies/Companies"
 import AddCompany from "./companies/AddCompany"
 
-const Details = ({ tab, details, page, isUser, isCompany }) => {
+const Details = ({ tab, details, setDetails, page, isUser, isCompany }) => {
   const Content = () => {
     if (tab == undefined || tab == "profile")
       return <Profile details={details} page={page} />
@@ -25,8 +25,10 @@ const Details = ({ tab, details, page, isUser, isCompany }) => {
           {isUser || isCompany ? (
             <EditProfile
               details={details}
+              setDetails={setDetails}
               isUser={isUser}
               isCompany={isCompany}
+              page={page}
             />
           ) : (
             <Profile details={details} page={page} />

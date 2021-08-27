@@ -74,11 +74,12 @@ const AddCompany = () => {
               placeholder="Company Title"
             />
             <Input
-              title="Bio"
+              title="About"
               name="bio"
               id="bio"
               handleChange={handleChange}
               placeholder="Bio..."
+              textarea={true}
             />
             <Button text="Save" btnClass="btn-primary" loading={loading} />
           </form>

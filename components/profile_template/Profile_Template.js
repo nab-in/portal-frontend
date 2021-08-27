@@ -2,12 +2,17 @@ import React from "react"
 import Hero from "./hero/Hero"
 import Template from "./template/Template"
 
-const Profile_Template = ({ details, page, loading }) => {
+const Profile_Template = ({ details, setDetails, page, loading }) => {
   return (
     <div>
       <Hero page={page} details={details} loading={loading} />
       <main>
-        <Template page={page} details={details} loading={loading} />
+        <Template
+          page={page}
+          details={details}
+          loading={loading}
+          setDetails={setDetails}
+        />
       </main>
     </div>
   )

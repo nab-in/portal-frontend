@@ -2,6 +2,7 @@ import React from "react"
 import Link from "next/link"
 import { GoVerified } from "react-icons/go"
 import styles from "./company.module.sass"
+import { DASH } from "../api"
 
 const Company = ({ company, page }) => {
   let { id, logo, name, jobs } = company
@@ -18,7 +19,7 @@ const Company = ({ company, page }) => {
       <div className={styles.details}>
         {page == "auth" ? (
           <>
-            <a href={`http://localhost:3005/?company=${id}`} target="_blank">
+            <a href={`${DASH}?company=${id}`} target="_blank">
               Visit Dashboard
             </a>
           </>

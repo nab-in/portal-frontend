@@ -1,6 +1,7 @@
 import React from "react"
 import Link from "next/link"
 import styles from "../template/template.module.sass"
+import { DASH } from "../../api"
 
 const Aside = ({ page, details, tab, isUser, isCompany }) => {
   let Nav = () => {
@@ -12,9 +13,7 @@ const Aside = ({ page, details, tab, isUser, isCompany }) => {
             <ul>
               {isCompany && (
                 <li>
-                  <Link href={`/dashboard/`}>
-                    <a>Dashboard</a>
-                  </Link>
+                  <a href={`${DASH}?company=${details.id}`}>Dashboard</a>
                 </li>
               )}
               <li>

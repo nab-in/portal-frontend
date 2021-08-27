@@ -1,5 +1,6 @@
 import React, { createContext, useReducer, useContext } from "react"
 import Cookies from "js-cookie"
+import { BACKEND } from "../components/api"
 
 const AuthStateContext = createContext()
 const AuthDispatchContext = createContext()
@@ -36,7 +37,7 @@ const authReducer = (state, action) => {
     case "ADD_DP":
       userCopy = {
         ...state.user,
-        dp: `http://localhost:5000${payload.path}`,
+        dp: BACKEND + payload.path,
       }
       return {
         ...state,
@@ -45,7 +46,7 @@ const authReducer = (state, action) => {
     case "ADD_CV":
       userCopy = {
         ...state.user,
-        cv: `http://localhost:5000${payload.path}`,
+        cv: BACKEND + payload.path,
       }
       return {
         ...state,

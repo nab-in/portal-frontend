@@ -1,26 +1,56 @@
-import React, { useState } from "react"
+import { useState } from "react"
+import axios from "axios"
+import { config } from "../../../config"
+import { API } from "../../../api"
+import { useAlertsDispatch } from "../../../../context/alerts"
 import Input from "../../../inputs/Input"
 import Button from "../../../buttons/FormButton"
 import Upload from "../Upload"
 import styles from "../edit_profile.module.sass"
-import Settings from "../settings/Settings"
 
-const EditProfile = ({ details }) => {
+const EditProfile = ({ details, setDetails, page }) => {
   let [formData, setFormData] = useState({
     name: details?.name ? details.name : "",
     title: details.title ? details.title : "",
     bio: details.bio ? details.bio : "",
     location: details.location ? details.location : "",
-    about: details.about ? details.about : "",
     website: details.website ? details.website : "",
   })
-  let { name, title, bio, location, about, website } = formData
+  const [loading, setloading] = useState(false)
+  const dispatch = useAlertsDispatch()
+  let { name, title, bio, location, website } = formData
   const handleChange = (e) => {
     let { name, value } = e.target
     setFormData({ ...formData, [name]: value })
   }
   const handleSubmit = (e) => {
     e.preventDefault(e)
+    setloading(true)
+    axios
+      .put(`${API}/companies/${details?.id}`, formData, config)
+      .then((res) => {
+        setDetails(res.data.payload)
+        dispatch({
+          type: "ADD",
+          payload: {
+            type: "success",
+            message: "Details updated successfully",
+          },
+        })
+        setloading(false)
+      })
+      .catch((err) => {
+        if (err?.response) {
+          dispatch({
+            type: "ADD",
+            payload: {
+              type: "danger",
+              message: err?.response.data?.message,
+            },
+          })
+        }
+        setloading(false)
+      })
   }
 
   return (
@@ -32,6 +62,9 @@ const EditProfile = ({ details }) => {
         <Upload
           dp={details.dp ? details.dp : details.logo}
           name={details.username ? details.username : details.name}
+          page={page}
+          details={details}
+          setDetails={setDetails}
         />
         <article className={styles.contents}>
           <form onSubmit={(e) => handleSubmit(e)}>
@@ -52,12 +85,13 @@ const EditProfile = ({ details }) => {
               placeholder="Title..."
             />
             <Input
-              title="Bio"
+              title="About"
               name="bio"
               id="bio"
               value={bio}
               placeholder="Bio"
               handleChange={handleChange}
+              textarea={true}
             />
             <Input
               title="Location"
@@ -68,15 +102,6 @@ const EditProfile = ({ details }) => {
               placeholder="Location"
             />
             <Input
-              title="About"
-              name="about"
-              id="about"
-              value={about}
-              handleChange={handleChange}
-              placeholder="About"
-              textarea={true}
-            />
-            <Input
               type="url"
               title="Website"
               name="website"
@@ -85,7 +110,7 @@ const EditProfile = ({ details }) => {
               handleChange={handleChange}
               placeholder="http://..."
             />
-            <Button text="Save" btnClass="btn-primary" />
+            <Button text="Save" btnClass="btn-primary" loading={loading} />
           </form>
         </article>
       </section>

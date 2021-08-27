@@ -8,13 +8,12 @@ import Details from "../Details"
 import styles from "./template.module.sass"
 import { API } from "../../api"
 
-const Template = ({ page, details }) => {
+const Template = ({ page, details, setDetails }) => {
   let router = useRouter()
   let [isUser, setUser] = useState(false)
   let [isCompany, setCompany] = useState(false)
   let [loading, setLoading] = useState(false)
-  let tab
-  tab = router.query.tab
+  let tab = router.query.tab
   const { user } = useAuthState()
 
   useEffect(() => {
@@ -66,6 +65,7 @@ const Template = ({ page, details }) => {
               tab={tab}
               isCompany={isCompany}
               isUser={isUser}
+              setDetails={setDetails}
             />
           </div>
         </>

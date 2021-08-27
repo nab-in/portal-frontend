@@ -23,7 +23,12 @@ const Company = ({ data, error }) => {
   return (
     <div>
       {details && !loading && (
-        <Profile_Template page="company" details={details} loading={loading} />
+        <Profile_Template
+          page="company"
+          details={details}
+          loading={loading}
+          setDetails={setDetails}
+        />
       )}
       {!loading && (!details || details == undefined) && <Error />}
     </div>
