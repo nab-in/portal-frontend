@@ -28,7 +28,7 @@ const Companies = ({ data, error }) => {
   let [number, setNumber] = useState(0)
   let [url, setUrl] = useState("")
   let [searchUrl, setSearchUrl] = useState(
-    `${API}/companies?pageSize=1&page=1${url}`
+    `${API}/companies?pageSize=8&page=1${url}`
   )
   const { isAuthenticated } = useAuthState()
   let [filter, setFilter] = useState(false)
@@ -41,7 +41,7 @@ const Companies = ({ data, error }) => {
 
   let pageName = "companies"
 
-  let apiUrl = `${API}/companies?pageSize=1&page=${page}`
+  let apiUrl = `${API}/companies?pageSize=8&page=${page}`
 
   useEffect(() => {
     if (
@@ -50,7 +50,7 @@ const Companies = ({ data, error }) => {
     )
       setResultsPages(true)
     setResultsPage(1)
-    let searchingUrl = `${API}/companies?pageSize=1&page=1&${url}`
+    let searchingUrl = `${API}/companies?pageSize=8&page=1&${url}`
 
     searching({
       setResults,
@@ -96,11 +96,9 @@ const Companies = ({ data, error }) => {
     checkSearch(search)
   }, [search])
 
-  // console.log(companies)
-
   // infinite scroll
   const handleScroll = () => {
-    setSearchUrl(`${API}/companies?pageSize=1&page=${resultsPage}&${url}`)
+    setSearchUrl(`${API}/companies?pageSize=8&page=${resultsPage}&${url}`)
     infiniteScroll({
       apiUrl,
       searchUrl,
@@ -238,7 +236,7 @@ export async function getServerSideProps() {
   let data = null
   let error = null
   try {
-    const res = await fetch(`${API}/companies?pageSize=1`)
+    const res = await fetch(`${API}/companies?pageSize=8`)
     data = await res.json()
   } catch (err) {
     console.log(err)
