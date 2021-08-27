@@ -8,7 +8,7 @@ const SwiperCategories = ({ categories, search, setSearch, url, setUrl }) => {
   // const [start, setStart] = useState(false)
   // const [clientX, setClientX] = useState(0)
   // const [isMoving, setIsMoving] = useState(false)
-  const [heights, setHeights] = useState(output)
+  const [heights, setHeights] = useState([])
   let [maxHeight, setMaxHeight] = useState(100)
   const WIDTH = node.current?.scrollWidth
   // const [lastTouch, setLastTouch] = useState(0)
@@ -146,9 +146,7 @@ const SwiperCategories = ({ categories, search, setSearch, url, setUrl }) => {
                   setSearch={setSearch}
                   url={url}
                   setUrl={setUrl}
-                  output={output}
                   heights={heights}
-                  setHeights={setHeights}
                 />
               </SwiperSlide>
             ))}
