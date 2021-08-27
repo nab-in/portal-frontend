@@ -9,7 +9,7 @@ import Spinner from "../../loaders/ButtonLoader"
 import infiniteScroll from "../../infiniteScroll"
 
 const SavedJobs = () => {
-  const [jobs, setJobs] = useState([])
+  const [jobs, setJobs] = useState(null)
   const [loading, setLoading] = useState(false)
   const [page, setPage] = useState(1)
   const [pages, setPages] = useState(false)
@@ -29,13 +29,15 @@ const SavedJobs = () => {
       )
       .then((res) => {
         setJobs(res.data.jobs)
-        setPage(parseInt(res.data?.pager?.page) + 1)
+        setPage(2)
         setPages(
           res.data.pager.page <=
             Math.ceil(res.data.pager.total / res.data.pager.pageSize)
         )
         setErrors(null)
         setLoading(false)
+        if (res.data.pager.total <= res.data.pager.pageSize)
+          setMessage("You have seen it all")
       })
       .catch((err) => {
         setLoading(false)
@@ -119,7 +121,13 @@ const SavedJobs = () => {
                 )}
               </>
             ) : (
-              <p>You didn't save any job</p>
+              <>
+                {errors?.msg ? (
+                  <p className={`alerts ${errors.type}`}>{errors.msg}</p>
+                ) : (
+                  <p>You didn't save any job</p>
+                )}
+              </>
             )}
           </div>
         )}
