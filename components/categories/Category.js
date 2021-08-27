@@ -20,7 +20,7 @@ const Category = ({ category, search, setSearch, url, setUrl, heights }) => {
 
   useEffect(() => {
     heights.push(dropdownRef.current?.scrollHeight)
-  }, [dropdownRef])
+  }, [open])
 
   return (
     <>

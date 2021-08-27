@@ -6,13 +6,14 @@ import { Swiper, SwiperSlide } from "swiper/react"
 const SwiperCategories = ({ categories, search, setSearch, url, setUrl }) => {
   const node = useRef()
   let output = []
-  const [start, setStart] = useState(false)
-  const [clientX, setClientX] = useState(0)
-  const [isMoving, setIsMoving] = useState(false)
+  // const [start, setStart] = useState(false)
+  // const [clientX, setClientX] = useState(0)
+  // const [isMoving, setIsMoving] = useState(false)
   const [heights, setHeights] = useState(output)
+  let [maxHeight, setMaxHeight] = useState(100)
   const WIDTH = node.current?.scrollWidth
-  const [lastTouch, setLastTouch] = useState(0)
-  const [movement, setMovement] = useState(0)
+  // const [lastTouch, setLastTouch] = useState(0)
+  // const [movement, setMovement] = useState(0)
   // const handleWheel = (e) => {
   //   handleMovement(e.deltaX)
   // }
@@ -49,10 +50,8 @@ const SwiperCategories = ({ categories, search, setSearch, url, setUrl }) => {
   //   setClientX(e.clientX)
   // }
 
-  let maxHeight = 100
-
   useEffect(() => {
-    if (heights.length > 0) maxHeight = Math.max(...heights)
+    if (heights.length > 0) setMaxHeight(Math.max(...heights))
   }, [heights])
 
   // const handleMouseStart = (e) => {
@@ -107,8 +106,8 @@ const SwiperCategories = ({ categories, search, setSearch, url, setUrl }) => {
     <div
       className={styles.main_content}
       style={{
-        paddingBottom: maxHeight + 50,
         marginBottom: -maxHeight - 50,
+        paddingBottom: maxHeight + 50,
       }}
     >
       <div
@@ -123,9 +122,11 @@ const SwiperCategories = ({ categories, search, setSearch, url, setUrl }) => {
       >
         <div
           className={styles.swiper}
-          style={{
-            transform: `translateX(${movement * -1}px)`,
-          }}
+          style={
+            {
+              // transform: `translateX(${movement * -1}px)`,
+            }
+          }
           ref={node}
         >
           <Swiper
@@ -133,8 +134,8 @@ const SwiperCategories = ({ categories, search, setSearch, url, setUrl }) => {
             slidesPerView={"auto"}
             grabCursor={true}
             style={{
-              marginBottom: "-250px",
-              paddingBottom: "250px",
+              marginBottom: -maxHeight - 50,
+              paddingBottom: maxHeight + 50,
             }}
           >
             {categories.map((category) => (

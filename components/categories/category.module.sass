@@ -2,24 +2,20 @@
 
 .main_content
     overflow-x: hidden
-    padding: 1rem .5rem
+    padding: 0 .5rem
     z-index: 2
+    visibility: hidden
     &::-webkit-scrollbar
         display: none
-.swiper
-    display: flex
-    transition-property: transform
-    will-change: transform
-    cursor: grab
-    scroll-snap-type: x mandatory
-    scroll-behavior: smooth
 
 .category
-    height: 30px
+    height: calc( 30px + 2rem )
     min-width: 200px
     max-width: 150%
     position: relative
     color: $primary
+    visibility: visible
+    padding: 1rem
     button
         padding: .3rem 1rem
         background: #E2E8EC
@@ -45,11 +41,11 @@
         left: 50%
         transform: translateX(-50%)
         background: #ffffff
-        width: 110%
+        width: 100%
         min-width: 180px
         opacity: 0
         pointer-events: none
-        z-index: 5
+        z-index: 8
         padding: 1.5rem 1.5rem
         box-shadow: 4px 4px 15px 10px rgba(0, 0, 0, 0.08)
         border-radius: 10px
