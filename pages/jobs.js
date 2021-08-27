@@ -96,6 +96,7 @@ const jobs = ({ data, error }) => {
       .get(`${API}/jobCategories?fields=id,name,children[id, name]`)
       .then((res) => {
         let data
+        let finalData
         let filter = []
         data = res.data?.jobCategories
         data.forEach((el) => {
@@ -104,10 +105,44 @@ const jobs = ({ data, error }) => {
         filter.forEach((el) => {
           data = data.filter((o) => o.id != el.id)
         })
-        setCategories(data)
+        finalData = [
+          {
+            id: 12,
+            name: "Job Type",
+            children: [
+              {
+                id: 14,
+                name: "Freelance",
+              },
+              {
+                id: 15,
+                name: "Full Time",
+              },
+            ],
+          },
+          ...data,
+        ]
+        console.log(finalData)
+        setCategories(finalData)
       })
       .catch((err) => {
         console.log(err)
+        setCategories([
+          {
+            id: 12,
+            name: "Job Type",
+            sub_categories: [
+              {
+                id: 14,
+                name: "Freelance",
+              },
+              {
+                id: 15,
+                name: "Full Time",
+              },
+            ],
+          },
+        ])
       })
   }, [])
 

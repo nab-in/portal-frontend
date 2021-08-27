@@ -8,6 +8,7 @@ import Alert from "../components/alerts/GlobalAlert"
 import { API } from "../components/api"
 import { config } from "../components/config"
 import axios from "axios"
+import "swiper/css"
 
 const MyApp = ({ Component, pageProps }) => {
   const Site = () => {

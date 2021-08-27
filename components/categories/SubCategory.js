@@ -50,37 +50,54 @@ const SubCategory = ({ sub, setSearch, search, category, url, setUrl }) => {
           categoryIndex
         ].sub_categories.filter((el) => el.id !== id)
 
-        filterCategories = filterCategories.filter((el) => {
-          return el !== id
-        })
-
-        setUrl(
-          url?.replace(
-            url?.split("&")?.find((el) => el.includes("eq")),
-            `filter=categories:eq:[${filterCategories}]`
+        if (category?.name === "Job Type") {
+          setUrl(
+            url?.replace(
+              url?.split("&")?.find((el) => el.includes("jobType")),
+              `filter=jobType:eq:${name}`
+            )
           )
-        )
-
-        //   removing category in categories array
-        if (searchCopy[categoryIndex].sub_categories.length === 0) {
-          searchCopy = searchCopy.filter((el) => el.id != category.id)
-
+        } else {
           filterCategories = filterCategories.filter((el) => {
-            return el !== category?.id
+            return el !== id
           })
+
           setUrl(
             url?.replace(
               url?.split("&")?.find((el) => el.includes("eq")),
               `filter=categories:eq:[${filterCategories}]`
             )
           )
-          if (filterCategories?.length < 1) {
+        }
+
+        //   removing category in categories array
+        if (searchCopy[categoryIndex].sub_categories.length === 0) {
+          searchCopy = searchCopy.filter((el) => el.id != category.id)
+          if (category?.name === "Job Type") {
             setUrl(
               url?.replace(
-                url?.split("&")?.find((el) => el.includes("eq")),
+                url?.split("&")?.find((el) => el.includes("jobType")),
                 ``
               )
             )
+          } else {
+            filterCategories = filterCategories.filter((el) => {
+              return el !== category?.id
+            })
+            setUrl(
+              url?.replace(
+                url?.split("&")?.find((el) => el.includes("eq")),
+                `filter=categories:eq:[${filterCategories}]`
+              )
+            )
+            if (filterCategories?.length < 1) {
+              setUrl(
+                url?.replace(
+                  url?.split("&")?.find((el) => el.includes("eq")),
+                  ``
+                )
+              )
+            }
           }
         }
 
@@ -102,13 +119,22 @@ const SubCategory = ({ sub, setSearch, search, category, url, setUrl }) => {
           sub_categories: searchCopy[categoryIndex].sub_categories.concat(sub),
         }
 
-        filterCategories.push(id)
-        setUrl(
-          url?.replace(
-            url?.split("&")?.find((el) => el.includes("eq")),
-            `filter=categories:eq:[${filterCategories}]`
+        if (category?.name === "Job Type") {
+          setUrl(
+            url?.replace(
+              url?.split("&")?.find((el) => el.includes("jobType")),
+              `filter=jobType:eq:${name}`
+            )
           )
-        )
+        } else {
+          filterCategories.push(id)
+          setUrl(
+            url?.replace(
+              url?.split("&")?.find((el) => el.includes("eq")),
+              `filter=categories:eq:[${filterCategories}]`
+            )
+          )
+        }
 
         setSearch({
           ...search,
@@ -128,18 +154,23 @@ const SubCategory = ({ sub, setSearch, search, category, url, setUrl }) => {
           sub_categories: [sub],
         }),
       })
-      filterCategories.push(id)
-      filterCategories.push(category?.id)
-      if (categoriesStr) {
-        setUrl(
-          url?.replace(
-            url?.split("&")?.find((el) => el.includes("eq")),
-            `filter=categories:eq:[${filterCategories}]`
-          )
-        )
+      if (category?.name === "Job Type") {
+        setUrl(url + `&filter=jobType:eq:${name}`)
       } else {
-        setUrl(url + `&filter=categories:eq:[${filterCategories}]`)
+        filterCategories.push(id)
+        filterCategories.push(category?.id)
+        if (categoriesStr) {
+          setUrl(
+            url?.replace(
+              url?.split("&")?.find((el) => el.includes("eq")),
+              `filter=categories:eq:[${filterCategories}]`
+            )
+          )
+        } else {
+          setUrl(url + `&filter=categories:eq:[${filterCategories}]`)
+        }
       }
+
       setChecked(true)
     }
   }
