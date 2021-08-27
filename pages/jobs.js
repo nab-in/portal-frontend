@@ -146,6 +146,11 @@ const jobs = ({ data, error }) => {
     return () => window.removeEventListener("scroll", handleScroll)
   })
 
+  const loadMoreJobs = () => {
+    setLoadMore(true)
+    handleScroll()
+  }
+
   return (
     <div className="jobs">
       <Hero
@@ -174,6 +179,7 @@ const jobs = ({ data, error }) => {
           url={url}
           setUrl={setUrl}
           number={number}
+          loadMoreJobs={loadMoreJobs}
         />
       </main>
     </div>

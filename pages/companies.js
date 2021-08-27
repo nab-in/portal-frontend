@@ -37,7 +37,7 @@ const Companies = ({ data, error }) => {
     location: "",
   })
 
-  console.log(data?.pager)
+  // console.log(data?.pager)
 
   let pageName = "companies"
 
@@ -96,7 +96,7 @@ const Companies = ({ data, error }) => {
     checkSearch(search)
   }, [search])
 
-  console.log(companies)
+  // console.log(companies)
 
   // infinite scroll
   const handleScroll = () => {
@@ -131,6 +131,11 @@ const Companies = ({ data, error }) => {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   })
+
+  const loadMoreCompanies = () => {
+    setLoadMore(true)
+    handleScroll()
+  }
 
   return (
     <div>
@@ -167,20 +172,52 @@ const Companies = ({ data, error }) => {
                 </>
               ) : (
                 <>
-                  {companies.length > 0 &&
-                    companies.map((company) => (
-                      <Company company={company} key={company.id} />
-                    ))}
+                  <>
+                    {results != null ? (
+                      <>
+                        {results.length > 0 ? (
+                          <>
+                            {results.map((company) => (
+                              <Company company={company} key={company.id} />
+                            ))}
+                          </>
+                        ) : (
+                          <p>No company match the your criteria</p>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        {companies.length > 0 &&
+                          companies.map((company) => (
+                            <Company company={company} key={company.id} />
+                          ))}
+                      </>
+                    )}
+                  </>
+                  {errors?.msg && (
+                    <p className={`alerts ${errors?.type}`}>{errors.msg}</p>
+                  )}
                 </>
               )}
               <div
                 className={`${styles.more__link} ${styles.more__link__center}`}
               >
                 <>
-                  {loadMore ? (
-                    <Spinner bg="light" />
+                  {message ? (
+                    <p>{message}</p>
                   ) : (
-                    <button className="primary__text">Load More</button>
+                    <>
+                      {loadMore ? (
+                        <Spinner bg="light" />
+                      ) : (
+                        <button
+                          className="primary__text"
+                          onClick={loadMoreCompanies}
+                        >
+                          Load More
+                        </button>
+                      )}
+                    </>
                   )}
                 </>
               </div>

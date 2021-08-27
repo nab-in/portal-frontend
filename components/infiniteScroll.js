@@ -103,7 +103,6 @@ const infiniteScroll = ({
         search?.categories?.length > 0
       ) {
         // checking if page number is less than the actual number of pages sent from api
-        //   console.log(resultsPage, resultsData)
         if (!loadMore && resultsPages) {
           setLoadMore(true)
           axios
@@ -133,7 +132,6 @@ const infiniteScroll = ({
               setResultsPage(parseInt(res.data?.pager.page) + 1)
             })
             .catch((err) => {
-              console.log(err)
               setLoadMore(false)
               if (err?.response) {
                 setErrors({
@@ -165,7 +163,6 @@ const infiniteScroll = ({
             .get(apiUrl, config)
             .then((res) => {
               if (res.data) {
-                console.log(res.data)
                 setErrors(null)
                 setPages(
                   res.data.pager.page <=
@@ -189,10 +186,8 @@ const infiniteScroll = ({
               }
             })
             .catch((err) => {
-              console.log(err)
               setLoadMore(false)
               if (err?.response) {
-                console.log("here")
                 setErrors({
                   type: "danger",
                   msg: err?.response?.data?.message,

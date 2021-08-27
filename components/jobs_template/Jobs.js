@@ -26,6 +26,7 @@ const Jobs = ({
   setUrl,
   errors,
   categories,
+  loadMoreJobs,
 }) => {
   let [filter, setFilter] = useState(false)
 
@@ -53,27 +54,17 @@ const Jobs = ({
 
   const filters = (
     <div className={styles.categories}>
-      <p>Filter By</p>
       {categories?.length > 0 && (
-        <Swiper
-          categories={categories}
-          search={search}
-          setSearch={setSearch}
-          url={url}
-          setUrl={setUrl}
-        />
-        //   {categories.map((category) => (
-        //     <div key={category.id} className={styles.category}>
-        //       <Category
-        //         category={category}
-        //         search={search}
-        //         setSearch={setSearch}
-        //         url={url}
-        //         setUrl={setUrl}
-        //       />
-        //     </div>
-        //   ))}
-        // </Swiper>
+        <>
+          <p>Filter By</p>
+          <Swiper
+            categories={categories}
+            search={search}
+            setSearch={setSearch}
+            url={url}
+            setUrl={setUrl}
+          />
+        </>
       )}
     </div>
   )
@@ -100,47 +91,45 @@ const Jobs = ({
           {filter && <h3 className={styles.results__header}>Results</h3>}
           {loading ? (
             <>
-              <Loader stars={true} />
-              <Loader stars={true} />
-              <Loader stars={true} />
+              <Loader stars={false} />
+              <Loader stars={false} />
+              <Loader stars={false} />
             </>
           ) : (
             <>
-              {errors?.msg ? (
-                <p className={`alerts ${errors.type}`}>{errors.msg}</p>
-              ) : (
-                <>
-                  {results != null && typeof results == "object" ? (
-                    <>
-                      {results?.length > 0 ? (
-                        <>
-                          <p>Showing {number} results</p>
-                          {results.map((job) => (
-                            <Job job={job} key={job.id} />
-                          ))}
-                        </>
-                      ) : (
-                        <p>No Job match your Criteria</p>
-                      )}
-                    </>
-                  ) : (
-                    <>
-                      {jobs?.length > 0 ? (
-                        <>
-                          {jobs.map((job) => (
-                            <Job job={job} key={job.id} />
-                          ))}
-                        </>
-                      ) : (
-                        <></>
-                      )}
-                    </>
-                  )}
-                </>
+              <>
+                {results != null && typeof results == "object" ? (
+                  <>
+                    {results?.length > 0 ? (
+                      <>
+                        <p>Showing {number} results</p>
+                        {results.map((job) => (
+                          <Job job={job} key={job.id} />
+                        ))}
+                      </>
+                    ) : (
+                      <p>No Job match your Criteria</p>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    {jobs?.length > 0 ? (
+                      <>
+                        {jobs.map((job) => (
+                          <Job job={job} key={job.id} />
+                        ))}
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </>
+                )}
+              </>
+              {errors?.msg && (
+                <p className={`alerts ${errors?.type}`}>{errors.msg}</p>
               )}
             </>
           )}
-          {message && <p>{message}</p>}
           <div
             className={
               page === "jobs"
@@ -151,9 +140,22 @@ const Jobs = ({
             {page === "jobs" ? (
               <>
                 {message ? (
-                  <></>
+                  <p>{message}</p>
                 ) : (
-                  <>{loadMore ? <Spinner bg="light" /> : <></>}</>
+                  <>
+                    {loadMore ? (
+                      <Spinner bg="light" />
+                    ) : (
+                      <>
+                        <button
+                          className="primary__text"
+                          onClick={loadMoreJobs}
+                        >
+                          Load More
+                        </button>
+                      </>
+                    )}
+                  </>
                 )}
               </>
             ) : (
