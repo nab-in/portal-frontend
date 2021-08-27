@@ -5,7 +5,6 @@ import { Swiper, SwiperSlide } from "swiper/react"
 
 const SwiperCategories = ({ categories, search, setSearch, url, setUrl }) => {
   const node = useRef()
-  let output = []
   // const [start, setStart] = useState(false)
   // const [clientX, setClientX] = useState(0)
   // const [isMoving, setIsMoving] = useState(false)
