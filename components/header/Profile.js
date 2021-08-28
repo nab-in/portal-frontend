@@ -1,7 +1,7 @@
 import { useState } from "react"
 import axios from "axios"
 import { config } from "../config"
-import { API } from "../api"
+import { API, DASH } from "../api"
 import Link from "next/link"
 import { useAlertsDispatch } from "../../context/alerts"
 import { useAuthState, useAuthDispatch } from "../../context/auth"
@@ -11,7 +11,6 @@ import { FaAngleDown } from "react-icons/fa"
 
 const Profile = () => {
   const { user, roles } = useAuthState()
-  console.log(roles)
   const dispatch = useAuthDispatch()
   const alertDispatch = useAlertsDispatch()
   let name = user?.username?.split("")[0]
@@ -64,6 +63,10 @@ const Profile = () => {
       })
   }
 
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
+  }
+
   return (
     <div className={styles.profile} ref={node}>
       <div onClick={() => setOpen(!open)} className={styles.profile}>
@@ -73,13 +76,7 @@ const Profile = () => {
         </div>
         <div className={styles.dp__container}>
           {user?.dp ? (
-            <img
-              src={user.dp}
-              alt={`dp`}
-              height={40}
-              width={40}
-              // objectFit="cover"
-            />
+            <img src={user.dp} alt={`dp`} height={40} width={40} />
           ) : (
             <>{name && <div className={styles.default}>{name}</div>}</>
           )}
@@ -121,6 +118,24 @@ const Profile = () => {
                 </Link>
               </li>
             </ul>
+            {roles?.length > 0 && (
+              <ul
+                style={{
+                  borderTop: "none",
+                }}
+              >
+                {roles.map(({ id, name }) => (
+                  <li key={id}>
+                    <a
+                      onClick={() => setOpen(false)}
+                      href={`${DASH}?role=${id}`}
+                    >
+                      {capitalizeFirstLetter(name)} Dashboard
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
             <li>
               <a
                 href="#!"
