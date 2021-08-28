@@ -5,7 +5,7 @@ import Section from "../Section"
 import Input from "../../inputs/Input"
 import Button from "../../buttons/FormButton"
 import { API } from "../../api"
-import { useAuthDispatch, useAuthState } from "../../../context/auth"
+import { useAuthDispatch } from "../../../context/auth"
 import { useAlertsDispatch } from "../../../context/alerts"
 
 const AddCompany = () => {
@@ -16,7 +16,6 @@ const AddCompany = () => {
     title: "",
     bio: "",
   })
-  const { companies } = useAuthState()
   const dispatch = useAuthDispatch()
   const alertsDispatch = useAlertsDispatch()
 
@@ -49,7 +48,6 @@ const AddCompany = () => {
         setLoading(false)
       })
   }
-  console.log(companies)
   return (
     <div>
       <Section title="Add Company">

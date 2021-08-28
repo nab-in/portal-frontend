@@ -18,6 +18,7 @@ const authReducer = (state, action) => {
         ...state,
         isAuthenticated: true,
         user: payload,
+        loading: false,
       }
     case "REGISTER":
       return {
@@ -87,6 +88,7 @@ const authReducer = (state, action) => {
         ...state,
         user: payload,
         isAuthenticated: true,
+        loading: false,
       }
     default:
       return {
@@ -98,6 +100,7 @@ const authReducer = (state, action) => {
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, {
     user: null,
+    loading: true,
     isAuthenticated: false,
     companies: [],
     roles: [],

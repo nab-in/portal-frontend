@@ -10,7 +10,8 @@ import styles from "./profile.module.sass"
 import { FaAngleDown } from "react-icons/fa"
 
 const Profile = () => {
-  const { user } = useAuthState()
+  const { user, roles } = useAuthState()
+  console.log(roles)
   const dispatch = useAuthDispatch()
   const alertDispatch = useAlertsDispatch()
   let name = user?.username?.split("")[0]

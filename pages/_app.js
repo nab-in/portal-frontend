@@ -12,25 +12,45 @@ import "swiper/css"
 
 const MyApp = ({ Component, pageProps }) => {
   const Site = () => {
-    const [loading, setLoading] = useState(true)
     const dispatch = useAuthDispatch()
-    const { user } = useAuthState()
+    const { user, loading } = useAuthState()
     const router = useRouter()
     useEffect(() => {
-      axios
-        .get(`${API}/me`, config)
-        .then((res) => {
-          if (!user)
-            dispatch({
-              type: "AUTH",
-              payload: res.data,
+      let isMounted = true
+      if (isMounted)
+        if (!user) {
+          axios
+            .get(
+              `${API}/me?fields=email,firstname,lastname,username,bio,title,location,id,websitelink,cv,cvlink,verified,enabled,dp,userRoles,companies`,
+              config
+            )
+            .then((res) => {
+              let data = res.data
+              if (data?.companies)
+                dispatch({
+                  type: "COMPANIES",
+                  payload: data.companies,
+                })
+              if (data?.userRoles)
+                dispatch({
+                  type: "USERROLES",
+                  payload: data.userRoles,
+                })
+              delete data?.companies
+              delete data?.userRoles
+              dispatch({
+                type: "AUTH",
+                payload: data,
+              })
             })
-          setLoading(false)
-        })
-        .catch((err) => {
-          setLoading(false)
-          console.log(err)
-        })
+            .catch((err) => {
+              setLoading(false)
+              console.log(err)
+            })
+        }
+      return () => {
+        isMounted = false
+      }
     }, [])
     if (
       router.pathname.startsWith("/register") ||

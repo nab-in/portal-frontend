@@ -13,7 +13,18 @@ let Card = ({ title, content, url }) => (
 )
 
 const Profile = ({ details }) => {
-  let { id, title, bio, about, website, cv, location, firstname } = details
+  let {
+    id,
+    title,
+    bio,
+    about,
+    website,
+    websitelink,
+    cv,
+    cvlink,
+    location,
+    firstname,
+  } = details
 
   return (
     <div className={styles.profile}>
@@ -29,14 +40,20 @@ const Profile = ({ details }) => {
             </>
           ) : (
             <>
-              {!title && !bio && !location && !about && !website && !cv && (
-                <p>
-                  No profile found!! &nbsp;
-                  <Link href="/profile?tab=edit-profile">
-                    <a>Add Profile</a>
-                  </Link>
-                </p>
-              )}
+              {!title &&
+                !bio &&
+                !location &&
+                !about &&
+                !website &&
+                !cv &&
+                !websitelink && (
+                  <p>
+                    No profile found!! &nbsp;
+                    <Link href="/profile?tab=edit-profile">
+                      <a>Add Profile</a>
+                    </Link>
+                  </p>
+                )}
               {title && <Card title="Title" content={title} />}
               {bio && <Card title="Bio" content={bio} />}
               {location && <Card title="Location" content={location} />}
@@ -44,6 +61,10 @@ const Profile = ({ details }) => {
               {website && (
                 <Card title="Website" content={website} url={website} />
               )}
+              {websitelink && (
+                <Card title="Website" content={websitelink} url={websitelink} />
+              )}
+              {cvlink && <Card title="Website" content={cvlink} url={cvlink} />}
               {cv && <Card title="CV" content={`${firstname} cv`} url={cv} />}
             </>
           )}
