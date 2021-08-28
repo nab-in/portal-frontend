@@ -43,13 +43,6 @@ const Username = ({ username }) => {
           message: "There are errors in your form",
         },
       })
-      alertsDispatch({
-        type: "ADD",
-        payload: {
-          type: "success",
-          message: "Username changed successfully",
-        },
-      })
     } else {
       setLoading(true)
       axios
@@ -58,6 +51,13 @@ const Username = ({ username }) => {
           dispatch({
             type: "ADD_PROFILE",
             payload: res.data?.payload,
+          })
+          alertsDispatch({
+            type: "ADD",
+            payload: {
+              type: "success",
+              message: "Username changed successfully",
+            },
           })
           setLoading(false)
         })

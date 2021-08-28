@@ -76,6 +76,8 @@ const Email = ({ email }) => {
               },
             })
           }
+          if (error?.message) {
+          }
         })
     }
   }

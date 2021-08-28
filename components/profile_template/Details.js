@@ -1,4 +1,3 @@
-import React from "react"
 import SavedJobs from "./jobs/SavedJobs"
 import Profile from "./profile/Profile"
 import AppliedJobs from "./jobs/AppliedJobs"

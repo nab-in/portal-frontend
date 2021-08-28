@@ -20,21 +20,12 @@ const EditProfile = ({ details, page }) => {
     title: details.title ? details.title : "",
     bio: details.bio ? details.bio : "",
     location: details.location ? details.location : "",
-    about: details.about ? details.about : "",
     website: details.website ? details.website : "",
     websitelink: details?.websitelink ? details.websitelink : "",
     cvlink: details?.cvlink ? details.cvlink : "",
   })
-  let {
-    firstname,
-    lastname,
-    title,
-    bio,
-    location,
-    about,
-    websitelink,
-    cvlink,
-  } = formData
+  let { firstname, lastname, title, bio, location, websitelink, cvlink } =
+    formData
 
   const dispatch = useAlertsDispatch()
   const authDispatch = useAuthDispatch()

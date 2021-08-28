@@ -15,7 +15,7 @@ const GlobalAlert = () => {
 
   let timeout = setTimeout(() => {
     close()
-  }, 20000)
+  }, 40000)
 
   useEffect(() => {
     timeout

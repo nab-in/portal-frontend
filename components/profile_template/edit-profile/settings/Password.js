@@ -29,6 +29,7 @@ const Password = () => {
     if (name === "password" && value.length >= 6) {
       setError(null)
     }
+    if (name === "userpassword") setPassErr(null)
   }
   const handleSubmit = (e) => {
     e.preventDefault(e)

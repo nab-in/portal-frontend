@@ -17,26 +17,41 @@ const Template = ({ page, details, setDetails }) => {
   const { user } = useAuthState()
 
   useEffect(() => {
-    if (page == "company" || page == "auth-company") setLoading(true)
-    if (page == "company")
-      axios
-        .get(`${API}/users/belongstocompany?company=${router.query.id}`, config)
-        .then((res) => {
-          setLoading(false)
-          if (page == "company") setCompany(res.data)
-        })
-        .catch((err) => {
-          setLoading(false)
-          console.log(err.message)
-        })
+    let isMounted = true
+    if (isMounted) {
+      if (page == "company" || page == "auth-company") setLoading(true)
+      if (page == "company")
+        axios
+          .get(
+            `${API}/users/belongstocompany?company=${router.query.id}`,
+            config
+          )
+          .then((res) => {
+            setLoading(false)
+            if (page == "company") setCompany(res.data)
+          })
+          .catch((err) => {
+            setLoading(false)
+            console.log(err.message)
+          })
+    }
+    return () => {
+      isMounted = false
+    }
   }, [])
 
   useEffect(() => {
-    if (page == "auth-user") {
-      setUser(true)
+    let isMounted = true
+    if (isMounted) {
+      if (page == "auth-user") {
+        setUser(true)
+      }
+      if (page == "user" && user?.id == details.id) {
+        setUser(true)
+      }
     }
-    if (page == "user" && user?.id == details.id) {
-      setUser(true)
+    return () => {
+      isMounted = false
     }
   }, [])
 
