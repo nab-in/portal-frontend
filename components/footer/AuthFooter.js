@@ -1,7 +1,13 @@
-import styles from "./FooterLoggedIn.module.sass"
+import styles from "./authfooter.module.sass"
 import Link from "next/link"
+import { useAuthState } from "../../context/auth"
+import { DASH } from "../api"
 
 const AuthFooter = () => {
+  const { roles } = useAuthState()
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
+  }
   return (
     <footer className={styles.footer_container}>
       <div className={styles.flex_container}>
@@ -28,6 +34,14 @@ const AuthFooter = () => {
         <div className={styles.f_jobs}>
           <h3>Browse</h3>
           <ul>
+            {roles?.length > 0 &&
+              roles.map(({ id, name }) => (
+                <li>
+                  <a href={`${DASH}/select_identity?role=${id}`}>
+                    {capitalizeFirstLetter(name)} Dashboard
+                  </a>
+                </li>
+              ))}
             <li>
               <Link href="/jobs">
                 <a>Jobs</a>
