@@ -5,7 +5,7 @@ import Jobs from "../components/jobs_template/Jobs"
 import Companies from "../components/home/companies/Companies"
 import { API } from "../components/api"
 
-const Home = ({ data, companies, error }) => {
+const Home = ({ data, companies, error, companiesErr }) => {
   const [loading, setLoading] = useState(true)
   const [jobs, setJobs] = useState([])
   let [message, setMessage] = useState(null)
@@ -23,6 +23,11 @@ const Home = ({ data, companies, error }) => {
       setMessage("Client error, please make sure you are connected to internet")
     }
   }, [error])
+  useEffect(() => {
+    if (companiesErr) {
+      setLoadCompanies(false)
+    }
+  }, [companiesErr])
   useEffect(() => {
     if (companies) setLoadCompanies(false)
   }, [companies])
@@ -51,19 +56,26 @@ export async function getServerSideProps() {
   let data = null
   let companies = null
   let error = null
+  let companiesErr = null
   try {
     const res = await fetch(
       `${API}/jobs?pageSize=8&fields=name,title,closeDate,created,company,id,location`
     )
-    companies = await (await fetch(`${API}/companies`)).json()
     data = await res.json()
   } catch (err) {
     error = JSON.stringify(err)
   }
 
+  try {
+    companies = await (await fetch(`${API}/companies`)).json()
+  } catch (err) {
+    companiesErr = JSON.stringify(err)
+  }
+
   return {
     props: {
       error,
+      companiesErr,
       data,
       companies,
     },
