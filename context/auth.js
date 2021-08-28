@@ -80,6 +80,8 @@ export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, {
     user: null,
     isAuthenticated: false,
+    companies: [],
+    userRoles: [],
   })
   return (
     <AuthDispatchContext.Provider value={dispatch}>

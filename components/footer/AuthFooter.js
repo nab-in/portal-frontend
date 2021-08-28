@@ -1,7 +1,7 @@
 import styles from "./FooterLoggedIn.module.sass"
 import Link from "next/link"
 
-const FooterLoggedIn = () => {
+const AuthFooter = () => {
   return (
     <footer className={styles.footer_container}>
       <div className={styles.flex_container}>
@@ -99,4 +99,4 @@ const FooterLoggedIn = () => {
   )
 }
 
-export default FooterLoggedIn
+export default AuthFooter
