@@ -7,29 +7,67 @@ import {API} from "../../../api"
 import axios from "axios"
 import styles from "./settings.module.sass"
 import checkSymbols, { checkChange } from "../../../checkSymbols"
+import {useAlertsDispatch} from "../../../../context/alerts"
+import {useAuthDispatch} from "../../../../context/auth"
 
 const Username = ({ username }) => {
   const [error, setError] = useState(null)
+  const [ passErr, setPassErr] = useState(null)
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     username: "",
     userpassword: ""
   })
+  const dispatch = useAuthDispatch()
+  const alertsDispatch = useAlertsDispatch()
   const handleChange = (e) => {
     let {name, value} = e.target
     setFormData({...formData, [name]: value})
-    if(name == "username") checkChange(formData.username, setError)
+    if(name == "username") {checkChange(formData.username, setError)
+     alertsDispatch({
+          type: "REMOVE",
+        })
+    }
+    if(name == "userpassword") setPassErr(null)
   }
   const handleSubmit = (e) => {
     e.preventDefault(e)
-    setLoading(true)
-    axios.put(`${API}/users`, formData, config).then(res => {
-      console.log(res.data);
+   if(formData.username.trim().length < 3) {
+     setError({
+       type: "danger",
+       msg: "Username should have atleast three characters"
+     })
+   } else if(error) {
+      alertsDispatch({
+          type: "ADD",
+          payload: {
+            type: "danger",
+            message: "There are errors in your form"
+          }
+        })
+   } else {
+      setLoading(true)
+      axios.put(`${API}/users`, formData, config).then(res => {
+      dispatch({
+        type: "ADD_PROFILE",
+        payload: res.data?.payload
+      })
       setLoading(false)
     }).catch(err => {
       console.log(err?.response);
       setLoading(false)
+      if(err?.response?.data == "Incorrect password") {
+        setPassErr(err?.response?.data)
+        alertsDispatch({
+          type: "ADD",
+          payload: {
+            type: "danger",
+            message: err?.response?.data
+          }
+        })
+      }
     })
+   }
   }
 
   checkSymbols(formData.username, setError)
@@ -49,6 +87,7 @@ const Username = ({ username }) => {
           handleChange={handleChange}
           value={formData.userpassword}
           name="userpassword"
+          error={passErr && passErr}
         />
         <Button text="Update" btnClass="btn-primary" loading={loading} />
       </form>

@@ -10,7 +10,7 @@ import styles from "./upload.module.sass"
 const Upload = ({ details, setDetails, dp, name, page }) => {
   const dispatch = useAuthDispatch()
   const alertDispatch = useAlertsDispatch()
-  name = name.split("")[0]
+  name = name?.split("")[0]
   let [imgData, setImgData] = useState(null)
 
   const handleChange = (e) => {

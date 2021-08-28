@@ -8,7 +8,7 @@ const Hero = ({ details, page, loading }) => {
     const { isAuthenticated, user } = useAuthState()
     if (page == "company" || page == "company/jobs") {
       let { logo, name, title, id } = details
-      let defaultdp = name.split("")[0]
+      let defaultdp = name?.split("")[0]
       return (
         <div className={styles.container}>
           <div className={styles.dp__container}>
@@ -24,9 +24,6 @@ const Hero = ({ details, page, loading }) => {
             <div className={styles.name}>
               <h1>
                 <span>{name}</span>
-                {/* {isAuthenticated && user?.role !== "company" && (
-                  <span className="badge unverified">Follow</span>
-                )} */}
               </h1>
             </div>
             <div className={`${styles.title}`}>
@@ -38,7 +35,7 @@ const Hero = ({ details, page, loading }) => {
     }
     if (page == "user" || page == "auth-user") {
       let { dp, firstname, lastname, username, title, id } = details
-      let name = username.split("")[0]
+      let name = username?.split("")[0]
       return (
         <div className={styles.container}>
           <div className={styles.dp__container}>
@@ -47,8 +44,6 @@ const Hero = ({ details, page, loading }) => {
                 <img
                   src={dp}
                   alt={`${username}`}
-                  // layout="fill"
-                  // objectFit="contain"
                 />
               ) : (
                 <div className={styles.default}>{name}</div>
