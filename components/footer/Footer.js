@@ -16,8 +16,7 @@ const Footer = () => {
         <h1 className={styles.logo}>
           <Link href="/">
             <a>
-              {/* <span>Job</span>Portal. */}
-              <Logo height={40} />
+              <Logo height={25} />
             </a>
           </Link>
         </h1>
@@ -120,7 +119,7 @@ const Footer = () => {
           <h1 className={styles.logo2}>
             <Link href="/">
               <a>
-                <span>Job</span>Portal.
+                <Logo height={20} />
               </a>
             </Link>
           </h1>
