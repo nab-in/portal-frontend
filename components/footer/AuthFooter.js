@@ -36,7 +36,7 @@ const AuthFooter = () => {
           <ul>
             {roles?.length > 0 &&
               roles.map(({ id, name }) => (
-                <li>
+                <li key={id}>
                   <a href={`${DASH}/select_identity?role=${id}`}>
                     {capitalizeFirstLetter(name)} Dashboard
                   </a>

@@ -11,24 +11,31 @@ import { useAuthState, useAuthDispatch } from "../../../context/auth"
 const Companies = () => {
   let router = useRouter()
   const [errors, setErrors] = useState(null)
+  const [message, setMessage] = useState("")
   const { companies } = useAuthState()
   const dispatch = useAuthDispatch()
 
   useEffect(() => {
     let isMounted = true
     if (isMounted) {
-      if (companies?.length === 0)
+      if (companies?.length === 0 && message != "No company found") {
         axios
           .get(`${API}/me?fields=companies`, config)
           .then((res) => {
-            dispatch({
-              type: "COMPANIES",
-              payload: res.data.companies,
-            })
+            if (res.data?.companies?.length == 0) {
+              console.log("message here")
+              setMessage("No company found")
+            } else {
+              dispatch({
+                type: "COMPANIES",
+                payload: res.data.companies,
+              })
+            }
           })
           .catch((err) => {
             console.log(err)
           })
+      }
     }
     return () => {
       isMounted = false
