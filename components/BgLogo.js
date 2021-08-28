@@ -1,7 +1,7 @@
 const Logo = ({ height }) => {
   return (
     <img
-      src="/assets/images/Logo.svg"
+      src="/assets/images/bgLogo.svg"
       alt="logo"
       height={height}
       loading="lazy"

@@ -1,15 +1,14 @@
-import styles from "./Footer.module.sass";
-import Link from "next/link";
-import Input from "../inputs/Input";
-import FormButton from "../buttons/FormButton";
-// import { useAuthState } from "../../context/auth";
+import styles from "./Footer.module.sass"
+import Link from "next/link"
+import Input from "../inputs/Input"
+import FormButton from "../buttons/FormButton"
+import Logo from "../BgLogo"
 
 const Footer = () => {
-  // const { user } = useAuthState();
-  const handleChange = (e) => {};
+  const handleChange = (e) => {}
   const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+    e.preventDefault()
+  }
 
   return (
     <footer className={styles.footer_container}>
@@ -17,7 +16,8 @@ const Footer = () => {
         <h1 className={styles.logo}>
           <Link href="/">
             <a>
-              <span>Job</span>Portal.
+              {/* <span>Job</span>Portal. */}
+              <Logo height={40} />
             </a>
           </Link>
         </h1>
@@ -141,7 +141,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

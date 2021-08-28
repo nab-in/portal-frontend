@@ -90,6 +90,11 @@ const authReducer = (state, action) => {
         isAuthenticated: true,
         loading: false,
       }
+    case "FAILED":
+      return {
+        ...state,
+        loading: false,
+      }
     default:
       return {
         state,

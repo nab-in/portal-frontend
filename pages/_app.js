@@ -44,7 +44,9 @@ const MyApp = ({ Component, pageProps }) => {
               })
             })
             .catch((err) => {
-              console.log(err)
+              dispatch({
+                type: "FAILED",
+              })
             })
         }
       return () => {
