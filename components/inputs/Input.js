@@ -18,7 +18,7 @@ const Input = ({
     <div
       className={
         error
-          ? `${styles.form_control} ${inputClass} error`
+          ? `${styles.form_control} ${inputClass} ${styles.error}`
           : `${styles.form_control} ${inputClass}`
       }
     >
@@ -41,6 +41,7 @@ const Input = ({
           value={value}
           id={id}
           onChange={(e) => handleChange(e)}
+          className={error ? `error`: ``}
         />
       )}
 

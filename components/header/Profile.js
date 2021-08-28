@@ -92,13 +92,7 @@ const Profile = () => {
         <div className={styles.profile}>
           <div className={styles.dp__container}>
             {user?.dp ? (
-              <img
-                src={user.dp}
-                alt={`dp`}
-                height={40}
-                width={40}
-                // objectFit="cover"
-              />
+              <img src={user.dp} alt={`dp`} height={40} width={40} />
             ) : (
               <>{name && <div className={styles.default}>{name}</div>}</>
             )}

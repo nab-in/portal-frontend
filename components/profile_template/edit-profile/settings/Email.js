@@ -18,10 +18,6 @@ const Email = ({ email }) => {
     <Accordion title={title}>
       <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
         <Input
-          title="Enter your current email/username"
-          handleChange={handleChange}
-        />
-        <Input
           type="email"
           title="Enter your new email"
           handleChange={handleChange}

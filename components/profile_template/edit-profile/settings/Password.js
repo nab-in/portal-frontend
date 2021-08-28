@@ -13,10 +13,6 @@ const Password = () => {
     <Accordion title="Change Password">
       <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
         <Input
-          title="Enter your current email/username"
-          handleChange={handleChange}
-        />
-        <Input
           type="password"
           title="Enter your current password"
           handleChange={handleChange}

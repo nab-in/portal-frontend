@@ -1,4 +1,5 @@
 import { useAuthState } from "../../../../context/auth"
+import Link from "next/link"
 import Section from "../../Section"
 import Username from "./Username"
 import Email from "./Email"
@@ -9,6 +10,14 @@ const Settings = ({ page }) => {
   return (
     <Section title="Settings">
       <article>
+        <p
+          style={{
+            textAlign: "right",
+            marginBottom: "1rem",
+          }}
+        >
+          <Link href="/forgot_password">Forgot password?</Link>
+        </p>
         {page === "user" && (
           <Username username={user.username && user.username} />
         )}
