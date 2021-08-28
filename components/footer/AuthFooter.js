@@ -80,7 +80,8 @@ const AuthFooter = () => {
           <h1 className={styles.logo}>
             <Link href="/">
               <a>
-                <span>Job</span>Portal.
+                {/* <span>Job</span>Portal. */}
+                {/* <img /> */}
               </a>
             </Link>
           </h1>

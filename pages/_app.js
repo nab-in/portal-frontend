@@ -44,7 +44,6 @@ const MyApp = ({ Component, pageProps }) => {
               })
             })
             .catch((err) => {
-              setLoading(false)
               console.log(err)
             })
         }

@@ -29,11 +29,13 @@ const login = () => {
       ...formData,
       [name]: value,
     })
+    setErrors({})
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
     setLoading(true)
+    setErrors({})
     axios
       .post(`${API}/login`, formData)
       .then((res) => {
@@ -54,7 +56,22 @@ const login = () => {
       })
       .catch((err) => {
         setLoading(false)
-        console.log(err)
+        if (err?.response) {
+          setErrors({
+            type: "danger",
+            msg: err?.response?.data?.message,
+          })
+        } else if (err?.message) {
+          setErrors({
+            type: "danger",
+            msg: err?.message,
+          })
+        } else {
+          setErrors({
+            type: "danger",
+            msg: "Internal server error, please try again",
+          })
+        }
       })
   }
 
