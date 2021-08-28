@@ -6,24 +6,35 @@ import Section from "../Section"
 import Company from "../../company/Company"
 import { API } from "../../api"
 import { config } from "../../config"
+import { useAuthState, useAuthDispatch } from "../../../context/auth"
 
 const Companies = () => {
   let router = useRouter()
-  let [companies, setCompanies] = useState([])
+  const [errors, setErrors] = useState(null)
+  const { companies } = useAuthState()
+  const dispatch = useAuthDispatch()
 
   useEffect(() => {
-    axios
-      .get(`${API}/me?fields=companies`, config)
-      .then((res) => {
-        // console.log(res)
-        setCompanies(res.data.companies)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    let isMounted = true
+    if (isMounted) {
+      if (companies?.length === 0)
+        axios
+          .get(`${API}/me?fields=companies`, config)
+          .then((res) => {
+            dispatch({
+              type: "COMPANIES",
+              payload: res.data.companies,
+            })
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+    }
+    return () => {
+      isMounted = false
+    }
   }, [])
-  // add them in a global state
-  // console.log(companies)
+
   return (
     <div>
       <Section title="Your Companies">

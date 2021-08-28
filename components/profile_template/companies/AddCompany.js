@@ -5,6 +5,8 @@ import Section from "../Section"
 import Input from "../../inputs/Input"
 import Button from "../../buttons/FormButton"
 import { API } from "../../api"
+import { useAuthDispatch, useAuthState } from "../../../context/auth"
+import { useAlertsDispatch } from "../../../context/alerts"
 
 const AddCompany = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +16,10 @@ const AddCompany = () => {
     title: "",
     bio: "",
   })
+  const { companies } = useAuthState()
+  const dispatch = useAuthDispatch()
+  const alertsDispatch = useAlertsDispatch()
+
   const [loading, setLoading] = useState(false)
   const handleChange = (e) => {
     let { name, value } = e.target
@@ -25,14 +31,25 @@ const AddCompany = () => {
     axios
       .post(`${API}/companies`, formData, config)
       .then((res) => {
-        console.log(res.data)
         setLoading(false)
+        alertsDispatch({
+          type: "ADD",
+          payload: {
+            type: "success",
+            message: formData.name + " was created successfully",
+          },
+        })
+        dispatch({
+          type: "ADD_COMPANY",
+          payload: res.data?.payload,
+        })
       })
       .catch((err) => {
         console.log(err)
         setLoading(false)
       })
   }
+  console.log(companies)
   return (
     <div>
       <Section title="Add Company">

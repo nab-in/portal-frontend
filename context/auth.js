@@ -34,6 +34,25 @@ const authReducer = (state, action) => {
         isAuthenticated: false,
       }
 
+    case "COMPANIES":
+      return {
+        ...state,
+        companies: payload,
+      }
+
+    case "ADD_COMPANY":
+      let companiesCopy = [...state.companies, payload]
+      return {
+        ...state,
+        companies: companiesCopy,
+      }
+
+    case "USERROLES":
+      return {
+        ...state,
+        roles: payload,
+      }
+
     case "ADD_DP":
       userCopy = {
         ...state.user,
@@ -81,7 +100,7 @@ export const AuthProvider = ({ children }) => {
     user: null,
     isAuthenticated: false,
     companies: [],
-    userRoles: [],
+    roles: [],
   })
   return (
     <AuthDispatchContext.Provider value={dispatch}>
