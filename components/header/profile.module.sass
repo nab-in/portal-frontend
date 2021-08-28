@@ -4,6 +4,7 @@
     display: flex
     align-items: center
     cursor: pointer
+    height: 100%
     .dp__container
         height: 40px
         width: 40px
@@ -28,11 +29,15 @@
         display: flex
         align-items: center
         padding-right: .7rem
+        height: 100%
+        .icon
+            font-size: 1rem
         span
             max-width: 120px
             white-space: nowrap
             overflow: hidden
             text-overflow: ellipsis
+            margin-right: .3rem
     .dropdown
         position: absolute
         top: 50px
@@ -77,11 +82,11 @@
 @media screen and ( max-width: 580px )
     .profile
         .dp__container
-            height: 30px
-            width: 30px
+            height: 35px
+            width: 35px
         .default
-            height: 30px
-            width: 30px
+            height: 35px
+            width: 35px
         .name
             span
                 max-width: 80px
@@ -89,7 +94,8 @@
 @media screen and ( max-width: 480px )
     .profile
         .name
-            display: none
+            span.name
+                display: none
         .dropdown
             .name
                 display: block

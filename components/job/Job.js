@@ -1,9 +1,66 @@
 import Link from "next/link"
 import dayjs from "dayjs"
+import { config } from "../config"
+import { API } from "../api"
+import axios from "axios"
 import styles from "./job.module.sass"
+import { useState } from "react"
+import { useAlertsDispatch } from "../../context/alerts"
+import Button from "../buttons/FormButton"
 
-const Job = ({ job }) => {
+const Job = ({ job, page, setItems }) => {
+  const [loading, setLoading] = useState(false)
+  const dispatch = useAlertsDispatch()
   let { id, name, company, created, closeDate, job_type, location } = job
+  const remove = () => {
+    if (page === "saved-jobs") {
+      setLoading(true)
+      axios
+        .delete(`${API}/jobs/${id}/remove`, config)
+        .then((res) => {
+          setLoading(false)
+          setItems((prev) => {
+            let arr = prev.filter((el) => el.id != job.id)
+            return arr
+          })
+          dispatch({
+            type: "ADD",
+            payload: {
+              type: "success",
+              message: "Job removed successfully",
+            },
+          })
+        })
+        .catch((err) => {
+          setLoading(false)
+          if (err?.response) {
+            dispatch({
+              type: "ADD",
+              payload: {
+                type: "danger",
+                message: err?.response.data?.message,
+              },
+            })
+          } else if (err?.message) {
+            dispatch({
+              type: "ADD",
+              payload: {
+                type: "danger",
+                message: err.message,
+              },
+            })
+          } else {
+            dispatch({
+              type: "ADD",
+              payload: {
+                type: "danger",
+                message: "Internal server error",
+              },
+            })
+          }
+        })
+    }
+  }
   return (
     <article className={`card ${styles.job__card}`}>
       <div className={styles.logo__container}>
@@ -42,6 +99,16 @@ const Job = ({ job }) => {
           <p>
             Location: <span>{location}</span>
           </p>
+        )}
+        {page === "saved-jobs" && (
+          <Button
+            click={remove}
+            btnClass="btn-secondary"
+            text="Remove"
+            loading={loading}
+            fontSize={14}
+            fontWeight={400}
+          />
         )}
       </div>
     </article>

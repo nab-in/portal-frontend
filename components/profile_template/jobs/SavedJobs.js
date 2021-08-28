@@ -104,7 +104,12 @@ const SavedJobs = () => {
             {jobs?.length > 0 ? (
               <>
                 {jobs.map((job) => (
-                  <Job key={job.id} job={job} />
+                  <Job
+                    key={job.id}
+                    job={job}
+                    page="saved-jobs"
+                    setItems={setJobs}
+                  />
                 ))}
                 {message?.length > 0 ? (
                   <p>{message}</p>

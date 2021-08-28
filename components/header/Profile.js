@@ -7,6 +7,7 @@ import { useAlertsDispatch } from "../../context/alerts"
 import { useAuthState, useAuthDispatch } from "../../context/auth"
 import UseClickOutside from "../UseClickOutside"
 import styles from "./profile.module.sass"
+import { FaAngleDown } from "react-icons/fa"
 
 const Profile = () => {
   const { user } = useAuthState()
@@ -66,7 +67,8 @@ const Profile = () => {
     <div className={styles.profile} ref={node}>
       <div onClick={() => setOpen(!open)} className={styles.profile}>
         <div className={styles.name}>
-          <span>{user?.username}</span>
+          <span className={styles.name}>{user?.username}</span>
+          <FaAngleDown className={styles.icon} />
         </div>
         <div className={styles.dp__container}>
           {user?.dp ? (
