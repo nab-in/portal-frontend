@@ -68,11 +68,10 @@ const Footer = () => {
 
         <div className={styles.footer_copyright}>
           <p>
-            {" "}
             &#169; 2021 -{" "}
             <b>
               <span>Job</span>Portal.
-            </b>{" "}
+            </b>
           </p>
         </div>
       </div>
@@ -138,6 +137,14 @@ const Footer = () => {
             </li>
           </ul>
         </div>
+      </div>
+      <div className={`${styles.footer_copyright} ${styles.mobile}`}>
+        <p>
+          &#169; 2021 -{" "}
+          <b>
+            <span>Job</span>Portal.
+          </b>
+        </p>
       </div>
     </footer>
   )
