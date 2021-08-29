@@ -1,0 +1,21 @@
+@import "../../styles/_colorsVariables"
+
+.social
+    .logo
+        margin-bottom: 2rem
+        display: inline-block
+    &__showcase
+        margin-bottom: 1rem
+        ul
+            display: flex
+            li
+                a
+                    color: $bg
+                    margin-right: 2rem
+                    padding: .5rem 0
+                    .social__icon
+                        transform: scale(1.8)
+                        transition: .25s
+                        &:hover
+                            transform: scale(2.5)
+                            color: $primary
