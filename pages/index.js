@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import Head from "next/head"
 import Hero from "../components/home/hero/Hero"
 import Jobs from "../components/jobs_template/Jobs"
@@ -6,12 +6,14 @@ import Companies from "../components/home/companies/Companies"
 import { API } from "../components/api"
 import axios from "axios"
 
-const Home = ({ data, companies, error, companiesErr }) => {
+const Home = ({ data, error, companiesErr, companiesData }) => {
   const [loading, setLoading] = useState(true)
   const [errors, setErrors] = useState(null)
   const [companyErrors, setCompanyErrors] = useState(null)
   const [jobs, setJobs] = useState([])
-  let [message, setMessage] = useState(null)
+  const [message, setMessage] = useState(null)
+  const [companyMsg, setCompanyMsg] = useState(null)
+  const [companies, setCompanies] = useState([])
   const [loadCompanies, setLoadCompanies] = useState(true)
 
   useEffect(() => {
@@ -67,8 +69,15 @@ const Home = ({ data, companies, error, companiesErr }) => {
   }, [companiesErr])
 
   useEffect(() => {
-    if (companies) setLoadCompanies(false)
-  }, [companies])
+    if (companiesData) {
+      setLoadCompanies(false)
+      if (companiesData?.companies.length === 0) {
+        setCompanyMsg("Ooops not a single company found")
+      } else {
+        setCompanies(companiesData?.companies)
+      }
+    }
+  }, [companiesData])
 
   const refreshJobs = () => {
     setLoading(true)
@@ -81,11 +90,46 @@ const Home = ({ data, companies, error, companiesErr }) => {
           setMessage("Ooops! not a single job found")
         } else {
           setJobs(res.data.jobs)
+          setMessage(null)
         }
         setLoading(false)
       })
       .catch((err) => {
         setLoading(false)
+        if (err?.response) {
+          setErrors({
+            type: "danger",
+            msg: err?.response?.data?.message,
+          })
+        } else if (err?.message) {
+          setErrors({
+            type: "danger",
+            msg: err?.message,
+          })
+        } else {
+          setErrors({
+            type: "danger",
+            msg: "Internal server error",
+          })
+        }
+      })
+  }
+
+  const refreshCompanies = () => {
+    setLoadCompanies(true)
+    axios
+      .get(`${API}/companies?pageSize=6&fields=name,id,logo`)
+      .then((res) => {
+        if (res?.data?.companies?.length === 0) {
+          setCompanyMsg("Oops No company found")
+        } else {
+          setCompa(res.data.jobs)
+          setMessage(null)
+        }
+        setLoadCompanies(false)
+      })
+      .catch((err) => {
+        setLoadCompanies(false)
         if (err?.response) {
           setErrors({
             type: "danger",
@@ -125,6 +169,8 @@ const Home = ({ data, companies, error, companiesErr }) => {
           companies={companies}
           loading={loadCompanies}
           error={companyErrors}
+          message={companyMsg}
+          refresh={refreshCompanies}
         />
       </main>
     </div>
@@ -133,7 +179,7 @@ const Home = ({ data, companies, error, companiesErr }) => {
 
 export async function getServerSideProps() {
   let data = null
-  let companies = null
+  let companiesData = null
   let error = null
   let companiesErr = null
   try {
@@ -146,7 +192,9 @@ export async function getServerSideProps() {
   }
 
   try {
-    companies = await (await fetch(`${API}/companies`)).json()
+    companiesData = await (
+      await fetch(`${API}/companies?pageSize=6&fields=name,id,logo`)
+    ).json()
   } catch (err) {
     companiesErr = JSON.stringify(err)
   }
@@ -156,7 +204,7 @@ export async function getServerSideProps() {
       error,
       companiesErr,
       data,
-      companies,
+      companiesData,
     },
   }
 }

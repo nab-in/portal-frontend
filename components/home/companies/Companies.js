@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react"
 import Link from "next/link"
+import { FaSync } from "react-icons/fa"
 import Loader from "../../loaders/CompaniesLoader"
 import styles from "./companies.module.sass"
 
 // let loading = false
-const Companies = ({ companies, loading }) => {
+const Companies = ({ companies, loading, message, refresh, error }) => {
   return (
     <section className={styles.companies}>
       <div className={`${styles.container} container`}>
@@ -18,9 +18,9 @@ const Companies = ({ companies, loading }) => {
             </>
           ) : (
             <>
-              {companies?.companies.length > 0 ? (
+              {companies?.length > 0 && (
                 <>
-                  {companies.companies.map(({ logo, name, id, jobs }) => (
+                  {companies.map(({ logo, name, id, jobs }) => (
                     <article key={id}>
                       <Link href={`/companies/${id}`}>
                         <div className={`${styles.logo__container}`}>
@@ -33,8 +33,31 @@ const Companies = ({ companies, loading }) => {
                     </article>
                   ))}
                 </>
-              ) : (
-                <>No company found</>
+              )}
+              {message && <p>{message}</p>}
+              {(message || error) && (
+                <div
+                  style={{
+                    width: "100%",
+                    textAlign: "center",
+                    marginTop: "1rem",
+                  }}
+                >
+                  <button
+                    onClick={refresh}
+                    style={{
+                      cursor: "pointer",
+                    }}
+                  >
+                    <FaSync
+                      className={loading ? `spinner` : ``}
+                      style={{
+                        fontSize: "1.8rem",
+                        color: "gray",
+                      }}
+                    />
+                  </button>
+                </div>
               )}
             </>
           )}
