@@ -166,7 +166,7 @@ const Jobs = ({
               </>
             ) : (
               <>
-                {message && jobs?.length === 0 ? (
+                {(message || error?.msg) && jobs?.length === 0 ? (
                   <div
                     style={{
                       width: "100%",
