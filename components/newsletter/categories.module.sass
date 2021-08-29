@@ -9,11 +9,14 @@
     margin: 1rem 0 2rem
     &.white
         button
+            background: #E2E8EC
+            color: $primary
+            border: none
             &:focus
                 box-shadow: 0 0 0 3px white, 0 0 0 6px #E2E8EC
+
     button
         padding: .3rem 1rem
-        background: #E2E8EC
         border-radius: 0
         display: flex
         width: 100%
@@ -21,7 +24,8 @@
         align-items: center
         justify-content: center
         cursor: pointer
-        color: $primary
+        color: gray
+        border: 1px solid gray
         span
             display: inline-block
             min-width: 150px
@@ -29,7 +33,7 @@
             margin-left: 1.2rem
             font-size: .9rem
         &:focus
-            box-shadow: 0 0 0 3px black, 0 0 0 6px #E2E8EC
+            box-shadow: 0 0 0 3px #0D0D0D, 0 0 0 4px lightgray
 
     .dropdown
         position: absolute

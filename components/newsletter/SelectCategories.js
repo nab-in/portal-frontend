@@ -109,7 +109,7 @@ const SelectCategories = ({ setSelected, selected, bg }) => {
       className={
         bg === "white"
           ? `${styles.categories} ${styles.white}`
-          : `${styles.categories}`
+          : `${styles.categories} ${styles.dark}`
       }
       ref={node}
     >

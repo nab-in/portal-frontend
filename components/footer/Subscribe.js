@@ -35,7 +35,11 @@ const Subscribe = () => {
           inputClass="bg_input"
         />
       </div>
-      <SelectCategories selected={selected} setSelected={setSelected} />
+      <SelectCategories
+        selected={selected}
+        setSelected={setSelected}
+        bg="dark"
+      />
       <FormButton
         text="Subscribe"
         btnClass="btn-primary"
