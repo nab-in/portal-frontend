@@ -30,7 +30,7 @@ const Subscribe = () => {
           type="email"
           name="email"
           handleChange={handleChange}
-          id="email"
+          id="footer-email"
           title="Email address:"
           inputClass="bg_input"
         />

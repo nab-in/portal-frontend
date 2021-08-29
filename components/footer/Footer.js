@@ -28,6 +28,10 @@ const Footer = () => {
             </p>
           </div>
           <div className={styles.form}>
+            <p>
+              <b>OR</b> Subscribe to our newsletter to receive updates on jobs
+              of your preference
+            </p>
             <Subscribe />
           </div>
           <div className={styles.footer_copyright}>
@@ -43,7 +47,7 @@ const Footer = () => {
       </section>
       <section className={styles.footer__right}>
         <div className={styles.footer__right__container}>
-          <article>
+          <article className={styles.footer__links}>
             <h3>Browse</h3>
             <div className={styles.showcase}>
               <ul>
@@ -60,7 +64,7 @@ const Footer = () => {
               </ul>
             </div>
           </article>
-          <article>
+          <article className={styles.footer__links}>
             <h3>About</h3>
             <div className={styles.showcase}>
               <ul>
@@ -81,13 +85,16 @@ const Footer = () => {
               </ul>
             </div>
           </article>
-          <Social />
+          <article className={styles.social}>
+            <Social />
+          </article>
           <div className={`${styles.footer_copyright} ${styles.mobile}`}>
             <p>
               &#169; 2021 -&nbsp;
-              <b>
-                <span>Job</span>Portal.
-              </b>
+              <span>Job</span>Portal. Designed and Developed by&nbsp;
+              <a href="http://github.com/nab-in" target="_blank">
+                We Code Together
+              </a>
             </p>
           </div>
         </div>

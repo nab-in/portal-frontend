@@ -9,7 +9,7 @@ import styles from "./social.module.sass"
 
 const Social = () => {
   return (
-    <article className={styles.social}>
+    <div className={styles.social}>
       <h3>Connect</h3>
       <div className={styles.logo}>
         <Logo height={20} />
@@ -38,7 +38,7 @@ const Social = () => {
           </li>
         </ul>
       </div>
-    </article>
+    </div>
   )
 }
 

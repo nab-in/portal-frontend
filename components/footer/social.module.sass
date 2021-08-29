@@ -10,7 +10,7 @@
             display: flex
             li
                 a
-                    color: $bg
+                    color: gray
                     margin-right: 2rem
                     padding: .5rem 0
                     .social__icon
@@ -19,3 +19,24 @@
                         &:hover
                             transform: scale(2.5)
                             color: $primary
+
+@media screen and ( max-width: 480px )
+    .social
+        .logo
+            margin-bottom: 1rem
+            display: inline-block
+        &__showcase
+            margin-bottom: 2rem
+            ul
+                display: flex
+                li
+                    a
+                        color: gray
+                        margin-right: 2rem
+                        padding: .5rem 0
+                        .social__icon
+                            transform: scale(1.8)
+                            transition: .25s
+                            &:hover
+                                transform: scale(2.5)
+                                color: $primary

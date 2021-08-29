@@ -119,7 +119,7 @@ const SelectCategories = ({ setSelected, selected, bg }) => {
           open()
         }}
       >
-        Select job categories
+        Select your preferences
         {openDropdown ? (
           <FaChevronUp className={styles.icon} />
         ) : (
