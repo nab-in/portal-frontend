@@ -54,6 +54,12 @@ const authReducer = (state, action) => {
         roles: payload,
       }
 
+    case "CATEGORIES":
+      return {
+        ...state,
+        categories: payload,
+      }
+
     case "ADD_DP":
       userCopy = {
         ...state.user,
@@ -109,6 +115,7 @@ export const AuthProvider = ({ children }) => {
     isAuthenticated: false,
     companies: [],
     roles: [],
+    categories: [],
   })
   return (
     <AuthDispatchContext.Provider value={dispatch}>

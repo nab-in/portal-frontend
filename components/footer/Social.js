@@ -4,7 +4,6 @@ import {
   FaLinkedinIn,
   FaInstagram,
 } from "react-icons/fa"
-import Link from "next/link"
 import Logo from "../BgLogo"
 import styles from "./social.module.sass"
 
@@ -12,11 +11,9 @@ const Social = () => {
   return (
     <article className={styles.social}>
       <h3>Connect</h3>
-      <Link href="/">
-        <a className={styles.logo}>
-          <Logo height={25} />
-        </a>
-      </Link>
+      <div className={styles.logo}>
+        <Logo height={20} />
+      </div>
       <div className={styles.social__showcase}>
         <ul>
           <li>
