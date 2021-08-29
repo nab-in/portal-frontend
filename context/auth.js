@@ -55,9 +55,57 @@ const authReducer = (state, action) => {
       }
 
     case "CATEGORIES":
+      let data
+      let finalData
+      let filter = []
+      data = payload
+      data.forEach((el) => {
+        if (el.children) filter = filter.concat(el.children)
+      })
+      filter.forEach((el) => {
+        data = data.filter((o) => o.id != el.id)
+      })
+      finalData = [
+        {
+          id: 12,
+          name: "Job Type",
+          children: [
+            {
+              id: 14,
+              name: "Freelance",
+            },
+            {
+              id: 15,
+              name: "Full Time",
+            },
+          ],
+        },
+        ...data,
+      ]
       return {
         ...state,
-        categories: payload,
+        categories: finalData,
+      }
+
+    case "CATEGORIES_FAIL":
+      return {
+        ...state,
+        categories: [
+          {
+            id: 12,
+            name: "Job Type",
+            sub_categories: [
+              {
+                id: 14,
+                name: "Freelance",
+              },
+              {
+                id: 15,
+                name: "Full Time",
+              },
+            ],
+          },
+        ],
       }
 
     case "ADD_DP":

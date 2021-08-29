@@ -23,6 +23,7 @@ const Profile = () => {
   const logout = () => {
     axios(`${API}/logout`, config)
       .then((res) => {
+        console.log(res.data)
         dispatch({
           type: "LOGOUT",
         })
@@ -35,6 +36,7 @@ const Profile = () => {
         })
       })
       .catch((err) => {
+        console.log(err?.response)
         if (err?.response) {
           alertDispatch({
             type: "ADD",

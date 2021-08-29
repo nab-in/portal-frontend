@@ -25,12 +25,11 @@ const Jobs = ({
   url,
   setUrl,
   errors,
-  categories,
   loadMoreJobs,
 }) => {
   let [filter, setFilter] = useState(false)
 
-  let { isAuthenticated } = useAuthState()
+  let { isAuthenticated, categories } = useAuthState()
 
   // check if search object has any value to dynamically render heading
   let checkSearch = (obj) => {

@@ -2,12 +2,14 @@ import React, { useState } from "react"
 import Input from "../inputs/Input"
 import FormButton from "../buttons/FormButton"
 import styles from "./newsletter.module.sass"
+import SelectCategories from "./SelectCategories"
 
 const NewsLetter = () => {
   const [formData, setFormdata] = useState({
     Name: "",
     email: "",
   })
+  const [selected, setSelected] = useState([])
   const [loading, setLoading] = useState(false)
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -31,6 +33,11 @@ const NewsLetter = () => {
           handleChange={handleChange}
           name="email"
           id="email"
+        />
+        <SelectCategories
+          selected={selected}
+          setSelected={setSelected}
+          bg="white"
         />
         <FormButton
           text="Subscribe"

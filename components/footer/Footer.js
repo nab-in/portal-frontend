@@ -1,19 +1,10 @@
-import { useState } from "react"
 import styles from "./footer.module.sass"
 import Link from "next/link"
 import Social from "./Social"
-import Input from "../inputs/Input"
-import FormButton from "../buttons/FormButton"
 import Logo from "../BgLogo"
-import { useAuthState, useAuthDispatch } from "../../context/auth"
+import Subscribe from "./Subscribe"
 
 const Footer = () => {
-  const [loading, setLoading] = useState(false)
-  const handleChange = (e) => {}
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setLoading(true)
-  }
   return (
     <footer className={styles.footer}>
       <section className={styles.footer__right}>
@@ -37,32 +28,7 @@ const Footer = () => {
             </p>
           </div>
           <div className={styles.form}>
-            <form onSubmit={(e) => handleSubmit(e)}>
-              <Input
-                type="text"
-                name="username"
-                handleChange={handleChange}
-                id="name"
-                title="Name:"
-                inputClass="bg_input"
-                placeholder="Enter your full name"
-              />
-              <Input
-                type="email"
-                name="email"
-                handleChange={handleChange}
-                id="email"
-                title="Email address:"
-                inputClass="bg_input"
-                placeholder="Enter your email address"
-              />
-              <FormButton
-                text="Subscribe"
-                btnClass="btn-primary"
-                btnGroupClass="btns"
-                loading={loading}
-              />
-            </form>
+            <Subscribe />
           </div>
           <div className={styles.footer_copyright}>
             <p>

@@ -4,11 +4,11 @@ import Jobs from "../components/jobs_template/Jobs"
 import { API } from "../components/api"
 import axios from "axios"
 import infiniteScroll, { searching } from "../components/infiniteScroll"
+import { useAuthDispatch, useAuthState } from "../context/auth"
 
 const jobs = ({ data, error }) => {
   // states
   let [loadMore, setLoadMore] = useState(false)
-  let [categories, setCategories] = useState([])
   let [page, setPage] = useState(data?.pager.page + 1)
   let [pages, setPages] = useState(data?.pager.page < data?.pager.pageCount)
   let [resultsPage, setResultsPage] = useState(1)
@@ -32,6 +32,9 @@ const jobs = ({ data, error }) => {
   let pageName = "jobs"
 
   let apiUrl = `${API}/jobs?pageSize=8&page=${page}&fields=name,title,closeDate,created,company,id,location`
+
+  const { categories } = useAuthState()
+  const dispatch = useAuthDispatch()
 
   useEffect(() => {
     if (
@@ -92,58 +95,28 @@ const jobs = ({ data, error }) => {
   }, [error])
 
   useEffect(() => {
-    axios
-      .get(`${API}/jobCategories?fields=id,name,children[id, name]`)
-      .then((res) => {
-        let data
-        let finalData
-        let filter = []
-        data = res.data?.jobCategories
-        data.forEach((el) => {
-          if (el.children) filter = filter.concat(el.children)
-        })
-        filter.forEach((el) => {
-          data = data.filter((o) => o.id != el.id)
-        })
-        finalData = [
-          {
-            id: 12,
-            name: "Job Type",
-            children: [
-              {
-                id: 14,
-                name: "Freelance",
-              },
-              {
-                id: 15,
-                name: "Full Time",
-              },
-            ],
-          },
-          ...data,
-        ]
-        console.log(finalData)
-        setCategories(finalData)
-      })
-      .catch((err) => {
-        console.log(err)
-        setCategories([
-          {
-            id: 12,
-            name: "Job Type",
-            sub_categories: [
-              {
-                id: 14,
-                name: "Freelance",
-              },
-              {
-                id: 15,
-                name: "Full Time",
-              },
-            ],
-          },
-        ])
-      })
+    let isMounted = true
+    if (isMounted) {
+      if (categories?.length <= 1) {
+        axios
+          .get(`${API}/jobCategories?fields=id,name,children[id, name]`)
+          .then((res) => {
+            dispatch({
+              type: "CATEGORIES",
+              payload: res?.data?.jobCategories,
+            })
+          })
+          .catch((err) => {
+            console.log(err)
+            dispatch({
+              type: "CATEGORIES_FAIL",
+            })
+          })
+      }
+    }
+    return () => {
+      isMounted = false
+    }
   }, [])
 
   const handleScroll = () => {
@@ -197,7 +170,6 @@ const jobs = ({ data, error }) => {
       />
       <main>
         <Jobs
-          categories={categories}
           errors={errors}
           filter={true}
           search={search}
