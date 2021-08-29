@@ -12,7 +12,7 @@ const AuthFooter = () => {
     <footer className={styles.footer_container}>
       <div className={styles.flex_container}>
         <div className={styles.f_browse}>
-          <h3>Company</h3>
+          <h3>About</h3>
           <ul>
             <li>
               <Link href="/about">About us</Link>
