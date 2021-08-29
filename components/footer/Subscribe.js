@@ -1,8 +1,8 @@
 import { useState } from "react"
-import { useAuthState, useAuthDispatch } from "../../context/auth"
 import Input from "../inputs/Input"
 import FormButton from "../buttons/FormButton"
 import SelectCategories from "../newsletter/SelectCategories"
+import styles from "./footer.module.sass"
 
 const Subscribe = () => {
   const [loading, setLoading] = useState(false)
@@ -17,30 +17,31 @@ const Subscribe = () => {
 
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
-      <Input
-        type="text"
-        name="username"
-        handleChange={handleChange}
-        id="name"
-        title="Name:"
-        inputClass="bg_input"
-        placeholder="Enter your full name"
-      />
-      <Input
-        type="email"
-        name="email"
-        handleChange={handleChange}
-        id="email"
-        title="Email address:"
-        inputClass="bg_input"
-        placeholder="Enter your email address"
-      />
+      <div className={styles.inputs}>
+        <Input
+          type="text"
+          name="username"
+          handleChange={handleChange}
+          id="name"
+          title="Name:"
+          inputClass="bg_input"
+        />
+        <Input
+          type="email"
+          name="email"
+          handleChange={handleChange}
+          id="email"
+          title="Email address:"
+          inputClass="bg_input"
+        />
+      </div>
       <SelectCategories selected={selected} setSelected={setSelected} />
       <FormButton
         text="Subscribe"
         btnClass="btn-primary"
         btnGroupClass="btns"
         loading={loading}
+        color="#0D0D0D"
       />
     </form>
   )

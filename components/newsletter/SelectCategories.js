@@ -134,7 +134,14 @@ const SelectCategories = ({ setSelected, selected, bg }) => {
         }
       >
         {loading ? (
-          <div className={styles.loader}>
+          <div
+            className={styles.loader}
+            style={{
+              height: 20,
+              width: "95%",
+              margin: "1rem auto",
+            }}
+          >
             <span className="loader" />
           </div>
         ) : (

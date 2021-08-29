@@ -7,7 +7,7 @@ import Subscribe from "./Subscribe"
 const Footer = () => {
   return (
     <footer className={styles.footer}>
-      <section className={styles.footer__right}>
+      <section className={styles.footer__left}>
         <div className={styles.footer__left__container}>
           <div className={styles.logo}>
             <Logo height={25} />
@@ -33,15 +33,16 @@ const Footer = () => {
           <div className={styles.footer_copyright}>
             <p>
               &#169; 2021 -&nbsp;
-              <b>
-                <span>Job</span>Portal.
-              </b>
+              <span>Job</span>Portal. Designed and Developed by&nbsp;
+              <a href="http://github.com/nab-in" target="_blank">
+                We Code Together
+              </a>
             </p>
           </div>
         </div>
       </section>
-      <section className={styles.footer__left}>
-        <div className={styles.footer__left__container}>
+      <section className={styles.footer__right}>
+        <div className={styles.footer__right__container}>
           <article>
             <h3>Browse</h3>
             <div className={styles.showcase}>

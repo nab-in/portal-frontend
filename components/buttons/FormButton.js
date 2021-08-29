@@ -10,6 +10,7 @@ const FormButton = ({
   click,
   fontSize,
   fontWeight,
+  color,
 }) => {
   return (
     <div className={`btn-group ${btnGroupClass}`} onClick={click}>
@@ -19,6 +20,7 @@ const FormButton = ({
         style={{
           fontSize: fontSize && fontSize,
           fontWeight: fontWeight && fontWeight,
+          color: color ? color : "white",
         }}
       >
         {text}

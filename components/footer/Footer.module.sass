@@ -1,2 +1,66 @@
+@import "../../styles/_colorsVariables"
+
 .footer
     background: black
+    display: flex
+    justify-content: center
+    height: 100%
+    .logo
+        margin-bottom: 1.5rem
+    p
+        font-size: .9rem
+        line-height: 1.6rem
+        color: lightgray
+        margin-bottom: 1rem
+
+    a
+        color: gray
+        font-size: .9rem
+
+    h3
+        color: lightgray
+        font-weight: 400
+        margin-bottom: 1.5rem
+
+    &__left
+        width: 40%
+        display: flex
+        justify-content: flex-end
+        background: rgba(255, 255, 255, .05)
+        padding-left: 7.5%
+        &__container
+            max-width: 640px
+            width: 100%
+            padding: 3.5rem 2rem 3rem 0
+            form
+                max-width: 450px
+                margin-bottom: 1.5rem
+                .inputs
+                    display: flex
+                    justify-content: space-between
+                    div
+                        width: 48%
+                        label
+                            font-size: .9rem
+                            color: gray
+                        input
+                            background: none !important
+                            border-bottom-color: gray
+                            padding-left: 0
+                            color: $bg
+    &__right
+        width: 60%
+        display: flex
+        justify-content: flex-start
+        padding-right: 7.5%
+        &__container
+            max-width: 960px
+            width: 100%
+            padding: 3.5rem 0 3rem 2rem
+            display: flex
+            justify-content: space-between
+            .mobile
+                display: none
+            ul
+                li
+                    margin: 1.4rem 0
