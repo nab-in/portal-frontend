@@ -1,0 +1,55 @@
+@import "../../styles/_colorsVariables"
+
+.footer
+    background: #0D0D0D
+    height: 100%
+    .footer_copyright
+        position: absolute
+        bottom: 0
+        p
+            font-size: .8rem
+    p
+        font-size: .9rem
+        line-height: 1.6rem
+        color: lightgray
+        margin-bottom: 1rem
+
+    a
+        color: gray
+        font-size: .9rem
+
+    h3
+        color: lightgray
+        font-weight: 400
+        margin-bottom: 1.5rem
+    &__container
+        max-width: 1600px
+        width: 85%
+        margin: 0 auto
+        padding: 3.5rem 0 4rem
+        display: flex
+        justify-content: flex-start
+        ul
+            li
+                margin: 1.4rem 0
+        article
+            width: 30%
+
+@media screen and ( max-width: 992px )
+    .footer
+        &__container
+            width: 90%
+            article
+                width: 30%
+
+@media screen and ( max-width: 480px )
+    .footer
+        padding-bottom: 2rem
+        &__container
+            flex-wrap: wrap
+            article.social
+                width: 100%
+                order: 1
+            article.footer__links
+                width: 50%
+                order: 2
