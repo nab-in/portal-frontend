@@ -9,6 +9,7 @@ import NewsLetter from "../newsletter/NewsLetter"
 import styles from "../../styles/template.module.sass"
 import { useAuthState } from "../../context/auth"
 import Swiper from "./swiper"
+import { FaSync } from "react-icons/fa"
 
 // main template to display jobs in landing page and jobs page
 const Jobs = ({
@@ -25,6 +26,8 @@ const Jobs = ({
   url,
   setUrl,
   errors,
+  error,
+  refresh,
   loadMoreJobs,
 }) => {
   let [filter, setFilter] = useState(false)
@@ -124,8 +127,12 @@ const Jobs = ({
                   </>
                 )}
               </>
+              {page !== "jobs" && message && <p>{message}</p>}
               {errors?.msg && (
                 <p className={`alerts ${errors?.type}`}>{errors.msg}</p>
+              )}
+              {error?.msg && (
+                <p className={`alerts ${error?.type}`}>{error.msg}</p>
               )}
             </>
           )}
@@ -158,7 +165,33 @@ const Jobs = ({
                 )}
               </>
             ) : (
-              <Link href="/jobs">More Jobs &gt;&gt;</Link>
+              <>
+                {message && jobs?.length === 0 ? (
+                  <div
+                    style={{
+                      width: "100%",
+                      textAlign: "center",
+                    }}
+                  >
+                    <button
+                      onClick={refresh}
+                      style={{
+                        cursor: "pointer",
+                      }}
+                    >
+                      <FaSync
+                        className={loading ? `spinner` : ``}
+                        style={{
+                          fontSize: "1.8rem",
+                          color: "gray",
+                        }}
+                      />
+                    </button>
+                  </div>
+                ) : (
+                  <Link href="/jobs">More Jobs &gt;&gt;</Link>
+                )}
+              </>
             )}
           </div>
         </div>

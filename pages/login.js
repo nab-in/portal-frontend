@@ -52,7 +52,7 @@ const login = () => {
             type: "success",
           },
         })
-        router.push("/")
+        router.push("/profile")
       })
       .catch((err) => {
         setLoading(false)
