@@ -28,7 +28,7 @@ const Template = ({ page, details, setDetails }) => {
           )
           .then((res) => {
             setLoading(false)
-            if (page == "company") setCompany(res.data)
+            if (page == "company") setCompany(res.data?.message)
           })
           .catch((err) => {
             setLoading(false)

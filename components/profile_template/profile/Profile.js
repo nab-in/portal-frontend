@@ -12,7 +12,7 @@ let Card = ({ title, content, url }) => (
   </div>
 )
 
-const Profile = ({ details }) => {
+const Profile = ({ details, page, isCompany, isUser }) => {
   let {
     id,
     title,
@@ -43,15 +43,24 @@ const Profile = ({ details }) => {
               {!title &&
                 !bio &&
                 !location &&
-                !about &&
                 !website &&
                 !cv &&
-                !websitelink && (
+                !websitelink &&
+                !cvlink && (
                   <p>
                     No profile found!! &nbsp;
-                    <Link href="/profile?tab=edit-profile">
-                      <a>Add Profile</a>
-                    </Link>
+                    {isUser &&
+                      page !=
+                        "company"(
+                          <Link href="/profile?tab=edit-profile">
+                            <a>Add Profile</a>
+                          </Link>
+                        )}
+                    {isCompany && page == "company" && (
+                      <Link href={`/companies/${id}?tab=edit-profile`}>
+                        <a>Add Profile</a>
+                      </Link>
+                    )}
                   </p>
                 )}
               {title && <Card title="Title" content={title} />}

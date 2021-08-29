@@ -8,17 +8,49 @@ import AddCompany from "./companies/AddCompany"
 
 const Details = ({ tab, details, setDetails, page, isUser, isCompany }) => {
   const Content = () => {
-    if (tab == undefined || tab == "profile")
-      return <Profile details={details} page={page} />
-    if (tab == "jobs" && page == "company")
+    if (tab == undefined || tab == "profile") {
+      return (
+        <Profile
+          details={details}
+          page={page}
+          isCompany={isCompany}
+          isUser={isUser}
+        />
+      )
+    } else if (tab == "jobs" && page == "company") {
       return <Jobs page={page} details={details} />
-    if (tab == "jobs" && page != "company")
-      return <Profile page={page} details={details} />
-    if (tab == "companies" && page != "company")
+    } else if (tab == "jobs" && page != "company") {
+      return (
+        <Profile
+          page={page}
+          details={details}
+          isCompany={isCompany}
+          isUser={isUser}
+        />
+      )
+    } else if (tab == "companies" && page != "company") {
       return <Companies page={page} />
-    if (tab == "add-company" && page != "company")
+    } else if (tab == "add-company" && page != "company") {
       return <AddCompany page={page} />
-    if (tab == "edit-profile")
+    } else if (tab == "companies" && page == "company") {
+      return (
+        <Profile
+          page={page}
+          details={details}
+          isCompany={isCompany}
+          isUser={isUser}
+        />
+      )
+    } else if (tab == "add-company" && page == "company") {
+      return (
+        <Profile
+          page={page}
+          details={details}
+          isCompany={isCompany}
+          isUser={isUser}
+        />
+      )
+    } else if (tab == "edit-profile") {
       return (
         <>
           {isUser || isCompany ? (
@@ -30,30 +62,55 @@ const Details = ({ tab, details, setDetails, page, isUser, isCompany }) => {
               page={page}
             />
           ) : (
-            <Profile details={details} page={page} />
+            <Profile
+              details={details}
+              page={page}
+              isCompany={isCompany}
+              isUser={isUser}
+            />
           )}
         </>
       )
-    if (tab == "saved-jobs")
+    } else if (tab == "saved-jobs") {
       return (
         <>
           {isUser ? (
             <SavedJobs page={page} details={details} />
           ) : (
-            <Profile details={details} page={page} />
+            <Profile
+              details={details}
+              page={page}
+              isCompany={isCompany}
+              isUser={isUser}
+            />
           )}
         </>
       )
-    if (tab == "applied-jobs")
+    } else if (tab == "applied-jobs") {
       return (
         <>
           {isUser ? (
             <AppliedJobs page={page} details={details} />
           ) : (
-            <Profile details={details} page={page} />
+            <Profile
+              details={details}
+              page={page}
+              isCompany={isCompany}
+              isUser={isUser}
+            />
           )}
         </>
       )
+    } else {
+      return (
+        <Profile
+          details={details}
+          page={page}
+          isCompany={isCompany}
+          isUser={isUser}
+        />
+      )
+    }
   }
   return (
     <div>
