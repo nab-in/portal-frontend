@@ -1,3 +1,4 @@
+import { useState } from "react"
 import styles from "./input.module.sass"
 
 const Input = ({
@@ -14,6 +15,10 @@ const Input = ({
   textarea,
   required,
 }) => {
+  const [showPassword, setShowPassword] = useState(false)
+  const togglePassword = () => {
+    setShowPassword(!showPassword)
+  }
   return (
     <div
       className={
@@ -35,7 +40,9 @@ const Input = ({
         />
       ) : (
         <input
-          type={type}
+          type={
+            type === "password" ? (showPassword ? "text" : "password") : type
+          }
           name={name}
           placeholder={placeholder}
           value={value}
@@ -45,7 +52,9 @@ const Input = ({
           required={required}
         />
       )}
-
+      <span className={showPassword ? `` : ``} onClick={togglePassword}>
+        {showPassword ? "hide" : "show"}
+      </span>
       {error && <small className="text-danger">{error}</small>}
       {success && <small className="text-success">{success}</small>}
     </div>
