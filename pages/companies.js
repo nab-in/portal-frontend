@@ -71,7 +71,8 @@ const Companies = ({ data, error }) => {
       setLoading(false)
       setCompanies(data.companies)
       setNumber(data?.pager?.total)
-      
+      if (data?.pager?.total <= data?.pager?.pageSize)
+        setMessage("You have seen it all")
       if (data?.companies?.length === 0)
         setMessage("Opps not a single company found")
     }
@@ -182,6 +183,10 @@ const Companies = ({ data, error }) => {
             Math.ceil(res.data.pager.total / res.data.pager.pageSize)
         )
         setLoading(false)
+        if (data?.pager?.total <= data?.pager?.pageSize)
+          setMessage("You have seen it all")
+        if (data?.companies?.length === 0)
+          setMessage("Opps not a single company found")
       })
       .catch((err) => {
         setLoading(false)
