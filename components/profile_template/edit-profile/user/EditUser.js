@@ -4,7 +4,6 @@ import Input from "../../../inputs/Input"
 import Button from "../../../buttons/FormButton"
 import Upload from "../Upload"
 import styles from "../edit_profile.module.sass"
-import Settings from "../settings/Settings"
 import CV from "./CV"
 import axios from "axios"
 import { API } from "../../../api"
@@ -176,7 +175,6 @@ const EditProfile = ({ details, page }) => {
         </article>
       </Section>
       <CV userCv={details.cv} />
-      <Settings page="user" />
     </div>
   )
 }

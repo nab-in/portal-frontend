@@ -161,6 +161,13 @@ const Aside = ({ page, details, tab, isUser, isCompany }) => {
                   </a>
                 </Link>
               </li>
+              <li>
+                <Link href={`/profile/${id}?tab=setting`}>
+                  <a className={tab == "setting" ? `${styles.active}` : ""}>
+                    Setting
+                  </a>
+                </Link>
+              </li>
             </ul>
           </nav>
         </aside>
@@ -219,6 +226,13 @@ const Aside = ({ page, details, tab, isUser, isCompany }) => {
                     }
                   >
                     Companies
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href={`/profile?tab=setting`}>
+                  <a className={tab == "setting" ? `${styles.active}` : ""}>
+                    Setting
                   </a>
                 </Link>
               </li>

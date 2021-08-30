@@ -2,6 +2,7 @@ import SavedJobs from "./jobs/SavedJobs"
 import Profile from "./profile/Profile"
 import AppliedJobs from "./jobs/AppliedJobs"
 import EditProfile from "./edit-profile/EditProfile"
+import Settings from "./edit-profile/settings/Settings"
 import Jobs from "./jobs/Jobs"
 import Companies from "./companies/Companies"
 import AddCompany from "./companies/AddCompany"
@@ -91,6 +92,21 @@ const Details = ({ tab, details, setDetails, page, isUser, isCompany }) => {
         <>
           {isUser ? (
             <AppliedJobs page={page} details={details} />
+          ) : (
+            <Profile
+              details={details}
+              page={page}
+              isCompany={isCompany}
+              isUser={isUser}
+            />
+          )}
+        </>
+      )
+    } else if (tab == "setting" || tab == "settings") {
+      return (
+        <>
+          {isUser ? (
+            <Settings page="user" />
           ) : (
             <Profile
               details={details}
