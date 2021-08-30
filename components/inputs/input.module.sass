@@ -6,6 +6,7 @@
     width: 100%
     margin: 1.3rem 0
     transition: .2s
+    position: relative
     label
         margin-bottom: .2rem
     input, textarea
@@ -31,3 +32,18 @@
     small
         display: inline-block
         margin-top: .3rem
+    .toggle__password
+        position: absolute
+        right: 0
+        top: 20.02px
+        width: 36px
+        overflow: hidden
+        cursor: pointer
+        height: 35px
+        display: flex
+        justify-content: flex-end
+        align-items: center
+        color: gray
+        font-size: .8rem
+        &.show
+            color: $primary

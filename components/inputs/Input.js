@@ -50,11 +50,23 @@ const Input = ({
           onChange={(e) => handleChange(e)}
           className={error ? `error` : ``}
           required={required}
+          style={{
+            paddingRight: type === "password" ? "50px" : "1rem",
+          }}
         />
       )}
-      <span className={showPassword ? `` : ``} onClick={togglePassword}>
-        {showPassword ? "hide" : "show"}
-      </span>
+      {type === "password" && (
+        <span
+          className={
+            showPassword
+              ? `${styles.show} ${styles.toggle__password} toggle__password`
+              : `${styles.toggle__password} toggle__password`
+          }
+          onClick={togglePassword}
+        >
+          {showPassword ? "hide" : "show"}
+        </span>
+      )}
       {error && <small className="text-danger">{error}</small>}
       {success && <small className="text-success">{success}</small>}
     </div>
