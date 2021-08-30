@@ -157,7 +157,33 @@ const Jobs = ({
             {page === "jobs" ? (
               <>
                 {message && !loading ? (
-                  <p>{message}</p>
+                  <>
+                    <p>{message}</p>
+                    {(jobs?.length === 0 || results?.length === 0) && (
+                      <div
+                        style={{
+                          width: "100%",
+                          textAlign: "center",
+                          marginTop: "1rem",
+                        }}
+                      >
+                        <button
+                          onClick={refresh}
+                          style={{
+                            cursor: "pointer",
+                          }}
+                        >
+                          <FaSync
+                            className={loading ? `spinner` : ``}
+                            style={{
+                              fontSize: "1.8rem",
+                              color: "gray",
+                            }}
+                          />
+                        </button>
+                      </div>
+                    )}
+                  </>
                 ) : (
                   <>
                     {jobs?.length > 0 || results?.length > 0 ? (

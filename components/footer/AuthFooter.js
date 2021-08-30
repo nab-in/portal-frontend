@@ -9,7 +9,6 @@ const AuthFooter = () => {
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
   }
-  console.log(roles)
   return (
     <footer className={styles.footer}>
       <section className={styles.footer__container}>

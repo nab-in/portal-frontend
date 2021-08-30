@@ -169,8 +169,12 @@ const jobs = ({ data, error }) => {
       .then((res) => {
         setErrors(null)
         setNumber(res?.data?.pager.total)
-        setResults(res.data.jobs)
-
+        if (!url) {
+          setResults(null)
+          setJobs(res.data.jobs)
+        } else {
+          setResults(res.data.jobs)
+        }
         setResultsPage(res.data?.pager.page + 1)
         setResultsPages(
           res.data.pager.page <=

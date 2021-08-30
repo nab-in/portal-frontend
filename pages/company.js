@@ -30,7 +30,7 @@ const Companies = ({ data, error }) => {
   let [number, setNumber] = useState(0)
   let [url, setUrl] = useState("")
   let [searchUrl, setSearchUrl] = useState(
-    `${API}/companies?pageSize=8&page=1${url}`
+    `${API}/companies?pageSize=8&page=1${url}&fields=id,name,logo,verification`
   )
   const { isAuthenticated } = useAuthState()
   let [filter, setFilter] = useState(false)
@@ -39,11 +39,9 @@ const Companies = ({ data, error }) => {
     location: "",
   })
 
-  // console.log(data?.pager)
-
   let pageName = "companies"
 
-  let apiUrl = `${API}/companies?pageSize=8&page=${page}`
+  let apiUrl = `${API}/companies?pageSize=8&page=${page}&fields=id,name,logo,verification`
 
   useEffect(() => {
     if (
@@ -52,7 +50,7 @@ const Companies = ({ data, error }) => {
     )
       setResultsPages(true)
     setResultsPage(1)
-    let searchingUrl = `${API}/companies?pageSize=8&page=1&${url}`
+    let searchingUrl = `${API}/companies?pageSize=8&page=1&${url}&fields=id,name,logo,verification`
 
     searching({
       setResults,
@@ -72,6 +70,9 @@ const Companies = ({ data, error }) => {
     if (data) {
       setLoading(false)
       setCompanies(data.companies)
+      setNumber(data?.pager?.total)
+      if (data?.companies?.length === 0)
+        setMessage("Opps not a single company found")
     }
   }, [data])
 
@@ -122,7 +123,9 @@ const Companies = ({ data, error }) => {
 
   // infinite scroll
   const handleScroll = () => {
-    setSearchUrl(`${API}/companies?pageSize=8&page=${resultsPage}&${url}`)
+    setSearchUrl(
+      `${API}/companies?pageSize=8&page=${resultsPage}&${url}&fields=id,name,logo,verification`
+    )
     infiniteScroll({
       apiUrl,
       searchUrl,
@@ -166,8 +169,12 @@ const Companies = ({ data, error }) => {
       .then((res) => {
         setErrors(null)
         setNumber(res?.data?.pager.total)
-        setResults(res.data.companies)
-
+        if (!url) {
+          setCompanies(res.data.companies)
+          setResults(null)
+        } else {
+          setResults(res.data.companies)
+        }
         setResultsPage(res.data?.pager.page + 1)
         setResultsPages(
           res.data.pager.page <=
@@ -287,7 +294,7 @@ const Companies = ({ data, error }) => {
                     <p>{message}</p>
                   ) : (
                     <>
-                      {companies?.length > 0 || results?.length > 0 ? (
+                      {(companies?.length > 0 || results?.length > 0) && (
                         <>
                           {loadMore ? (
                             <Spinner bg="light" />
@@ -300,31 +307,34 @@ const Companies = ({ data, error }) => {
                             </button>
                           )}
                         </>
-                      ) : (
-                        <div
-                          style={{
-                            width: "100%",
-                            textAlign: "center",
-                          }}
-                        >
-                          <button
-                            onClick={refreshCompanies}
-                            style={{
-                              cursor: "pointer",
-                            }}
-                          >
-                            <FaSync
-                              className={loading ? `spinner` : ``}
-                              style={{
-                                fontSize: "1.8rem",
-                                color: "gray",
-                              }}
-                            />
-                          </button>
-                        </div>
                       )}
                     </>
                   )}
+                  {companies?.length === 0 &&
+                    (results?.length === 0 || results === null) && (
+                      <div
+                        style={{
+                          width: "100%",
+                          textAlign: "center",
+                          marginTop: "1rem",
+                        }}
+                      >
+                        <button
+                          onClick={refreshCompanies}
+                          style={{
+                            cursor: "pointer",
+                          }}
+                        >
+                          <FaSync
+                            className={loading ? `spinner` : ``}
+                            style={{
+                              fontSize: "1.8rem",
+                              color: "gray",
+                            }}
+                          />
+                        </button>
+                      </div>
+                    )}
                 </>
               </div>
             </div>
@@ -344,7 +354,9 @@ export async function getServerSideProps() {
   let data = null
   let error = null
   try {
-    const res = await fetch(`${API}/companies?pageSize=8`)
+    const res = await fetch(
+      `${API}/companies?pageSize=8&fields=id,name,logo,verification`
+    )
     data = await res.json()
   } catch (err) {
     console.log(err)

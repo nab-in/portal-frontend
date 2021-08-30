@@ -69,7 +69,6 @@ export const searching = ({
       })
   } else {
     setResults(null)
-    setMessage(null)
   }
 }
 
