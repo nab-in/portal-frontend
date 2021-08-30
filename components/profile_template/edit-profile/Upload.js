@@ -16,7 +16,6 @@ const Upload = ({ details, setDetails, dp, name, page }) => {
   let [loading, setLoading] = useState(false)
 
   const handleChange = (e) => {
-    console.log(e.target?.files)
     if (e.target.files) {
       const reader = new FileReader()
       const data = new FormData()
