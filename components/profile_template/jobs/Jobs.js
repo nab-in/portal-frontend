@@ -28,7 +28,12 @@ const Jobs = ({ page, details }) => {
       axios
         .get(`${API}/companies/${details.id}?fields=jobs`)
         .then((res) => {
-          if (res?.data?.jobs?.length === 0) setMessage("No Jobs found")
+          if (res?.data?.jobs?.length === 0)
+            setMessage(
+              <>
+                No jobs found. <Link href="/jobs">Explore jobs?</Link>
+              </>
+            )
           if (res?.data?.jobs?.length > 0) setJobs(res.data.jobs)
           setLoading(false)
         })
