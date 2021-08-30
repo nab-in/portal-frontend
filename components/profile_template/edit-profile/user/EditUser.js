@@ -56,6 +56,41 @@ const EditProfile = ({ details, page }) => {
       .catch((err) => {
         console.log(err?.response)
         setLoading(false)
+        if (err?.response) {
+          dispatch({
+            type: "ADD",
+            payload: {
+              type: "danger",
+              message: err.response?.data?.message,
+            },
+          })
+        } else if (err?.message) {
+          if (err?.code === "ECONNREFUSED") {
+            dispatch({
+              type: "ADD",
+              payload: {
+                type: "danger",
+                message: "Failed to connect, please try again",
+              },
+            })
+          } else {
+            dispatch({
+              type: "ADD",
+              payload: {
+                type: "danger",
+                message: err?.message,
+              },
+            })
+          }
+        } else {
+          dispatch({
+            type: "ADD",
+            payload: {
+              type: "danger",
+              message: "Internal server error, please try again",
+            },
+          })
+        }
       })
   }
   return (

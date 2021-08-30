@@ -49,13 +49,11 @@ const Profile = ({ details, page, isCompany, isUser }) => {
                 !cvlink && (
                   <p>
                     No profile found!! &nbsp;
-                    {isUser &&
-                      page !=
-                        "company"(
-                          <Link href="/profile?tab=edit-profile">
-                            <a>Add Profile</a>
-                          </Link>
-                        )}
+                    {isUser && page != "company" && (
+                      <Link href="/profile?tab=edit-profile">
+                        <a>Add Profile</a>
+                      </Link>
+                    )}
                     {isCompany && page == "company" && (
                       <Link href={`/companies/${id}?tab=edit-profile`}>
                         <a>Add Profile</a>

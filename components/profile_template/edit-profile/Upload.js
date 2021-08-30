@@ -5,6 +5,7 @@ import { FaCamera } from "react-icons/fa"
 import { API, BACKEND } from "../../api"
 import { useAuthDispatch } from "../../../context/auth"
 import { useAlertsDispatch } from "../../../context/alerts"
+import Spinner from "../../loaders/ButtonLoader"
 import styles from "./upload.module.sass"
 
 const Upload = ({ details, setDetails, dp, name, page }) => {
@@ -12,6 +13,7 @@ const Upload = ({ details, setDetails, dp, name, page }) => {
   const alertDispatch = useAlertsDispatch()
   name = name?.split("")[0]
   let [imgData, setImgData] = useState(null)
+  let [loading, setLoading] = useState(false)
 
   const handleChange = (e) => {
     if (e.target.files) {
@@ -24,7 +26,8 @@ const Upload = ({ details, setDetails, dp, name, page }) => {
 
       // uploading file
       data.append("", e.target.files[0])
-      if (page == "auth-user")
+      if (page == "auth-user") {
+        setLoading(true)
         axios
           .post(`${API}/users/dp`, data, config)
           .then((res) => {
@@ -49,11 +52,12 @@ const Upload = ({ details, setDetails, dp, name, page }) => {
               },
             })
           })
+      }
       if (page == "company") {
+        setLoading(true)
         axios
           .post(`${API}/companies/${details?.id}/logo`, data, config)
           .then((res) => {
-            console.log(res.data)
             setDetails({ ...details, logo: BACKEND + res.data?.path })
             alertDispatch({
               type: "ADD",
@@ -62,16 +66,46 @@ const Upload = ({ details, setDetails, dp, name, page }) => {
                 message: res.data.message,
               },
             })
+            setLoading(false)
           })
           .catch((err) => {
             console.log(err)
-            alertDispatch({
-              type: "ADD",
-              payload: {
-                type: "danger",
-                message: err.response?.data?.message,
-              },
-            })
+            setLoading(false)
+            if (err?.response) {
+              alertDispatch({
+                type: "ADD",
+                payload: {
+                  type: "danger",
+                  message: err.response?.data?.message,
+                },
+              })
+            } else if (err?.message) {
+              if (err?.code === "ECONNREFUSED") {
+                alertDispatch({
+                  type: "ADD",
+                  payload: {
+                    type: "danger",
+                    message: "Failed to connect, please try again",
+                  },
+                })
+              } else {
+                alertDispatch({
+                  type: "ADD",
+                  payload: {
+                    type: "danger",
+                    message: err?.message,
+                  },
+                })
+              }
+            } else {
+              alertDispatch({
+                type: "ADD",
+                payload: {
+                  type: "danger",
+                  message: "Internal server error, please try again",
+                },
+              })
+            }
           })
       }
     }
@@ -99,7 +133,14 @@ const Upload = ({ details, setDetails, dp, name, page }) => {
                 )}
               </>
             )}
-            <FaCamera className={styles.icon} />
+            <span className={styles.icon__container}>
+              <FaCamera className={styles.icon} />
+            </span>
+            {loading && (
+              <span className={styles.spinner}>
+                <Spinner />
+              </span>
+            )}
           </div>
         </label>
       </form>

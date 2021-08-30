@@ -35,22 +35,17 @@ const AuthFooter = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/">
-                  <a>Dashboard</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/">
+                <Link href="/profile">
                   <a>Profile</a>
                 </Link>
               </li>
               <li>
-                <Link href="/">
+                <Link href="/profile?tab=applied-jobs">
                   <a>Applied Jobs</a>
                 </Link>
               </li>
               <li>
-                <Link href="/">
+                <Link href="/profile?tab=saved-jobs">
                   <a>Saved Jobs</a>
                 </Link>
               </li>
