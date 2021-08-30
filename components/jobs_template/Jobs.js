@@ -103,11 +103,19 @@ const Jobs = ({
                 <p className="alerts danger">{errors?.msg}</p>
               ) : (
                 <>
+                  {(jobs?.length > 0 || results?.length > 0) && (
+                    <p
+                      style={{
+                        marginBottom: "1rem",
+                      }}
+                    >
+                      Showing {number} results
+                    </p>
+                  )}
                   {results != null && typeof results == "object" ? (
                     <>
                       {results?.length > 0 ? (
                         <>
-                          <p>Showing {number} results</p>
                           {results.map((job) => (
                             <Job job={job} key={job.id} />
                           ))}
