@@ -1,13 +1,9 @@
 import { useState, useEffect } from "react"
 import { config } from "../../config"
 import axios from "axios"
-import { FaSync } from "react-icons/fa"
 import { API } from "../../api"
-import Section from "../Section"
-import Job from "../../job/Job"
-import Loader from "../../loaders/CardLoader"
-import Spinner from "../../loaders/ButtonLoader"
 import infiniteScroll from "../../infiniteScroll"
+import JobsTemplate from "./JobsTemplate"
 
 const SavedJobs = () => {
   const [jobs, setJobs] = useState(null)
@@ -23,12 +19,21 @@ const SavedJobs = () => {
   const pageName = "jobs"
 
   useEffect(() => {
-    refreshJobs()
+    let isMounted = true
+    if (isMounted) refreshJobs()
+    return () => {
+      isMounted = false
+    }
   }, [])
 
   useEffect(() => {
-    if (page === 2 && pages === false) {
-      setMessage("You have seen it all")
+    let isMounted = true
+    if (isMounted)
+      if (page === 2 && pages === false) {
+        setMessage("You have seen it all")
+      }
+    return () => {
+      isMounted = false
     }
   }, [pages])
 
@@ -114,7 +119,7 @@ const SavedJobs = () => {
       number={number}
       title="Saved Jobs"
       message={message}
-      loadMore={loadiMore}
+      loadMore={loadMore}
       loadMoreJobs={loadMoreJobs}
       refreshJobs={refreshJobs}
     />

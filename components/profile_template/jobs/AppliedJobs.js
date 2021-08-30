@@ -19,7 +19,11 @@ const AppliedJobs = () => {
   const pageName = "jobs"
 
   useEffect(() => {
-    refreshJobs()
+    let isMounted = true
+    if (isMounted) refreshJobs()
+    return () => {
+      isMounted = false
+    }
   }, [])
 
   useEffect(() => {
@@ -110,7 +114,7 @@ const AppliedJobs = () => {
       number={number}
       title="Applied Jobs"
       message={message}
-      loadMore={loadiMore}
+      loadMore={loadMore}
       loadMoreJobs={loadMoreJobs}
       refreshJobs={refreshJobs}
     />
@@ -118,89 +122,3 @@ const AppliedJobs = () => {
 }
 
 export default AppliedJobs
-
-{
-  /* <Section title="Saved Jobs">
-<article>
-  {loading ? (
-    <>
-      <Loader />
-      <Loader />
-      <Loader />
-    </>
-  ) : (
-    <div className="main__content">
-      {errors?.type === "normal" ? (
-        <></>
-      ) : (
-        <>
-          {jobs?.length > 0 && (
-            <p
-              style={{
-                marginBottom: "1rem",
-              }}
-            >
-              Showing {number} results
-            </p>
-          )}
-          {jobs?.length > 0 &&
-            jobs.map((job) => (
-              <Job
-                key={job.id}
-                job={job}
-                page="saved-jobs"
-                setItems={setJobs}
-              />
-            ))}
-          {errors?.type === "infinite" && (
-            <p className={`alerts danger`}>{errors.msg}</p>
-          )}
-          {message?.length > 0 && !loading ? (
-            <p>{message}</p>
-          ) : (
-            <>
-              {jobs?.length > 0 ? (
-                <>
-                  {loadMore ? (
-                    <Spinner bg="light" />
-                  ) : (
-                    <button
-                      className="primary__text"
-                      onClick={loadMoreJobs}
-                    >
-                      Load More
-                    </button>
-                  )}
-                </>
-              ) : (
-                <div
-                  style={{
-                    width: "100%",
-                    textAlign: "center",
-                  }}
-                >
-                  <button
-                    onClick={refreshJobs}
-                    style={{
-                      cursor: "pointer",
-                    }}
-                  >
-                    <FaSync
-                      className={loading ? `spinner` : ``}
-                      style={{
-                        fontSize: "1.8rem",
-                        color: "gray",
-                      }}
-                    />
-                  </button>
-                </div>
-              )}
-            </>
-          )}
-        </>
-      )}
-    </div>
-  )}
-</article>
-</Section> */
-}
