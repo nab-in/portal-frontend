@@ -10,45 +10,111 @@ import { useAuthDispatch } from "../../../../context/auth"
 
 const CV = ({ userCv }) => {
   let [loading, setLoading] = useState(false)
-  const [cv, setCv] = useState("")
+  const [cv, setCv] = useState(null)
+  let [type, setType] = useState(false)
   const dispatch = useAuthDispatch()
   const alertDispatch = useAlertsDispatch()
   const handleFileChange = (e) => {
     const data = new FormData()
     data.append("", e.target.files[0])
     setCv(data)
-  }
-  const handleFileSubmit = (e) => {
-    e.preventDefault(e)
-    setLoading(true)
-    axios
-      .post(`${API}/users/cv`, cv, config)
-      .then((res) => {
-        setLoading(false)
-        dispatch({
-          type: "ADD_CV",
-          payload: res.data,
-        })
-        alertDispatch({
-          type: "ADD",
-          payload: {
-            type: "success",
-            message: res.data.message,
-          },
-        })
-      })
-      .catch((err) => {
-        setLoading(false)
-        console.log(err.response?.data?.message)
+    alertDispatch({
+      type: "REMOVE",
+    })
+    if (e.target.files) {
+      if (e.target.files[0]?.type === "application/pdf") {
+        setType(true)
+      } else {
         alertDispatch({
           type: "ADD",
           payload: {
             type: "danger",
-            message: err.response?.data?.message,
+            message: "Only pdf files are allowed",
           },
         })
-      })
+      }
+    }
   }
+
+  const handleFileSubmit = (e) => {
+    e.preventDefault(e)
+    if (cv) {
+      if (type === true) {
+        setLoading(true)
+        axios
+          .post(`${API}/users/cv`, cv, config)
+          .then((res) => {
+            setLoading(false)
+            dispatch({
+              type: "ADD_CV",
+              payload: res.data,
+            })
+            alertDispatch({
+              type: "ADD",
+              payload: {
+                type: "success",
+                message: res.data.message,
+              },
+            })
+          })
+          .catch((err) => {
+            setLoading(false)
+            if (err?.response) {
+              alertDispatch({
+                type: "ADD",
+                payload: {
+                  type: "danger",
+                  message: err.response?.data?.message,
+                },
+              })
+            } else if (err?.message) {
+              if (err?.code === "ECONNREFUSED") {
+                alertDispatch({
+                  type: "ADD",
+                  payload: {
+                    type: "danger",
+                    message: "Failed to connect, please try again",
+                  },
+                })
+              } else {
+                alertDispatch({
+                  type: "ADD",
+                  payload: {
+                    type: "danger",
+                    message: err?.message,
+                  },
+                })
+              }
+            } else {
+              alertDispatch({
+                type: "ADD",
+                payload: {
+                  type: "danger",
+                  message: "Internal server error, please try again",
+                },
+              })
+            }
+          })
+      } else {
+        alertDispatch({
+          type: "ADD",
+          payload: {
+            type: "danger",
+            message: "Only pdf files are allowed",
+          },
+        })
+      }
+    } else {
+      alertDispatch({
+        type: "ADD",
+        payload: {
+          type: "danger",
+          message: "Files shouldn't be empty",
+        },
+      })
+    }
+  }
+
   return (
     <Section title="Upload CV">
       <article className={styles.cv}>
