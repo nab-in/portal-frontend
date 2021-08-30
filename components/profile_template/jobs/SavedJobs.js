@@ -18,7 +18,7 @@ const SavedJobs = () => {
   let [errors, setErrors] = useState(null)
   let [message, setMessage] = useState(null)
   const [loadMore, setLoadMore] = useState(false)
-  const apiUrl = `${API}/users/savedJobs?page=${page}&pageSize=1&fields=id,name,company,location,created,closeDate`
+  const apiUrl = `${API}/users/savedJobs?page=${page}&pageSize=6&fields=id,name,companies,jobType,location,created,closeDate`
 
   const pageName = "jobs"
 
@@ -59,7 +59,7 @@ const SavedJobs = () => {
     setLoading(true)
     axios
       .get(
-        `${API}/users/savedJobs?page=${page}&pageSize=6&fields=id,name,company,location,created,closeDate`,
+        `${API}/users/savedJobs?page=1&pageSize=6&fields=id,name,companies,jobType,location,created,closeDate`,
         config
       )
       .then((res) => {
@@ -105,89 +105,19 @@ const SavedJobs = () => {
   }
 
   return (
-    <Section title="Saved Jobs">
-      <article>
-        {loading ? (
-          <>
-            <Loader />
-            <Loader />
-            <Loader />
-          </>
-        ) : (
-          <div className="main__content">
-            {errors?.type === "normal" ? (
-              <></>
-            ) : (
-              <>
-                {jobs?.length > 0 && (
-                  <p
-                    style={{
-                      marginBottom: "1rem",
-                    }}
-                  >
-                    Showing {number} results
-                  </p>
-                )}
-                {jobs?.length > 0 &&
-                  jobs.map((job) => (
-                    <Job
-                      key={job.id}
-                      job={job}
-                      page="saved-jobs"
-                      setItems={setJobs}
-                    />
-                  ))}
-                {errors?.type === "infinite" && (
-                  <p className={`alerts danger`}>{errors.msg}</p>
-                )}
-                {message?.length > 0 && !loading ? (
-                  <p>{message}</p>
-                ) : (
-                  <>
-                    {jobs?.length > 0 ? (
-                      <>
-                        {loadMore ? (
-                          <Spinner bg="light" />
-                        ) : (
-                          <button
-                            className="primary__text"
-                            onClick={loadMoreJobs}
-                          >
-                            Load More
-                          </button>
-                        )}
-                      </>
-                    ) : (
-                      <div
-                        style={{
-                          width: "100%",
-                          textAlign: "center",
-                        }}
-                      >
-                        <button
-                          onClick={refreshJobs}
-                          style={{
-                            cursor: "pointer",
-                          }}
-                        >
-                          <FaSync
-                            className={loading ? `spinner` : ``}
-                            style={{
-                              fontSize: "1.8rem",
-                              color: "gray",
-                            }}
-                          />
-                        </button>
-                      </div>
-                    )}
-                  </>
-                )}
-              </>
-            )}
-          </div>
-        )}
-      </article>
-    </Section>
+    <JobsTemplate
+      errors={errors}
+      loading={loading}
+      jobs={jobs}
+      page="saved-jobs"
+      setJobs={setJobs}
+      number={number}
+      title="Saved Jobs"
+      message={message}
+      loadMore={loadiMore}
+      loadMoreJobs={loadMoreJobs}
+      refreshJobs={refreshJobs}
+    />
   )
 }
 
