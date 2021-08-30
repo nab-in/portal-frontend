@@ -16,7 +16,7 @@ const EditProfile = ({ details, setDetails, page }) => {
     location: details.location ? details.location : "",
     website: details.website ? details.website : "",
   })
-  const [loading, setloading] = useState(false)
+  const [loading, setLoading] = useState(false)
   const dispatch = useAlertsDispatch()
   let { name, title, bio, location, website } = formData
   const handleChange = (e) => {
@@ -25,7 +25,7 @@ const EditProfile = ({ details, setDetails, page }) => {
   }
   const handleSubmit = (e) => {
     e.preventDefault(e)
-    setloading(true)
+    setLoading(true)
     axios
       .put(`${API}/companies/${details?.id}`, formData, config)
       .then((res) => {
@@ -37,19 +37,45 @@ const EditProfile = ({ details, setDetails, page }) => {
             message: "Details updated successfully",
           },
         })
-        setloading(false)
+        setLoading(false)
       })
       .catch((err) => {
+        setLoading(false)
         if (err?.response) {
           dispatch({
             type: "ADD",
             payload: {
               type: "danger",
-              message: err?.response.data?.message,
+              message: err.response?.data?.message,
+            },
+          })
+        } else if (err?.message) {
+          if (err?.code === "ECONNREFUSED") {
+            dispatch({
+              type: "ADD",
+              payload: {
+                type: "danger",
+                message: "Failed to connect, please try again",
+              },
+            })
+          } else {
+            dispatch({
+              type: "ADD",
+              payload: {
+                type: "danger",
+                message: err?.message,
+              },
+            })
+          }
+        } else {
+          dispatch({
+            type: "ADD",
+            payload: {
+              type: "danger",
+              message: "Internal server error, please try again",
             },
           })
         }
-        setloading(false)
       })
   }
 

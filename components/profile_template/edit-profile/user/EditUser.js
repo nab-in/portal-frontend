@@ -53,7 +53,6 @@ const EditProfile = ({ details, page }) => {
         setLoading(false)
       })
       .catch((err) => {
-        console.log(err?.response)
         setLoading(false)
         if (err?.response) {
           dispatch({
