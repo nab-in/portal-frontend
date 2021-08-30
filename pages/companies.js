@@ -256,7 +256,7 @@ const Companies = ({ data, error }) => {
                             marginBottom: "1rem",
                           }}
                         >
-                          Showing {number} results
+                          Showing {number} result(s)
                         </p>
                       )}
                       {results != null ? (

@@ -38,7 +38,7 @@ const JobsTemplate = ({
                       marginBottom: "1rem",
                     }}
                   >
-                    Showing {number} results
+                    Showing {number} result(s)
                   </p>
                 )}
                 {jobs?.length > 0 &&

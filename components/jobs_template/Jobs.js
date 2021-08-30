@@ -109,7 +109,7 @@ const Jobs = ({
                         marginBottom: "1rem",
                       }}
                     >
-                      Showing {number} results
+                      Showing {number} result(s)
                     </p>
                   )}
                   {results != null && typeof results == "object" ? (
