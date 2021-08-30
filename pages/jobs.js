@@ -103,7 +103,9 @@ const jobs = ({ data, error }) => {
     if (isMounted) {
       if (categories?.length <= 1) {
         axios
-          .get(`${API}/jobCategories?fields=id,name,children[id, name]`)
+          .get(
+            `${API}/jobCategories?fields=id,name,children[id, name]&filter=verification:eq:true`
+          )
           .then((res) => {
             dispatch({
               type: "CATEGORIES",
