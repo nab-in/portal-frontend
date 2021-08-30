@@ -1,7 +1,7 @@
 import React, { Children } from "react"
 import { withRouter } from "next/router"
 import Link from "next/link"
-import styles from "./aside/aside.module.sass"
+import styles from "./header/header.module.sass"
 
 const ActiveLink = withRouter(({ router, children, ...props }) => (
   <Link {...props}>

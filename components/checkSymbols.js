@@ -24,7 +24,6 @@ const checkSymbols = (name, setError) => {
 
 export const checkChange = (name, setError) => {
   let chars = format.exec(name)
-  // if (format.test(name)) setError(null)
   if (!chars) setError(null)
   console.log(chars, name)
   return null

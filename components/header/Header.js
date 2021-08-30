@@ -4,11 +4,11 @@ import { useAuthState } from "../../context/auth"
 import { useRouter } from "next/router"
 import { AiOutlineSearch } from "react-icons/ai"
 import UseClickOutside from "../UseClickOutside"
-import styles from "./Header.module.sass"
+import styles from "./header.module.sass"
 import rippleEffect from "../rippleEffect.js"
 import Profile from "./Profile"
-// import Notifications from "./Notifications"
 import Logo from "../Logo"
+import ActiveLink from "../ActiveLink"
 
 const Search = () => {
   let router = useRouter()
@@ -116,7 +116,6 @@ const Header = () => {
           )}
           {isAuthenticated && (
             <div className={styles.auth}>
-              {/* <Notifications /> */}
               <Profile />
             </div>
           )}
@@ -142,24 +141,24 @@ const Header = () => {
             </div>
             <ul className={styles.menu__list}>
               <li>
-                <Link href="/jobs">
+                <ActiveLink href="/jobs">
                   <a>Jobs</a>
-                </Link>
+                </ActiveLink>
               </li>
               <li>
-                <Link href="/companies">
+                <ActiveLink href="/companies">
                   <a>Companies</a>
-                </Link>
+                </ActiveLink>
               </li>
               <li>
-                <Link href="/about">
+                <ActiveLink href="/about">
                   <a>About</a>
-                </Link>
+                </ActiveLink>
               </li>
               <li>
-                <Link href="/contact">
+                <ActiveLink href="/contact">
                   <a>Contact</a>
-                </Link>
+                </ActiveLink>
               </li>
               {!isAuthenticated && (
                 <>
