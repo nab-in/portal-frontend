@@ -99,7 +99,6 @@ const JobDetails = ({ job }) => {
     axios
       .get(`${API}/jobs/${id}/applications/${user?.id}`, config)
       .then((res) => {
-        console.log(res.data)
         setText("Revoke")
       })
       .catch((err) => {
@@ -112,7 +111,6 @@ const JobDetails = ({ job }) => {
       .get(`${API}/jobs/${id}/saves/${user?.id}`, config)
       .then((res) => {
         setSaveText("Saved!")
-        console.log(res.data)
       })
       .catch((err) => {
         console.log(err.response.data.message)
@@ -183,6 +181,7 @@ const JobDetails = ({ job }) => {
               btnClass="btn-secondary"
               text={saveText}
               loading={saveLoading}
+              color="#00507A"
             />
             <Button
               click={apply}
