@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
+import { FaSync } from "react-icons/fa"
+import axios from "axios"
 import { useAuthState } from "../context/auth"
 import Hero from "../components/filter_hero/Hero"
 import Template from "../components/template/Template"
@@ -76,7 +78,29 @@ const Companies = ({ data, error }) => {
   useEffect(() => {
     if (error) {
       setLoading(false)
-      console.log(error)
+      if (JSON.parse(error)?.response) {
+        setErrors({
+          type: "normal",
+          msg: JSON.parse(error)?.data?.message,
+        })
+      } else if (JSON.parse(error)?.message) {
+        if (JSON.parse(error)?.code === "ECONNREFUSED") {
+          setErrors({
+            type: "normal",
+            msg: "Failed to connect, please refresh",
+          })
+        } else {
+          setErrors({
+            type: "normal",
+            msg: JSON.parse(error)?.message,
+          })
+        }
+      } else {
+        setErrors({
+          type: "normal",
+          msg: "Internal server error, please try again",
+        })
+      }
     }
   }, [error])
 
@@ -135,6 +159,51 @@ const Companies = ({ data, error }) => {
     handleScroll()
   }
 
+  const refreshCompanies = () => {
+    setLoading(true)
+    axios
+      .get(searchUrl)
+      .then((res) => {
+        setErrors(null)
+        setNumber(res?.data?.pager.total)
+        setResults(res.data.companies)
+
+        setResultsPage(res.data?.pager.page + 1)
+        setResultsPages(
+          res.data.pager.page <=
+            Math.ceil(res.data.pager.total / res.data.pager.pageSize)
+        )
+        setLoading(false)
+      })
+      .catch((err) => {
+        setLoading(false)
+        setMessage(null)
+        if (err?.response) {
+          setErrors({
+            type: "normal",
+            msg: err?.response?.data?.message,
+          })
+        } else if (err?.message) {
+          if (err?.code === "ECONNREFUSED") {
+            setErrors({
+              type: "normal",
+              msg: "Failed to connect, please refresh",
+            })
+          } else {
+            setErrors({
+              type: "normal",
+              msg: err?.message,
+            })
+          }
+        } else {
+          setErrors({
+            type: "normal",
+            msg: "Internal server error, please try again",
+          })
+        }
+      })
+  }
+
   return (
     <div>
       <Hero
@@ -170,30 +239,43 @@ const Companies = ({ data, error }) => {
                 </>
               ) : (
                 <>
-                  <>
-                    {results != null ? (
-                      <>
-                        {results.length > 0 ? (
-                          <>
-                            {results.map((company) => (
+                  {errors?.type === "normal" ? (
+                    <p className="alerts danger">{errors?.msg}</p>
+                  ) : (
+                    <>
+                      {(companies?.length > 0 || results?.length > 0) && (
+                        <p
+                          style={{
+                            marginBottom: "1rem",
+                          }}
+                        >
+                          Showing {number} results
+                        </p>
+                      )}
+                      {results != null ? (
+                        <>
+                          {results.length > 0 ? (
+                            <>
+                              {results.map((company) => (
+                                <Company company={company} key={company.id} />
+                              ))}
+                            </>
+                          ) : (
+                            <p>No company match the your criteria</p>
+                          )}
+                        </>
+                      ) : (
+                        <>
+                          {companies.length > 0 &&
+                            companies.map((company) => (
                               <Company company={company} key={company.id} />
                             ))}
-                          </>
-                        ) : (
-                          <p>No company match the your criteria</p>
-                        )}
-                      </>
-                    ) : (
-                      <>
-                        {companies.length > 0 &&
-                          companies.map((company) => (
-                            <Company company={company} key={company.id} />
-                          ))}
-                      </>
-                    )}
-                  </>
-                  {errors?.msg && (
-                    <p className={`alerts ${errors?.type}`}>{errors.msg}</p>
+                        </>
+                      )}
+                    </>
+                  )}
+                  {errors?.type === "infinite" && (
+                    <p className={`alerts danger`}>{errors.msg}</p>
                   )}
                 </>
               )}
@@ -201,19 +283,45 @@ const Companies = ({ data, error }) => {
                 className={`${styles.more__link} ${styles.more__link__center}`}
               >
                 <>
-                  {message ? (
+                  {message && !loading ? (
                     <p>{message}</p>
                   ) : (
                     <>
-                      {loadMore ? (
-                        <Spinner bg="light" />
+                      {companies?.length > 0 || results?.length > 0 ? (
+                        <>
+                          {loadMore ? (
+                            <Spinner bg="light" />
+                          ) : (
+                            <button
+                              className="primary__text"
+                              onClick={loadMoreCompanies}
+                            >
+                              Load More
+                            </button>
+                          )}
+                        </>
                       ) : (
-                        <button
-                          className="primary__text"
-                          onClick={loadMoreCompanies}
+                        <div
+                          style={{
+                            width: "100%",
+                            textAlign: "center",
+                          }}
                         >
-                          Load More
-                        </button>
+                          <button
+                            onClick={refreshCompanies}
+                            style={{
+                              cursor: "pointer",
+                            }}
+                          >
+                            <FaSync
+                              className={loading ? `spinner` : ``}
+                              style={{
+                                fontSize: "1.8rem",
+                                color: "gray",
+                              }}
+                            />
+                          </button>
+                        </div>
                       )}
                     </>
                   )}
