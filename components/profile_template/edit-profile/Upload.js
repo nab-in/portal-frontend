@@ -16,62 +16,40 @@ const Upload = ({ details, setDetails, dp, name, page }) => {
   let [loading, setLoading] = useState(false)
 
   const handleChange = (e) => {
+    console.log(e.target?.files)
     if (e.target.files) {
       const reader = new FileReader()
       const data = new FormData()
-      reader.addEventListener("load", () => {
-        setImgData(reader.result)
-      })
-      reader.readAsDataURL(e.target.files[0])
-
-      // uploading file
-      data.append("", e.target.files[0])
-      if (page == "auth-user") {
-        setLoading(true)
-        axios
-          .post(`${API}/users/dp`, data, config)
-          .then((res) => {
-            dispatch({
-              type: "ADD_DP",
-              payload: res.data,
+      if (
+        e.target.files[0]?.type == "image/png" ||
+        e.target.files[0]?.type == "image/jpg" ||
+        e.target.files[0]?.type == "image/jpeg"
+        // || e.target.files[0]?.type == "image/webp"
+      ) {
+        reader.addEventListener("load", () => {
+          setImgData(reader.result)
+        })
+        reader.readAsDataURL(e.target.files[0])
+        // uploading file
+        data.append("", e.target.files[0])
+        if (page == "auth-user") {
+          setLoading(true)
+          axios
+            .post(`${API}/users/dp`, data, config)
+            .then((res) => {
+              dispatch({
+                type: "ADD_DP",
+                payload: res.data,
+              })
+              alertDispatch({
+                type: "ADD",
+                payload: {
+                  type: "success",
+                  message: res.data.message,
+                },
+              })
             })
-            alertDispatch({
-              type: "ADD",
-              payload: {
-                type: "success",
-                message: res.data.message,
-              },
-            })
-          })
-          .catch((err) => {
-            alertDispatch({
-              type: "ADD",
-              payload: {
-                type: "danger",
-                message: err.response?.data?.message,
-              },
-            })
-          })
-      }
-      if (page == "company") {
-        setLoading(true)
-        axios
-          .post(`${API}/companies/${details?.id}/logo`, data, config)
-          .then((res) => {
-            setDetails({ ...details, logo: BACKEND + res.data?.path })
-            alertDispatch({
-              type: "ADD",
-              payload: {
-                type: "success",
-                message: res.data.message,
-              },
-            })
-            setLoading(false)
-          })
-          .catch((err) => {
-            console.log(err)
-            setLoading(false)
-            if (err?.response) {
+            .catch((err) => {
               alertDispatch({
                 type: "ADD",
                 payload: {
@@ -79,34 +57,70 @@ const Upload = ({ details, setDetails, dp, name, page }) => {
                   message: err.response?.data?.message,
                 },
               })
-            } else if (err?.message) {
-              if (err?.code === "ECONNREFUSED") {
+            })
+        }
+        if (page == "company") {
+          setLoading(true)
+          axios
+            .post(`${API}/companies/${details?.id}/logo`, data, config)
+            .then((res) => {
+              setDetails({ ...details, logo: BACKEND + res.data?.path })
+              alertDispatch({
+                type: "ADD",
+                payload: {
+                  type: "success",
+                  message: res.data.message,
+                },
+              })
+              setLoading(false)
+            })
+            .catch((err) => {
+              setLoading(false)
+              if (err?.response) {
                 alertDispatch({
                   type: "ADD",
                   payload: {
                     type: "danger",
-                    message: "Failed to connect, please try again",
+                    message: err.response?.data?.message,
                   },
                 })
+              } else if (err?.message) {
+                if (err?.code === "ECONNREFUSED") {
+                  alertDispatch({
+                    type: "ADD",
+                    payload: {
+                      type: "danger",
+                      message: "Failed to connect, please try again",
+                    },
+                  })
+                } else {
+                  alertDispatch({
+                    type: "ADD",
+                    payload: {
+                      type: "danger",
+                      message: err?.message,
+                    },
+                  })
+                }
               } else {
                 alertDispatch({
                   type: "ADD",
                   payload: {
                     type: "danger",
-                    message: err?.message,
+                    message: "Internal server error, please try again",
                   },
                 })
               }
-            } else {
-              alertDispatch({
-                type: "ADD",
-                payload: {
-                  type: "danger",
-                  message: "Internal server error, please try again",
-                },
-              })
-            }
-          })
+            })
+        }
+      } else {
+        alertDispatch({
+          type: "ADD",
+          payload: {
+            type: "danger",
+            message: "Only image files allowed!",
+          },
+        })
       }
     }
   }
