@@ -3,24 +3,87 @@ import Input from "../inputs/Input"
 import FormButton from "../buttons/FormButton"
 import SelectCategories from "../newsletter/SelectCategories"
 import styles from "./footer.module.sass"
+import axios from "axios"
+import { API } from "../api"
+import { useAlertsDispatch } from "../../context/alerts"
+import checkEmail, { checkEmailChange } from "../checkEmail"
 
 const Subscribe = () => {
-  const [loading, setLoading] = useState(false)
+  const [formData, setFormdata] = useState({
+    Name: "",
+    email: "",
+  })
+  let alertDispatch = useAlertsDispatch()
+  const [emailError, setEmailError] = useState(null)
+  const [errors, setErrors] = useState(null)
   const [selected, setSelected] = useState([])
+  const [loading, setLoading] = useState(false)
 
-  const handleChange = (e) => {}
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormdata({
+      ...formData,
+      [name]: value,
+    })
+    setErrors(null)
+    if (name === "email") checkEmailChange(value, setEmailError)
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // setLoading(true)
+    let data = {
+      ...formData,
+      selected,
+    }
+    setLoading(true)
+    axios
+      .post(`${API}/subscribers`, data)
+      .then((res) => {
+        setLoading(false)
+        alertDispatch({
+          type: "ADD",
+          payload: {
+            message: "You have successfully logged in",
+            type: "success",
+          },
+        })
+      })
+      .catch((err) => {
+        setLoading(false)
+        if (err?.response) {
+          setErrors({
+            type: "danger",
+            msg: err?.response?.data?.message,
+          })
+        } else if (err?.message) {
+          if (err?.code === "ECONNREFUSED") {
+            setErrors({
+              type: "danger",
+              msg: "Failed to connect, please try again",
+            })
+          } else {
+            setErrors({
+              type: "danger",
+              msg: err?.message,
+            })
+          }
+        } else {
+          setErrors({
+            type: "danger",
+            msg: "Internal server error, please try again",
+          })
+        }
+      })
   }
+
+  checkEmail(formData.email, setEmailError)
 
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
       <div className={styles.inputs}>
         <Input
           type="text"
-          name="username"
+          name="name"
           handleChange={handleChange}
           id="name"
           title="Name:"
@@ -33,6 +96,7 @@ const Subscribe = () => {
           id="footer-email"
           title="Email address:"
           inputClass="bg_input"
+          error={emailError?.msg && emailError.msg}
         />
       </div>
       <SelectCategories
@@ -40,6 +104,8 @@ const Subscribe = () => {
         setSelected={setSelected}
         bg="dark"
       />
+      {errors?.msg && <p className="alerts danger">{errors.msg}</p>}
+
       <FormButton
         text="Subscribe"
         btnClass="btn-primary"

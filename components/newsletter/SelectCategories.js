@@ -10,15 +10,15 @@ const SubCategory = ({ sub, selected, setSelected }) => {
   let [checked, setChecked] = useState(false)
   const { id, name } = sub
   let selectedCopy = selected
-  let categoriesIndex = selected?.findIndex((el) => el == id)
+  let categoriesIndex = selected?.findIndex((el) => el.id == id)
   const toggleSubCategory = () => {
     if (categoriesIndex === -1) {
-      selectedCopy.push(id)
+      selectedCopy.push({ id })
       setSelected(selectedCopy)
       setChecked(true)
     } else {
       selectedCopy = selectedCopy.filter((el) => {
-        return el !== id
+        return el.id !== id
       })
       setSelected(selectedCopy)
       setChecked(false)
@@ -77,7 +77,7 @@ const SelectCategories = ({ setSelected, selected, bg }) => {
       setLoading(true)
       axios
         .get(
-          `${API}/jobCategories?fields=id,name,children[id, name]&filter=verification:eq:true`
+          `${API}/jobCategories?fields=id,name,children[id, name]&filter=verified:eq:true`
         )
         .then((res) => {
           setErrors(null)

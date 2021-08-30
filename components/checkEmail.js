@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 
-let format = /[ `!@#$%^&*()+\-=\[\]{};':"\\|,<>\/?~]/
+let format = /^\S+@\S+\.\S+$/
 
 export const checkEmailChange = (name, setError) => {
   let check = format.test(name)

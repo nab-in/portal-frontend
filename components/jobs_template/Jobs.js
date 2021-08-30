@@ -103,7 +103,7 @@ const Jobs = ({
                 <p className="alerts danger">{errors?.msg}</p>
               ) : (
                 <>
-                  {(jobs?.length > 0 || results?.length > 0) && (
+                  {page == "jobs" && (jobs?.length > 0 || results?.length > 0) && (
                     <p
                       style={{
                         marginBottom: "1rem",

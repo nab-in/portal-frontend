@@ -30,7 +30,7 @@ const Companies = ({ data, error }) => {
   let [number, setNumber] = useState(0)
   let [url, setUrl] = useState("")
   let [searchUrl, setSearchUrl] = useState(
-    `${API}/companies?pageSize=8&page=1${url}&fields=id,name,logo,verification`
+    `${API}/companies?pageSize=8&page=1${url}&fields=id,name,logo,verified`
   )
   const { isAuthenticated } = useAuthState()
   let [filter, setFilter] = useState(false)
@@ -41,7 +41,7 @@ const Companies = ({ data, error }) => {
 
   let pageName = "companies"
 
-  let apiUrl = `${API}/companies?pageSize=8&page=${page}&fields=id,name,logo,verification`
+  let apiUrl = `${API}/companies?pageSize=8&page=${page}&fields=id,name,logo,verified`
 
   useEffect(() => {
     if (
@@ -50,7 +50,7 @@ const Companies = ({ data, error }) => {
     )
       setResultsPages(true)
     setResultsPage(1)
-    let searchingUrl = `${API}/companies?pageSize=8&page=1&${url}&fields=id,name,logo,verification`
+    let searchingUrl = `${API}/companies?pageSize=8&page=1&${url}&fields=id,name,logo,verified`
 
     searching({
       setResults,
@@ -124,7 +124,7 @@ const Companies = ({ data, error }) => {
   // infinite scroll
   const handleScroll = () => {
     setSearchUrl(
-      `${API}/companies?pageSize=8&page=${resultsPage}&${url}&fields=id,name,logo,verification`
+      `${API}/companies?pageSize=8&page=${resultsPage}&${url}&fields=id,name,logo,verified`
     )
     infiniteScroll({
       apiUrl,
@@ -355,7 +355,7 @@ export async function getServerSideProps() {
   let error = null
   try {
     const res = await fetch(
-      `${API}/companies?pageSize=8&fields=id,name,logo,verification`
+      `${API}/companies?pageSize=8&fields=id,name,logo,verified`
     )
     data = await res.json()
   } catch (err) {
