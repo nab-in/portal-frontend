@@ -192,6 +192,7 @@ const JobDetails = ({ job }) => {
               text={saveText}
               loading={saveLoading}
               color="#00507A"
+              bg="light"
             />
             <Button
               click={apply}
