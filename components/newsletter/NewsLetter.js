@@ -35,45 +35,58 @@ const NewsLetter = () => {
       ...formData,
       selected,
     }
-    setLoading(true)
-    axios
-      .post(`${API}/subscribers`, data)
-      .then((res) => {
-        setLoading(false)
-        alertDispatch({
-          type: "ADD",
-          payload: {
-            message: "You have successfully logged in",
-            type: "success",
-          },
-        })
+    if (emailError || selected?.length === 0) {
+      setErrors({
+        type: "danger",
+        msg: "There are error(s) in your form",
       })
-      .catch((err) => {
-        setLoading(false)
-        if (err?.response) {
-          setErrors({
-            type: "danger",
-            msg: err?.response?.data?.message,
+      if (selected?.length === 0) {
+        setErrors({
+          type: "danger",
+          msg: "Please select atleast one category",
+        })
+      }
+    } else {
+      setLoading(true)
+      axios
+        .post(`${API}/subscribers`, data)
+        .then((res) => {
+          setLoading(false)
+          alertDispatch({
+            type: "ADD",
+            payload: {
+              message: "You have successfully logged in",
+              type: "success",
+            },
           })
-        } else if (err?.message) {
-          if (err?.code === "ECONNREFUSED") {
+        })
+        .catch((err) => {
+          setLoading(false)
+          if (err?.response) {
             setErrors({
               type: "danger",
-              msg: "Failed to connect, please try again",
+              msg: err?.response?.data?.message,
             })
+          } else if (err?.message) {
+            if (err?.code === "ECONNREFUSED") {
+              setErrors({
+                type: "danger",
+                msg: "Failed to connect, please try again",
+              })
+            } else {
+              setErrors({
+                type: "danger",
+                msg: err?.message,
+              })
+            }
           } else {
             setErrors({
               type: "danger",
-              msg: err?.message,
+              msg: "Internal server error, please try again",
             })
           }
-        } else {
-          setErrors({
-            type: "danger",
-            msg: "Internal server error, please try again",
-          })
-        }
-      })
+        })
+    }
   }
 
   checkEmail(formData.email, setEmailError)
