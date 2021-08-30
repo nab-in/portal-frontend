@@ -167,7 +167,6 @@ const Home = ({ data, error, companiesErr, companiesData }) => {
     <div>
       <Head>
         <title>Job Portal App</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <Hero />
       <main>
