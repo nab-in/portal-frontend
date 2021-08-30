@@ -55,7 +55,7 @@ const JobsTemplate = ({
                 )}
               </>
             )}
-            {message?.length > 0 && !loading && <p>{message}</p>}
+            {message && !loading && <p>{message}</p>}
             {jobs?.length > 0 ? (
               <>
                 {loadMore ? (

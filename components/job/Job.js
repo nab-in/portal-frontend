@@ -108,6 +108,8 @@ const Job = ({ job, page, setItems }) => {
             loading={loading}
             fontSize={14}
             fontWeight={400}
+            color="#00507A"
+            bg="light"
           />
         )}
       </div>

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import Link from "next/link"
 import { config } from "../../config"
 import axios from "axios"
 import { API } from "../../api"
@@ -79,7 +80,14 @@ const SavedJobs = () => {
         setLoading(false)
         if (res.data.pager.total <= res.data.pager.pageSize)
           setMessage("You have seen it all")
-        if (res?.data?.jobs?.length === 0) setMessage("You didn't save any job")
+        if (res?.data?.jobs?.length === 0)
+          setMessage(() => {
+            return (
+              <>
+                You didn't save any job. <Link href="/jobs">Explore jobs?</Link>
+              </>
+            )
+          })
       })
       .catch((err) => {
         setLoading(false)
