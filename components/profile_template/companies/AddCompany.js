@@ -44,8 +44,42 @@ const AddCompany = () => {
         })
       })
       .catch((err) => {
-        console.log(err)
         setLoading(false)
+        if (err?.response) {
+          alertsDispatch({
+            type: "ADD",
+            payload: {
+              type: "danger",
+              message: err.response?.data?.message,
+            },
+          })
+        } else if (err?.message) {
+          if (err?.code === "ECONNREFUSED") {
+            alertsDispatch({
+              type: "ADD",
+              payload: {
+                type: "danger",
+                message: "Failed to connect, please try again",
+              },
+            })
+          } else {
+            alertsDispatch({
+              type: "ADD",
+              payload: {
+                type: "danger",
+                message: err?.message,
+              },
+            })
+          }
+        } else {
+          alertsDispatch({
+            type: "ADD",
+            payload: {
+              type: "danger",
+              message: "Internal server error, please try again",
+            },
+          })
+        }
       })
   }
   return (
