@@ -61,6 +61,7 @@ const SelectCategories = ({ setSelected, selected, bg }) => {
   const dispatch = useAuthDispatch()
   const [loading, setLoading] = useState(false)
   const { categories } = useAuthState()
+  const [errors, setErrors] = useState(null)
   const [jobCategories, setJobCategories] = useState([])
   const open = () => {
     setOpenDropdown(!openDropdown)
@@ -79,6 +80,7 @@ const SelectCategories = ({ setSelected, selected, bg }) => {
           `${API}/jobCategories?fields=id,name,children[id, name]&filter=verification:eq:true`
         )
         .then((res) => {
+          setErrors(null)
           dispatch({
             type: "CATEGORIES",
             payload: res?.data?.jobCategories,
@@ -100,6 +102,29 @@ const SelectCategories = ({ setSelected, selected, bg }) => {
             type: "CATEGORIES_FAIL",
           })
           setLoading(false)
+          if (err?.response) {
+            setErrors({
+              type: "danger",
+              msg: err.response?.data?.message,
+            })
+          } else if (err?.message) {
+            if (err?.code === "ECONNREFUSED") {
+              setErrors({
+                type: "danger",
+                msg: "Failed to connect",
+              })
+            } else {
+              setErrors({
+                type: "danger",
+                msg: err?.message,
+              })
+            }
+          } else {
+            setErrors({
+              type: "danger",
+              msg: "Internal server error, please refresh",
+            })
+          }
         })
     } else {
       setJobCategories(categories?.filter((el) => el.id != 12))
@@ -148,6 +173,7 @@ const SelectCategories = ({ setSelected, selected, bg }) => {
           </div>
         ) : (
           <>
+            {errors?.msg && <p className="alerts danger">{errors.msg}</p>}
             {jobCategories?.length === 0 ? (
               <p>No category to select</p>
             ) : (
