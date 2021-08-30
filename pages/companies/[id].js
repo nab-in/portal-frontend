@@ -6,20 +6,22 @@ import { API } from "../../components/api"
 const Company = ({ data, error }) => {
   let [details, setDetails] = useState(null)
   let [loading, setLoading] = useState(true)
+
   useEffect(() => {
-    if (data && data.id) {
+    if (data && data?.id) {
       setDetails(data)
       setLoading(false)
     } else {
       setLoading(false)
     }
   }, [data])
+
   useEffect(() => {
     if (error) {
-      console.log(error)
       setLoading(false)
     }
   }, [error])
+
   return (
     <div>
       {details && !loading && (
