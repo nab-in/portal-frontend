@@ -66,7 +66,7 @@ const jobs = ({ data, error }) => {
       setJobs(data.jobs)
       setNumber(data.pager?.total)
       if (data.jobs.length === 0) setMessage("Ooops! not a single job found")
-      if (data?.pager?.total <= data?.pager?.pageSize)
+      if (data?.pager?.total <= data?.pager?.pageSize && data?.jobs?.length > 0)
         setMessage("You have seen it all")
     }
   }, [data])
@@ -184,7 +184,10 @@ const jobs = ({ data, error }) => {
           res.data.pager.page <=
             Math.ceil(res.data.pager.total / res.data.pager.pageSize)
         )
-        if (res?.data?.pager?.total <= res?.data?.pager?.pageSize)
+        if (
+          res?.data?.pager?.total <= res?.data?.pager?.pageSize &&
+          res?.data?.jobs?.length > 0
+        )
           setMessage("You have seen it all")
         if (res?.data?.jobs?.length === 0)
           setMessage("Ooops! not a single job found")
