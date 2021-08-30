@@ -71,6 +71,7 @@ const Companies = ({ data, error }) => {
       setLoading(false)
       setCompanies(data.companies)
       setNumber(data?.pager?.total)
+      
       if (data?.companies?.length === 0)
         setMessage("Opps not a single company found")
     }

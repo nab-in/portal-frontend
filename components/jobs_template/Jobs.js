@@ -188,16 +188,20 @@ const Jobs = ({
                   <>
                     {jobs?.length > 0 || results?.length > 0 ? (
                       <>
-                        {loadMore ? (
-                          <Spinner bg="light" />
-                        ) : (
+                        {!message && (
                           <>
-                            <button
-                              className="primary__text"
-                              onClick={loadMoreJobs}
-                            >
-                              Load More
-                            </button>
+                            {loadMore ? (
+                              <Spinner bg="light" />
+                            ) : (
+                              <>
+                                <button
+                                  className="primary__text"
+                                  onClick={loadMoreJobs}
+                                >
+                                  Load More
+                                </button>
+                              </>
+                            )}
                           </>
                         )}
                       </>

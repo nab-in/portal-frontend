@@ -35,11 +35,20 @@ const NewsLetter = () => {
       ...formData,
       selected,
     }
-    if (emailError || selected?.length === 0) {
+    if (
+      emailError ||
+      selected?.length === 0 ||
+      formData?.email?.trim().length === 0
+    ) {
       setErrors({
         type: "danger",
         msg: "There are error(s) in your form",
       })
+      if (formData?.email?.trim().length === 0)
+        setEmailError({
+          type: "danger",
+          msg: "This field shouldn't be empty",
+        })
       if (selected?.length === 0) {
         setErrors({
           type: "danger",
@@ -111,7 +120,9 @@ const NewsLetter = () => {
           setSelected={setSelected}
           bg="white"
         />
-        {errors?.msg && <p className="alerts danger">{errors.msg}</p>}
+        {errors?.msg && <p className="alerts danger" style={{
+          marginBottom: "1rem"
+        }}>{errors.msg}</p>}
         <FormButton
           text="Subscribe"
           btnClass="btn-primary span__full"
