@@ -1,4 +1,5 @@
 import styles from "./card.module.sass"
+
 const CardLoader = ({ stars }) => {
   return (
     <div className={`card ${styles.card}`}>

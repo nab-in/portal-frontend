@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { FaChevronDown, FaChevronUp } from "react-icons/fa"
 import SubCategory from "./SubCategory"
 import UseClickOutside from "../UseClickOutside"
@@ -17,10 +17,6 @@ const Category = ({ category, search, setSearch, url, setUrl, heights }) => {
   let node = UseClickOutside(() => {
     setOpenDropdown(false)
   })
-
-  useEffect(() => {
-    heights.push(dropdownRef.current?.scrollHeight)
-  }, [open])
 
   return (
     <>

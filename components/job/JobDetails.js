@@ -96,26 +96,36 @@ const JobDetails = ({ job }) => {
   }
 
   useEffect(() => {
-    axios
-      .get(`${API}/jobs/${id}/applications/${user?.id}`, config)
-      .then((res) => {
-        setText("Revoke")
-      })
-      .catch((err) => {
-        console.log(err.response.data.message)
-      })
+    let isMounted = true
+    if (isMounted)
+      axios
+        .get(`${API}/jobs/${id}/applications/${user?.id}`, config)
+        .then((res) => {
+          setText("Revoke")
+        })
+        .catch((err) => {
+          console.log(err.response.data.message)
+        })
+    return () => {
+      isMounted = false
+    }
   }, [])
 
   useEffect(() => {
-    axios
-      .get(`${API}/jobs/${id}/saves/${user?.id}`, config)
-      .then((res) => {
-        setSaveText("Saved!")
-      })
-      .catch((err) => {
-        console.log(err.response.data.message)
-      })
-  })
+    let isMounted = true
+    if (isMounted)
+      axios
+        .get(`${API}/jobs/${id}/saves/${user?.id}`, config)
+        .then((res) => {
+          setSaveText("Saved!")
+        })
+        .catch((err) => {
+          console.log(err.response.data.message)
+        })
+    return () => {
+      isMounted = false
+    }
+  }, [])
 
   return (
     <div className={styles.details}>

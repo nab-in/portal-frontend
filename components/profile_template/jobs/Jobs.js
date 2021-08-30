@@ -5,7 +5,6 @@ import Section from "../Section"
 import styles from "./jobs.module.sass"
 import axios from "axios"
 import { API } from "../../api"
-import Loader from "../../loaders/CardLoader"
 
 const Jobs = ({ page, details }) => {
   const [loading, setLoading] = useState(false)

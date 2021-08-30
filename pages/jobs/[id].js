@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import dayjs from "dayjs"
 import JobDetails from "../../components/job/JobDetails"
 import RelatedJobs from "../../components/job/RelatedJobs"

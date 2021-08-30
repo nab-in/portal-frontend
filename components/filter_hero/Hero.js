@@ -41,24 +41,29 @@ const Hero = ({ setSearch, search, title, url, setUrl }) => {
   }
 
   useEffect(() => {
-    if (router.query) {
-      setSearch({
-        ...search,
-        name: router.query.keyword ? router.query.keyword : "",
-        location: router.query.location ? router.query.location : "",
-      })
-      setUrl(
-        `${
-          router.query?.keyword
-            ? "&filter=name:ilike:" + router.query.keyword
-            : ""
-        }` +
+    let isMounted = true
+    if (isMounted)
+      if (router.query) {
+        setSearch({
+          ...search,
+          name: router.query.keyword ? router.query.keyword : "",
+          location: router.query.location ? router.query.location : "",
+        })
+        setUrl(
           `${
-            router.query?.location
-              ? "&filter=location:ilike:" + router.query.location
+            router.query?.keyword
+              ? "&filter=name:ilike:" + router.query.keyword
               : ""
-          }`
-      )
+          }` +
+            `${
+              router.query?.location
+                ? "&filter=location:ilike:" + router.query.location
+                : ""
+            }`
+        )
+      }
+    return () => {
+      isMounted = false
     }
   }, [router.query])
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { FaBell } from "react-icons/fa"
 import UseClickOutside from "../UseClickOutside"

@@ -1,4 +1,3 @@
-import React from "react"
 import styles from "./template.module.sass"
 
 const Template = ({ heading, filters, children }) => {

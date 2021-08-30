@@ -1,4 +1,3 @@
-import React from "react"
 import { useAuthState } from "../../../context/auth"
 import Loader from "../../loaders/HeroLoader"
 import styles from "./hero.module.sass"
@@ -41,10 +40,7 @@ const Hero = ({ details, page, loading }) => {
           <div className={styles.dp__container}>
             <div className={styles.dp}>
               {dp ? (
-                <img
-                  src={dp}
-                  alt={`${username}`}
-                />
+                <img src={dp} alt={`${username}`} />
               ) : (
                 <div className={styles.default}>{name}</div>
               )}

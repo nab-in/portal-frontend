@@ -27,8 +27,13 @@ const SubCategory = ({ sub, selected, setSelected }) => {
 
   useEffect(() => {
     // updating UI when subcategory is removed from filter criteria
-    if (categoriesIndex === -1 || categoriesIndex === undefined) {
-      setChecked(false)
+    let isMounted = true
+    if (isMounted)
+      if (categoriesIndex === -1 || categoriesIndex === undefined) {
+        setChecked(false)
+      }
+    return () => {
+      isMounted = false
     }
   }, [selected])
 

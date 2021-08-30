@@ -1,4 +1,3 @@
-import React from "react"
 import Link from "next/link"
 import { GoVerified } from "react-icons/go"
 import styles from "./company.module.sass"

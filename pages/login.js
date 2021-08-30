@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import Input from "../components/inputs/Input"
@@ -39,7 +39,6 @@ const login = () => {
     axios
       .post(`${API}/login`, formData)
       .then((res) => {
-        console.log(res)
         dispatch({
           type: "LOGIN",
           payload: res.data,

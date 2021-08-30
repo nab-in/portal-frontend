@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import Input from "../components/inputs/Input"
 import FormButton from "../components/buttons/FormButton"

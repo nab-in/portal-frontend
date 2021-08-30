@@ -1,4 +1,3 @@
-import React from "react"
 import rippleEffect from "../rippleEffect.js"
 import Loader from "../loaders/ButtonLoader"
 

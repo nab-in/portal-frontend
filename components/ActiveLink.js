@@ -1,11 +1,11 @@
-import React, { Children } from "react"
+import { Children, cloneElement } from "react"
 import { withRouter } from "next/router"
 import Link from "next/link"
 import styles from "./header/header.module.sass"
 
 const ActiveLink = withRouter(({ router, children, ...props }) => (
   <Link {...props}>
-    {React.cloneElement(Children.only(children), {
+    {cloneElement(Children.only(children), {
       className:
         `/${router.pathname.split("/")[1]}` === props.href
           ? `${styles.active}`
