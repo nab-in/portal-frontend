@@ -33,10 +33,17 @@ const Home = ({ data, error, companiesErr, companiesData }) => {
           msg: JSON.parse(error)?.response?.data?.message,
         })
       } else if (JSON.parse(error)?.message) {
-        setErrors({
-          type: "danger",
-          msg: JSON.parse(error)?.message,
-        })
+        if (JSON.parse(error)?.code === "ECONNREFUSED") {
+          setErrors({
+            type: "danger",
+            msg: "Failed to connect, please refresh",
+          })
+        } else {
+          setErrors({
+            type: "danger",
+            msg: JSON.parse(error)?.message,
+          })
+        }
       } else {
         setErrors({
           type: "danger",
@@ -55,10 +62,17 @@ const Home = ({ data, error, companiesErr, companiesData }) => {
           msg: JSON.parse(error)?.response?.data?.message,
         })
       } else if (JSON.parse(error)?.message) {
-        setCompanyErrors({
-          type: "danger",
-          msg: JSON.parse(error)?.message,
-        })
+        if (JSON.parse(error)?.code === "ECONNREFUSED") {
+          setCompanyErrors({
+            type: "danger",
+            msg: "Failed to connect",
+          })
+        } else {
+          setCompanyErrors({
+            type: "danger",
+            msg: JSON.parse(error)?.message,
+          })
+        }
       } else {
         setCompanyErrors({
           type: "danger",

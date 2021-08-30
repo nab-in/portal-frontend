@@ -99,41 +99,44 @@ const Jobs = ({
             </>
           ) : (
             <>
-              <>
-                {results != null && typeof results == "object" ? (
-                  <>
-                    {results?.length > 0 ? (
-                      <>
-                        <p>Showing {number} results</p>
-                        {results.map((job) => (
-                          <Job job={job} key={job.id} />
-                        ))}
-                      </>
-                    ) : (
-                      <p>No Job match your Criteria</p>
-                    )}
-                  </>
-                ) : (
-                  <>
-                    {jobs?.length > 0 ? (
-                      <>
-                        {jobs.map((job) => (
-                          <Job job={job} key={job.id} />
-                        ))}
-                      </>
-                    ) : (
-                      <></>
-                    )}
-                  </>
-                )}
-              </>
-              {page !== "jobs" && message && <p>{message}</p>}
-              {errors?.msg && (
-                <p className={`alerts ${errors?.type}`}>{errors.msg}</p>
+              {errors?.type === "normal" ? (
+                <p className="alerts danger">{errors?.msg}</p>
+              ) : (
+                <>
+                  {results != null && typeof results == "object" ? (
+                    <>
+                      {results?.length > 0 ? (
+                        <>
+                          <p>Showing {number} results</p>
+                          {results.map((job) => (
+                            <Job job={job} key={job.id} />
+                          ))}
+                        </>
+                      ) : (
+                        <p>No Job match your Criteria</p>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      {jobs?.length > 0 ? (
+                        <>
+                          {jobs.map((job) => (
+                            <Job job={job} key={job.id} />
+                          ))}
+                        </>
+                      ) : (
+                        <></>
+                      )}
+                    </>
+                  )}
+                </>
               )}
-              {error?.msg && (
-                <p className={`alerts ${error?.type}`}>{error.msg}</p>
+
+              {page !== "jobs" && message && !loading && <p>{message}</p>}
+              {errors?.type === "infinite" && (
+                <p className={`alerts danger`}>{errors.msg}</p>
               )}
+              {error?.msg && <p className={`alerts danger`}>{error.msg}</p>}
             </>
           )}
           <div
@@ -145,21 +148,47 @@ const Jobs = ({
           >
             {page === "jobs" ? (
               <>
-                {message ? (
+                {message && !loading ? (
                   <p>{message}</p>
                 ) : (
                   <>
-                    {loadMore ? (
-                      <Spinner bg="light" />
-                    ) : (
+                    {jobs?.length > 0 || results?.length > 0 ? (
                       <>
-                        <button
-                          className="primary__text"
-                          onClick={loadMoreJobs}
-                        >
-                          Load More
-                        </button>
+                        {loadMore ? (
+                          <Spinner bg="light" />
+                        ) : (
+                          <>
+                            <button
+                              className="primary__text"
+                              onClick={loadMoreJobs}
+                            >
+                              Load More
+                            </button>
+                          </>
+                        )}
                       </>
+                    ) : (
+                      <div
+                        style={{
+                          width: "100%",
+                          textAlign: "center",
+                        }}
+                      >
+                        <button
+                          onClick={refresh}
+                          style={{
+                            cursor: "pointer",
+                          }}
+                        >
+                          <FaSync
+                            className={loading ? `spinner` : ``}
+                            style={{
+                              fontSize: "1.8rem",
+                              color: "gray",
+                            }}
+                          />
+                        </button>
+                      </div>
                     )}
                   </>
                 )}

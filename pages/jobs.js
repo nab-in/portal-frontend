@@ -44,7 +44,7 @@ const jobs = ({ data, error }) => {
     )
       setResultsPages(true)
     setResultsPage(1)
-    let searchingUrl = `${API}/jobs?pageSize=2&page=1&fields=name,title,closeDate,created,company,id,location${url}`
+    let searchingUrl = `${API}/jobs?pageSize=8&page=1&fields=name,title,closeDate,created,company,id,location${url}`
 
     searching({
       setResults,
@@ -61,13 +61,10 @@ const jobs = ({ data, error }) => {
   }, [search, url])
 
   useEffect(() => {
-    setErrors(null)
-  }, [search, url])
-
-  useEffect(() => {
     if (data) {
       setLoading(false)
       setJobs(data.jobs)
+      setNumber(data.pager?.total)
       if (data.jobs.length === 0) setMessage("Ooops! not a single job found")
     }
   }, [data])
@@ -77,17 +74,24 @@ const jobs = ({ data, error }) => {
       setLoading(false)
       if (JSON.parse(error)?.response) {
         setErrors({
-          type: "danger",
-          msg: err?.response?.data?.message,
+          type: "normal",
+          msg: JSON.parse(error)?.data?.message,
         })
-      } else if (JSON.parse(error)?.message == "Network Error") {
-        setErrors({
-          type: "danger",
-          msg: "Network Error",
-        })
+      } else if (JSON.parse(error)?.message) {
+        if (JSON.parse(error)?.code === "ECONNREFUSED") {
+          setErrors({
+            type: "normal",
+            msg: "Failed to connect, please refresh",
+          })
+        } else {
+          setErrors({
+            type: "normal",
+            msg: JSON.parse(error)?.message,
+          })
+        }
       } else {
         setErrors({
-          type: "danger",
+          type: "normal",
           msg: "Internal server error, please try again",
         })
       }
@@ -107,7 +111,6 @@ const jobs = ({ data, error }) => {
             })
           })
           .catch((err) => {
-            console.log(err)
             dispatch({
               type: "CATEGORIES_FAIL",
             })
@@ -159,6 +162,44 @@ const jobs = ({ data, error }) => {
     handleScroll()
   }
 
+  const refreshJobs = () => {
+    setLoading(true)
+    axios
+      .get(searchUrl)
+      .then((res) => {
+        setErrors(null)
+        setNumber(res?.data?.pager.total)
+        setResults(res.data.jobs)
+
+        setResultsPage(res.data?.pager.page + 1)
+        setResultsPages(
+          res.data.pager.page <=
+            Math.ceil(res.data.pager.total / res.data.pager.pageSize)
+        )
+        setLoading(false)
+      })
+      .catch((err) => {
+        setLoading(false)
+        setMessage(null)
+        if (err?.response) {
+          setErrors({
+            type: "normal",
+            msg: err?.response?.data?.message,
+          })
+        } else if (err?.message) {
+          setErrors({
+            type: "normal",
+            msg: err?.message,
+          })
+        } else {
+          setErrors({
+            type: "normal",
+            msg: "Internal server error, please try again",
+          })
+        }
+      })
+  }
+
   return (
     <div className="jobs">
       <Hero
@@ -187,6 +228,7 @@ const jobs = ({ data, error }) => {
           setUrl={setUrl}
           number={number}
           loadMoreJobs={loadMoreJobs}
+          refresh={refreshJobs}
         />
       </main>
     </div>

@@ -94,7 +94,7 @@ const authReducer = (state, action) => {
           {
             id: 12,
             name: "Job Type",
-            sub_categories: [
+            children: [
               {
                 id: 14,
                 name: "Freelance",

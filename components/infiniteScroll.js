@@ -44,17 +44,24 @@ export const searching = ({
         setResults(null)
         if (err?.response) {
           setErrors({
-            type: "danger",
+            type: "normal",
             msg: err?.response?.data?.message,
           })
-        } else if (err?.message == "Network Error") {
-          setErrors({
-            type: "danger",
-            msg: "Network Error",
-          })
+        } else if (err?.message) {
+          if (err?.code === "ECONNREFUSED") {
+            setErrors({
+              type: "normal",
+              msg: "Failed to connect, please refresh",
+            })
+          } else {
+            setErrors({
+              type: "normal",
+              msg: err?.message,
+            })
+          }
         } else {
           setErrors({
-            type: "danger",
+            type: "normal",
             msg: "Internal server error, please try again",
           })
         }
@@ -135,17 +142,24 @@ const infiniteScroll = ({
               setLoadMore(false)
               if (err?.response) {
                 setErrors({
-                  type: "danger",
+                  type: "infinite",
                   msg: err?.response?.data?.message,
                 })
-              } else if (err?.message == "Network Error") {
-                setErrors({
-                  type: "danger",
-                  msg: "Network Error",
-                })
+              } else if (err?.message) {
+                if (err?.code === "ECONNREFUSED") {
+                  setErrors({
+                    type: "infinite",
+                    msg: "Failed to connect, please refresh",
+                  })
+                } else {
+                  setErrors({
+                    type: "infinite",
+                    msg: err?.message,
+                  })
+                }
               } else {
                 setErrors({
-                  type: "danger",
+                  type: "infinite",
                   msg: "Internal server error, please try again",
                 })
               }
@@ -157,7 +171,7 @@ const infiniteScroll = ({
       } else {
         // checking if page number is less than the actual number of pages sent from api
         if (!loadMore && pages) {
-          console.log("here")
+          // console.log("here")
           setLoadMore(true)
           axios
             .get(apiUrl, config)
@@ -189,17 +203,24 @@ const infiniteScroll = ({
               setLoadMore(false)
               if (err?.response) {
                 setErrors({
-                  type: "danger",
+                  type: "infinite",
                   msg: err?.response?.data?.message,
                 })
-              } else if (err?.message == "Network Error") {
-                setErrors({
-                  type: "danger",
-                  msg: "Network Error",
-                })
+              } else if (err?.message) {
+                if (err?.code === "ECONNREFUSED") {
+                  setErrors({
+                    type: "infinite",
+                    msg: "Failed to connect, please refresh",
+                  })
+                } else {
+                  setErrors({
+                    type: "infinite",
+                    msg: err?.message,
+                  })
+                }
               } else {
                 setErrors({
-                  type: "danger",
+                  type: "infinite",
                   msg: "Internal server error, please try again",
                 })
               }
@@ -211,6 +232,8 @@ const infiniteScroll = ({
         }
       }
     }
+  } else {
+    setLoadMore(false)
   }
 }
 
