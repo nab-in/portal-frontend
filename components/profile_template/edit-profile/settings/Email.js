@@ -8,7 +8,7 @@ import Button from "../../../buttons/FormButton"
 import styles from "./settings.module.sass"
 import { useAlertsDispatch } from "../../../../context/alerts"
 import { useAuthDispatch } from "../../../../context/auth"
-import checkMail, { checkChange } from "../../../checkEmail"
+import checkMail, { checkEmailChange } from "../../../checkEmail"
 
 const Email = ({ email }) => {
   const [error, setError] = useState(null)
@@ -24,7 +24,7 @@ const Email = ({ email }) => {
     let { name, value } = e.target
     setFormData({ ...formData, [name]: value })
     if (name == "email") {
-      checkChange(name, setError)
+      checkEmailChange(name, setError)
     }
     if (name == "userpassword") setPassErr(null)
   }

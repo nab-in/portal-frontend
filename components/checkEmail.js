@@ -2,14 +2,9 @@ import { useEffect } from "react"
 
 let format = /[ `!@#$%^&*()+\-=\[\]{};':"\\|,<>\/?~]/
 
-export const checkChange = (name, setError) => {
+export const checkEmailChange = (name, setError) => {
   let check = format.test(name)
   if (check) setError(null)
-  if (!check)
-    setError({
-      type: "danger",
-      msg: "Invalid email",
-    })
 }
 
 const checkMail = (name, setError) => {
@@ -17,7 +12,6 @@ const checkMail = (name, setError) => {
     const timeout = setTimeout(() => {
       if (name) {
         let check = format.test(name)
-        console.log(check)
         if (check) setError(null)
         if (!check)
           setError({

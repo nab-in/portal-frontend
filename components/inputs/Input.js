@@ -13,6 +13,7 @@ const Input = ({
   error,
   success,
   textarea,
+  required,
 }) => {
   return (
     <div
@@ -41,7 +42,8 @@ const Input = ({
           value={value}
           id={id}
           onChange={(e) => handleChange(e)}
-          className={error ? `error`: ``}
+          className={error ? `error` : ``}
+          required={required}
         />
       )}
 
