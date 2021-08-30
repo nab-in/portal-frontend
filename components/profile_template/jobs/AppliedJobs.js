@@ -74,7 +74,8 @@ const AppliedJobs = () => {
         setLoading(false)
         if (res.data.pager.total <= res.data.pager.pageSize)
           setMessage("You have seen it all")
-        if (res?.data?.jobs?.length === 0) setMessage("You didn't save any job")
+        if (res?.data?.jobs?.length === 0)
+          setMessage("You didn't apply any job")
       })
       .catch((err) => {
         setLoading(false)

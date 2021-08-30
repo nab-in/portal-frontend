@@ -29,7 +29,7 @@ const JobsTemplate = ({
         ) : (
           <div className="main__content">
             {errors?.type === "normal" ? (
-              <></>
+              <p className="alerts danger">{errors?.msg}</p>
             ) : (
               <>
                 {jobs?.length > 0 && (
@@ -53,49 +53,45 @@ const JobsTemplate = ({
                 {errors?.type === "infinite" && (
                   <p className={`alerts danger`}>{errors.msg}</p>
                 )}
-                {message?.length > 0 && !loading ? (
-                  <p>{message}</p>
+              </>
+            )}
+            {message?.length > 0 && !loading && <p>{message}</p>}
+            {jobs?.length > 0 ? (
+              <>
+                {loadMore ? (
+                  <Spinner bg="light" />
                 ) : (
                   <>
-                    {jobs?.length > 0 ? (
-                      <>
-                        {loadMore ? (
-                          <Spinner bg="light" />
-                        ) : (
-                          <button
-                            className="primary__text"
-                            onClick={loadMoreJobs}
-                          >
-                            Load More
-                          </button>
-                        )}
-                      </>
-                    ) : (
-                      <div
-                        style={{
-                          width: "100%",
-                          textAlign: "center",
-                        }}
-                      >
-                        <button
-                          onClick={refreshJobs}
-                          style={{
-                            cursor: "pointer",
-                          }}
-                        >
-                          <FaSync
-                            className={loading ? `spinner` : ``}
-                            style={{
-                              fontSize: "1.8rem",
-                              color: "gray",
-                            }}
-                          />
-                        </button>
-                      </div>
+                    {!message && (
+                      <button className="primary__text" onClick={loadMoreJobs}>
+                        Load More
+                      </button>
                     )}
                   </>
                 )}
               </>
+            ) : (
+              <div
+                style={{
+                  width: "100%",
+                  marginTop: "1rem",
+                }}
+              >
+                <button
+                  onClick={refreshJobs}
+                  style={{
+                    cursor: "pointer",
+                  }}
+                >
+                  <FaSync
+                    className={loading ? `spinner` : ``}
+                    style={{
+                      fontSize: "1.8rem",
+                      color: "gray",
+                    }}
+                  />
+                </button>
+              </div>
             )}
           </div>
         )}
