@@ -27,7 +27,7 @@ const Register = () => {
 
   const [loading, setLoading] = useState(false)
 
-  const { firstname, email, username, password } = formData
+  const { firstname, lastname, email, username, password } = formData
 
   const handleChange = (e) => {
     let { name, value } = e.target
@@ -35,19 +35,22 @@ const Register = () => {
       ...formData,
       [name]: value,
     })
+    setError(null)
 
     if (name === "email") checkEmailChange(value, setEmailErr)
 
     if (name === "username") checkChange(value, setUsernameErr)
 
-    // if (name === "lastname" && value.length < 3) {
-    //   setErrors({ ...errors, lastname: "Not less tha 3 characters required" })
-    // } else {
-    //   setErrors({
-    //     ...errors,
-    //     lastname: "",
-    //   })
-    // }
+    if (name === "lastname") {
+      if (value.length < 2) {
+        setErrors({ ...errors, lastname: "Atleast two(2) characters required" })
+      } else {
+        setErrors({
+          ...errors,
+          lastname: "",
+        })
+      }
+    }
     if (name === "password") {
       if (value.length < 6) {
         setErrors({ ...errors, password: "Your password is weak" })
@@ -60,11 +63,11 @@ const Register = () => {
     }
 
     if (name === "firstname") {
-      if (value.length < 6) {
+      if (value.length < 2) {
         console.log(name, value)
         setErrors({
           ...errors,
-          firstname: "Atleast three(3) characters required",
+          firstname: "Atleast two(2) characters required",
         })
       } else {
         setErrors({
@@ -76,19 +79,21 @@ const Register = () => {
   }
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (errors || emailErr || usernameErr) {
+    if (errors?.firstname || errors?.password || emailErr || usernameErr) {
       setError("There are error(s) in your form")
+      console.log("here", errors, emailErr, usernameErr)
     } else if (
-      username.trim().length < 3 ||
+      username.trim().length < 2 ||
       password.trim().length < 6 ||
-      firstname.trim().length < 3 ||
+      firstname.trim().length < 2 ||
+      lastname.trim().length < 2 ||
       email.trim().length < 3
     ) {
       setError("There are error(s) in your form")
-      if (username.trim().length < 3)
+      if (username.trim().length < 2)
         setUsernameErr({
           type: "danger",
-          msg: "Atleast three(3) characters required",
+          msg: "Atleast wo(2) characters required",
         })
       if (email.trim().length < 3)
         setEmailErr({
@@ -100,10 +105,15 @@ const Register = () => {
           ...errors,
           password: "Your password is weak",
         })
-      if (firstname.trim().length < 6)
+      if (firstname.trim().length < 2)
         setErrors({
           ...errors,
           firstname: "Atleast three(3) characters required",
+        })
+      if (lastname.trim().length === 0)
+        setErrors({
+          ...errors,
+          lastname: "Atleast three(3) characters required",
         })
     } else {
       setLoading(true)
@@ -123,7 +133,17 @@ const Register = () => {
         })
         .catch((err) => {
           setLoading(false)
-          console.log(err.response)
+          if (err?.response) {
+            setError(err?.response?.data?.message)
+          } else if (err?.message) {
+            if (err?.code === "ECONNREFUSED") {
+              setError("Failed to connect, please try again")
+            } else {
+              setError(err?.message)
+            }
+          } else {
+            setError("Internal server error, please try again")
+          }
         })
     }
   }
@@ -150,7 +170,7 @@ const Register = () => {
           handleChange={handleChange}
           id="lastname"
           title="Last Name:"
-          // error={errors?.lastname && errors.lastname}
+          error={errors?.lastname && errors.lastname}
           inputClass="bg_input"
         />
         <Input
