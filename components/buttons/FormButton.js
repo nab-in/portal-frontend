@@ -11,12 +11,16 @@ const FormButton = ({
   fontWeight,
   color,
   bg,
+  onclick,
 }) => {
   return (
     <div className={`btn-group ${btnGroupClass}`} onClick={click}>
       <button
         className={`btn ${btnClass}`}
-        onClick={rippleEffect}
+        onClick={(e) => {
+          rippleEffect(e)
+          if (onclick) onclick()
+        }}
         style={{
           fontSize: fontSize && fontSize,
           fontWeight: fontWeight && fontWeight,

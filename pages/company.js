@@ -30,7 +30,7 @@ const Companies = ({ data, error }) => {
   let [number, setNumber] = useState(0)
   let [url, setUrl] = useState("")
   let [searchUrl, setSearchUrl] = useState(
-    `${API}/companies?pageSize=8&page=1${url}&fields=id,name,logo,verified`
+    `${API}/companies?pageSize=8&page=1&${url}&fields=id,name,logo,verified`
   )
   const { isAuthenticated } = useAuthState()
   let [filter, setFilter] = useState(false)
@@ -47,9 +47,15 @@ const Companies = ({ data, error }) => {
     if (
       search?.name?.trim().length == 0 &&
       search?.location?.trim().length == 0
-    )
+    ) {
       setResultsPages(true)
+      setMessage("")
+      if (companies?.length === 0) setMessage("Oops not a single company found")
+    }
     setResultsPage(1)
+    setSearchUrl(
+      `${API}/companies?pageSize=8&page=1&${url}&fields=id,name,logo,verified`
+    )
     let searchingUrl = `${API}/companies?pageSize=8&page=1&${url}&fields=id,name,logo,verified`
 
     searching({
@@ -174,11 +180,21 @@ const Companies = ({ data, error }) => {
       .then((res) => {
         setErrors(null)
         setNumber(res?.data?.pager.total)
+        if (
+          res?.data?.pager?.total <= res?.data?.pager?.pageSize &&
+          res?.data?.companies?.length > 0
+        )
+          setMessage("You have seen it all")
         if (!url) {
           setCompanies(res.data.companies)
           setResults(null)
+
+          if (res?.data?.companies?.length === 0)
+            setMessage("Opps not a single company found")
         } else {
           setResults(res.data.companies)
+          if (res?.data?.companies?.length === 0)
+            setMessage("No results matching your criteria")
         }
         setResultsPage(res.data?.pager.page + 1)
         setResultsPages(
@@ -186,13 +202,6 @@ const Companies = ({ data, error }) => {
             Math.ceil(res.data.pager.total / res.data.pager.pageSize)
         )
         setLoading(false)
-        if (
-          res?.data?.pager?.total <= res?.data?.pager?.pageSize &&
-          res?.data?.companies?.length > 0
-        )
-          setMessage("You have seen it all")
-        if (res?.data?.companies?.length === 0)
-          setMessage("Opps not a single company found")
       })
       .catch((err) => {
         setLoading(false)
@@ -273,14 +282,12 @@ const Companies = ({ data, error }) => {
                       )}
                       {results != null ? (
                         <>
-                          {results.length > 0 ? (
+                          {results.length > 0 && (
                             <>
                               {results.map((company) => (
                                 <Company company={company} key={company.id} />
                               ))}
                             </>
-                          ) : (
-                            <p>No company match the your criteria</p>
                           )}
                         </>
                       ) : (
@@ -302,8 +309,34 @@ const Companies = ({ data, error }) => {
                 className={`${styles.more__link} ${styles.more__link__center}`}
               >
                 <>
-                  {message && !loading ? (
-                    <p>{message}</p>
+                  {message && !loading && !errors ? (
+                    <>
+                      <p>{message}</p>
+                      {(companies?.length === 0 || results?.length === 0) && (
+                        <div
+                          style={{
+                            width: "100%",
+                            textAlign: "center",
+                            marginTop: "1rem",
+                          }}
+                        >
+                          <button
+                            onClick={refreshCompanies}
+                            style={{
+                              cursor: "pointer",
+                            }}
+                          >
+                            <FaSync
+                              className={loading ? `spinner` : ``}
+                              style={{
+                                fontSize: "1.8rem",
+                                color: "gray",
+                              }}
+                            />
+                          </button>
+                        </div>
+                      )}
+                    </>
                   ) : (
                     <>
                       {(companies?.length > 0 || results?.length > 0) && (

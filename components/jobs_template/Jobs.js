@@ -71,8 +71,6 @@ const Jobs = ({
     </div>
   )
 
-  console.log(message, errors?.msg)
-
   return (
     <Template
       heading={filter ? "Filter Criteria" : heading}
