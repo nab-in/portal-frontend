@@ -3,7 +3,8 @@ module.exports = {
     "<rootDir>/.next/",
     // "<rootDir>/node_modules/"
   ],
-  moduleDirectories: ["node_module", "pages"],
+  testEnvironment: "jsdom",
+  moduleDirectories: ["node_modules", "pages"],
   setupFilesAfterEnv: ["<rootDir>/setupTests.js"],
   moduleNameMapper: {
     "\\.(css|less|scss|sass)$": "identity-obj-proxy",
