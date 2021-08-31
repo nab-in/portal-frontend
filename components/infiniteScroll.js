@@ -30,6 +30,8 @@ export const searching = ({
             ? res.data.companies
             : ""
         )
+        if (res?.data?.pager?.total === 0)
+          setMessage("No result matching your criteria")
 
         setResultsPage(res.data?.pager.page + 1)
         setResultsPages(
@@ -42,6 +44,7 @@ export const searching = ({
       .catch((err) => {
         setLoading(false)
         setResults(null)
+        console.log(err?.response)
         if (err?.response) {
           setErrors({
             type: "normal",

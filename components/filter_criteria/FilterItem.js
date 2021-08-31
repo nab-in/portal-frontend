@@ -43,37 +43,55 @@ const FilterItem = ({ sub, search, category, setSearch, url, setUrl }) => {
         categoryIndex
       ].sub_categories.filter((el) => el.id !== id)
 
-      filterCategories = filterCategories.filter((el) => {
-        return el !== id
-      })
-
-      setUrl(
-        url.replace(
-          url?.split("&")?.find((el) => el.includes("eq")),
-          `filter=categories:eq:[${filterCategories}]`
+      if (category?.name === "Job Type") {
+        setUrl(
+          url?.replace(
+            url?.split("&")?.find((el) => el.includes("jobType")),
+            `filter=jobType:eq:${name}`
+          )
         )
-      )
+      } else {
+        filterCategories = filterCategories.filter((el) => {
+          return el !== id
+        })
+
+        setUrl(
+          url.replace(
+            url?.split("&")?.find((el) => el.includes("eq")),
+            `filter=categories:eq:[${filterCategories}]`
+          )
+        )
+      }
 
       //   removing category in categories array
       if (searchCopy[categoryIndex].sub_categories.length === 0) {
-        filterCategories = filterCategories.filter((el) => {
-          return el !== category?.id
-        })
-
-        if (filterCategories?.length === 0) {
+        if (category?.name === "Job Type") {
           setUrl(
-            url.replace(
-              url?.split("&")?.find((el) => el.includes("eq")),
+            url?.replace(
+              url?.split("&")?.find((el) => el.includes("jobType")),
               ``
             )
           )
         } else {
-          setUrl(
-            url.replace(
-              url?.split("&")?.find((el) => el.includes("eq")),
-              `filter=categories:eq:[${filterCategories}]`
+          filterCategories = filterCategories.filter((el) => {
+            return el !== category?.id
+          })
+
+          if (filterCategories?.length === 0) {
+            setUrl(
+              url.replace(
+                url?.split("&")?.find((el) => el.includes("eq")),
+                ``
+              )
             )
-          )
+          } else {
+            setUrl(
+              url.replace(
+                url?.split("&")?.find((el) => el.includes("eq")),
+                `filter=categories:eq:[${filterCategories}]`
+              )
+            )
+          }
         }
         searchCopy = searchCopy.filter((el) => el.id != category.id)
       }

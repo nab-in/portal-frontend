@@ -273,14 +273,12 @@ const Companies = ({ data, error }) => {
                       )}
                       {results != null ? (
                         <>
-                          {results.length > 0 ? (
+                          {results.length > 0 && (
                             <>
                               {results.map((company) => (
                                 <Company company={company} key={company.id} />
                               ))}
                             </>
-                          ) : (
-                            <p>No company match the your criteria</p>
                           )}
                         </>
                       ) : (

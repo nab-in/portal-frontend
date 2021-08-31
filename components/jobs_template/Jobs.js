@@ -71,6 +71,8 @@ const Jobs = ({
     </div>
   )
 
+  console.log(message, errors?.msg)
+
   return (
     <Template
       heading={filter ? "Filter Criteria" : heading}
@@ -114,14 +116,12 @@ const Jobs = ({
                   )}
                   {results != null && typeof results == "object" ? (
                     <>
-                      {results?.length > 0 ? (
+                      {results?.length > 0 && (
                         <>
                           {results.map((job) => (
                             <Job job={job} key={job.id} />
                           ))}
                         </>
-                      ) : (
-                        <p>No Job match your Criteria</p>
                       )}
                     </>
                   ) : (
