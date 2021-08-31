@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react"
-import App from "../pages/"
+import App from "../pages/jobs/[id]"
 
 // jest.mock("next/config", () => () => ({
 //   publicRuntimeConfig: {
@@ -8,6 +8,8 @@ import App from "../pages/"
 //     BACKEND_URL: "http://localhost:5000",
 //   },
 // }))
+
+// jest.mock("swiper/react", () => () => ({}))
 
 describe("App", () => {
   it("renders without crashing", () => {
