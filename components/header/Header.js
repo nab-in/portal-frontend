@@ -141,6 +141,11 @@ const Header = () => {
             </div>
             <ul className={styles.menu__list}>
               <li>
+                <ActiveLink href="/">
+                  <a>Home</a>
+                </ActiveLink>
+              </li>
+              <li>
                 <ActiveLink href="/jobs">
                   <a>Jobs</a>
                 </ActiveLink>
@@ -153,11 +158,6 @@ const Header = () => {
               <li>
                 <ActiveLink href="/about">
                   <a>About</a>
-                </ActiveLink>
-              </li>
-              <li>
-                <ActiveLink href="/contact">
-                  <a>Contact</a>
                 </ActiveLink>
               </li>
               {!isAuthenticated && (

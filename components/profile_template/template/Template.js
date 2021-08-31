@@ -32,7 +32,7 @@ const Template = ({ page, details, setDetails }) => {
           })
           .catch((err) => {
             setLoading(false)
-            console.log(err.message)
+            console.log(err?.response)
           })
     }
     return () => {
