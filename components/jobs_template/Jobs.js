@@ -156,7 +156,7 @@ const Jobs = ({
           >
             {page === "jobs" ? (
               <>
-                {message && !loading ? (
+                {message && !loading && !errors ? (
                   <>
                     <p>{message}</p>
                     {(jobs?.length === 0 || results?.length === 0) && (

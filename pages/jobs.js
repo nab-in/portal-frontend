@@ -41,9 +41,13 @@ const jobs = ({ data, error }) => {
       search?.name?.trim().length == 0 &&
       search?.location?.trim().length == 0 &&
       search?.categories?.length == 0
-    )
-      setResultsPages(true)
+    ) {
+        setResultsPages(true)
+        setMessage("")
+        if(jobs?.length === 0) setMessage("Ooops not a single job found")
+      }
     setResultsPage(1)
+    
     let searchingUrl = `${API}/jobs?pageSize=8&page=1&fields=name,title,closeDate,created,company,id,location${url}`
 
     searching({

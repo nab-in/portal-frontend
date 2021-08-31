@@ -31,7 +31,7 @@ export const searching = ({
             : ""
         )
         if (res?.data?.pager?.total === 0)
-          setMessage("No result matching your criteria")
+          setMessage("No results matching your criteria")
 
         setResultsPage(res.data?.pager.page + 1)
         setResultsPages(
