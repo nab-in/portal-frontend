@@ -111,7 +111,7 @@ const Companies = () => {
                     </>
                   )}
                   {message?.length > 0 && !loading && <p>{message}</p>}
-                  {companies?.length === 0 && (
+                  {(companies?.length === 0 || errors) && (
                     <div
                       style={{
                         width: "100%",

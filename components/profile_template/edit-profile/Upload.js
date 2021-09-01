@@ -64,6 +64,10 @@ const Upload = ({ details, setDetails, dp, name, page }) => {
             .post(`${API}/companies/${details?.id}/logo`, data, config)
             .then((res) => {
               setDetails({ ...details, logo: BACKEND + res.data?.path })
+              dispatch({
+                type: "ADD_LOGO",
+                payload: res.data,
+              })
               alertDispatch({
                 type: "ADD",
                 payload: {

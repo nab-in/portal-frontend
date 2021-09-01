@@ -12,6 +12,7 @@ const authReducer = (state, action) => {
   let { type, payload } = action
   let userCopy
   let companiesCopy
+  let companyIndex
   switch (type) {
     case "LOGIN":
       Cookies.set("token", payload.token)
@@ -51,9 +52,24 @@ const authReducer = (state, action) => {
 
     case "EDIT_COMPANY":
       companiesCopy = [...state.companies]
-      console.log(companiesCopy)
+      companyIndex = companiesCopy.findIndex((el) => el.id === payload.id)
+      companiesCopy[companyIndex] = payload
+      console.log(payload, companiesCopy)
       return {
         ...state,
+        companies: companiesCopy,
+      }
+
+    case "ADD_LOGO":
+      companiesCopy = [...state.companies]
+      companyIndex = companiesCopy.findIndex((el) => el.id === payload.id)
+      companiesCopy[companyIndex] = {
+        ...companiesCopy[companyIndex],
+        logo: BACKEND + payload.path,
+      }
+      return {
+        ...state,
+        companies: companiesCopy,
       }
 
     case "USERROLES":
