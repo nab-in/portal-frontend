@@ -12,7 +12,7 @@ const Aside = ({ page, details, tab, isUser, isCompany }) => {
             <ul>
               {isCompany && (
                 <li>
-                  <a href={`${DASH}?company=${details.id}`}>Dashboard</a>
+                  <a href={`${DASH}?company=${details.id}`} target="_blank">Dashboard</a>
                 </li>
               )}
               <li>

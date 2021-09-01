@@ -11,6 +11,7 @@ if (token === "") Cookies.set("token", "")
 const authReducer = (state, action) => {
   let { type, payload } = action
   let userCopy
+  let companiesCopy
   switch (type) {
     case "LOGIN":
       Cookies.set("token", payload.token)
@@ -42,10 +43,17 @@ const authReducer = (state, action) => {
       }
 
     case "ADD_COMPANY":
-      let companiesCopy = [...state.companies, payload]
+      companiesCopy = [...state.companies, payload]
       return {
         ...state,
         companies: companiesCopy,
+      }
+
+    case "EDIT_COMPANY":
+      companiesCopy = [...state.companies]
+      console.log(companiesCopy)
+      return {
+        ...state,
       }
 
     case "USERROLES":
@@ -80,6 +88,20 @@ const authReducer = (state, action) => {
             },
           ],
         },
+        {
+          id: 13,
+          name: "Open To",
+          children: [
+            {
+              id: 16,
+              name: "Individual",
+            },
+            {
+              id: 17,
+              name: "Company",
+            },
+          ],
+        },
         ...data,
       ]
       return {
@@ -102,6 +124,20 @@ const authReducer = (state, action) => {
               {
                 id: 15,
                 name: "Full Time",
+              },
+            ],
+          },
+          {
+            id: 13,
+            name: "Open To",
+            children: [
+              {
+                id: 16,
+                name: "Individual",
+              },
+              {
+                id: 17,
+                name: "Company",
               },
             ],
           },

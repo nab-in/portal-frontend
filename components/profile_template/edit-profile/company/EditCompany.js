@@ -3,6 +3,7 @@ import axios from "axios"
 import { config } from "../../../config"
 import { API } from "../../../api"
 import { useAlertsDispatch } from "../../../../context/alerts"
+import { useAuthDispatch } from "../../../../context/auth"
 import Input from "../../../inputs/Input"
 import Button from "../../../buttons/FormButton"
 import Upload from "../Upload"
@@ -18,6 +19,7 @@ const EditProfile = ({ details, setDetails, page }) => {
   })
   const [loading, setLoading] = useState(false)
   const dispatch = useAlertsDispatch()
+  const authDisptach = useAuthDispatch()
   let { name, title, bio, location, website } = formData
   const handleChange = (e) => {
     let { name, value } = e.target
@@ -30,6 +32,10 @@ const EditProfile = ({ details, setDetails, page }) => {
       .put(`${API}/companies/${details?.id}`, formData, config)
       .then((res) => {
         setDetails(res.data.payload)
+        authDisptach({
+          type: "EDIT_COMPANY",
+          payload: res.data.payload,
+        })
         dispatch({
           type: "ADD",
           payload: {

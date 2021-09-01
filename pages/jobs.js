@@ -107,7 +107,7 @@ const jobs = ({ data, error }) => {
   useEffect(() => {
     let isMounted = true
     if (isMounted) {
-      if (categories?.length <= 1) {
+      if (categories?.length <= 2) {
         axios
           .get(
             `${API}/jobCategories?fields=id,name,children[id, name]&filter=verified:eq:true`

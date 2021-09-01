@@ -78,7 +78,7 @@ const SelectCategories = ({ setSelected, selected, bg }) => {
   })
 
   const clickDropDown = () => {
-    if (categories?.length <= 1) {
+    if (categories?.length <= 2) {
       setLoading(true)
       axios
         .get(
@@ -132,7 +132,8 @@ const SelectCategories = ({ setSelected, selected, bg }) => {
           }
         })
     } else {
-      setJobCategories(categories?.filter((el) => el.id != 12))
+      let data = categories?.filter((el) => el.id != 12)
+      setJobCategories(data?.filter((el) => el.id != 13))
     }
   }
 
