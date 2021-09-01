@@ -19,7 +19,7 @@ const AuthFooter = () => {
               {roles?.length > 0 &&
                 roles.map(({ id, name }) => (
                   <li key={id}>
-                    <a href={`${DASH}/select_identity?role=${id}`}>
+                    <a href={`${DASH}/?role=${id}`} target="_blank">
                       {capitalizeFirstLetter(name)} Dashboard
                     </a>
                   </li>
