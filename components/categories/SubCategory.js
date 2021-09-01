@@ -57,6 +57,13 @@ const SubCategory = ({ sub, setSearch, search, category, url, setUrl }) => {
               `filter=jobType:eq:${name}`
             )
           )
+        } else if (category?.name === "Open To") {
+          setUrl(
+            url?.replace(
+              url?.split("&")?.find((el) => el.includes("openTo")),
+              `filter=openTo:eq:${name}`
+            )
+          )
         } else {
           filterCategories = filterCategories.filter((el) => {
             return el !== id
@@ -77,6 +84,13 @@ const SubCategory = ({ sub, setSearch, search, category, url, setUrl }) => {
             setUrl(
               url?.replace(
                 url?.split("&")?.find((el) => el.includes("jobType")),
+                ``
+              )
+            )
+          } else if (category?.name === "Open To") {
+            setUrl(
+              url?.replace(
+                url?.split("&")?.find((el) => el.includes("openTo")),
                 ``
               )
             )
@@ -126,6 +140,13 @@ const SubCategory = ({ sub, setSearch, search, category, url, setUrl }) => {
               `filter=jobType:eq:${name}`
             )
           )
+        } else if (category?.name === "Open To") {
+          setUrl(
+            url?.replace(
+              url?.split("&")?.find((el) => el.includes("openTo")),
+              `filter=openTo:eq:${name}`
+            )
+          )
         } else {
           filterCategories.push(id)
           setUrl(
@@ -156,6 +177,8 @@ const SubCategory = ({ sub, setSearch, search, category, url, setUrl }) => {
       })
       if (category?.name === "Job Type") {
         setUrl(url + `&filter=jobType:eq:${name}`)
+      } else if (category?.name === "Open To") {
+        setUrl(url + `&filter=openTo:eq:${name}`)
       } else {
         filterCategories.push(id)
         filterCategories.push(category?.id)

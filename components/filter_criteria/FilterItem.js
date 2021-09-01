@@ -50,7 +50,15 @@ const FilterItem = ({ sub, search, category, setSearch, url, setUrl }) => {
             `filter=jobType:eq:${name}`
           )
         )
-      } else {
+      } else if (category?.name === "Job Type") {
+        setUrl(
+          url?.replace(
+            url?.split("&")?.find((el) => el.includes("openTo")),
+            `filter=openTo:eq:${name}`
+          )
+        )
+      }
+      {
         filterCategories = filterCategories.filter((el) => {
           return el !== id
         })
@@ -69,6 +77,13 @@ const FilterItem = ({ sub, search, category, setSearch, url, setUrl }) => {
           setUrl(
             url?.replace(
               url?.split("&")?.find((el) => el.includes("jobType")),
+              ``
+            )
+          )
+        } else if (category?.name === "Open To") {
+          setUrl(
+            url?.replace(
+              url?.split("&")?.find((el) => el.includes("openTo")),
               ``
             )
           )
