@@ -11,7 +11,8 @@ import Button from "../buttons/FormButton"
 const Job = ({ job, page, setItems }) => {
   const [loading, setLoading] = useState(false)
   const dispatch = useAlertsDispatch()
-  let { id, name, company, created, closeDate, job_type, location } = job
+  let { id, name, company, created, closeDate, jobType, location, openTo } = job
+
   const remove = () => {
     if (page === "saved-jobs") {
       setLoading(true)
@@ -90,9 +91,14 @@ const Job = ({ job, page, setItems }) => {
             <a>{job?.company?.name}</a>
           </Link>
         </p>
-        {job_type && (
+        {jobType && (
           <p>
-            Job Type: <span>{job_type}</span>
+            Job Type: <span>{jobType}</span>
+          </p>
+        )}
+        {openTo && (
+          <p>
+            Open to: <span>{openTo}</span>
           </p>
         )}
         {location && (

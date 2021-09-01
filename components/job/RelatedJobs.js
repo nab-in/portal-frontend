@@ -47,7 +47,7 @@ const RelatedJobs = ({ job }) => {
                     created,
                     closeDate,
                     location,
-                    job_type,
+                    jobType,
                     name,
                   }) => (
                     <article key={id} className="card">
@@ -77,9 +77,9 @@ const RelatedJobs = ({ job }) => {
                           <p>
                             Company name: <span>{company?.name}</span>
                           </p>
-                          {job_type && (
+                          {jobType && (
                             <p>
-                              Job Type: <span>{job_type}</span>
+                              Job Type: <span>{jobType}</span>
                             </p>
                           )}
                           <p>

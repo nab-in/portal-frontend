@@ -90,7 +90,8 @@ const Jobs = ({ page, details }) => {
                           name,
                           created,
                           closeDate,
-                          job_type,
+                          jobType,
+                          openTo,
                           location,
                         }) => {
                           return (
@@ -116,9 +117,14 @@ const Jobs = ({ page, details }) => {
                                 </p>
                               </div>
                               <div className={styles.job__descriptions}>
-                                {job_type && (
+                                {jobType && (
                                   <p>
-                                    Job Type: <span>{job_type}</span>
+                                    Job Type: <span>{jobType}</span>
+                                  </p>
+                                )}
+                                {openTo && (
+                                  <p>
+                                    Open To: <span>{openTo}</span>
                                   </p>
                                 )}
                                 <p>

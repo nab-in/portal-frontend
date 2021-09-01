@@ -26,7 +26,8 @@ const JobDetails = ({ job }) => {
 
   let {
     id,
-    job_type,
+    jobType,
+    openTo,
     location,
     company,
     email,
@@ -104,7 +105,7 @@ const JobDetails = ({ job }) => {
           setText("Revoke")
         })
         .catch((err) => {
-          console.log(err.response.data.message)
+          console.log(err)
         })
     return () => {
       isMounted = false
@@ -120,7 +121,7 @@ const JobDetails = ({ job }) => {
           setSaveText("Saved!")
         })
         .catch((err) => {
-          console.log(err.response.data.message)
+          console.log(err)
         })
     return () => {
       isMounted = false
@@ -139,9 +140,14 @@ const JobDetails = ({ job }) => {
           Location: <span>{location}</span>
         </div>
       )}
-      {job_type && (
+      {jobType && (
         <div className={styles.title}>
-          Open To: <span>{job_type}</span>
+          Job Type: <span>{jobType}</span>
+        </div>
+      )}
+      {openTo && (
+        <div className={styles.title}>
+          Open To: <span>{openTo}</span>
         </div>
       )}
       {bio && (
@@ -185,22 +191,29 @@ const JobDetails = ({ job }) => {
       )}
       {isAuthenticated && (
         <section>
-          <div className={styles.btns}>
-            <Button
-              click={save}
-              btnClass="btn-secondary"
-              text={saveText}
-              loading={saveLoading}
-              color="#00507A"
-              bg="light"
-            />
-            <Button
-              click={apply}
-              btnClass={text === "Applied!" ? "btn-secondary" : "btn-primary"}
-              text={text}
-              loading={loading}
-            />
-          </div>
+          {openTo !== "company" ? (
+            <div className={styles.btns}>
+              <Button
+                click={save}
+                btnClass="btn-secondary"
+                text={saveText}
+                loading={saveLoading}
+                color="#00507A"
+                bg="light"
+              />
+              <Button
+                click={apply}
+                btnClass={text === "Applied!" ? "btn-secondary" : "btn-primary"}
+                text={text}
+                loading={loading}
+              />
+            </div>
+          ) : (
+            <p>
+              This job is open to company only, if you have a company, please
+              apply via their contact information
+            </p>
+          )}
         </section>
       )}
     </div>
