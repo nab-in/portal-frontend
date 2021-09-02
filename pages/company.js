@@ -9,7 +9,6 @@ import NewsLetter from "../components/newsletter/NewsLetter"
 import Company from "../components/company/Company"
 import Loader from "../components/loaders/CardLoader"
 import Spinner from "../components/loaders/ButtonLoader"
-import categories from "../data/company_categories"
 import styles from "../styles/template.module.sass"
 import { API } from "../components/api"
 import infiniteScroll, { searching } from "../components/infiniteScroll"
@@ -234,14 +233,7 @@ const Companies = ({ data, error }) => {
 
   return (
     <div>
-      <Hero
-        search={search}
-        setSearch={setSearch}
-        categories={categories}
-        title="Search for different Companies."
-        url={url}
-        setUrl={setUrl}
-      />
+      <Hero search={search} setSearch={setSearch} url={url} setUrl={setUrl} />
       <main>
         <Template heading={filter ? "Filter Criteria" : "Companies"}>
           <div
