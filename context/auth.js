@@ -62,10 +62,10 @@ const authReducer = (state, action) => {
 
     case "ADD_LOGO":
       companiesCopy = [...state.companies]
-      companyIndex = companiesCopy.findIndex((el) => el.id === payload.id)
+      companyIndex = companiesCopy.findIndex((el) => el.id === payload.data.id)
       companiesCopy[companyIndex] = {
         ...companiesCopy[companyIndex],
-        logo: BACKEND + payload.path,
+        logo: BACKEND + payload.data.path,
       }
       return {
         ...state,

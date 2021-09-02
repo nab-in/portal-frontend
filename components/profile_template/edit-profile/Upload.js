@@ -66,7 +66,10 @@ const Upload = ({ details, setDetails, dp, name, page }) => {
               setDetails({ ...details, logo: BACKEND + res.data?.path })
               dispatch({
                 type: "ADD_LOGO",
-                payload: res.data,
+                payload: {
+                  id: details?.id,
+                  data: res.data,
+                },
               })
               alertDispatch({
                 type: "ADD",

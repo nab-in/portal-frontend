@@ -17,7 +17,7 @@ const Error = () => {
             Go back
           </button>
           <Link href="/">
-            <a className="btn btn-primary">Go Home</a>
+            <a className="btn btn-primary">Home</a>
           </Link>
         </div>
       </div>
