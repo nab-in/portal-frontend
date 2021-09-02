@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import dayjs from "dayjs"
+import { GoVerified } from "react-icons/go"
 import JobDetails from "../../components/job/JobDetails"
 import RelatedJobs from "../../components/job/RelatedJobs"
 import NewsLetter from "../../components/newsletter/NewsLetter"
@@ -67,7 +68,24 @@ const job = ({ data, error }) => {
                     </div>
                     <div className={styles.job__heading}>
                       <div className={styles.title}>
-                        <h1>{job.name}</h1>
+                        <h1>
+                          <span className={styles.name}>{job.name}</span>
+                          <span
+                            className={
+                              job?.company?.verified === "true"
+                                ? "badge verified"
+                                : "badge unverified"
+                            }
+                          >
+                            {job?.company?.verified === "true" ? (
+                              <>
+                                Verified <GoVerified className="icon" />
+                              </>
+                            ) : (
+                              "Not Verified"
+                            )}
+                          </span>
+                        </h1>
                       </div>
                       <div className={styles.time__details}>
                         <div className={`${styles.time} ${styles.posted}`}>
