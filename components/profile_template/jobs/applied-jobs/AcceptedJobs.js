@@ -14,7 +14,7 @@ const AcceptedJobs = () => {
   let [errors, setErrors] = useState(null)
   let [message, setMessage] = useState(null)
   const [loadMore, setLoadMore] = useState(false)
-  const apiUrl = `${API}/users/appliedJobs?page=${page}&pageSize=6&fields=id,name,companies,jobType,location,created,closeDate,accepted`
+  const apiUrl = `${API}/users/appliedJobs?page=${page}&pageSize=6&fields=id,name,companies,jobType,location,created,closeDate,accepted&filter=accepted:eq:true`
 
   const pageName = "jobs"
 
@@ -64,7 +64,7 @@ const AcceptedJobs = () => {
     setLoading(true)
     axios
       .get(
-        `${API}/users/appliedJobs?page=1&pageSize=6&fields=id,name,companies,jobType,location,created,closeDate,accepted`,
+        `${API}/users/appliedJobs?page=1&pageSize=6&fields=id,name,companies,jobType,location,created,closeDate,accepted&filter=accepted:eq:true`,
         config
       )
       .then((res) => {

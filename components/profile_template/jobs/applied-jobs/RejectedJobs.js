@@ -14,7 +14,7 @@ const RejectedJobs = () => {
   let [errors, setErrors] = useState(null)
   let [message, setMessage] = useState(null)
   const [loadMore, setLoadMore] = useState(false)
-  const apiUrl = `${API}/users/appliedJobs?page=${page}&pageSize=6&fields=id,name,companies,jobType,location,created,closeDate,rejected`
+  const apiUrl = `${API}/users/appliedJobs?page=${page}&pageSize=6&fields=id,name,companies,jobType,location,created,closeDate,rejected&filter=rejected:eq:true`
 
   const pageName = "jobs"
 
@@ -60,11 +60,13 @@ const RejectedJobs = () => {
     })
   }
 
+  console.log(jobs)
+
   const refreshJobs = () => {
     setLoading(true)
     axios
       .get(
-        `${API}/users/appliedJobs?page=1&pageSize=6&fields=id,name,companies,jobType,location,created,closeDate,accepted`,
+        `${API}/users/appliedJobs?page=1&pageSize=6&fields=id,name,companies,jobType,location,created,closeDate,rejected&filter=rejected:eq:true`,
         config
       )
       .then((res) => {
