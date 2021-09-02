@@ -233,13 +233,7 @@ const Companies = ({ data, error }) => {
 
   return (
     <div>
-      <Hero
-        search={search}
-        setSearch={setSearch}
-        title="Search for different Companies."
-        url={url}
-        setUrl={setUrl}
-      />
+      <Hero search={search} setSearch={setSearch} url={url} setUrl={setUrl} />
       <main>
         <Template heading={filter ? "Filter Criteria" : "Companies"}>
           <div
