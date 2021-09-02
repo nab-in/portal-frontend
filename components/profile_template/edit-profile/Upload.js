@@ -63,7 +63,7 @@ const Upload = ({ details, setDetails, dp, name, page }) => {
           axios
             .post(`${API}/companies/${details?.id}/logo`, data, config)
             .then((res) => {
-              setDetails({ ...details, logo: BACKEND + res.data?.path })
+              setDetails({ ...details, logo: res.data?.path })
               dispatch({
                 type: "ADD_LOGO",
                 payload: {

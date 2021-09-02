@@ -65,7 +65,7 @@ const authReducer = (state, action) => {
       companyIndex = companiesCopy.findIndex((el) => el.id === payload.data.id)
       companiesCopy[companyIndex] = {
         ...companiesCopy[companyIndex],
-        logo: BACKEND + payload.data.path,
+        logo: payload.data.path,
       }
       return {
         ...state,
