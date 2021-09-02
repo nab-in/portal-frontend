@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useRouter } from "next/router"
 import styles from "./hero.module.sass"
 
-const Hero = ({ setSearch, search, title, url, setUrl }) => {
+const Hero = ({ setSearch, search, url, setUrl }) => {
   let router = useRouter()
 
   // working on search url
@@ -71,7 +71,6 @@ const Hero = ({ setSearch, search, title, url, setUrl }) => {
     <div className={styles.hero}>
       <div className={styles.container}>
         <div className={styles.wrapper}>
-          {/* <h1>{title}</h1> */}
           <div className={styles.search__container}>
             <form
               onSubmit={(e) => handleSubmit(e)}
