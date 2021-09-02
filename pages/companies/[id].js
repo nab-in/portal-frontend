@@ -8,17 +8,27 @@ const Company = ({ data, error }) => {
   let [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    if (data && data?.id) {
-      setDetails(data)
-      setLoading(false)
-    } else {
-      setLoading(false)
+    let isMounted = true
+    if (isMounted)
+      if (data && data?.id) {
+        setDetails(data)
+        setLoading(false)
+      } else {
+        setLoading(false)
+      }
+    return () => {
+      isMounted = false
     }
   }, [data])
 
   useEffect(() => {
-    if (error) {
-      setLoading(false)
+    let isMounted = true
+    if (isMounted)
+      if (error) {
+        setLoading(false)
+      }
+    return () => {
+      isMounted = false
     }
   }, [error])
 
