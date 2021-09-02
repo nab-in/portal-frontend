@@ -130,7 +130,7 @@ const Profile = () => {
                   <li key={id}>
                     <a
                       onClick={() => setOpen(false)}
-                      href={`${DASH}/?role=${id}`}
+                      href={`${DASH}/select_identity?role=${id}`}
                       target="_blank"
                     >
                       {capitalizeFirstLetter(name)} Dashboard

@@ -18,7 +18,7 @@ const Company = ({ company, page }) => {
       <div className={styles.details}>
         {page == "auth" ? (
           <>
-            <a href={`${DASH}?company=${id}`} target="_blank">
+            <a href={`${DASH}/select_identity?company=${id}`} target="_blank">
               Visit Dashboard
             </a>
           </>
