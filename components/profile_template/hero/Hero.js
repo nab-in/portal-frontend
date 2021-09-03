@@ -1,12 +1,13 @@
 import { useAuthState } from "../../../context/auth"
 import Loader from "../../loaders/HeroLoader"
+import { GoVerified } from "react-icons/go"
 import styles from "./hero.module.sass"
 
 const Hero = ({ details, page, loading }) => {
   const Profile = () => {
     const { isAuthenticated, user } = useAuthState()
     if (page == "company" || page == "company/jobs") {
-      let { logo, name, title, id } = details
+      let { logo, name, title, id, verified } = details
       let defaultdp = name?.split("")[0]
       return (
         <div className={styles.container}>
@@ -23,6 +24,17 @@ const Hero = ({ details, page, loading }) => {
             <div className={styles.name}>
               <h1>
                 <span>{name}</span>
+                {verified === "true" && (
+                  <span
+                    className={
+                      verified === "true"
+                        ? "badge verified"
+                        : "badge unverified"
+                    }
+                  >
+                    Verified <GoVerified className="icon" />
+                  </span>
+                )}
               </h1>
             </div>
             <div className={`${styles.title}`}>

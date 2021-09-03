@@ -132,7 +132,10 @@ const JobDetails = ({ job }) => {
     <div className={styles.details}>
       {company && (
         <div className={styles.title}>
-          Company/Organisation: <span>{company?.name}</span>
+          Company/Organisation:{" "}
+          <span>
+            <Link href={`/companies/${company?.id}`}>{company?.name}</Link>
+          </span>
         </div>
       )}
       {location && (

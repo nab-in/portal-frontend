@@ -10,6 +10,12 @@ import { config } from "../components/config"
 import axios from "axios"
 import "swiper/css"
 
+export function reportWebVitals(metric) {
+  if (metric.label === "custom") {
+    console.log(metric)
+  }
+}
+
 const MyApp = ({ Component, pageProps }) => {
   const Site = () => {
     const dispatch = useAuthDispatch()
