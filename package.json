@@ -23,7 +23,7 @@
     "react-icons": "^4.2.0",
     "react-linkify": "^1.0.0-alpha",
     "sass": "^1.41.0",
-    "swiper": "^7.0.5"
+    "swiper": "^7.0.6"
   },
   "devDependencies": {
     "@testing-library/dom": "^8.2.0",
