@@ -26,7 +26,7 @@
     "swiper": "^7.0.6"
   },
   "devDependencies": {
-    "@testing-library/dom": "^8.2.0",
+    "@testing-library/dom": "^8.7.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.0",
     "babel-jest": "^27.1.0",
