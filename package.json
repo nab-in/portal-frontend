@@ -20,13 +20,13 @@
     "npm": "^7.23.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-icons": "^4.2.0",
+    "react-icons": "^4.3.1",
     "react-linkify": "^1.0.0-alpha",
     "sass": "^1.41.0",
     "swiper": "^7.0.6"
   },
   "devDependencies": {
-    "@testing-library/dom": "^8.2.0",
+    "@testing-library/dom": "^8.11.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.0",
     "babel-jest": "^27.1.0",
