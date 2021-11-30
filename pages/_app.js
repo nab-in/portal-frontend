@@ -12,7 +12,7 @@ import "swiper/css"
 
 export function reportWebVitals(metric) {
   if (metric.label === "custom") {
-    console.log(metric)
+    // console.log(metric)
   }
 }
 
@@ -21,6 +21,7 @@ const MyApp = ({ Component, pageProps }) => {
     const dispatch = useAuthDispatch()
     const { user, loading } = useAuthState()
     const router = useRouter()
+    console.log(config)
     useEffect(() => {
       let isMounted = true
       if (isMounted)

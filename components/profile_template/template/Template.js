@@ -17,6 +17,10 @@ const Template = ({ page, details, setDetails }) => {
   const { user } = useAuthState()
 
   useEffect(() => {
+    if (!user && page === "company") setCompany(false)
+  }, [user])
+
+  useEffect(() => {
     let isMounted = true
     if (isMounted) {
       if (page == "company" || page == "auth-company") setLoading(true)

@@ -31,10 +31,13 @@ const authReducer = (state, action) => {
     // Logout
     case "LOGOUT":
       Cookies.set("token", "")
+      window.location.reload()
       return {
         ...state,
         user: null,
         isAuthenticated: false,
+        companies: [],
+        roles: [],
       }
 
     case "COMPANIES":
@@ -54,7 +57,6 @@ const authReducer = (state, action) => {
       companiesCopy = [...state.companies]
       companyIndex = companiesCopy.findIndex((el) => el.id === payload.id)
       companiesCopy[companyIndex] = payload
-      console.log(payload, companiesCopy)
       return {
         ...state,
         companies: companiesCopy,

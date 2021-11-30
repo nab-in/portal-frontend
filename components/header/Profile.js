@@ -21,48 +21,46 @@ const Profile = () => {
   let node = UseClickOutside(() => setOpen(false))
 
   const logout = () => {
-    axios(`${API}/logout`, config)
-      .then((res) => {
-        console.log(res.data)
-        dispatch({
-          type: "LOGOUT",
-        })
-        alertDispatch({
-          type: "ADD",
-          payload: {
-            message: "You have successfully logged out",
-            type: "success",
-          },
-        })
-      })
-      .catch((err) => {
-        console.log(err?.response)
-        if (err?.response) {
-          alertDispatch({
-            type: "ADD",
-            payload: {
-              type: "danger",
-              message: err?.response?.data?.message,
-            },
-          })
-        } else if (err?.message == "Network Error") {
-          alertDispatch({
-            type: "ADD",
-            payload: {
-              type: "danger",
-              message: "Network Error",
-            },
-          })
-        } else {
-          alertDispatch({
-            type: "ADD",
-            payload: {
-              type: "danger",
-              message: "Internal server error, please try again",
-            },
-          })
-        }
-      })
+    // axios(`${API}/logout`, config)
+    //   .then((res) => {
+    dispatch({
+      type: "LOGOUT",
+    })
+    alertDispatch({
+      type: "ADD",
+      payload: {
+        message: "You have successfully logged out",
+        type: "success",
+      },
+    })
+    // })
+    // .catch((err) => {
+    //   if (err?.response) {
+    //     alertDispatch({
+    //       type: "ADD",
+    //       payload: {
+    //         type: "danger",
+    //         message: err?.response?.data?.message,
+    //       },
+    //     })
+    //   } else if (err?.message == "Network Error") {
+    //     alertDispatch({
+    //       type: "ADD",
+    //       payload: {
+    //         type: "danger",
+    //         message: "Network Error",
+    //       },
+    //     })
+    //   } else {
+    //     alertDispatch({
+    //       type: "ADD",
+    //       payload: {
+    //         type: "danger",
+    //         message: "Internal server error, please try again",
+    //       },
+    //     })
+    //   }
+    // })
   }
 
   const capitalizeFirstLetter = (string) => {
