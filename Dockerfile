@@ -14,6 +14,7 @@ WORKDIR /app
 COPY package.json ./
 RUN npm install --frozen-lockfile
 RUN npm i next-pwa
+RUN npm i react
 COPY next.config.js ./
 
 # Rebuild the source code only when needed
