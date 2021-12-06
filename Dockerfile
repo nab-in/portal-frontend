@@ -12,6 +12,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY package.json ./
 RUN npm install --frozen-lockfile
+RUN npm i next-pwa
 
 # Rebuild the source code only when needed
 FROM node:alpine AS builder
@@ -29,6 +30,7 @@ RUN npm i -g next
 RUN npm i next-pwa
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001
+COPY next.config.js ./
 
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
