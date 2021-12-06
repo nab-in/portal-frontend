@@ -26,6 +26,7 @@ WORKDIR /app
 
 ENV NODE_ENV production
 RUN npm i -g next
+RUN npm i next-pwa
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001
 
@@ -40,4 +41,4 @@ EXPOSE 3000
 
 ENV PORT 3000
 
-CMD ["npm", "start"]
+CMD ["npx next", "start"]
