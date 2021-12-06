@@ -16,10 +16,12 @@ RUN npm i next-pwa
 RUN npm i react
 COPY next.config.js ./
 COPY . .
-RUN npm i && npm i next && npm i react && npm i -g next && npm run build
+RUN npm i && npm i next && npm i -g react && npm i -g next
 ENV NODE_ENV production
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001
+RUN npm i 
+RUN pm run build
 
 USER nextjs
 
