@@ -5,4 +5,4 @@ COPY package*.json /app/
 RUN npm i --production
 COPY . /app/
 RUN npm run build
-CMD ["npm", "start"]
+CMD ["node_modules/.bin/next", "start"]
