@@ -21,6 +21,7 @@ ENV NODE_ENV production
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001
 RUN npm i 
+RUN npm install react-dom
 RUN npm run build
 
 USER nextjs
