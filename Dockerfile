@@ -16,7 +16,7 @@ RUN npm i
 RUN npm i next-pwa
 RUN npm i react
 COPY next.config.js ./
-RUN npm i && npm i next && npm i react && npm i -g next && npm run build
+RUN npm i && npm i next && npm i react && npm i -g next
 
 # Rebuild the source code only when needed
 FROM node:14.16.1-alpine3.12 AS builder
