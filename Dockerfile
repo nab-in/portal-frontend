@@ -25,7 +25,7 @@ FROM node:alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV production
-
+RUN npm i -g next
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001
 
