@@ -1,7 +1,7 @@
 import { Children, cloneElement } from "react"
 import { withRouter } from "next/router"
 import Link from "next/link"
-import styles from "./header/header.module.sass"
+import styles from "./header/Header.module.sass"
 
 const ActiveLink = withRouter(({ router, children, ...props }) => (
   <Link {...props}>

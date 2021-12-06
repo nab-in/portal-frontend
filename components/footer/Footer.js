@@ -1,4 +1,4 @@
-import styles from "./footer.module.sass"
+import styles from "./Footer.module.sass"
 import Link from "next/link"
 import Social from "./Social"
 import Logo from "../BgLogo"

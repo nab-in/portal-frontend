@@ -21,7 +21,6 @@ const MyApp = ({ Component, pageProps }) => {
     const dispatch = useAuthDispatch()
     const { user, loading } = useAuthState()
     const router = useRouter()
-    console.log(config)
     useEffect(() => {
       let isMounted = true
       if (isMounted)
