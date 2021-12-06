@@ -12,7 +12,7 @@ FROM node:14.16.1-alpine3.12 AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY package.json ./
-RUN npm install --frozen-lockfile
+RUN npm i
 RUN npm i next-pwa
 RUN npm i react
 COPY next.config.js ./
@@ -22,7 +22,7 @@ FROM node:14.16.1-alpine3.12 AS builder
 WORKDIR /app
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
-RUN npm install --production --ignore-scripts --prefer-offline && npm run build && npm i next && npm i -g next
+RUN npm i && npm i next && npm i -g next && npm run build
 
 # Production image, copy all the files and run next
 FROM node:14.16.1-alpine3.12 AS runner
