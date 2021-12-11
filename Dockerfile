@@ -1,7 +1,5 @@
 FROM node:alpine AS deps
 RUN apk add --no-cache libc6-compat
-RUN apk add curl
-RUN curl -sfL https://install.goreleaser.com/github.com/tj/node-prune.sh | sh -s -- -b /usr/local/bin
 WORKDIR /app
 COPY package.json ./
 RUN yarn install --frozen-lockfile
@@ -12,7 +10,6 @@ COPY . .
 COPY --from=deps /app/node_modules ./node_modules
 RUN yarn build && yarn install --production --ignore-scripts --prefer-offline
 RUN npm prune --production
-RUN /usr/local/bin/node-prune
 
 FROM node:alpine AS runner
 WORKDIR /app
