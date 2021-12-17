@@ -219,6 +219,10 @@ const jobs = ({ data, error }) => {
       })
   }
 
+  useEffect(() => {
+    refreshJobs()
+  }, [])
+
   return (
     <div className="jobs">
       <Hero

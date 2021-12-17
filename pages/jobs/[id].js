@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useRouter } from "next/router"
 import dayjs from "dayjs"
 import { GoVerified } from "react-icons/go"
 import JobDetails from "../../components/job/JobDetails"
@@ -10,11 +11,14 @@ import styles from "../../styles/job.module.sass"
 import { API } from "../../components/api"
 import { useAuthState } from "../../context/auth"
 import Error from "../../components/error/Error"
+import axios from "axios"
 
 const job = ({ data, error }) => {
   let [loading, setLoading] = useState(true)
   let { isAuthenticated } = useAuthState()
   let [job, setJob] = useState(null)
+  const router = useRouter()
+
   useEffect(() => {
     if (data) {
       setJob(data)
@@ -26,6 +30,21 @@ const job = ({ data, error }) => {
       setLoading(false)
     }
   }, [error])
+
+  useEffect(() => {
+    axios
+      .get(
+        `${API}/jobs/${router.query.id}?fields=openTo,jobType,name,title,closeDate,created,company,id,description,bio,location,email,attachment`
+      )
+      .then((res) => {
+        setJob(res.data)
+        setLoading(false)
+      })
+      .catch((err) => {
+        setLoading(false)
+      })
+  })
+
   return (
     <div>
       {loading ? (

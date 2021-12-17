@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react"
+import { useRouter } from "next/router"
 import Error from "../../components/error/Error"
 import Profile_Template from "../../components/profile_template/Profile_Template"
 import { API } from "../../components/api"
+import axios from "axios"
 
 const Company = ({ data, error }) => {
   let [details, setDetails] = useState(null)
   let [loading, setLoading] = useState(true)
+  const router = useRouter()
 
   useEffect(() => {
     let isMounted = true
@@ -20,6 +23,18 @@ const Company = ({ data, error }) => {
       isMounted = false
     }
   }, [data])
+
+  useEffect(() => {
+    axios
+      .get(`${API}/companies/${router.query.id}`)
+      .then((res) => {
+        setDetails(res?.data)
+        setLoading(false)
+      })
+      .catch((err) => {
+        setLoading(false)
+      })
+  })
 
   useEffect(() => {
     let isMounted = true

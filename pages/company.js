@@ -231,6 +231,10 @@ const Companies = ({ data, error }) => {
       })
   }
 
+  useEffect(() => {
+    refreshCompanies()
+  }, [])
+
   return (
     <div>
       <Hero search={search} setSearch={setSearch} url={url} setUrl={setUrl} />

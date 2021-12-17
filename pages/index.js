@@ -137,7 +137,7 @@ const Home = ({ data, error, companiesErr, companiesData }) => {
         if (res?.data?.companies?.length === 0) {
           setCompanyMsg("Oops No company found")
         } else {
-          setCompa(res.data.jobs)
+          setCompanies(res.data.jobs)
           setMessage(null)
         }
         setLoadCompanies(false)
@@ -162,6 +162,11 @@ const Home = ({ data, error, companiesErr, companiesData }) => {
         }
       })
   }
+
+  useEffect(() => {
+    refreshJobs()
+    refreshCompanies()
+  }, [])
 
   return (
     <div>
