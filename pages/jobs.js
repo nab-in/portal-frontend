@@ -64,45 +64,45 @@ const jobs = ({ data, error }) => {
     })
   }, [search, url])
 
-  useEffect(() => {
-    if (data) {
-      setLoading(false)
-      setJobs(data.jobs)
-      setNumber(data.pager?.total)
-      if (data.jobs.length === 0) setMessage("Ooops! not a single job found")
-      if (data?.pager?.total <= data?.pager?.pageSize && data?.jobs?.length > 0)
-        setMessage("You have seen it all")
-    }
-  }, [data])
+  // useEffect(() => {
+  //   if (data) {
+  //     setLoading(false)
+  //     setJobs(data.jobs)
+  //     setNumber(data.pager?.total)
+  //     if (data.jobs.length === 0) setMessage("Ooops! not a single job found")
+  //     if (data?.pager?.total <= data?.pager?.pageSize && data?.jobs?.length > 0)
+  //       setMessage("You have seen it all")
+  //   }
+  // }, [data])
 
-  useEffect(() => {
-    if (error) {
-      setLoading(false)
-      if (JSON.parse(error)?.response) {
-        setErrors({
-          type: "normal",
-          msg: JSON.parse(error)?.data?.message,
-        })
-      } else if (JSON.parse(error)?.message) {
-        if (JSON.parse(error)?.code === "ECONNREFUSED") {
-          setErrors({
-            type: "normal",
-            msg: "Failed to connect, please refresh",
-          })
-        } else {
-          setErrors({
-            type: "normal",
-            msg: JSON.parse(error)?.message,
-          })
-        }
-      } else {
-        setErrors({
-          type: "normal",
-          msg: "Internal server error, please try again",
-        })
-      }
-    }
-  }, [error])
+  // useEffect(() => {
+  //   if (error) {
+  //     setLoading(false)
+  //     if (JSON.parse(error)?.response) {
+  //       setErrors({
+  //         type: "normal",
+  //         msg: JSON.parse(error)?.data?.message,
+  //       })
+  //     } else if (JSON.parse(error)?.message) {
+  //       if (JSON.parse(error)?.code === "ECONNREFUSED") {
+  //         setErrors({
+  //           type: "normal",
+  //           msg: "Failed to connect, please refresh",
+  //         })
+  //       } else {
+  //         setErrors({
+  //           type: "normal",
+  //           msg: JSON.parse(error)?.message,
+  //         })
+  //       }
+  //     } else {
+  //       setErrors({
+  //         type: "normal",
+  //         msg: "Internal server error, please try again",
+  //       })
+  //     }
+  //   }
+  // }, [error])
 
   useEffect(() => {
     let isMounted = true

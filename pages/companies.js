@@ -71,49 +71,49 @@ const Companies = ({ data, error }) => {
     })
   }, [search, url])
 
-  useEffect(() => {
-    if (data) {
-      setLoading(false)
-      setCompanies(data.companies)
-      setNumber(data?.pager?.total)
-      if (
-        data?.pager?.total <= data?.pager?.pageSize &&
-        data?.companies?.length > 0
-      )
-        setMessage("You have seen it all")
-      if (data?.companies?.length === 0)
-        setMessage("Opps not a single company found")
-    }
-  }, [data])
+  // useEffect(() => {
+  //   if (data) {
+  //     setLoading(false)
+  //     setCompanies(data.companies)
+  //     setNumber(data?.pager?.total)
+  //     if (
+  //       data?.pager?.total <= data?.pager?.pageSize &&
+  //       data?.companies?.length > 0
+  //     )
+  //       setMessage("You have seen it all")
+  //     if (data?.companies?.length === 0)
+  //       setMessage("Opps not a single company found")
+  //   }
+  // }, [data])
 
-  useEffect(() => {
-    if (error) {
-      setLoading(false)
-      if (JSON.parse(error)?.response) {
-        setErrors({
-          type: "normal",
-          msg: JSON.parse(error)?.data?.message,
-        })
-      } else if (JSON.parse(error)?.message) {
-        if (JSON.parse(error)?.code === "ECONNREFUSED") {
-          setErrors({
-            type: "normal",
-            msg: "Failed to connect, please refresh",
-          })
-        } else {
-          setErrors({
-            type: "normal",
-            msg: JSON.parse(error)?.message,
-          })
-        }
-      } else {
-        setErrors({
-          type: "normal",
-          msg: "Internal server error, please try again",
-        })
-      }
-    }
-  }, [error])
+  // useEffect(() => {
+  //   if (error) {
+  //     setLoading(false)
+  //     if (JSON.parse(error)?.response) {
+  //       setErrors({
+  //         type: "normal",
+  //         msg: JSON.parse(error)?.data?.message,
+  //       })
+  //     } else if (JSON.parse(error)?.message) {
+  //       if (JSON.parse(error)?.code === "ECONNREFUSED") {
+  //         setErrors({
+  //           type: "normal",
+  //           msg: "Failed to connect, please refresh",
+  //         })
+  //       } else {
+  //         setErrors({
+  //           type: "normal",
+  //           msg: JSON.parse(error)?.message,
+  //         })
+  //       }
+  //     } else {
+  //       setErrors({
+  //         type: "normal",
+  //         msg: "Internal server error, please try again",
+  //       })
+  //     }
+  //   }
+  // }, [error])
 
   let checkSearch = (obj) => {
     for (let key in obj) {

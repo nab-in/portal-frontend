@@ -10,42 +10,47 @@ const Company = ({ data, error }) => {
   let [loading, setLoading] = useState(true)
   const router = useRouter()
 
-  useEffect(() => {
-    let isMounted = true
-    if (isMounted)
-      if (data && data?.id) {
-        setDetails(data)
-        setLoading(false)
-      } else {
-        setLoading(false)
-      }
-    return () => {
-      isMounted = false
-    }
-  }, [data])
+  // useEffect(() => {
+  //   let isMounted = true
+  //   if (isMounted)
+  //     if (data && data?.id) {
+  //       setDetails(data)
+  //       setLoading(false)
+  //     } else {
+  //       setLoading(false)
+  //     }
+  //   return () => {
+  //     isMounted = false
+  //   }
+  // }, [data])
 
   useEffect(() => {
-    axios
-      .get(`${API}/companies/${router.query.id}`)
-      .then((res) => {
-        setDetails(res?.data)
-        setLoading(false)
-      })
-      .catch((err) => {
-        setLoading(false)
-      })
-  })
-
-  useEffect(() => {
-    let isMounted = true
-    if (isMounted)
-      if (error) {
-        setLoading(false)
-      }
+    let mounted = true
+    if (mounted)
+      axios
+        .get(`${API}/companies/${router.query.id}`)
+        .then((res) => {
+          setDetails(res?.data)
+          setLoading(false)
+        })
+        .catch((err) => {
+          setLoading(false)
+        })
     return () => {
-      isMounted = false
+      mounted = false
     }
-  }, [error])
+  }, [])
+
+  // useEffect(() => {
+  //   let isMounted = true
+  //   if (isMounted)
+  //     if (error) {
+  //       setLoading(false)
+  //     }
+  //   return () => {
+  //     isMounted = false
+  //   }
+  // }, [error])
 
   return (
     <div>

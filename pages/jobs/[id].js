@@ -19,31 +19,36 @@ const job = ({ data, error }) => {
   let [job, setJob] = useState(null)
   const router = useRouter()
 
-  useEffect(() => {
-    if (data) {
-      setJob(data)
-      setLoading(false)
-    }
-  }, [data])
-  useEffect(() => {
-    if (error) {
-      setLoading(false)
-    }
-  }, [error])
+  // useEffect(() => {
+  //   if (data) {
+  //     setJob(data)
+  //     setLoading(false)
+  //   }
+  // }, [data])
+  // useEffect(() => {
+  //   if (error) {
+  //     setLoading(false)
+  //   }
+  // }, [error])
 
   useEffect(() => {
-    axios
-      .get(
-        `${API}/jobs/${router.query.id}?fields=openTo,jobType,name,title,closeDate,created,company,id,description,bio,location,email,attachment`
-      )
-      .then((res) => {
-        setJob(res.data)
-        setLoading(false)
-      })
-      .catch((err) => {
-        setLoading(false)
-      })
-  })
+    let mounted = true
+    if (mounted)
+      axios
+        .get(
+          `${API}/jobs/${router.query.id}?fields=openTo,jobType,name,title,closeDate,created,company,id,description,bio,location,email,attachment`
+        )
+        .then((res) => {
+          setJob(res.data)
+          setLoading(false)
+        })
+        .catch((err) => {
+          setLoading(false)
+        })
+    return () => {
+      mounted = false
+    }
+  }, [])
 
   return (
     <div>

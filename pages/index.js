@@ -16,82 +16,82 @@ const Home = ({ data, error, companiesErr, companiesData }) => {
   const [companies, setCompanies] = useState([])
   const [loadCompanies, setLoadCompanies] = useState(true)
 
-  useEffect(() => {
-    if (data) {
-      setLoading(false)
-      setJobs(data.jobs)
-      if (data.jobs.length === 0) setMessage("Ooops! not a single job found")
-    }
-  }, [data])
+  // useEffect(() => {
+  //   if (data) {
+  //     setLoading(false)
+  //     setJobs(data.jobs)
+  //     if (data.jobs.length === 0) setMessage("Ooops! not a single job found")
+  //   }
+  // }, [data])
 
-  useEffect(() => {
-    if (error) {
-      setLoading(false)
-      if (JSON.parse(error)?.response) {
-        setErrors({
-          type: "danger",
-          msg: JSON.parse(error)?.response?.data?.message,
-        })
-      } else if (JSON.parse(error)?.message) {
-        if (JSON.parse(error)?.code === "ECONNREFUSED") {
-          setErrors({
-            type: "danger",
-            msg: "Failed to connect, please refresh",
-          })
-        } else {
-          setErrors({
-            type: "danger",
-            msg: JSON.parse(error)?.message,
-          })
-        }
-      } else {
-        setErrors({
-          type: "danger",
-          msg: "Internal server error",
-        })
-      }
-    }
-  }, [error])
+  // useEffect(() => {
+  //   if (error) {
+  //     setLoading(false)
+  //     if (JSON.parse(error)?.response) {
+  //       setErrors({
+  //         type: "danger",
+  //         msg: JSON.parse(error)?.response?.data?.message,
+  //       })
+  //     } else if (JSON.parse(error)?.message) {
+  //       if (JSON.parse(error)?.code === "ECONNREFUSED") {
+  //         setErrors({
+  //           type: "danger",
+  //           msg: "Failed to connect, please refresh",
+  //         })
+  //       } else {
+  //         setErrors({
+  //           type: "danger",
+  //           msg: JSON.parse(error)?.message,
+  //         })
+  //       }
+  //     } else {
+  //       setErrors({
+  //         type: "danger",
+  //         msg: "Internal server error",
+  //       })
+  //     }
+  //   }
+  // }, [error])
 
-  useEffect(() => {
-    if (companiesErr) {
-      setLoadCompanies(false)
-      if (JSON.parse(error)?.response) {
-        setCompanyErrors({
-          type: "danger",
-          msg: JSON.parse(error)?.response?.data?.message,
-        })
-      } else if (JSON.parse(error)?.message) {
-        if (JSON.parse(error)?.code === "ECONNREFUSED") {
-          setCompanyErrors({
-            type: "danger",
-            msg: "Failed to connect",
-          })
-        } else {
-          setCompanyErrors({
-            type: "danger",
-            msg: JSON.parse(error)?.message,
-          })
-        }
-      } else {
-        setCompanyErrors({
-          type: "danger",
-          msg: "Internal server error",
-        })
-      }
-    }
-  }, [companiesErr])
+  // useEffect(() => {
+  //   if (companiesErr) {
+  //     setLoadCompanies(false)
+  //     if (JSON.parse(error)?.response) {
+  //       setCompanyErrors({
+  //         type: "danger",
+  //         msg: JSON.parse(error)?.response?.data?.message,
+  //       })
+  //     } else if (JSON.parse(error)?.message) {
+  //       if (JSON.parse(error)?.code === "ECONNREFUSED") {
+  //         setCompanyErrors({
+  //           type: "danger",
+  //           msg: "Failed to connect",
+  //         })
+  //       } else {
+  //         setCompanyErrors({
+  //           type: "danger",
+  //           msg: JSON.parse(error)?.message,
+  //         })
+  //       }
+  //     } else {
+  //       setCompanyErrors({
+  //         type: "danger",
+  //         msg: "Internal server error",
+  //       })
+  //     }
+  //   }
+  // }, [companiesErr])
 
-  useEffect(() => {
-    if (companiesData) {
-      setLoadCompanies(false)
-      if (companiesData?.companies.length === 0) {
-        setCompanyMsg("Ooops not a single company found")
-      } else {
-        setCompanies(companiesData?.companies)
-      }
-    }
-  }, [companiesData])
+  // useEffect(() => {
+  //   if (companiesData) {
+  //     setLoadCompanies(false)
+  //     if (companiesData?.companies.length === 0) {
+  //       setCompanyMsg("Ooops not a single company found")
+  //     } else {
+  //       setCompanies(companiesData?.companies)
+  //     }
+  //   }
+  // }, [companiesData])
 
   const refreshJobs = () => {
     setLoading(true)
@@ -137,7 +137,7 @@ const Home = ({ data, error, companiesErr, companiesData }) => {
         if (res?.data?.companies?.length === 0) {
           setCompanyMsg("Oops No company found")
         } else {
-          setCompanies(res.data.jobs)
+          setCompanies(res.data.companies)
           setMessage(null)
         }
         setLoadCompanies(false)
@@ -165,6 +165,9 @@ const Home = ({ data, error, companiesErr, companiesData }) => {
 
   useEffect(() => {
     refreshJobs()
+  }, [])
+
+  useEffect(() => {
     refreshCompanies()
   }, [])
 
