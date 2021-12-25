@@ -51,7 +51,7 @@ const login = () => {
             type: "success",
           },
         })
-        router.push("/profile")
+        window.location.href = "/profile"
       })
       .catch((err) => {
         setLoading(false)

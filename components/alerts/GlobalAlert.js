@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useAlertsState, useAlertsDispatch } from "../../context/alerts"
 import { AiOutlineClose } from "react-icons/ai"
+import UseClickOutside from "../UseClickOutside"
 
 const GlobalAlert = () => {
   let { alert } = useAlertsState()
@@ -13,21 +14,22 @@ const GlobalAlert = () => {
     })
   }
 
-  let timeout = () => {
-    setTimeout(() => {
-      close()
-    }, 40000)
-  }
+  let node = UseClickOutside(() => close())
 
   useEffect(() => {
-    timeout
-    return () => clearTimeout(timeout)
-  }, [])
+    let timeout = setTimeout(() => {
+      close()
+    }, 5000)
+    return () => {
+      clearTimeout(timeout)
+    }
+  }, [alert])
 
   return (
     <>
       {alert.message && (
         <div
+          ref={node}
           className={
             alert.message
               ? `alerts removable ${type} open`
