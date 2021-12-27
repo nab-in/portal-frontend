@@ -1,0 +1,16 @@
+.gitignore
+.github
+node_modules
+tests
+.babelrc
+contextapi.md
+deploy.sh
+docker-compose-test.yml
+docker-compose.yml
+jest.config.jest
+Dockerfile
+next.example.jest
+nginx.config
+README.md
+setupTests.js
+.next
