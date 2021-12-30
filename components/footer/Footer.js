@@ -1,8 +1,8 @@
-import styles from "./Footer.module.sass"
-import Link from "next/link"
-import Social from "./Social"
-import Logo from "../BgLogo"
-import Subscribe from "./Subscribe"
+import styles from "./Footer.module.sass";
+import Link from "next/link";
+import Social from "./Social";
+import Logo from "../BgLogo";
+import Subscribe from "./Subscribe";
 
 const Footer = () => {
   return (
@@ -37,7 +37,7 @@ const Footer = () => {
           <div className={styles.footer_copyright}>
             <p>
               &#169; 2021 -&nbsp;
-              <span>Job</span>Portal. Designed and Developed by&nbsp;
+              <span>Job</span>Portal. Designed and Developed with ♥️ by &nbsp;
               <a href="http://github.com/nab-in" target="_blank">
                 We Code Together
               </a>
@@ -91,7 +91,7 @@ const Footer = () => {
           <div className={`${styles.footer_copyright} ${styles.mobile}`}>
             <p>
               &#169; 2021 -&nbsp;
-              <span>Job</span>Portal. Designed and Developed by&nbsp;
+              <span>Job</span>Portal. Designed and Developed with ♥️ by &nbsp;
               <a href="http://github.com/nab-in" target="_blank">
                 We Code Together
               </a>
@@ -100,7 +100,7 @@ const Footer = () => {
         </div>
       </section>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

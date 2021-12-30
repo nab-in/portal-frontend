@@ -1,14 +1,14 @@
-import styles from "./authfooter.module.sass"
-import Link from "next/link"
-import { useAuthState } from "../../context/auth"
-import { DASH } from "../api"
-import Social from "./Social"
+import styles from "./authfooter.module.sass";
+import Link from "next/link";
+import { useAuthState } from "../../context/auth";
+import { DASH } from "../api";
+import Social from "./Social";
 
 const AuthFooter = () => {
-  const { roles } = useAuthState()
+  const { roles } = useAuthState();
   const capitalizeFirstLetter = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
-  }
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+  };
   return (
     <footer className={styles.footer}>
       <section className={styles.footer__container}>
@@ -82,7 +82,7 @@ const AuthFooter = () => {
         <div className={`${styles.footer_copyright} ${styles.mobile}`}>
           <p>
             &#169; 2021 -&nbsp;
-            <span>Job</span>Portal. Designed and Developed by&nbsp;
+            <span>Job</span>Portal. Designed and Developed with ♥️ by &nbsp;
             <a href="http://github.com/nab-in" target="_blank">
               We Code Together
             </a>
@@ -90,7 +90,7 @@ const AuthFooter = () => {
         </div>
       </section>
     </footer>
-  )
-}
+  );
+};
 
-export default AuthFooter
+export default AuthFooter;
