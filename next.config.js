@@ -7,8 +7,8 @@ module.exports = withPWA({
     skipWaiting: true,
   },
   publicRuntimeConfig: {
-    API_URL: "../api",
-    DASH_URL: "../dashboard",
-    BACKEND_URL: "../api",
+    API_URL: `${process.env.API_URL}`,
+    DASH_URL: `${process.env.DASHBOARD_URL}`,
+    BACKEND_URL: `${process.env.API_URL}`,
   },
 });

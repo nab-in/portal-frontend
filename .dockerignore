@@ -14,3 +14,4 @@ nginx.config
 README.md
 setupTests.js
 .next
+.env
