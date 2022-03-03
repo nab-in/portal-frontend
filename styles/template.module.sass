@@ -3,6 +3,28 @@
         h3.results__header
             margin: 2rem 0 1rem
     .more__link
+        position: relative
         text-align: right
+        margin: 2rem 0
         &.more__link__center
             text-align: center
+
+.categories
+    width: 100%
+    display: flex
+    justify-content: flex-start
+    align-content: center
+    align-items: center
+    flex-wrap: wrap
+    margin-bottom: 2rem
+    // overflow-x: hidden
+    .category
+        width: 200px
+        margin-right: .8rem
+    p
+        margin-right: .7rem
+        min-width: 70px
+
+@media screen and ( max-width: 768px )
+    .categories
+        margin-bottom: 1.3rem

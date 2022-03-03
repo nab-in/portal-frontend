@@ -1,32 +1,66 @@
-import React from "react"
 import Link from "next/link"
-import Image from "next/image"
+import { FaSync } from "react-icons/fa"
+import Loader from "../../loaders/CompaniesLoader"
 import styles from "./companies.module.sass"
-import companies from "../../../data/companies"
 
-const Companies = () => {
+// let loading = false
+const Companies = ({ companies, loading, message, refresh, error }) => {
   return (
     <section className={styles.companies}>
       <div className={`${styles.container} container`}>
         <h2 className="primary__header">Trusted By</h2>
         <div className={`${styles.showcase}`}>
-          {companies.slice(1, 7).map(({ logo, name, id, jobs }) => (
-            <article key={id}>
-              <Link href={`/companies/${id}`}>
-                <div className={`${styles.logo__container}`}>
-                  <Image
-                    src={`/assets/companies/${logo}`}
-                    alt={`${name} logo`}
-                    layout="fill"
-                    objectFit="contain"
-                  />
+          {loading ? (
+            <>
+              <Loader />
+              <Loader />
+              <Loader />
+            </>
+          ) : (
+            <>
+              {companies?.length > 0 && (
+                <>
+                  {companies.map(({ logo, name, id, jobs }) => (
+                    <article key={id}>
+                      <Link href={`/companies/${id}`}>
+                        <div className={`${styles.logo__container}`}>
+                          <img src={logo} alt={`${name} logo`} />
+                        </div>
+                      </Link>
+                      <Link href={`/companies/${id}?tab=jobs`}>
+                        <a>View {jobs} Jobs</a>
+                      </Link>
+                    </article>
+                  ))}
+                </>
+              )}
+              {message && <p>{message}</p>}
+              {(message || error) && (
+                <div
+                  style={{
+                    width: "100%",
+                    textAlign: "center",
+                    marginTop: "1rem",
+                  }}
+                >
+                  <button
+                    onClick={refresh}
+                    style={{
+                      cursor: "pointer",
+                    }}
+                  >
+                    <FaSync
+                      className={loading ? `spinner` : ``}
+                      style={{
+                        fontSize: "1.8rem",
+                        color: "gray",
+                      }}
+                    />
+                  </button>
                 </div>
-              </Link>
-              <Link href={`/companies/${id}/jobs/`}>
-                <a>View {jobs} Jobs</a>
-              </Link>
-            </article>
-          ))}
+              )}
+            </>
+          )}
         </div>
         <div className={styles.link__container}>
           <Link href={`/companies`}>

@@ -1,68 +1,106 @@
-import styles from "./Footer.module.sass"
-import Link from "next/link"
+import styles from "./Footer.module.sass";
+import Link from "next/link";
+import Social from "./Social";
+import Logo from "../BgLogo";
+import Subscribe from "./Subscribe";
 
 const Footer = () => {
-  return (<div className={styles.footer_container}>
-    <div className={styles.footer_left}>
-    <h1 className={styles.logo}>
-    <Link href="/">
-      <a  href="/"><span>Job</span>Portal.</a>
-      </Link>
-  </h1>
-      <p className={styles.footer_call_to_action}>Sign Up today to start applying for different jobs and posting jobs for different professions 
-      <Link href=""><a className={styles.footer_links}>Register</a></Link></p>
-      <p className={styles.footer_call_to_action}>Already Registered? 
-      <Link href=""><a className={styles.footer_links}>Login</a></Link></p>
+  return (
+    <footer className={styles.footer}>
+      <section className={styles.footer__left}>
+        <div className={styles.footer__left__container}>
+          <div className={styles.logo}>
+            <Logo height={25} />
+          </div>
+          <div className={styles.footer__texts}>
+            <p>
+              Sign Up today to start applying for different jobs and posting
+              jobs for different professions &nbsp;
+              <Link href="/register">
+                <a>Register</a>
+              </Link>
+            </p>
+            <p>
+              Already Registered? &nbsp;
+              <Link href="/login">
+                <a>Login</a>
+              </Link>
+            </p>
+          </div>
+          <div className={styles.form}>
+            <p>
+              <b>OR</b> Subscribe to our newsletter to receive updates on jobs
+              of your preference
+            </p>
+            <Subscribe />
+          </div>
+          <div className={styles.footer_copyright}>
+            <p>
+              &#169; 2021 -&nbsp;
+              <span>Job</span>Portal. Designed and Developed with ♥️ by &nbsp;
+              <a href="http://github.com/nab-in" target="_blank">
+                We Code Together
+              </a>
+            </p>
+          </div>
+        </div>
+      </section>
+      <section className={styles.footer__right}>
+        <div className={styles.footer__right__container}>
+          <article className={styles.footer__links}>
+            <h3>Browse</h3>
+            <div className={styles.showcase}>
+              <ul>
+                <li>
+                  <Link href="/jobs">
+                    <a>Jobs</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/companies">
+                    <a>Companies</a>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </article>
+          <article className={styles.footer__links}>
+            <h3>About</h3>
+            <div className={styles.showcase}>
+              <ul>
+                <li>
+                  <Link href="/about">About us</Link>
+                </li>
+                <li>
+                  <Link href="/contact">Contact us</Link>
+                </li>
+                <li>
+                  <Link href="/help">Help</Link>
+                </li>
+                <li>
+                  <Link href="/terms">
+                    <a>Terms of Use</a>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </article>
+          <article className={styles.social}>
+            <Social />
+          </article>
+          <div className={`${styles.footer_copyright} ${styles.mobile}`}>
+            <p>
+              &#169; 2021 -&nbsp;
+              <span>Job</span>Portal. Designed and Developed with ♥️ by &nbsp;
+              <a href="http://github.com/nab-in" target="_blank">
+                We Code Together
+              </a>
+            </p>
+          </div>
+        </div>
+      </section>
+    </footer>
+  );
+};
 
-      <div>
-      <p className={styles.footer_call_to_action} >Subscribe to start receiving notifications when new jobs are posted </p>
-      <form>
-        <input className={styles.footer_form} type="text" placeholder="Name" name="name"/>
-        <input className={styles.footer_form} type="text" placeholder="Email" name="email"/>
-        <button className={`btn btn-primary ${styles.btn}`}> Subscribe </button>
-      </form>
-      </div>
-
-      <div className={styles.footer_copyright}>
-        <p> &#169; 2021 - <b><span>Job</span>Portal.</b> </p>
-      </div>
-
-    </div>
-    <div className={styles.footer_right}>
-      <div className={styles.f_browse}>
-      <h3>Browse</h3>
-      <ul>
-        <li><Link href="/"><a>Jobs</a></Link></li>
-        <li><Link href="/"><a>Companies</a></Link></li>
-      </ul>
-      </div>
-
-      <div className={styles.f_jobs}>
-      <h3>Jobs</h3>
-      <ul>
-        <li><Link href="/">About us</Link></li>
-        <li><Link href="/">Contact us</Link></li>
-        <li><Link href="/">Help</Link></li>
-        <li><Link href="/"><a href="/">Terms of Use</a></Link></li>
-      </ul>
-      </div>
-
-      <div className={styles.f_connect}>
-      <h3>Connect</h3>
-      <h1 className={styles.logo2}>
-    <Link href="/">
-      <a  href="/"><span>Job</span>Portal.</a>
-      </Link>
-  </h1>
-      <ul>
-        <li><Link href="/">Facebook</Link></li>
-        <li><Link href="/">Twitter</Link></li>
-        <li><Link href="/">LinkedIn</Link></li>
-        <li><Link href="/"><a href="/">Instagram</a></Link></li>
-      </ul>
-      </div>
-    </div>
-  </div>)
-}
-
-export default Footer
+export default Footer;

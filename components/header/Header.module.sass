@@ -5,8 +5,122 @@
     height: 60px
     background: white
     position: fixed
+    top: 0
     z-index: 12
     border-bottom: 1px solid #E2E8EC
+    .container
+        width: 85%
+        max-width: 1600px
+        margin: auto
+        display: flex
+        justify-content: space-between
+        .logo__container
+            height: 60px
+            width: 130px
+            position: relative
+            padding: 15px 0
+            display: flex
+            justify-content: flex-start
+            transition: .35s
+            flex-grow: 2
+            .logo
+                height: 30px
+                width: 100px
+                position: relative
+        nav.nav
+            display: flex
+            align-items: center
+            justify-content: space-between
+            flex-grow: 1
+            .mobile__search
+                display: none
+            .auth
+                order: 3
+                display: flex
+                height: 100%
+            .menu
+                .burger
+                    display: none
+                ul.menu__list
+                    display: flex
+                    align-items: center
+                    li
+                        margin: 1rem
+                        &.auth_link
+                            display: none
+            .search__container
+                button.toggle__search
+                    cursor: pointer
+                    line-height: 60px
+                    font-size: 1.2rem
+                    color: $primary
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    padding: 1rem
+                .search
+                    opacity: 0
+                    visibility: hidden
+                    position: absolute
+                    left: 50%
+                    top: 70px
+                    z-index: 15
+                    transform: translateX(-50%)
+                    transition: .35s
+                    width: 1000px
+                    max-width: 80%
+                    height: 45px
+                    overflow: hidden
+                    border-radius: 5px
+                    &.open
+                        opacity: 1
+                        visibility: visible
+                    form
+                        width: 100%
+                        height: 100%
+                        display: flex
+                        input
+                            width: calc( 100% - 100px )
+                            height: 100%
+                            display: flex
+                            background: #E2E8EC
+                            border-top-left-radius: 5px
+                            border-bottom-left-radius: 5px
+                            border: 1px solid lightgray !important
+                            padding: .7rem
+                            color: black
+                            transition: .3s
+                            &:focus
+                                background: white
+                        .btn
+                            height: 100%
+                            max-width: 100px
+                            min-width: 100px
+                            padding: 0
+                            cursor: pointer
+            .auth__links
+                order: 3
+                display: flex
+                align-items: center
+                li
+                    margin-left: 1rem
+                    .join
+                        height: 56px
+a.active
+    color: $secondary
+
+@media screen and ( max-width: 1080px )
+    .header
+        .container
+            nav.nav
+                flex-grow: 0.5
+                .menu
+                    ul.menu__list
+                        li
+                            margin: .7rem
+                .auth__links
+                    li
+                        margin-left: .7rem
     overflow-y: hidden
 
 .logo
@@ -75,12 +189,164 @@
                 font-weight: 500
                 line-height: 30px
 
-
-@media screen and ( max-width: 992px )
-
-
 @media screen and ( max-width: 840px )
+    .header
+        .container
+            width: 90%
 
-@media screen and ( max-width: 767px )
+@media screen and ( max-width: 768px )
+    .header
+        .container
+            .logo__container
+                flex-grow: 1
+            nav.nav
+                display: flex
+                align-items: center
+                justify-content: flex-end
+                flex-grow: 1
+                .search__container
+                    button.toggle__search
+                        padding: .7rem
+                    .search
+                        max-width: 90%
+                        height: 35px
+                .mobile__search
+                    display: block
+                .menu
+                    order: 3
+                    &.open
+                        ul.menu__list
+                            opacity: 1
+                            transform: translateX(0)
+                    .burger
+                        border-radius: 30%
+                        display: flex
+                        justify-content: center
+                        align-items: center
+                        background: white
+                        height: 35px
+                        width: 35px
+                        z-index: 10
+                        margin-left: .7rem
+                        button.toggle__button
+                            height: 100%
+                            width: 100%
+                            padding: 7.5px
+                            cursor: pointer
+                            display: flex
+                            flex-direction: column
+                            justify-content: center
+                            align-items: flex-start
+                            position: relative
+                            &.close
+                                span
+                                    &.middle
+                                        opacity: 0
+                                    &.before
+                                        width: 31px
+                                        transform: rotateZ(45deg)
+                                        transform-origin: 4px 0px 0px
+                                    &.after
+                                        width: 31px
+                                        transform: rotateZ(-45deg)
+                                        transform-origin: 2px 0px 0px
+                            span
+                                position: relative
+                                height: 2px
+                                width: 25px
+                                background: $primary
+                                transition: .25s
+                                &.middle
+                                    margin: 7px 0
+                                &.before, &.after
+                                    transition: .25s
+                                    width: 20px
+                    ul.menu__list
+                        position: absolute
+                        transition: .35s
+                        opacity: 0
+                        right: 0
+                        top: 50px
+                        background: #ffffff
+                        width: 100%
+                        padding: 1.5rem 5%
+                        padding-top: 40px
+                        box-shadow: 4px 4px 15px 10px rgba(0, 0, 0, 0.08)
+                        border-radius: 10px
+                        text-align: left
+                        transform: translateX(100%)
+                        display: flex
+                        flex-direction: column
+                        .search__container
+                            width: 100%
+                            margin: 1rem 0 0
+                            button.toggle__search
+                                display: none
+                            .search
+                                opacity: 1
+                                visibility: visible
+                                position: relative
+                                left: 0
+                                top: 0
+                                transform: translateX(0)
+                                transition: .35s
+                                width: 100%
+                                max-width: 100%
+                                height: 35px
 
-            
+                        li
+                            width: 100%
+                            &.auth_link
+                                display: block
+                            a
+                                display: flex
+                                width: 100%
+                                padding: .4rem 0
+                                border-bottom: 1px solid #BBBBBB
+                                cursor: pointer
+                .auth__links
+                    display: flex
+                    align-items: center
+                    order: 2
+                    li
+                        margin-left: .3rem
+                        &.login
+                            display: none
+                        .join
+                            height: 100%
+                            border-radius: 5px
+                            padding: .7rem 1rem
+
+@media screen and ( max-width: 400px )
+    .header
+        .container
+            .logo__container
+                width: 100px
+                .logo
+                    height: 25px
+                    width: 80px
+            nav.nav
+                .menu
+                    .burger
+                        height: 30px
+                        width: 30px
+                        position: absolute
+                        top: 70px
+                        right: 5%
+                        box-shadow: 4px 4px 25px 5px rgba(0, 0, 0, 0.15)
+                        button.toggle__button
+                            padding: 5px
+                            &.close
+                                span
+                                    &.before
+                                        width: 25px
+                                        transform-origin: 4px 0px 0px
+                                    &.after
+                                        width: 25px
+                                        transform-origin: 2px 0px 0px
+                            span
+                                width: 20px
+                                &.middle
+                                    margin: 5px 0
+                                &.before, &.after
+                                    width: 15px

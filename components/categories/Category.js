@@ -1,41 +1,26 @@
-import React, { useState, useRef, useEffect } from "react"
+import { useRef, useState } from "react"
 import { FaChevronDown, FaChevronUp } from "react-icons/fa"
 import SubCategory from "./SubCategory"
+import UseClickOutside from "../UseClickOutside"
 import styles from "./category.module.sass"
 
-// detect outside click hook
-let useClickOutside = (handler) => {
-  let node = useRef()
-  useEffect(() => {
-    let handle = (e) => {
-      if (!node.current.contains(e.target)) {
-        handler()
-      }
-    }
-    document.addEventListener("mousedown", handle)
-    return () => {
-      document.removeEventListener("mousedown", handle)
-    }
-  })
-  return node
-}
-
 // filter dropdown component per each category
-const Category = ({ category, search, setSearch }) => {
+const Category = ({ category, search, setSearch, url, setUrl, heights }) => {
   let [openDropdown, setOpenDropdown] = useState(false)
-  let { name, sub_categories, id } = category
+  let { name, children, id } = category
+  const dropdownRef = useRef()
   const open = () => {
     setOpenDropdown(!openDropdown)
   }
 
   // check if outside is clicked
-  let node = useClickOutside(() => {
+  let node = UseClickOutside(() => {
     setOpenDropdown(false)
   })
 
   return (
     <>
-      {sub_categories.length > 0 && (
+      {children?.length > 0 && (
         <div className={styles.category} ref={node}>
           <button onClick={open}>
             {name}{" "}
@@ -51,14 +36,17 @@ const Category = ({ category, search, setSearch }) => {
                 ? `${styles.open} ${styles.dropdown}`
                 : `${styles.dropdown}`
             }
+            ref={dropdownRef}
           >
-            {sub_categories.map((sub) => (
+            {children.map((sub) => (
               <SubCategory
                 key={sub.id}
                 sub={sub}
                 search={search}
                 setSearch={setSearch}
                 category={category}
+                url={url}
+                setUrl={setUrl}
               />
             ))}
           </div>

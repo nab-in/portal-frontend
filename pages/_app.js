@@ -1,13 +1,64 @@
-import React from "react"
-// import { Provider } from "react-redux"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import "../styles/globals.sass"
 import Layout from "../components/layout/Layout"
-// import store from "../redux/store"
+import { AuthProvider, useAuthDispatch, useAuthState } from "../context/auth"
+import { AlertsProvider } from "../context/alerts"
+import Alert from "../components/alerts/GlobalAlert"
+import { API } from "../components/api"
+import { config } from "../components/config"
+import axios from "axios"
+import "swiper/css"
 
-function MyApp({ Component, pageProps }) {
-  const router = useRouter()
+export function reportWebVitals(metric) {
+  if (metric.label === "custom") {
+    // console.log(metric)
+  }
+}
+
+const MyApp = ({ Component, pageProps }) => {
   const Site = () => {
+    const dispatch = useAuthDispatch()
+    const { user, loading } = useAuthState()
+    const router = useRouter()
+    useEffect(() => {
+      let isMounted = true
+      if (isMounted)
+        if (!user) {
+          axios
+            .get(
+              `${API}/me?fields=email,firstname,lastname,username,bio,title,location,id,websitelink,cv,cvlink,verified,enabled,dp,userRoles,companies`,
+              config
+            )
+            .then((res) => {
+              let data = res.data
+              if (data?.companies)
+                dispatch({
+                  type: "COMPANIES",
+                  payload: data.companies,
+                })
+              if (data?.userRoles)
+                dispatch({
+                  type: "USERROLES",
+                  payload: data.userRoles,
+                })
+              delete data?.companies
+              delete data?.userRoles
+              dispatch({
+                type: "AUTH",
+                payload: data,
+              })
+            })
+            .catch((err) => {
+              dispatch({
+                type: "FAILED",
+              })
+            })
+        }
+      return () => {
+        isMounted = false
+      }
+    }, [])
     if (
       router.pathname.startsWith("/register") ||
       router.pathname.startsWith("/login") ||
@@ -16,16 +67,19 @@ function MyApp({ Component, pageProps }) {
       return <Component {...pageProps} />
     } else {
       return (
-        <Layout>
+        <Layout loading={loading}>
           <Component {...pageProps} />
         </Layout>
       )
     }
   }
   return (
-    // <Provider store={store}>
-    <Site />
-    // </Provider>
+    <AuthProvider>
+      <AlertsProvider>
+        <Site />
+        <Alert />
+      </AlertsProvider>
+    </AuthProvider>
   )
 }
 

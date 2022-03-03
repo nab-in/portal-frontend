@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { useRouter } from "next/router"
 import styles from "./hero.module.sass"
 
@@ -32,7 +32,7 @@ const Hero = () => {
     <div className={styles.hero}>
       <div className={styles.container}>
         <div className={styles.wrapper}>
-          <h1>Land to your destiny job today.</h1>
+          <h1 className="text-primary-400">Land to your destiny job today.</h1>
           <p>
             I have no idea what to add in these texts. Lorem ipsum dolor sit
             amet, consectetur adipiscing elit. Potenti pretium adipiscing tortor

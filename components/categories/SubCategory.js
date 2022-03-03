@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import styles from "./category.module.sass"
 
-const SubCategory = ({ sub, setSearch, search, category }) => {
+const SubCategory = ({ sub, setSearch, search, category, url, setUrl }) => {
   let { name, id } = sub //sub category destructuring
   let [checked, setChecked] = useState(false)
 
@@ -18,6 +18,28 @@ const SubCategory = ({ sub, setSearch, search, category }) => {
     )
   }
 
+  // working on search url
+  let urlBreak = url?.split("&")
+
+  let categoriesArray = []
+
+  let filterCategories = []
+
+  let categoriesStr = urlBreak?.find((el) => {
+    return el.includes("categories")
+  })
+
+  if (categoriesStr) {
+    categoriesArray = categoriesStr?.split(":")
+    categoriesArray = categoriesArray[categoriesArray?.length - 1]
+    categoriesArray = categoriesArray?.split("[")
+    categoriesArray = categoriesArray[1]?.split("]")
+    if (categoriesArray[0]?.length > 1) {
+      categoriesArray = categoriesArray[0]?.split(",")
+    }
+    filterCategories = categoriesArray
+  }
+
   // toggling sub category
   const toggleSubCategory = () => {
     // if category exists this run
@@ -28,9 +50,70 @@ const SubCategory = ({ sub, setSearch, search, category }) => {
           categoryIndex
         ].sub_categories.filter((el) => el.id !== id)
 
+        if (category?.name === "Job Type") {
+          setUrl(
+            url?.replace(
+              url?.split("&")?.find((el) => el.includes("jobType")),
+              `filter=jobType:eq:${name}`
+            )
+          )
+        } else if (category?.name === "Open To") {
+          setUrl(
+            url?.replace(
+              url?.split("&")?.find((el) => el.includes("openTo")),
+              `filter=openTo:eq:${name}`
+            )
+          )
+        } else {
+          filterCategories = filterCategories.filter((el) => {
+            return el !== id
+          })
+
+          setUrl(
+            url?.replace(
+              url?.split("&")?.find((el) => el.includes("eq")),
+              `filter=categories:eq:[${filterCategories}]`
+            )
+          )
+        }
+
         //   removing category in categories array
-        if (searchCopy[categoryIndex].sub_categories.length === 0)
+        if (searchCopy[categoryIndex].sub_categories.length === 0) {
           searchCopy = searchCopy.filter((el) => el.id != category.id)
+          if (category?.name === "Job Type") {
+            setUrl(
+              url?.replace(
+                url?.split("&")?.find((el) => el.includes("jobType")),
+                ``
+              )
+            )
+          } else if (category?.name === "Open To") {
+            setUrl(
+              url?.replace(
+                url?.split("&")?.find((el) => el.includes("openTo")),
+                ``
+              )
+            )
+          } else {
+            filterCategories = filterCategories.filter((el) => {
+              return el !== category?.id
+            })
+            setUrl(
+              url?.replace(
+                url?.split("&")?.find((el) => el.includes("eq")),
+                `filter=categories:eq:[${filterCategories}]`
+              )
+            )
+            if (filterCategories?.length < 1) {
+              setUrl(
+                url?.replace(
+                  url?.split("&")?.find((el) => el.includes("eq")),
+                  ``
+                )
+              )
+            }
+          }
+        }
 
         //   updating state with new categories
         setSearch({
@@ -48,6 +131,30 @@ const SubCategory = ({ sub, setSearch, search, category }) => {
           ...searchCopy[categoryIndex],
 
           sub_categories: searchCopy[categoryIndex].sub_categories.concat(sub),
+        }
+
+        if (category?.name === "Job Type") {
+          setUrl(
+            url?.replace(
+              url?.split("&")?.find((el) => el.includes("jobType")),
+              `filter=jobType:eq:${name}`
+            )
+          )
+        } else if (category?.name === "Open To") {
+          setUrl(
+            url?.replace(
+              url?.split("&")?.find((el) => el.includes("openTo")),
+              `filter=openTo:eq:${name}`
+            )
+          )
+        } else {
+          filterCategories.push(id)
+          setUrl(
+            url?.replace(
+              url?.split("&")?.find((el) => el.includes("eq")),
+              `filter=categories:eq:[${filterCategories}]`
+            )
+          )
         }
 
         setSearch({
@@ -68,6 +175,25 @@ const SubCategory = ({ sub, setSearch, search, category }) => {
           sub_categories: [sub],
         }),
       })
+      if (category?.name === "Job Type") {
+        setUrl(url + `&filter=jobType:eq:${name}`)
+      } else if (category?.name === "Open To") {
+        setUrl(url + `&filter=openTo:eq:${name}`)
+      } else {
+        filterCategories.push(id)
+        filterCategories.push(category?.id)
+        if (categoriesStr) {
+          setUrl(
+            url?.replace(
+              url?.split("&")?.find((el) => el.includes("eq")),
+              `filter=categories:eq:[${filterCategories}]`
+            )
+          )
+        } else {
+          setUrl(url + `&filter=categories:eq:[${filterCategories}]`)
+        }
+      }
+
       setChecked(true)
     }
   }

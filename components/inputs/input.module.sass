@@ -6,6 +6,7 @@
     width: 100%
     margin: 1.3rem 0
     transition: .2s
+    position: relative
     label
         margin-bottom: .2rem
     input, textarea
@@ -16,6 +17,8 @@
         border-bottom: 1px solid lightgray
         font-size: 1rem
         resize: none
+        color: #333333
+        font-size: .95rem
         &:focus
             outline: none !important
             border-bottom-color: $primary
@@ -26,3 +29,21 @@
         height: auto
         min-height: 70px
         margin-top: .6rem
+    small
+        display: inline-block
+        margin-top: .3rem
+    .toggle__password
+        position: absolute
+        right: 0
+        top: 20.02px
+        width: 36px
+        overflow: hidden
+        cursor: pointer
+        height: 35px
+        display: flex
+        justify-content: flex-end
+        align-items: center
+        color: gray
+        font-size: .8rem
+        &.show
+            color: $primary

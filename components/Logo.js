@@ -1,14 +1,13 @@
-import React from "react"
-import Image from "next/image"
-
-const Logo = ({ height, width }) => {
+const Logo = ({ height }) => {
   return (
-    <Image
-      src="/assets/images/logo.png"
+    <img
+      src="/assets/images/Logo.svg"
       alt="logo"
       height={height}
-      width={width}
-      layout="intrinsic"
+      loading="lazy"
+      style={{
+        width: "auto",
+      }}
     />
   )
 }

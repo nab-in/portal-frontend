@@ -1,20 +1,88 @@
-import React from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/router"
+import Error from "../../components/error/Error"
 import Profile_Template from "../../components/profile_template/Profile_Template"
-import companies from "../../data/companies"
+import { API } from "../../components/api"
+import axios from "axios"
 
-const Company = () => {
-  let router = useRouter()
-  let details
-  let id = router.query.id
-  let company = companies.filter((el) => el.id == id)
-  if (company.length > 0) details = company[0]
+const Company = ({ data, error }) => {
+  let [details, setDetails] = useState(null)
+  let [loading, setLoading] = useState(true)
+  const router = useRouter()
+
+  // useEffect(() => {
+  //   let isMounted = true
+  //   if (isMounted)
+  //     if (data && data?.id) {
+  //       setDetails(data)
+  //       setLoading(false)
+  //     } else {
+  //       setLoading(false)
+  //     }
+  //   return () => {
+  //     isMounted = false
+  //   }
+  // }, [data])
+
+  useEffect(() => {
+    let mounted = true
+    if (mounted)
+      axios
+        .get(`${API}/companies/${router.query.id}`)
+        .then((res) => {
+          setDetails(res?.data)
+          setLoading(false)
+        })
+        .catch((err) => {
+          setLoading(false)
+        })
+    return () => {
+      mounted = false
+    }
+  }, [])
+
+  // useEffect(() => {
+  //   let isMounted = true
+  //   if (isMounted)
+  //     if (error) {
+  //       setLoading(false)
+  //     }
+  //   return () => {
+  //     isMounted = false
+  //   }
+  // }, [error])
+
   return (
     <div>
-      {details && <Profile_Template page="company" details={details} />}
-      {!details && <h2>Not Found</h2>}
+      {details && !loading && (
+        <Profile_Template
+          page="company"
+          details={details}
+          loading={loading}
+          setDetails={setDetails}
+        />
+      )}
+      {!loading && (!details || details == undefined) && <Error />}
     </div>
   )
+}
+
+export async function getServerSideProps(context) {
+  let data = null
+  let error = null
+  try {
+    const res = await fetch(`${API}/companies/${context.params.id}`)
+    data = await res.json()
+  } catch (err) {
+    error = JSON.stringify(err)
+  }
+
+  return {
+    props: {
+      error,
+      data,
+    },
+  }
 }
 
 export default Company

@@ -1,0 +1,59 @@
+@import "/styles/_colorsVariables"
+
+.notifications
+    height: 100%
+    display: flex
+    align-items: center
+    position: relative
+    button
+        margin-right: 2rem
+        position: relative
+        font-size: 1rem
+        cursor: pointer
+        color: $primary
+        span
+            position: absolute
+            top: -10px
+            right: -10px
+            font-size: 12px
+            background: red
+            color: white
+            height: 20px
+            width: 20px
+            display: flex
+            justify-content: center
+            align-items: center
+            border-radius: 50%
+    .dropdown
+        position: absolute
+        top: 50px
+        right: calc( -5% - 50px )
+        visibility: hidden
+        opacity: 0
+        min-width: 250px
+        padding: 1rem 0
+        background: #FFFFFF
+        box-shadow: 2px 4px 15px 15px rgba(0, 0, 0, 0.05)
+        transition: .35s
+        &.open
+            opacity: 1
+            visibility: visible
+        h3
+            border-bottom: 1px solid#D9D9D9
+            padding: 0 1rem 1rem
+        .showcase
+            margin: .7rem 0
+            article
+                padding: .7rem 1rem
+                font-size: .9rem
+                margin: .5rem 0
+                border-radius: 5px
+                background: white
+                &:hover
+                    opacity: .9
+                &.unread
+                    background: #E2E8EC
+        a
+            display: flex
+            margin: 1rem
+            font-size: .9rem

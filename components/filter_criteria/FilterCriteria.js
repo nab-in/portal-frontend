@@ -1,27 +1,33 @@
-import React from "react"
 import { AiOutlineClose } from "react-icons/ai"
 import FilterItem from "./FilterItem"
 
 // displays filter criteria set in the hero component
-const FilterCriteria = ({ search, setSearch }) => {
+const FilterCriteria = ({ search, setSearch, url, setUrl }) => {
   // setSearch will be used to remove criteria when remove action is called
 
   return (
     <div className="filter__criteria">
-      {search?.keyword && (
+      {search?.name && (
         <div className="criteria">
           <div className="criteria__title">Keyword:</div>
           <div className="criteria__showcase">
             <span>
-              {search.keyword}
+              {search.name}
               <span
                 className="close"
-                onClick={() =>
+                onClick={() => {
+                  setUrl(
+                    url.replace(
+                      url?.split("&")?.find((el) => el.includes("name")),
+                      ``
+                    )
+                  )
+
                   setSearch({
                     ...search,
-                    keyword: "",
+                    name: "",
                   })
-                }
+                }}
               >
                 <AiOutlineClose className="icon" />
               </span>
@@ -37,12 +43,18 @@ const FilterCriteria = ({ search, setSearch }) => {
               {search.location}
               <span
                 className="close"
-                onClick={() =>
+                onClick={() => {
+                  setUrl(
+                    url.replace(
+                      url?.split("&")?.find((el) => el.includes("location")),
+                      ``
+                    )
+                  )
                   setSearch({
                     ...search,
                     location: "",
                   })
-                }
+                }}
               >
                 <AiOutlineClose className="icon" />
               </span>
@@ -64,6 +76,8 @@ const FilterCriteria = ({ search, setSearch }) => {
                       setSearch={setSearch}
                       category={category}
                       search={search}
+                      url={url}
+                      setUrl={setUrl}
                     />
                   ))}
                 </div>

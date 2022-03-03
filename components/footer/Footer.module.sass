@@ -1,122 +1,144 @@
-@import "/styles/_colorsVariables"
+@import "../../styles/_colorsVariables"
 
-.footer_container
-  padding-top: 2rem
-  height: auto
-  background-image: linear-gradient($primary, $primary, #5ba2ff)
-  display: grid
-  // grid-template-columns: repeat(auto-fill, minmax(350px, 1fr))
-  grid-template-columns: repeat(4, 1fr)
-  grid-template-rows: 1fr 0.05fr
-  gap: 0px 0px
-  grid-template-areas: "footer_left footer_left footer_right  footer_right" ". . . ." ". . . ."
+.footer
+    background: black
+    display: flex
+    justify-content: center
+    height: 100%
+    .logo
+        margin-bottom: 1.5rem
+    .footer_copyright
+        p
+            font-size: .8rem
+    p
+        font-size: .9rem
+        line-height: 1.6rem
+        color: lightgray
+        margin-bottom: 1rem
 
-.footer_left 
-  grid-area: footer_left
-  margin-left: 20%
-  margin-right: 5%
-  color: $bg
-
-.footer_right
-  display: grid
-  // grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  grid-template-columns: repeat(3, 1fr)
-  grid-template-rows: repeat(2, 1fr)
-  gap: 0px 0px
-  grid-template-areas: "f_browse f_jobs f_connect" "f_browse f_jobs f_connect"
-  grid-area: footer_right
-
-.f_browse
-  grid-area: f_browse
-  margin-top: 3.5rem
-  h3
-    color: $bg
-  li
-    list-style-type: none
-    margin-top: 1rem
     a
-      color: $bg
-    a:hover
-      text-decoration: none
-    
-.f_jobs
-  grid-area: f_jobs
-  margin-top: 3.5rem
-  h3
-    color: $bg
-  li
-    list-style-type: none
-    margin-top: 1rem
-    a
-      color: $bg
-    a:hover
-      text-decoration: none
+        color: gray
+        font-size: .9rem
 
-.f_connect
-  grid-area: f_connect
-  margin-top: 3.5rem
-  h3
-    color: $bg
-  li
-    list-style-type: none
-    margin-top: 1rem
-    a
-      color: $bg
-    a:hover
-      text-decoration: none
+    h3
+        color: lightgray
+        font-weight: 400
+        margin-bottom: 1.5rem
 
-.logo
-  font-weight: 800
-  font-size: 1.5rem
-  position: relative
-  color: $text-color
-  a 
-    color: $secondary
-    text-decoration: none
-    
-    span
-        color: $bg
+    &__left
+        width: 40%
+        display: flex
+        justify-content: flex-end
+        background: rgba(255, 255, 255, .05)
+        padding-left: 7.5%
+        &__container
+            max-width: 640px
+            width: 100%
+            padding: 3.5rem 2rem 3rem 0
+            form
+                max-width: 450px
+                margin-bottom: 1.5rem
+                .inputs
+                    display: flex
+                    justify-content: space-between
+                    div
+                        width: 48%
+                        label
+                            font-size: .9rem
+                            color: gray
+                        input
+                            background: none !important
+                            border-bottom-color: gray
+                            padding-left: 0
+                            color: $bg
+    &__right
+        width: 60%
+        display: flex
+        justify-content: flex-start
+        padding-right: 7.5%
+        &__container
+            max-width: 960px
+            width: 100%
+            padding: 3.5rem 0 3rem 2rem
+            display: flex
+            justify-content: space-between
+            .mobile
+                display: none
+            ul
+                li
+                    margin: 1.4rem 0
 
-.logo2
-  font-weight: 800
-  font-size: 1.5rem
-  position: relative
-  color: $text-color
-  margin-top: 0.8rem
-  
-  a 
-    color: $secondary
-    text-decoration: none
-        
-    span
-        color: $bg
+@media screen and ( max-width: 992px )
+    .footer
+        &__left
+            &__container
+                form
+                    .inputs
+                        flex-wrap: wrap
+                        div
+                            width: 100%
 
-.footer_links
-  color: $secondary
-  margin-left: 0.8rem
+@media screen and ( max-width: 840px  )
+    .footer
+        &__left
+            padding-left: 5%
+        &__right
+            padding-right: 5%
 
-.footer_call_to_action
-  margin-top: 1.6rem
+@media screen and ( max-width: 767px  )
+    .footer
+        flex-wrap: wrap
+        &__left
+            width: 100%
+            padding: 0 5%
+            &__container
+                max-width: 100%
+                padding: 4rem 0 3rem
+                form
+                    max-width: 100%
+                .footer_copyright
+                    display: none
+        &__right
+            width: 100%
+            padding: 0 5%
+            &__container
+                max-width: 100%
+                flex-wrap: wrap
+                padding: 4rem 0 5rem
+                .mobile
+                    display: block
+                    position: absolute
+                    bottom: 0
+                    left: 5%
 
-.footer_call_to_action
-  margin-bottom: 0.2rem
-
-.footer_form
-  background: #00000000
-  width: 100%
-  padding: 12px 20px
-  margin: 8px 0
-  display: inline-block
-  border-top-style: hidden
-  border-left-style: hidden
-  border-right-style: hidden
-  border-radius: 3px
-  box-sizing: border-box
-  border-bottom-width: 0.1rem
-  border-bottom-color: $bg
-
-.footer_copyright
-  margin-top: 2rem
-  font-size: 0.8rem
-  span
-    color: $secondary
+@media screen and ( max-width: 480px  )
+    .footer
+        &__left
+            width: 100%
+            padding: 0 5%
+            &__container
+                max-width: 100%
+                padding: 4rem 0 3rem
+                form
+                    max-width: 100%
+                .footer_copyright
+                    display: none
+        &__right
+            width: 100%
+            padding: 0 5%
+            &__container
+                max-width: 100%
+                flex-wrap: wrap
+                justify-content: center
+                padding: 4rem 0 5rem
+                article.social
+                    width: 100%
+                    order: 1
+                article.footer__links
+                    width: 50%
+                    order: 2
+                .mobile
+                    display: block
+                    position: absolute
+                    bottom: 0
+                    left: 5%

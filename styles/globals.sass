@@ -4,6 +4,22 @@
 //     font-family: 'Lato' sans-serif
 //     src: local('Lato Regular'), local('Lato-Regular'), url('/Lato-Black.ttf') format('ttf')
 
+html, body, .layout
+    min-height: 100vh
+    position: relative
+
+body
+    overflow-x: hidden
+    width: 100vw
+
+.layout
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+
+.swiper-slide
+    width: auto !important
+
 *
     padding: 0
     margin: 0
@@ -13,6 +29,7 @@
 @import "./_colors"
 @import "./_colorsVariables"
 @import "./_variables"
+@import "./_alerts"
 
 input, textarea, button
     outline: none !important
@@ -62,13 +79,17 @@ button
     border: none
 
 .btn
-    padding: .5rem 3rem
-    min-width: 150px
+    padding: .5rem 2rem
+    min-width: 100px
     cursor: pointer
     font-size: 1rem
+    position: relative
+    overflow: hidden
     @include flexCenter
     &.span__full
         width: 100%
+    &.btn-secondary
+        background: #E2E8EC
     &.btn-primary
         background: $secondary
         color: white
@@ -77,6 +98,18 @@ button
         transition: .2s
         &:hover
             box-shadow: none
+
+span.ripple
+    position: absolute
+    border-radius: 50%
+    transform: scale(0)
+    animation: ripple 800ms linear
+    background-color: rgba(255, 255, 255, 0.5)
+
+@keyframes ripple
+    to
+        transform: scale(4)
+        opacity: 0
 
 .bg_input
     margin: 1.5rem 0 !important
@@ -92,6 +125,8 @@ button
             border-bottom: 1px solid lightgray !important
             padding: 0
             color: #E2E8EC
+            &::placeholder
+                color: #E2E8EC
 
 .card
     border: 1px solid #BBBBBB
@@ -118,7 +153,7 @@ button
             margin-left: .7rem
 
 .filter__criteria
-    // margin-bottom: 1.5rem
+    position: relative
     .criteria
         margin-bottom: .7rem
         display: flex
@@ -177,6 +212,41 @@ button
             -webkit-text-stroke-width: 1px
             -webkit-text-stroke-color: $secondary
             -webkit-text-fill-color: transparent
+
+.loader
+    width: 100%
+    height: 100%
+    display: block
+    background: rgba(226, 232, 236, .5)
+    animation: wave .1.2s ease-in 0s infinite both
+    position: relative
+    border-radius: 5px
+    overflow: hidden
+    &::before
+        content: ""
+        position: absolute
+        width: 100%
+        height: 100%
+        display: block
+        background: #E2E8EC
+        animation: wave 1.2s ease-in .4s infinite both
+
+.spinner
+    animation: spin .5s linear 0s infinite forwards
+
+@keyframes spin
+    0%
+        transform: rotate(0deg)
+    100%
+        transform: rotate(360deg)
+
+@keyframes wave
+    0%
+        transform: translateX(-100%)
+    50%
+        transform: translateX(0)
+    100%
+        transform: translateX(100%)
 
 .template__layout
     display: grid

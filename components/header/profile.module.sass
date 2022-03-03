@@ -1,0 +1,101 @@
+@import "/styles/_colorsVariables"
+
+.profile
+    display: flex
+    align-items: center
+    cursor: pointer
+    height: 100%
+    .dp__container
+        height: 40px
+        width: 40px
+        position: relative
+        img
+            height: 100%
+            width: 100%
+            object-fit: cover
+            border-radius: 50%
+    .default
+        height: 40px
+        width: 40px
+        text-transform: uppercase
+        display: flex
+        justify-content: center
+        align-items: center
+        font-size: 1.5rem
+        background: #E2E8EC
+        color: $primary
+    .name
+        color: $primary
+        display: flex
+        align-items: center
+        padding-right: .7rem
+        height: 100%
+        .icon
+            font-size: 1rem
+        span
+            max-width: 120px
+            white-space: nowrap
+            overflow: hidden
+            text-overflow: ellipsis
+            margin-right: .3rem
+    .dropdown
+        position: absolute
+        top: 50px
+        right: 0
+        transform: translateX(100%)
+        opacity: 0
+        min-width: 250px
+        cursor: default
+        padding: 1rem 0
+        background: #FFFFFF
+        box-shadow: 2px 4px 15px 15px rgba(0, 0, 0, 0.05)
+        transition: .35s
+        &.open
+            transform: translateX(0)
+            opacity: 1
+        .profile
+            justify-content: center
+            align-items: canter
+            flex-direction: column
+            padding: 1rem
+            cursor: default
+            .name
+                color: black
+            .dp__container
+                margin-right: 0
+                margin-bottom: 1rem
+        ul
+            li
+                a
+                    padding: .7rem 1rem
+                    display: flex
+            ul
+                border-top: 1px solid#D9D9D9
+                border-bottom: 1px solid#D9D9D9
+
+@media screen and ( max-width: 840px )
+    .profile
+        .name
+            span
+                max-width: 100px
+
+@media screen and ( max-width: 580px )
+    .profile
+        .dp__container
+            height: 35px
+            width: 35px
+        .default
+            height: 35px
+            width: 35px
+        .name
+            span
+                max-width: 80px
+
+@media screen and ( max-width: 480px )
+    .profile
+        .name
+            span.name
+                display: none
+        .dropdown
+            .name
+                display: block

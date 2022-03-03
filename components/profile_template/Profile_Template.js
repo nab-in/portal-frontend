@@ -1,14 +1,17 @@
-import React from "react"
-import Hero from "./Hero"
-import Template from "./Template"
-import styles from "./template.module.sass"
+import Hero from "./hero/Hero"
+import Template from "./template/Template"
 
-const Profile_Template = ({ details, page }) => {
+const Profile_Template = ({ details, setDetails, page, loading }) => {
   return (
     <div>
-      <Hero page={page} details={details} />
+      <Hero page={page} details={details} loading={loading} />
       <main>
-        <Template page={page} details={details} />
+        <Template
+          page={page}
+          details={details}
+          loading={loading}
+          setDetails={setDetails}
+        />
       </main>
     </div>
   )
