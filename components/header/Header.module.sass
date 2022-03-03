@@ -121,6 +121,73 @@ a.active
                 .auth__links
                     li
                         margin-left: .7rem
+    overflow-y: hidden
+
+.logo
+    font-weight: 800
+    font-size: 1.5rem
+    z-index: 0
+    position: relative
+    color: $text-color
+    padding-left: 3.7rem
+
+    a
+        color: $secondary
+        text-decoration: none
+
+        span
+            color: $primary
+
+.main_nav
+    padding: 20px 0 25px 40px
+
+    .logo
+        float: left
+
+    .navbar_menu
+        margin: 0 auto
+        list-style: none
+
+        ul
+            padding-left: 350px
+
+            li
+                display: inline-block
+                line-style-type: none
+                float: left
+
+                a
+                    color: $text-color
+                    text-decoration: none
+                    padding: 20px
+                    position: relative
+                    font-size: 18px
+                    font-weight: 500
+                    line-height: 30px
+                    
+                a:hover
+                    color: $secondary
+                    
+.navbar_user 
+    margin: 0 auto
+    list-style: none
+    float: right
+    padding-right: 100px
+
+    ul
+        li
+            display: inline-block
+            line-style-type: none
+            
+            a
+                line-height: 30px
+                color: $text-color
+                text-decoration: none
+                padding: 20px
+                position: relative
+                font-size: 18px
+                font-weight: 500
+                line-height: 30px
 
 @media screen and ( max-width: 840px )
     .header
