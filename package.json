@@ -17,13 +17,13 @@
     "js-cookie": "^3.0.1",
     "next": "^12.1.0",
     "next-pwa": "^5.4.5",
-    "npm": "^8.5.2",
+    "npm": "^8.5.3",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-icons": "^4.3.1",
     "react-linkify": "^1.0.0-alpha",
     "sass": "^1.49.9",
-    "swiper": "^8.0.6"
+    "swiper": "^8.0.7"
   },
   "devDependencies": {
     "@testing-library/dom": "^8.11.3",
