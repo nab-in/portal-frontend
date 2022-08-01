@@ -1,4 +1,4 @@
-# A markdown to explain how context api works along with useReducer hook
+# Manage react state using context api with usestate or userequcer hooks
 
 Contextapi uses two main hooks (createContext and useContext), along with one hook to set and update state{this hook isn't must but it is important}.
 
